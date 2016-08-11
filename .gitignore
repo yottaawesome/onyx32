@@ -27,3 +27,11 @@
 *.exe
 *.out
 *.app
+
+# VS
+*.user
+
+# Structure
+Debug/
+Release/
+/x64

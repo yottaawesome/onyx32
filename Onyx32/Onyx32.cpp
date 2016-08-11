@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "Onyx32.h"
-#include "../Onyx.Windowing/include/Onyx.Gui.h"
+#include "../Onyx.Gui/include/Onyx.Gui.h"
 
 #define MAX_LOADSTRING 100
 
