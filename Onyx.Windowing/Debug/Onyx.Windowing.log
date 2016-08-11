@@ -1,0 +1,2 @@
+﻿  stdafx.cpp
+c:\users\royal\documents\coding\onyx32\onyx.windowing\src\core\.cpp\stdafx.cpp(9): error C2857: '#include' statement specified with the /Ycsrc/core/.h/stdafx.h command-line option was not found in the source file
