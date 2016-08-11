@@ -30,8 +30,10 @@
 
 # VS
 *.user
+*.suo
 
 # Structure
 Debug/
 Release/
 /x64
+/.vs
