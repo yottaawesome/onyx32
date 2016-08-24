@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32", "Onyx32\Onyx32.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{558C2ADA-F073-451A-83C4-42173A23BCD6} = {558C2ADA-F073-451A-83C4-42173A23BCD6}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx.Gui", "Onyx.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui", "Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
