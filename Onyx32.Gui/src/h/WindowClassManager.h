@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace Onyx32::Windows
+namespace Onyx32::Gui
 {
 	enum ONYXWINDOWING_API WindowClassTypes
 	{

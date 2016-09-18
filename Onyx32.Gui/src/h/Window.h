@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace Onyx::Windows
+namespace Onyx32::Gui
 {
 	class Window : public IWindow
 	{

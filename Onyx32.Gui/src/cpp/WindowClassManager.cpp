@@ -2,7 +2,7 @@
 #include "../h/StaticFunctions.h"
 #include "../h/Resource.h"
 
-using namespace Onyx32::Windows;
+using namespace Onyx32::Gui;
 
 WindowClass WindowClassManager::DefaultWindowClass = WindowClass();
 

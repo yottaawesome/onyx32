@@ -2,7 +2,7 @@
 #include "../../include/Onyx32.Gui.h"
 #include  <Commctrl.h>
 
-using namespace Onyx::Windows;
+using namespace Onyx32::Gui;
 
 LRESULT CALLBACK Static::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
