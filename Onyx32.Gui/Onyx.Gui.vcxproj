@@ -153,7 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Onyx32.Gui.h" />
+    <ClInclude Include="src\h\Button.h" />
     <ClInclude Include="src\h\dllmain.h" />
+    <ClInclude Include="src\h\FormBuilder.h" />
     <ClInclude Include="src\h\Resource.h" />
     <ClInclude Include="src\h\StaticFunctions.h" />
     <ClInclude Include="src\h\stdafx.h" />
@@ -162,6 +164,7 @@
     <ClInclude Include="src\h\WindowClassManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\cpp\Button.cpp" />
     <ClCompile Include="src\cpp\dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -177,6 +180,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\cpp\Factory.cpp" />
+    <ClCompile Include="src\cpp\FormBuilder.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\cpp\StaticFunctions.cpp" />
     <ClCompile Include="src\cpp\stdafx.cpp">

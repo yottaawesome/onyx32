@@ -11,4 +11,6 @@ namespace Onyx32::Gui
 {
 	inline IControl::~IControl() { }
 	inline IWindow::~IWindow() { }
+	inline IButton::~IButton() { }
+	inline IFormBuilder::~IFormBuilder() { }
 }

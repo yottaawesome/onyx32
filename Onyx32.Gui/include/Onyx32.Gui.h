@@ -6,17 +6,17 @@
 #define ONYXWINDOWING_API __declspec(dllimport)
 #endif
 #include <string>
+#include <functional>
 
 using namespace std;
+
+typedef function<void(void)> FunctionHandler;
 
 namespace Onyx32::Gui
 {
 	class ONYXWINDOWING_API IWindow;
 
-	struct ONYXWINDOWING_API CreateWindowArgs
-	{
-		
-	};
+	struct ONYXWINDOWING_API CreateWindowArgs { };
 
 	class ONYXWINDOWING_API IControl
 	{
@@ -26,6 +26,12 @@ namespace Onyx32::Gui
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
 			virtual ~IControl() = 0;
+	};
+
+	class ONYXWINDOWING_API IButton : public IControl
+	{
+		public:
+			virtual ~IButton() = 0;
 	};
 
 	class ONYXWINDOWING_API IWindow 
@@ -41,9 +47,21 @@ namespace Onyx32::Gui
 			virtual ~IWindow() = 0;
 	};
 
+	class ONYXWINDOWING_API IFormBuilder
+	{
+	public:
+		virtual IWindow* CreateMainWindow(wstring& title, unsigned int width = 0, unsigned int height = 0) = 0;
+		virtual IWindow* CreateMainWindow(wstring&& title, unsigned int width = 0, unsigned int height = 0) = 0;
+
+		virtual void AddButton(IWindow* window, wstring& text, function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;
+		virtual void AddButton(IWindow* window, wstring&& text, function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;
+
+		virtual ~IFormBuilder() = 0;
+	};
+
 	class ONYXWINDOWING_API Factory
 	{
-		public:
-			static IWindow* TestWindowing();
+	public:
+		static IFormBuilder* GetFormBuilder();
 	};
 }
