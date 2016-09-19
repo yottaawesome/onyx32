@@ -3,6 +3,8 @@
 #include "../h/FormBuilder.h"
 #include "../h/Window.h"
 #include "../h/Button.h"
+#include "../h/Input.h"
+#include "../h/DllMain.h"
 #include "../h/StaticFunctions.h"
 
 namespace Onyx32::Gui
@@ -35,6 +37,13 @@ namespace Onyx32::Gui
 	{
 		Button* button = new Button(0, text, onClick, width, height);
 		window->AddControl(button);
+	}
+
+	IInput* FormBuilder::AddTextInput(IWindow* window)
+	{
+		auto input = new Input();
+		window->AddControl(input);
+		return input;
 	}
 
 	FormBuilder::~FormBuilder() { }

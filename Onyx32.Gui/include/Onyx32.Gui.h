@@ -34,6 +34,15 @@ namespace Onyx32::Gui
 			virtual ~IButton() = 0;
 	};
 
+	class ONYXWINDOWING_API IInput : public IControl
+	{
+		public:
+			virtual wstring GetText() = 0;
+			virtual void SetText(wstring* str) = 0;
+			virtual void SetText(wstring&& str) = 0;
+			virtual ~IInput() = 0;
+	};
+
 	class ONYXWINDOWING_API IWindow 
 	{
 		public: 
@@ -55,6 +64,8 @@ namespace Onyx32::Gui
 
 		virtual void AddButton(IWindow* window, wstring& text, function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;
 		virtual void AddButton(IWindow* window, wstring&& text, function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;
+
+		virtual IInput* AddTextInput(IWindow* window) = 0;
 
 		virtual ~IFormBuilder() = 0;
 	};

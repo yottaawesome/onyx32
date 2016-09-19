@@ -76,6 +76,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
+    <EmbedManifest>true</EmbedManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -112,7 +113,12 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'"</AdditionalManifestDependencies>
     </Link>
+    <Manifest>
+      <AdditionalManifestFiles>
+      </AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -156,6 +162,7 @@
     <ClInclude Include="src\h\Button.h" />
     <ClInclude Include="src\h\dllmain.h" />
     <ClInclude Include="src\h\FormBuilder.h" />
+    <ClInclude Include="src\h\Input.h" />
     <ClInclude Include="src\h\Resource.h" />
     <ClInclude Include="src\h\StaticFunctions.h" />
     <ClInclude Include="src\h\stdafx.h" />
@@ -181,6 +188,7 @@
     </ClCompile>
     <ClCompile Include="src\cpp\Factory.cpp" />
     <ClCompile Include="src\cpp\FormBuilder.cpp" />
+    <ClCompile Include="src\cpp\Input.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\cpp\StaticFunctions.cpp" />
     <ClCompile Include="src\cpp\stdafx.cpp">

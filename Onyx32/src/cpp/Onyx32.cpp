@@ -19,16 +19,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	
 	function<void(void)> a = []() -> void
 	{
-		OutputDebugStringW(L"LOL");
+		MessageBox(nullptr, L"You rock!", L"Brilliant", MB_OK);
 	};
 
 	wnd->Initialize();
-	fct->AddButton(
+	/*fct->AddButton(
 		wnd,
 		L"blah",
 		a,
 		100,
-		50);
+		50);*/
+	auto x = fct->AddTextInput(wnd);
+	wstring s = L"DURRR";
+	x->SetText(L"DURRRRR");
+	MessageBox(nullptr, x->GetText().c_str(), L"HURR", MB_OK);
 
 	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_ONYX32));
 	Onyx32::System::Application app(hAccelTable);

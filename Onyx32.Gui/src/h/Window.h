@@ -9,18 +9,18 @@ namespace Onyx32::Gui
 	class Window : public IWindow
 	{
 		public:
-			ONYXWINDOWING_API Window(wstring& title, HINSTANCE hInstance, unsigned int width = CW_USEDEFAULT, unsigned int height = 0);
-			ONYXWINDOWING_API Window(wstring&& title, HINSTANCE hInstance, unsigned int width = CW_USEDEFAULT, unsigned int height = 0);
+			Window(wstring& title, HINSTANCE hInstance, unsigned int width = CW_USEDEFAULT, unsigned int height = 0);
+			Window(wstring&& title, HINSTANCE hInstance, unsigned int width = CW_USEDEFAULT, unsigned int height = 0);
 
-			ONYXWINDOWING_API virtual void Initialize() override;
-			ONYXWINDOWING_API virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
-			ONYXWINDOWING_API virtual void SetHwnd(HWND hWnd) override;
-			ONYXWINDOWING_API virtual HWND GetHwnd() override;
+			virtual void Initialize() override;
+			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+			virtual void SetHwnd(HWND hWnd) override;
+			virtual HWND GetHwnd() override;
 
-			ONYXWINDOWING_API virtual void SetTitle(wstring&& title) override;
-			ONYXWINDOWING_API virtual void SetTitle(wstring& title) override;
+			virtual void SetTitle(wstring&& title) override;
+			virtual void SetTitle(wstring& title) override;
 
-			ONYXWINDOWING_API virtual void AddControl(IControl* control) override;
+			virtual void AddControl(IControl* control) override;
 
 		private:
 			HWND hWnd;

@@ -7,14 +7,14 @@ namespace Onyx32::Gui
 	class Button : public IButton
 	{
 	public:
-		ONYXWINDOWING_API Button(unsigned int controlId, wstring& text, FunctionHandler& onClick, unsigned int width, unsigned int height);
+		Button(unsigned int controlId, wstring& text, FunctionHandler& onClick, unsigned int width, unsigned int height);
 
-		ONYXWINDOWING_API virtual void Initialize(IWindow* parent) override;
-		ONYXWINDOWING_API virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
-		ONYXWINDOWING_API virtual void SetHwnd(HWND hWnd) override;
-		ONYXWINDOWING_API virtual HWND GetHwnd() override;
+		virtual void Initialize(IWindow* parent) override;
+		 virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+		 virtual void SetHwnd(HWND hWnd) override;
+		 virtual HWND GetHwnd() override;
 
-		ONYXWINDOWING_API virtual ~Button();
+		 virtual ~Button();
 
 	protected:
 		HWND hwndButton;
