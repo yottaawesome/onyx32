@@ -1,7 +1,6 @@
 #include "../h/stdafx.h"
 #include "../h/Onyx32.h"
 #include "../../../Onyx32.Gui/include/Onyx32.Gui.h"
-#include "../../../Onyx32.System/include/Onyx32.System.h"
 #include <functional>
 
 #define MAX_LOADSTRING 100
@@ -23,12 +22,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	};
 
 	wnd->Initialize();
-	/*fct->AddButton(
+	fct->AddButton(
 		wnd,
 		L"blah",
 		a,
-		100,
-		50);*/
+		200,
+		200);
 	auto x = fct->AddTextInput(wnd);
 	wstring s = L"DURRR";
 	x->SetText(L"DURRRRR");

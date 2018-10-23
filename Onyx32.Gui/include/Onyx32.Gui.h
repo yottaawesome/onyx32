@@ -12,6 +12,20 @@ using namespace std;
 
 typedef function<void(void)> FunctionHandler;
 
+namespace Onyx32::System
+{
+	class ONYXWINDOWING_API Application
+	{
+	public:
+		Application();
+		Application(HACCEL accelerators);
+		virtual int MainLoop();
+
+	private:
+		HACCEL accelerators;
+	};
+}
+
 namespace Onyx32::Gui
 {
 	class ONYXWINDOWING_API IWindow;

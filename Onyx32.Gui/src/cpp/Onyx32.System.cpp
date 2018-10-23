@@ -1,5 +1,5 @@
 #include "../h/stdafx.h"
-#include "../../include/Onyx32.System.h"
+#include "../../include/Onyx32.Gui.h"
 
 using namespace Onyx32::System;
 

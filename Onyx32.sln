@@ -1,17 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32", "Onyx32\Onyx32.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
 	ProjectSection(ProjectDependencies) = postProject
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804} = {28AEF3B1-6DA8-4E50-878C-5896F7BC1804}
 		{558C2ADA-F073-451A-83C4-42173A23BCD6} = {558C2ADA-F073-451A-83C4-42173A23BCD6}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui", "Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.System", "Onyx32.System\Onyx32.System.vcxproj", "{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,16 +34,11 @@ Global
 		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x64.Build.0 = Release|x64
 		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x86.ActiveCfg = Release|Win32
 		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x86.Build.0 = Release|Win32
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Debug|x64.ActiveCfg = Debug|x64
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Debug|x64.Build.0 = Debug|x64
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Debug|x86.ActiveCfg = Debug|Win32
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Debug|x86.Build.0 = Debug|Win32
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Release|x64.ActiveCfg = Release|x64
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Release|x64.Build.0 = Release|x64
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Release|x86.ActiveCfg = Release|Win32
-		{28AEF3B1-6DA8-4E50-878C-5896F7BC1804}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03A20EAF-7F9E-464F-8FE4-6CDCB6489165}
 	EndGlobalSection
 EndGlobal
