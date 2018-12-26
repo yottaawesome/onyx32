@@ -5,7 +5,7 @@
 
 namespace Onyx32::Gui
 {
-	Button::Button(unsigned int controlId, wstring& text, FunctionHandler& onClick, unsigned int width, unsigned int height)
+	Button::Button(unsigned int controlId, std::wstring& text, FunctionHandler& onClick, unsigned int width, unsigned int height)
 		: parent(nullptr), text(text), onClick(onClick), controlId(controlId), width(width), height(height)
 	{
 		width = width > 0 ? width : 100;

@@ -27,13 +27,13 @@ namespace Onyx32::Gui
 		return new Window(title, GetModuleHandle(nullptr));
 	}
 
-	void FormBuilder::AddButton(IWindow* window, wstring& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
+	void FormBuilder::AddButton(IWindow* window, std::wstring& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
 	{
 		Button* button = new Button(0, text, onClick, width, height);
 		window->AddControl(button);
 	}
 
-	void FormBuilder::AddButton(IWindow* window, wstring&& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
+	void FormBuilder::AddButton(IWindow* window, std::wstring&& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
 	{
 		Button* button = new Button(0, text, onClick, width, height);
 		window->AddControl(button);
