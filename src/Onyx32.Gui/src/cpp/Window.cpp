@@ -3,6 +3,7 @@
 #include "../h/Window.h"
 #include "../h/WindowClassManager.h"
 #include "../h/Resource.h"
+#include "../h/dllmain.h"
 
 using namespace Onyx32::Gui;
 
@@ -44,7 +45,7 @@ namespace Onyx32::Gui
 			height, // window height
 			NULL, // parent HWND
 			NULL, // HWND menu/child
-			hInstance, // instance of the module
+			Dll::GetModule(),//hInstance, // instance of the module
 			this // additional data
 		);
 

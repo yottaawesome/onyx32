@@ -14,17 +14,17 @@ namespace Onyx32::Gui
 	IWindow* FormBuilder::CreateMainWindow(wstring& title, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
-			return new Window(title, GetModuleHandle(nullptr), width, height);
+			return new Window(title, Dll::GetModule(), width, height);
 
-		return new Window(title, GetModuleHandle(nullptr));
+		return new Window(title, Dll::GetModule());
 	}
 
 	IWindow* FormBuilder::CreateMainWindow(wstring&& title, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
-			return new Window(title, GetModuleHandle(nullptr), width, height);
+			return new Window(title, Dll::GetModule(), width, height);
 
-		return new Window(title, GetModuleHandle(nullptr));
+		return new Window(title, Dll::GetModule());
 	}
 
 	void FormBuilder::AddButton(IWindow* window, std::wstring& text, function<void(void)>& onClick, unsigned int width, unsigned int height)

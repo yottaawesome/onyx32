@@ -33,8 +33,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	x->SetText(L"DURRRRR");
 	MessageBox(nullptr, x->GetText().c_str(), L"HURR", MB_OK);
 
-	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_ONYX32));
-	Onyx32::System::Application app(hAccelTable);
+	//HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_ONYX32));
+	Onyx32::System::Application app;
 	int retVal = app.MainLoop();
 
 	delete wnd;

@@ -1,6 +1,7 @@
 #include "../h/WindowClassManager.h"
 #include "../h/StaticFunctions.h"
 #include "../h/Resource.h"
+#include "../h/dllmain.h"
 
 using namespace Onyx32::Gui;
 
@@ -18,12 +19,12 @@ WindowClass WindowClassManager::GetDefaultWindowClass()
 		DefaultWindowClass.WndClass.lpfnWndProc = Static::WndProc;
 		DefaultWindowClass.WndClass.cbClsExtra = 0;
 		DefaultWindowClass.WndClass.cbWndExtra = 0;
-		DefaultWindowClass.WndClass.hInstance = GetModuleHandle(nullptr);
+		DefaultWindowClass.WndClass.hInstance = Dll::GetModule();
 		DefaultWindowClass.WndClass.hIcon = LoadIcon(GetModuleHandle(nullptr), MAKEINTRESOURCE(IDI_ONYX32));
 		DefaultWindowClass.WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 		DefaultWindowClass.WndClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		DefaultWindowClass.WndClass.lpszMenuName = MAKEINTRESOURCE(IDC_ONYX32);
-		DefaultWindowClass.WndClass.hIconSm = LoadIcon(DefaultWindowClass.WndClass.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+		DefaultWindowClass.WndClass.hIconSm = LoadIcon(Dll::GetModule(), MAKEINTRESOURCE(IDI_SMALL));
 
 		RegisterClassEx(&DefaultWindowClass.WndClass);
 
