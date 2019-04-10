@@ -71,32 +71,37 @@ namespace Onyx32::Gui
 
 		switch (message)
 		{
-		case WM_COMMAND:
-			wmId = LOWORD(wParam);
-			wmEvent = HIWORD(wParam);
-			// Parse the menu selections:
-			switch (wmId)
-			{
-			case IDM_ABOUT:
-				//DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+			case WM_COMMAND:
+				wmId = LOWORD(wParam);
+				wmEvent = HIWORD(wParam);
+				// Parse the menu selections:
+				switch (wmId)
+				{
+					case IDM_ABOUT:
+						//DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+						break;
+
+					case IDM_EXIT:
+						DestroyWindow(hWnd);
+						break;
+
+					default:
+						return DefWindowProc(hWnd, message, wParam, lParam);
+				}
 				break;
-			case IDM_EXIT:
-				DestroyWindow(hWnd);
+
+			case WM_PAINT:
+				hdc = BeginPaint(hWnd, &ps);
+				// TODO: Add any drawing code here...
+				EndPaint(hWnd, &ps);
 				break;
+
+			case WM_DESTROY:
+				PostQuitMessage(0);
+				break;
+
 			default:
 				return DefWindowProc(hWnd, message, wParam, lParam);
-			}
-			break;
-		case WM_PAINT:
-			hdc = BeginPaint(hWnd, &ps);
-			// TODO: Add any drawing code here...
-			EndPaint(hWnd, &ps);
-			break;
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			break;
-		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
 		return 0;
 	}

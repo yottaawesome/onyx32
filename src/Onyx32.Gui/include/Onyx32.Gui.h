@@ -10,22 +10,19 @@
 
 typedef std::function<void(void)> FunctionHandler;
 
-namespace Onyx32::System
+namespace Onyx32::Gui
 {
 	class ONYXWINDOWING_API Application
 	{
-	public:
-		Application();
-		Application(HACCEL accelerators);
-		virtual int MainLoop();
+		public:
+			Application();
+			Application(HACCEL accelerators);
+			virtual int MainLoop();
 
-	private:
-		HACCEL accelerators;
+		private:
+			HACCEL accelerators;
 	};
-}
 
-namespace Onyx32::Gui
-{
 	class ONYXWINDOWING_API IWindow;
 
 	class ONYXWINDOWING_API IControl
@@ -63,6 +60,7 @@ namespace Onyx32::Gui
 			virtual void AddControl(IControl* control) = 0;
 			virtual void SetTitle(std::wstring& title) = 0;
 			virtual void SetTitle(std::wstring&& title) = 0;
+
 			virtual ~IWindow() = 0;
 	};
 

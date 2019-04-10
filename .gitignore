@@ -36,7 +36,7 @@
 Debug/
 Release/
 /x64
-/.vs
+.vs/
 /Onyx32/*.aps
 /Onyx32/RCa08336
 /Onyx32/RCb08336

@@ -1,9 +1,9 @@
 #include "../h/stdafx.h"
 #include "../../include/Onyx32.Gui.h"
 
-using namespace Onyx32::System;
+using Onyx32::Gui::Application;
 
-namespace Onyx32::System
+namespace Onyx32::Gui
 {
 	Application::Application() { }
 

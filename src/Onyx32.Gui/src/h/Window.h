@@ -25,9 +25,6 @@ namespace Onyx32::Gui
 		private:
 			HWND hWnd;
 			HINSTANCE hInstance;
-			//IWin32Application* application;
-			//TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
-			//TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 			wstring title = L"Default";
 			unsigned int width;
 			unsigned int height;

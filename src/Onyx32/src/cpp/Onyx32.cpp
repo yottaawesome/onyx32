@@ -3,12 +3,13 @@
 #include "../../../Onyx32.Gui/include/Onyx32.Gui.h"
 #include <functional>
 
-#define MAX_LOADSTRING 100
-using namespace std;
+using std::wstring;
+using std::function;
+using Onyx32::Gui::IFormBuilder;
+using Onyx32::Gui::IWindow;
+using Onyx32::Gui::Factory;
 
-using namespace Onyx32::Gui;
-
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
+int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -16,7 +17,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	IFormBuilder* fct = Factory::GetFormBuilder();
 	IWindow* wnd = fct->CreateMainWindow(L"This is a test", 500, 500);
 	
-	function<void(void)> a = []() -> void
+	function<void(void)> clickHandler = []() -> void
 	{
 		MessageBox(nullptr, L"You rock!", L"Brilliant", MB_OK);
 	};
@@ -24,17 +25,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	wnd->Initialize();
 	fct->AddButton(
 		wnd,
-		L"blah",
-		a,
-		200,
-		200);
-	auto x = fct->AddTextInput(wnd);
-	wstring s = L"DURRR";
-	x->SetText(L"DURRRRR");
-	MessageBox(nullptr, x->GetText().c_str(), L"HURR", MB_OK);
+		L"Button",
+		clickHandler,
+		300,
+		300);
 
-	//HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_ONYX32));
-	Onyx32::System::Application app;
+	auto input = fct->AddTextInput(wnd);
+	input->SetText(L"Test input");
+	MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
+
+	Onyx32::Gui::Application app;
 	int retVal = app.MainLoop();
 
 	delete wnd;

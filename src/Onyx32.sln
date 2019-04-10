@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32", "src\Onyx32\Onyx32.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32", "Onyx32\Onyx32.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
 	ProjectSection(ProjectDependencies) = postProject
 		{558C2ADA-F073-451A-83C4-42173A23BCD6} = {558C2ADA-F073-451A-83C4-42173A23BCD6}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui", "src\Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui", "Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gui", "Gui", "{37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}"
 EndProject
