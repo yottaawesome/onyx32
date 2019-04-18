@@ -46,10 +46,10 @@ namespace Onyx32::Gui
 	{
 		switch (message)
 		{
-		case WM_LBUTTONUP:
-			this->onClick();
-		default:
-			return DefSubclassProc(hwndButton, message, wParam, lParam);
+			case WM_LBUTTONUP:
+				this->onClick();
+			default:
+				return DefSubclassProc(hwndButton, message, wParam, lParam);
 		}
 
 		return DefSubclassProc(hwndButton, message, wParam, lParam);
