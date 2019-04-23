@@ -4,6 +4,10 @@
 
 Onyx32 is a simple experimental Win32 wrapper written in C++ that is currently in development. It's intended to take advantage of newer C++ features. The project initially started as a means for me to learn newer C++ features while also exploring the Win32 API.
 
+## Status
+
+__In development.__
+
 ## Setting up
 
 Development is best done in Visual Studio. You will need to have Windows SDK 10.0.17763.0 to build the project.
