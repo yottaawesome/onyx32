@@ -6,7 +6,7 @@ Onyx32 is a simple experimental Win32 wrapper written in C++ that is currently i
 
 ## Status
 
-__In development.__
+_In development._
 
 ## Setting up
 
