@@ -10,7 +10,7 @@ _In development._
 
 ## Setting up
 
-Development is best done in Visual Studio. You will need to have Windows SDK 10.0.17763.0 to build the project.
+Development is best done in Visual Studio. Onyx32 targets the latest Windows SDK.
 
 ## Future features
 
