@@ -1,8 +1,14 @@
-# Onyx32
+# Onyx32 GUI
 
 ## Introduction
 
-Onyx32 is a simple experimental Win32 wrapper written in C++ that is currently in development. It's intended to take advantage of newer C++ features. The project initially started as a means for me to learn newer C++ features while also exploring the Win32 API.
+Onyx32 is a simple experimental Win32 framework written in C++ that is currently in development. It's intended to take advantage of newer C++ features. The project initially started as a means for me to learn newer C++ features while also exploring the Win32 API.
+
+This particular repository reflects the GUI library of Onyx32.
+
+## Using the library
+
+*TODO: add instructions!*
 
 ## Status
 
