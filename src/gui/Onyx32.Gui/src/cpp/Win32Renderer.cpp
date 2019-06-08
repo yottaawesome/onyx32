@@ -9,6 +9,8 @@ namespace Onyx32::Gui
 {
 	HWND Onyx32::Gui::Win32Renderer::Render(Window* window)
 	{
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
 		HWND hWnd = CreateWindow
 		(
 			window->GetWndClass().ClassName.c_str(), // class name
@@ -54,6 +56,7 @@ namespace Onyx32::Gui
 			button
 		);
 
+		// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
 		SetWindowSubclass(hwndButton, Static::DefCtrlProc, 0, (DWORD_PTR)button);
 		
 		return hwndButton;
