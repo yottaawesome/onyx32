@@ -1,4 +1,4 @@
-# Onyx32 GUI
+# Onyx32
 
 ## Introduction
 
