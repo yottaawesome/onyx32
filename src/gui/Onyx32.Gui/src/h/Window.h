@@ -20,14 +20,20 @@ namespace Onyx32::Gui
 
 			virtual void SetTitle(wstring&& title) override;
 			virtual void SetTitle(wstring& title) override;
+			virtual wstring& GetTitle() override;
+			
+			virtual UINT GetWidth() override;
+			virtual UINT GetHeight() override;
 
 			virtual void AddControl(IControl* control, unsigned int xPos, unsigned int yPos) override;
+
+			virtual WindowClass GetWndClass();
 
 		private:
 			HWND hWnd;
 			wstring title = L"Default";
 			unsigned int width;
 			unsigned int height;
-			Onyx32::Gui::WindowClass wcex;
+			WindowClass wcex;
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "../../include/Onyx32.Gui.h"
+#include <string>
 
 namespace Onyx32::Gui
 {
@@ -13,6 +14,11 @@ namespace Onyx32::Gui
 		virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 		virtual void SetHwnd(HWND hWnd) override;
 		virtual HWND GetHwnd() override;
+		virtual void SetParent(IWindow* parent);
+		virtual UINT GetWidth() override;
+		virtual UINT GetHeight() override;
+		virtual const std::wstring& GetText() override;
+		virtual UINT GetId() override;
 
 		virtual ~Button();
 

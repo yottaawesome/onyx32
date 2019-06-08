@@ -17,7 +17,7 @@ namespace Onyx32::Gui
 			0, 0, 100, 50,   // set size in WM_SIZE message 
 			parent->GetHwnd(),         // parent window 
 			(HMENU)100,   // edit control ID 
-			(HINSTANCE)GetWindowLong(parent->GetHwnd(), GWLP_HINSTANCE),
+			(HINSTANCE)GetWindowLongPtr(parent->GetHwnd(), GWLP_HINSTANCE),
 			NULL);        // pointer not needed 
 	}
 

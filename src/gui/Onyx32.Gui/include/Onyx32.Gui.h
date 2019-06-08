@@ -39,6 +39,10 @@ namespace Onyx32::Gui
 	{
 		public:
 			virtual ~IButton() = 0;
+			virtual UINT GetWidth() = 0;
+			virtual UINT GetHeight() = 0;
+			virtual UINT GetId() = 0;
+			virtual const std::wstring& GetText() = 0;
 	};
 
 	class ONYXWINDOWING_API IInput : public IControl
@@ -60,6 +64,9 @@ namespace Onyx32::Gui
 			virtual void AddControl(IControl* control, unsigned int xPos, unsigned int yPos) = 0;
 			virtual void SetTitle(std::wstring& title) = 0;
 			virtual void SetTitle(std::wstring&& title) = 0;
+			virtual std::wstring& GetTitle() = 0;
+			virtual UINT GetWidth() = 0;
+			virtual UINT GetHeight() = 0;
 
 			virtual ~IWindow() = 0;
 	};

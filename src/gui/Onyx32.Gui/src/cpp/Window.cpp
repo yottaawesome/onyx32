@@ -4,6 +4,7 @@
 #include "../h/WindowClassManager.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
+#include "../h/Win32Renderer.h"
 
 using namespace Onyx32::Gui;
 
@@ -21,6 +22,26 @@ namespace Onyx32::Gui
 		SetWindowText(hWnd, this->title.c_str());
 	}
 
+	std::wstring& Window::GetTitle()
+	{
+		return title;
+	}
+
+	UINT Window::GetWidth()
+	{
+		return width;
+	}
+
+	UINT Window::GetHeight()
+	{
+		return height;
+	}
+
+	WindowClass Window::GetWndClass()
+	{
+		return wcex;
+	}
+
 	void Window::SetTitle(wstring&& title)
 	{
 		this->title = title;
@@ -29,23 +50,8 @@ namespace Onyx32::Gui
 
 	void Window::Initialize()
 	{
-		//LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-		//LoadString(hInstance, IDC_DRIVECRYPT, szWindowClass, MAX_LOADSTRING);
-
-		hWnd = CreateWindow
-		(
-			wcex.ClassName.c_str(), // class name
-			title.c_str(), // window title
-			WS_OVERLAPPEDWINDOW, // window styles
-			CW_USEDEFAULT, // initial horizontal x position
-			0,  // initial horizontal y position
-			width,  // window width
-			height, // window height
-			NULL, // parent HWND
-			NULL, // HWND menu/child
-			Dll::GetModule(),//hInstance, // instance of the module
-			this // additional data
-		);
+		Win32Renderer renderer;
+		hWnd = renderer.Render(this);
 
 		if (!hWnd)
 			return;

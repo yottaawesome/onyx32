@@ -89,7 +89,7 @@
     <ClCompile Include="src\cpp\Onyx32.System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\Wind32Renderer.cpp">
+    <ClCompile Include="src\cpp\Win32Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
