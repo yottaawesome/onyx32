@@ -83,17 +83,4 @@ namespace Onyx32::Gui
 		public:
 			static IFormBuilder* GetFormBuilder();
 	};
-
-	class ONYXWINDOWING_API IWindow2
-	{
-		public:
-			virtual std::wstring Title() = 0;
-			virtual std::wstring Title(std::wstring&& newValue) = 0;
-			virtual int Height() = 0;
-			virtual int Height(int newValue) = 0;
-			virtual int Width() = 0;
-			virtual int Width(int newValue) = 0;
-
-			virtual ~IWindow2() = 0;
-	};
 }

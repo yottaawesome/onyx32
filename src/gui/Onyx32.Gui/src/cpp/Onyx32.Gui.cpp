@@ -14,5 +14,4 @@ namespace Onyx32::Gui
 	inline IButton::~IButton() { }
 	inline IFormBuilder::~IFormBuilder() { }
 	inline IInput::~IInput() { }
-	inline IWindow2::~IWindow2() { };
 }

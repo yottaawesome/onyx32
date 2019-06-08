@@ -4,15 +4,10 @@
 
 namespace Onyx32::Gui
 {
-	class Window2 : public IWindow2
-	{
-	
-	};
-
 	class Win32Renderer
 	{
 		public:
-			virtual HWND Render(IWindow2& window) = 0;
+			virtual HWND Render(IWindow& window) = 0;
 
 			virtual ~Win32Renderer();
 

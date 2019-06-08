@@ -3,7 +3,14 @@
 #include "../h/Win32Renderer.h"
 #include  <Commctrl.h>
 
-HWND Onyx32::Gui::Win32Renderer::Render(IWindow2& window)
+namespace Onyx32::Gui
 {
-	return nullptr;
+	HWND Onyx32::Gui::Win32Renderer::Render(IWindow& window)
+	{
+		return nullptr;
+	}
+
+	Onyx32::Gui::Win32Renderer::~Win32Renderer()
+	{
+	}
 }
