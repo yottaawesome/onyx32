@@ -14,35 +14,35 @@ namespace Onyx32::Gui
 	IWindow* FormBuilder::CreateMainWindow(wstring& title, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
-			return new Window(title, Dll::GetModule(), width, height);
+			return new Window(title, width, height);
 
-		return new Window(title, Dll::GetModule());
+		return new Window(title);
 	}
 
 	IWindow* FormBuilder::CreateMainWindow(wstring&& title, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
-			return new Window(title, Dll::GetModule(), width, height);
+			return new Window(title, width, height);
 
-		return new Window(title, Dll::GetModule());
+		return new Window(title);
 	}
 
 	void FormBuilder::AddButton(IWindow* window, std::wstring& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
 	{
 		Button* button = new Button(0, text, onClick, width, height);
-		window->AddControl(button);
+		window->AddControl(button, 100, 100);
 	}
 
 	void FormBuilder::AddButton(IWindow* window, std::wstring&& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
 	{
 		Button* button = new Button(0, text, onClick, width, height);
-		window->AddControl(button);
+		window->AddControl(button, 100, 100);
 	}
 
 	IInput* FormBuilder::AddTextInput(IWindow* window)
 	{
 		auto input = new Input();
-		window->AddControl(input);
+		window->AddControl(input, 100, 100);
 		return input;
 	}
 

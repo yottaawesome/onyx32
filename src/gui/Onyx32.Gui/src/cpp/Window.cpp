@@ -9,11 +9,11 @@ using namespace Onyx32::Gui;
 
 namespace Onyx32::Gui
 {
-	Window::Window(wstring& title, HINSTANCE hInstance, unsigned int width, unsigned int height)
-		: width(width), height(height), title(title), hInstance(hInstance) { }
+	Window::Window(wstring& title, unsigned int width, unsigned int height)
+		: width(width), height(height), title(title), wcex(WindowClassManager::GetDefaultWindowClass()), hWnd(nullptr) { }
 
-	Window::Window(wstring&& title, HINSTANCE hInstance, unsigned int width, unsigned int height)
-		: width(width), height(height), title(title), hInstance(hInstance) { }
+	Window::Window(wstring&& title, unsigned int width, unsigned int height)
+		: width(width), height(height), title(title), wcex(WindowClassManager::GetDefaultWindowClass()), hWnd(nullptr) { }
 
 	void Window::SetTitle(wstring& title)
 	{
@@ -31,8 +31,6 @@ namespace Onyx32::Gui
 	{
 		//LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 		//LoadString(hInstance, IDC_DRIVECRYPT, szWindowClass, MAX_LOADSTRING);
-
-		auto wcex = WindowClassManager::GetDefaultWindowClass();
 
 		hWnd = CreateWindow
 		(
@@ -57,7 +55,7 @@ namespace Onyx32::Gui
 		UpdateWindow(hWnd);
 	}
 
-	void Window::AddControl(IControl* control)
+	void Window::AddControl(IControl* control, unsigned int xPos, unsigned int yPos)
 	{
 		if (control != nullptr)
 			control->Initialize(this);
