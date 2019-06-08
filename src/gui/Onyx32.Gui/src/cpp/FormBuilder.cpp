@@ -11,20 +11,12 @@ namespace Onyx32::Gui
 {
 	FormBuilder::FormBuilder() { }
 
-	IWindow* FormBuilder::CreateMainWindow(wstring& title, unsigned int width, unsigned int height)
+	IWindow* FormBuilder::CreateMainWindow(std::wstring_view title, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
-			return new Window(title, width, height);
+			return new Window(std::wstring(title), width, height);
 
-		return new Window(title);
-	}
-
-	IWindow* FormBuilder::CreateMainWindow(wstring&& title, unsigned int width, unsigned int height)
-	{
-		if (width > 0 && height > 0)
-			return new Window(title, width, height);
-
-		return new Window(title);
+		return new Window(std::wstring(title));
 	}
 
 	void FormBuilder::AddButton(IWindow* window, std::wstring& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
