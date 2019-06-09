@@ -10,13 +10,10 @@ using namespace Onyx32::Gui;
 
 namespace Onyx32::Gui
 {
-	Window::Window(wstring& title, unsigned int width, unsigned int height)
-		: width(width), height(height), title(title), wcex(WindowClassManager::GetDefaultWindowClass()), hWnd(nullptr) { }
+	Window::Window(const WindowClass& wndClass, wstring_view title, unsigned int width, unsigned int height)
+		: width(width), height(height), title(title), WndClass(wndClass), hWnd(nullptr) { }
 
-	Window::Window(wstring&& title, unsigned int width, unsigned int height)
-		: width(width), height(height), title(title), wcex(WindowClassManager::GetDefaultWindowClass()), hWnd(nullptr) { }
-
-	void Window::SetTitle(wstring& title)
+	void Window::SetTitle(wstring_view title)
 	{
 		this->title = title;
 		SetWindowText(hWnd, this->title.c_str());
@@ -35,17 +32,6 @@ namespace Onyx32::Gui
 	UINT Window::GetHeight()
 	{
 		return height;
-	}
-
-	WindowClass Window::GetWndClass()
-	{
-		return wcex;
-	}
-
-	void Window::SetTitle(wstring&& title)
-	{
-		this->title = title;
-		SetWindowText(hWnd, this->title.c_str());
 	}
 
 	void Window::Initialize()

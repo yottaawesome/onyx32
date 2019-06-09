@@ -13,7 +13,7 @@ namespace Onyx32::Gui
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
 		HWND hWnd = CreateWindow
 		(
-			window->GetWndClass().ClassName.c_str(), // class name
+			window->WndClass.ClassName.c_str(), // class name
 			window->GetTitle().c_str(), // window title
 			WS_OVERLAPPEDWINDOW, // window styles
 			CW_USEDEFAULT, // initial horizontal x position

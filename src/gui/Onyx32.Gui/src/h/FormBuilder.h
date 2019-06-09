@@ -7,7 +7,7 @@ namespace Onyx32::Gui
 	{
 	public:
 		FormBuilder();
-		virtual IWindow* CreateMainWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) override;
+		virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) override;
 
 		virtual void AddButton(IWindow* window, std::wstring& text, std::function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) override;
 		virtual void AddButton(IWindow* window, std::wstring&& text, std::function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) override;

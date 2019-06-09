@@ -62,8 +62,7 @@ namespace Onyx32::Gui
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
 			virtual void AddControl(IControl* control, unsigned int xPos, unsigned int yPos) = 0;
-			virtual void SetTitle(std::wstring& title) = 0;
-			virtual void SetTitle(std::wstring&& title) = 0;
+			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
@@ -74,7 +73,7 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IFormBuilder
 	{
 		public:
-			virtual IWindow* CreateMainWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
+			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
 
 			virtual void AddButton(IWindow* window, std::wstring& text, std::function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;
 			virtual void AddButton(IWindow* window, std::wstring&& text, std::function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;

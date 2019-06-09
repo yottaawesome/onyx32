@@ -15,7 +15,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
     UNREFERENCED_PARAMETER(lpCmdLine);
 	
 	IFormBuilder* fct = Factory::GetFormBuilder();
-	IWindow* wnd = fct->CreateMainWindow(L"This is a test", 500, 500);
+	IWindow* wnd = fct->CreateDefaultWindow(L"This is a test", 500, 500);
 	
 	function<void(void)> clickHandler = []() -> void
 	{
