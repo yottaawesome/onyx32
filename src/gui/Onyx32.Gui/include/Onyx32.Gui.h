@@ -75,9 +75,7 @@ namespace Onyx32::Gui
 		public:
 			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
 
-			virtual void AddButton(IWindow* window, std::wstring& text, std::function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;
-			virtual void AddButton(IWindow* window, std::wstring&& text, std::function<void(void)>& onClick, unsigned int width = 0, unsigned int height = 0) = 0;
-
+			virtual IButton* AddButton(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick) = 0;
 			virtual IInput* AddTextInput(IWindow* window) = 0;
 
 			virtual ~IFormBuilder() = 0;

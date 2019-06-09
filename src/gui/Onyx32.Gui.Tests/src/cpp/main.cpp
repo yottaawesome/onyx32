@@ -26,9 +26,11 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	fct->AddButton(
 		wnd,
 		L"Button",
-		clickHandler,
-		300,
-		300);
+		100,
+		100,
+		100,
+		100,
+		clickHandler);
 
 	auto input = fct->AddTextInput(wnd);
 	input->SetText(L"Test input");

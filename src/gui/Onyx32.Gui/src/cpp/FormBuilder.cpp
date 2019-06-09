@@ -11,7 +11,7 @@ namespace Onyx32::Gui
 {
 	FormBuilder::FormBuilder() { }
 
-	IWindow* FormBuilder::CreateDefaultWindow(std::wstring_view title, unsigned int width, unsigned int height)
+	IWindow* FormBuilder::CreateDefaultWindow(std::wstring_view title, UINT width, UINT height)
 	{
 		if (width > 0 && height > 0)
 			return new Window(WindowClassManager::GetDefaultWindowClass(), title, width, height);
@@ -19,16 +19,11 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
-	void FormBuilder::AddButton(IWindow* window, std::wstring& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
+	IButton* FormBuilder::AddButton(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick)
 	{
-		Button* button = new Button(0, text, onClick, width, height);
+		Button* button = new Button(text, width, height, onClick);
 		window->AddControl(button, 100, 100);
-	}
-
-	void FormBuilder::AddButton(IWindow* window, std::wstring&& text, function<void(void)>& onClick, unsigned int width, unsigned int height)
-	{
-		Button* button = new Button(0, text, onClick, width, height);
-		window->AddControl(button, 100, 100);
+		return button;
 	}
 
 	IInput* FormBuilder::AddTextInput(IWindow* window)
