@@ -1,8 +1,6 @@
 #include "../h/stdafx.h"
 #include "../../include/Onyx32.Gui.h"
 
-using Onyx32::Gui::Application;
-
 namespace Onyx32::Gui
 {
 	Application::Application() : accelerators(nullptr) { }

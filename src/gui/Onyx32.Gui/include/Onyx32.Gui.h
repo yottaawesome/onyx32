@@ -62,7 +62,8 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
-			virtual void AddControl(IControl& control, unsigned int xPos, unsigned int yPos) = 0;
+			virtual void AddControl(IButton& control, unsigned int xPos, unsigned int yPos) = 0;
+			virtual void AddControl(ITextInput& control, unsigned int xPos, unsigned int yPos) = 0;
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;

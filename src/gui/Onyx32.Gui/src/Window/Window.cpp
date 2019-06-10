@@ -56,14 +56,20 @@ namespace Onyx32::Gui
 		UpdateWindow(_hWnd);
 	}
 
-	void Window::AddControl(IControl& control, UINT xPos, UINT yPos)
+	void Window::AddControl(IButton& control, UINT xPos, UINT yPos)
 	{
 		control.Initialize(this);
 		Win32Renderer renderer;
-		if(control.GetName() == L"BUTTON")
-			control.SetHwnd(renderer.Render((Window*)this, (Button*)&control, xPos, yPos));
-		else if(control.GetName() == L"EDIT")
-			control.SetHwnd(renderer.Render((Window*)this, (TextInput*)&control, xPos, yPos));
+		control.SetHwnd(renderer.Render((Window*)this, (BaseControl<IButton>*) & control, xPos, yPos));
+
+		_children[&control] = new ControlInfo(control, xPos, yPos);
+	}
+
+	void Window::AddControl(ITextInput& control, UINT xPos, UINT yPos)
+	{
+		control.Initialize(this);
+		Win32Renderer renderer;
+		control.SetHwnd(renderer.Render((Window*)this, (BaseControl<ITextInput>*) &control, xPos, yPos));
 
 		_children[&control] = new ControlInfo(control, xPos, yPos);
 	}

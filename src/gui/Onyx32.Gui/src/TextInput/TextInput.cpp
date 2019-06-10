@@ -20,6 +20,11 @@ namespace Onyx32::Gui
 		DestroyWindow(_wndHandle);
 	}
 
+	const std::wstring& TextInput::GetCreateWindowText()
+	{
+		return L"";
+	}
+
 	void TextInput::Initialize(IWindow* window)
 	{ }
 

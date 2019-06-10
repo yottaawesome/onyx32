@@ -25,7 +25,8 @@ namespace Onyx32::Gui
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
 
-			virtual void AddControl(IControl& control, UINT xPos, UINT yPos) override;
+			virtual void AddControl(IButton& control, UINT xPos, UINT yPos) override;
+			virtual void AddControl(ITextInput& control, UINT xPos, UINT yPos) override;
 
 			const WindowClass WndClass;
 

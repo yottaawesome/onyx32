@@ -35,13 +35,51 @@ namespace Onyx32::Gui
 		return hWnd;
 	}
 
-	HWND Win32Renderer::Render(Window* parent, Button* control, const UINT xPos, const UINT yPos)
+	template<typename ControlType>
+	HWND Win32Renderer::RenderInternal(Window* parent, BaseControl<ControlType>* control, const UINT xPos, const UINT yPos)
 	{
 		control->SetParent(parent);
 
 		HWND parentHwnd = parent->GetHwnd();
-		HWND hwndButton = CreateWindow
+		HWND hwndButton = CreateWindowEx
 		(
+			0,
+			control->GetName().c_str(),  // Predefined class; Unicode assumed 
+			control->GetText().c_str(),      // Button text 
+			control->GetStyles(),  // Styles 
+			xPos,         // x position 
+			yPos,         // y position 
+			control->GetWidth(),        // Button width
+			control->GetHeight(),        // Button height
+			parentHwnd,     // Parent window
+			(HMENU)control->GetId(),       // No menu.
+			(HINSTANCE)GetWindowLongPtr(parentHwnd, GWLP_HINSTANCE),
+			control
+		);
+
+		// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
+		SetWindowSubclass(hwndButton, Static::DefCtrlProc, 0, (DWORD_PTR)control);
+
+		return hwndButton;
+	}
+
+	HWND Win32Renderer::Render(Window* parent, BaseControl<IButton>* control, const UINT xPos, const UINT yPos)
+	{
+		return RenderInternal(parent, control, xPos, yPos);
+	}
+	HWND Win32Renderer::Render(Window* parent, BaseControl<ITextInput>* control, const UINT xPos, const UINT yPos)
+	{
+		return RenderInternal(parent, control, xPos, yPos);
+	}
+
+	/*HWND Win32Renderer::Render(Window* parent, Button* control, const UINT xPos, const UINT yPos)
+	{
+		control->SetParent(parent);
+
+		HWND parentHwnd = parent->GetHwnd();
+		HWND hwndButton = CreateWindowEx
+		(
+			0,
 			control->GetName().c_str(),  // Predefined class; Unicode assumed 
 			control->GetText().c_str(),      // Button text 
 			control->GetStyles(),  // Styles 
@@ -80,7 +118,7 @@ namespace Onyx32::Gui
 			control);
 
 		return hwndEdit;
-	}
+	}*/
 
 	void Win32Renderer::Resize(Button* button, const UINT width, const UINT height)
 	{

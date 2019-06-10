@@ -18,6 +18,7 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 			virtual const wstring GetText() override;
 			virtual void SetText(wstring_view str) override;
+			virtual const std::wstring& GetCreateWindowText() override;
 
 		protected:
 			wstring _text;

@@ -18,6 +18,7 @@ namespace Onyx32::Gui
 			virtual void SetParent(IWindow* parent);
 			virtual const std::wstring& GetName();
 			virtual int GetStyles();
+			virtual const std::wstring& GetCreateWindowText() = 0;
 
 		protected:
 			HWND _wndHandle;
