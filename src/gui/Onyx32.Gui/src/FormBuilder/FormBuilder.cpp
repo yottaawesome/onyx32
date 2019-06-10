@@ -1,5 +1,5 @@
 #include "../h/stdafx.h"
-#include "../h/FormBuilder.h"
+#include "FormBuilder.h"
 #include "../Window/Window.h"
 #include "../Button/Button.h"
 #include "../TextInput/TextInput.h"
@@ -27,7 +27,6 @@ namespace Onyx32::Gui
 
 	ITextInput* FormBuilder::AddTextInput(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		//ITextInput* input = new TextInput(text, width, height, 100);
 		ITextInput* input = new TextInput(text, width, height, 100);
 		window->AddControl(*input, xPos, yPos);
 		return input;

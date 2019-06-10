@@ -5,7 +5,7 @@ using Onyx32::Gui::Application;
 
 namespace Onyx32::Gui
 {
-	Application::Application() { }
+	Application::Application() : accelerators(nullptr) { }
 
 	Application::Application(HACCEL accelerators) : accelerators(accelerators) { }
 

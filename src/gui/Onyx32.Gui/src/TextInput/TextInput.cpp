@@ -13,9 +13,7 @@ namespace Onyx32::Gui
 		const UINT height,
 		const unsigned int controlId)
 		: BaseControl(controlId, width, height, nullptr, nullptr)
-	{
-
-	}
+	{ }
 
 	TextInput::~TextInput()
 	{
@@ -23,8 +21,7 @@ namespace Onyx32::Gui
 	}
 
 	void TextInput::Initialize(IWindow* window)
-	{
-	}
+	{ }
 
 	const wstring TextInput::GetText()
 	{

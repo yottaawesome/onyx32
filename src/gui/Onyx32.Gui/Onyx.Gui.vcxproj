@@ -167,7 +167,7 @@
     <ClInclude Include="src\Button\Button.h" />
     <ClInclude Include="src\h\ControlInfo.h" />
     <ClInclude Include="src\h\dllmain.h" />
-    <ClInclude Include="src\h\FormBuilder.h" />
+    <ClInclude Include="src\FormBuilder\FormBuilder.h" />
     <ClInclude Include="src\h\Onyx32.Gui.Internal.h" />
     <ClInclude Include="src\TextInput\TextInput.h" />
     <ClInclude Include="src\h\Resource.h" />
@@ -195,7 +195,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\cpp\Factory.cpp" />
-    <ClCompile Include="src\cpp\FormBuilder.cpp" />
+    <ClCompile Include="src\FormBuilder\FormBuilder.cpp" />
     <ClCompile Include="src\TextInput\TextInput.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\cpp\Onyx32.System.cpp" />
