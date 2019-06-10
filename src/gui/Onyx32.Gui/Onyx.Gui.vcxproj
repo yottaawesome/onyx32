@@ -198,7 +198,7 @@
     <ClCompile Include="src\FormBuilder\FormBuilder.cpp" />
     <ClCompile Include="src\TextInput\TextInput.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
-    <ClCompile Include="src\cpp\Onyx32.System.cpp" />
+    <ClCompile Include="src\cpp\Application.cpp" />
     <ClCompile Include="src\cpp\StaticFunctions.cpp" />
     <ClCompile Include="src\cpp\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
