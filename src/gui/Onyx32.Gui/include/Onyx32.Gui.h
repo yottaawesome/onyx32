@@ -32,6 +32,8 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
+			virtual const std::wstring& GetName() = 0;
+			virtual int GetStyles() = 0;
 			virtual ~IControl() = 0;
 	};
 
@@ -49,8 +51,11 @@ namespace Onyx32::Gui
 	{
 		public:
 			virtual std::wstring GetText() = 0;
+			virtual UINT GetWidth() = 0;
+			virtual UINT GetHeight() = 0;
 			virtual void SetText(std::wstring* str) = 0;
 			virtual void SetText(std::wstring&& str) = 0;
+			virtual UINT GetId() = 0;
 			virtual ~IInput() = 0;
 	};
 
@@ -61,7 +66,7 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
-			virtual void AddControl(IControl* control, unsigned int xPos, unsigned int yPos) = 0;
+			virtual void AddControl(IControl& control, unsigned int xPos, unsigned int yPos) = 0;
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;
@@ -76,7 +81,7 @@ namespace Onyx32::Gui
 			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
 
 			virtual IButton* AddButton(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick) = 0;
-			virtual IInput* AddTextInput(IWindow* window) = 0;
+			virtual IInput* AddTextInput(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 
 			virtual ~IFormBuilder() = 0;
 	};

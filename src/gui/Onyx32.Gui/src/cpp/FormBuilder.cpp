@@ -22,14 +22,14 @@ namespace Onyx32::Gui
 	IButton* FormBuilder::AddButton(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick)
 	{
 		Button* button = new Button(text, width, height, onClick);
-		window->AddControl(button, 100, 100);
+		window->AddControl(*button, xPos, yPos);
 		return button;
 	}
 
-	IInput* FormBuilder::AddTextInput(IWindow* window)
+	IInput* FormBuilder::AddTextInput(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		auto input = new Input();
-		window->AddControl(input, 100, 100);
+		Input* input = new Input(text, width, height, 100);
+		window->AddControl(*input, xPos, yPos);
 		return input;
 	}
 

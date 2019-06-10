@@ -6,51 +6,66 @@
 #include "../h/dllmain.h"
 #include "../h/Win32Renderer.h"
 
-using namespace Onyx32::Gui;
-
 namespace Onyx32::Gui
 {
 	Window::Window(const WindowClass& wndClass, wstring_view title, unsigned int width, unsigned int height)
-		: width(width), height(height), title(title), WndClass(wndClass), hWnd(nullptr) { }
+		: _width(width), _height(height), _title(title), WndClass(wndClass), _hWnd(nullptr) { }
+
+	Window::~Window()
+	{
+		for (auto item : _children)
+		{
+			delete item.first;
+			delete item.second;
+		}
+		DestroyWindow(_hWnd);
+	}
 
 	void Window::SetTitle(wstring_view title)
 	{
-		this->title = title;
-		SetWindowText(hWnd, this->title.c_str());
+		_title = title;
+		SetWindowText(_hWnd, _title.c_str());
 	}
 
 	std::wstring& Window::GetTitle()
 	{
-		return title;
+		return _title;
 	}
 
 	UINT Window::GetWidth()
 	{
-		return width;
+		return _width;
 	}
 
 	UINT Window::GetHeight()
 	{
-		return height;
+		return _height;
 	}
 
 	void Window::Initialize()
 	{
 		Win32Renderer renderer;
-		hWnd = renderer.Render(this);
+		_hWnd = renderer.Render(this);
 
-		if (!hWnd)
+		if (!_hWnd)
 			return;
 
 		// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx
-		ShowWindow(hWnd, SW_SHOWDEFAULT);
-		UpdateWindow(hWnd);
+		ShowWindow(_hWnd, SW_SHOWDEFAULT);
+		UpdateWindow(_hWnd);
 	}
 
-	void Window::AddControl(IControl* control, unsigned int xPos, unsigned int yPos)
+	void Window::AddControl(IControl& control, UINT xPos, UINT yPos)
 	{
-		if (control != nullptr)
-			control->Initialize(this);
+		control.Initialize(this);
+		Win32Renderer renderer;
+		if(control.GetName() == L"BUTTON")
+			control.SetHwnd(renderer.Render((Window*)this, (Button*)&control, xPos, yPos));
+		else if(control.GetName() == L"EDIT")
+			control.SetHwnd(renderer.Render((Window*)this, (Input*)&control, xPos, yPos));
+
+		_children[&control] = new ControlInfo(control, xPos, yPos);
+		//_children.push_back(ControlInfo(control, xPos, yPos));
 	}
 
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)
@@ -72,18 +87,18 @@ namespace Onyx32::Gui
 						break;
 
 					case IDM_EXIT:
-						DestroyWindow(hWnd);
+						DestroyWindow(_hWnd);
 						break;
 
 					default:
-						return DefWindowProc(hWnd, message, wParam, lParam);
+						return DefWindowProc(_hWnd, message, wParam, lParam);
 				}
 				break;
 
 			case WM_PAINT:
-				hdc = BeginPaint(hWnd, &ps);
+				hdc = BeginPaint(_hWnd, &ps);
 				// TODO: Add any drawing code here...
-				EndPaint(hWnd, &ps);
+				EndPaint(_hWnd, &ps);
 				break;
 
 			case WM_DESTROY:
@@ -91,18 +106,18 @@ namespace Onyx32::Gui
 				break;
 
 			default:
-				return DefWindowProc(hWnd, message, wParam, lParam);
+				return DefWindowProc(_hWnd, message, wParam, lParam);
 		}
 		return 0;
 	}
 
 	void Window::SetHwnd(HWND hWnd)
 	{
-		this->hWnd = hWnd;
+		_hWnd = hWnd;
 	}
 
 	HWND Window::GetHwnd()
 	{
-		return this->hWnd;
+		return _hWnd;
 	}
 }

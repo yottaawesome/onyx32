@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="include\Onyx32.Gui.h" />
     <ClInclude Include="src\h\Button.h" />
+    <ClInclude Include="src\h\ControlInfo.h" />
     <ClInclude Include="src\h\dllmain.h" />
     <ClInclude Include="src\h\FormBuilder.h" />
     <ClInclude Include="src\h\Input.h" />

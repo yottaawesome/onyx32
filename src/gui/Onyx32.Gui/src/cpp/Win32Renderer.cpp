@@ -7,7 +7,7 @@
 
 namespace Onyx32::Gui
 {
-	HWND Onyx32::Gui::Win32Renderer::Render(Window* window)
+	HWND Win32Renderer::Render(Window* window)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
@@ -36,30 +36,63 @@ namespace Onyx32::Gui
 		return hWnd;
 	}
 
-	HWND Onyx32::Gui::Win32Renderer::Render(Window* parent, Button* button, const UINT xPos, const UINT yPos)
+	HWND Win32Renderer::Render(Window* parent, Button* control, const UINT xPos, const UINT yPos)
 	{
-		button->SetParent(parent);
+		control->SetParent(parent);
 
 		HWND parentHwnd = parent->GetHwnd();
 		HWND hwndButton = CreateWindow
 		(
-			L"BUTTON",  // Predefined class; Unicode assumed 
-			button->GetText().c_str(),      // Button text 
-			WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+			control->GetName().c_str(),  // Predefined class; Unicode assumed 
+			control->GetText().c_str(),      // Button text 
+			control->GetStyles(),  // Styles 
 			xPos,         // x position 
 			yPos,         // y position 
-			button->GetWidth(),        // Button width
-			button->GetHeight(),        // Button height
+			control->GetWidth(),        // Button width
+			control->GetHeight(),        // Button height
 			parentHwnd,     // Parent window
-			(HMENU)button->GetId(),       // No menu.
+			(HMENU)control->GetId(),       // No menu.
 			(HINSTANCE)GetWindowLongPtr(parentHwnd, GWLP_HINSTANCE),
-			button
+			control
 		);
 
 		// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
-		SetWindowSubclass(hwndButton, Static::DefCtrlProc, 0, (DWORD_PTR)button);
+		SetWindowSubclass(hwndButton, Static::DefCtrlProc, 0, (DWORD_PTR)control);
 		
 		return hwndButton;
+	}
+
+	HWND Win32Renderer::Render(Window* parent, Input* control, const UINT xPos, const UINT yPos)
+	{
+		control->SetParent(parent);
+
+		HWND hwndEdit = CreateWindowEx(
+			0, 
+			L"EDIT",   // predefined class 
+			NULL,         // no window title 
+			WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL,
+			xPos, 
+			yPos, 
+			control->GetWidth(),
+			control->GetHeight(),   // set size in WM_SIZE message 
+			parent->GetHwnd(),         // parent window 
+			(HMENU)100,   // edit control ID 
+			(HINSTANCE)GetWindowLongPtr(parent->GetHwnd(), GWLP_HINSTANCE),
+			NULL);        // pointer not needed 
+
+		return hwndEdit;
+	}
+
+	void Win32Renderer::Resize(Button* button, const UINT width, const UINT height)
+	{
+		MoveWindow(
+			button->GetHwnd(),
+			0,
+			0,
+			width,
+			height,
+			true
+		);
 	}
 
 	Onyx32::Gui::Win32Renderer::~Win32Renderer()

@@ -32,7 +32,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		100,
 		clickHandler);
 
-	auto input = fct->AddTextInput(wnd);
+	auto input = fct->AddTextInput(wnd, L"", 350, 50, 25, 25);
 	input->SetText(L"Test input");
 	MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
 

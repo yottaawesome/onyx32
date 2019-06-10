@@ -11,7 +11,8 @@ function<void(void)> defaultClickHandler = []() -> void
 
 namespace Onyx32::Gui
 {
-	FunctionHandler Button::DefaultClickHandler = []() -> void { };
+	FunctionHandler Button::DefaultClickHandler = []() -> void {};
+	const std::wstring Button::Class = L"BUTTON";
 
 	Button::Button(
 		std::wstring_view text,
@@ -27,6 +28,16 @@ namespace Onyx32::Gui
 			_height(height),
 			_wndHandle(nullptr)
 	{
+	}
+
+	const std::wstring& Button::GetName()
+	{
+		return Button::Class;
+	}
+
+	int Button::GetStyles()
+	{
+		return Button::Styles;
 	}
 
 	void Button::SetHwnd(HWND hWnd)
@@ -64,6 +75,19 @@ namespace Onyx32::Gui
 		return _text;
 	}
 
+	void Button::Resize(const UINT width, const UINT height)
+	{
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-movewindow
+		MoveWindow(
+			_wndHandle,
+			0,
+			0,
+			width,
+			height,
+			true
+		);
+	}
+
 	UINT Button::GetId()
 	{
 		return _controlId;
@@ -71,8 +95,8 @@ namespace Onyx32::Gui
 
 	void Button::Initialize(IWindow* parent)
 	{
-		Win32Renderer renderer;
-		_wndHandle = renderer.Render(static_cast<Window*>(parent), this, 10, 10);
+		//Win32Renderer renderer;
+		//_wndHandle = renderer.Render(static_cast<Window*>(parent), this, 10, 10);
 	}
 
 	LRESULT Button::Process(UINT message, WPARAM wParam, LPARAM lParam)
@@ -88,5 +112,8 @@ namespace Onyx32::Gui
 		return DefSubclassProc(_wndHandle, message, wParam, lParam);
 	}
 
-	Button::~Button() { }
+	Button::~Button() 
+	{
+		DestroyWindow(_wndHandle);
+	}
 }

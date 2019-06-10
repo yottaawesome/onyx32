@@ -2,6 +2,9 @@
 #include <string>
 #include "../../include/Onyx32.Gui.h"
 #include "../h/WindowClassManager.h"
+#include <vector>
+#include "../h/ControlInfo.h"
+#include <map>
 
 namespace Onyx32::Gui
 {
@@ -9,6 +12,7 @@ namespace Onyx32::Gui
 	{
 		public:
 			Window(const WindowClass& wcex, wstring_view title, unsigned int width = CW_USEDEFAULT, unsigned int height = 0);
+			virtual ~Window();
 
 			virtual void Initialize() override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
@@ -21,14 +25,15 @@ namespace Onyx32::Gui
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
 
-			virtual void AddControl(IControl* control, unsigned int xPos, unsigned int yPos) override;
+			virtual void AddControl(IControl& control, UINT xPos, UINT yPos) override;
 
 			const WindowClass WndClass;
 
-		private:
-			HWND hWnd;
-			wstring title = L"Default";
-			unsigned int width;
-			unsigned int height;
+		protected:
+			HWND _hWnd;
+			wstring _title = L"Default";
+			unsigned int _width;
+			unsigned int _height;
+			std::map<IControl*, ControlInfo*> _children;
 	};
 }

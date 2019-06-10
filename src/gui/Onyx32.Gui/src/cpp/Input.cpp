@@ -5,20 +5,68 @@
 
 namespace Onyx32::Gui
 {
+	const std::wstring Input::Class = L"EDIT";
+
+	Input::Input(
+		std::wstring_view text,
+		const UINT width,
+		const UINT height,
+		const unsigned int controlId)
+		:text(text), _width(width), _height(height), _controlId(controlId)
+	{
+
+	}
+	
+	Input::~Input()
+	{
+
+	}
+
 	void Input::Initialize(IWindow* window)
 	{
-		this->parent = window;
+		/*_parent = window;
 
 		hwndEdit = CreateWindowEx(
-			0, L"EDIT",   // predefined class 
+			0, 
+			L"EDIT",   // predefined class 
 			NULL,         // no window title 
-			WS_CHILD | WS_VISIBLE | WS_VSCROLL |
-			ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL,
+			WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL,
 			0, 0, 100, 50,   // set size in WM_SIZE message 
-			parent->GetHwnd(),         // parent window 
+			_parent->GetHwnd(),         // parent window 
 			(HMENU)100,   // edit control ID 
-			(HINSTANCE)GetWindowLongPtr(parent->GetHwnd(), GWLP_HINSTANCE),
+			(HINSTANCE)GetWindowLongPtr(_parent->GetHwnd(), GWLP_HINSTANCE),
 			NULL);        // pointer not needed 
+			*/
+	}
+
+	void Input::SetParent(IWindow* parent)
+	{
+		_parent = parent;
+	}
+
+	UINT Input::GetId()
+	{
+		return _controlId;
+	}
+
+	const std::wstring& Input::GetName()
+	{
+		return Input::Class;
+	}
+
+	UINT Input::GetWidth()
+	{
+		return _width;
+	}
+
+	UINT Input::GetHeight()
+	{
+		return _height;
+	}
+
+	int Input::GetStyles()
+	{
+		return Input::Styles;
 	}
 
 	wstring Input::GetText()
@@ -28,8 +76,7 @@ namespace Onyx32::Gui
 		//	hwndEdit,
 		//	ptr,
 		//	100);
-		wstring s = text;
-		return s;
+		return text;
 	}
 
 	void Input::SetText(wstring* str)
@@ -57,16 +104,11 @@ namespace Onyx32::Gui
 	
 	void Input::SetHwnd(HWND hWnd)
 	{
-
+		hwndEdit = hWnd;
 	}
 	
 	HWND Input::GetHwnd()
 	{
 		return nullptr;
-	}
-
-	Input::~Input()
-	{
-
 	}
 }

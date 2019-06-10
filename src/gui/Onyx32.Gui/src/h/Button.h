@@ -14,6 +14,7 @@ namespace Onyx32::Gui
 				const UINT height = 100,
 				FunctionHandler& onClick = Button::DefaultClickHandler,
 				const unsigned int controlId = 0);
+			virtual ~Button();
 
 			virtual void Initialize(IWindow* parent) override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
@@ -25,10 +26,10 @@ namespace Onyx32::Gui
 			virtual const std::wstring& GetText() override;
 			virtual UINT GetId() override;
 			virtual void SetClickHandler(FunctionHandler& onClick);
-			//virtual void Resize(const UINT);
-
-			virtual ~Button();
-
+			virtual void Resize(const UINT width, const UINT height);
+			virtual const std::wstring& GetName() override;
+			virtual int GetStyles() override;
+			
 		protected:
 			HWND _wndHandle;
 			IWindow* _parent;
@@ -39,5 +40,7 @@ namespace Onyx32::Gui
 			//void (*onClick)();
 			FunctionHandler& _onClick;
 			static FunctionHandler DefaultClickHandler;
+			static const std::wstring Class;
+			static const int Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON;
 	};
 }

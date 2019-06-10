@@ -54,6 +54,9 @@
     <ClInclude Include="src\h\Win32Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\h\ControlInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\dllmain.cpp">
