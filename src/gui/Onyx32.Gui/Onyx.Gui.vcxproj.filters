@@ -57,6 +57,9 @@
     <ClInclude Include="src\h\TextInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\h\Onyx32.Gui.Internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\dllmain.cpp">

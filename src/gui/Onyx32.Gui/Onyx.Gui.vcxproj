@@ -168,6 +168,7 @@
     <ClInclude Include="src\h\ControlInfo.h" />
     <ClInclude Include="src\h\dllmain.h" />
     <ClInclude Include="src\h\FormBuilder.h" />
+    <ClInclude Include="src\h\Onyx32.Gui.Internal.h" />
     <ClInclude Include="src\h\TextInput.h" />
     <ClInclude Include="src\h\Resource.h" />
     <ClInclude Include="src\h\StaticFunctions.h" />

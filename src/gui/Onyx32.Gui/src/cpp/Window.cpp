@@ -65,7 +65,6 @@ namespace Onyx32::Gui
 			control.SetHwnd(renderer.Render((Window*)this, (TextInput*)&control, xPos, yPos));
 
 		_children[&control] = new ControlInfo(control, xPos, yPos);
-		//_children.push_back(ControlInfo(control, xPos, yPos));
 	}
 
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)

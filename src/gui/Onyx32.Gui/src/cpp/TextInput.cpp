@@ -1,5 +1,4 @@
 #include "../h/stdafx.h"
-#include "../../include/Onyx32.Gui.h"
 #include "../h/TextInput.h"
 #include  <Commctrl.h>
 
@@ -12,11 +11,11 @@ namespace Onyx32::Gui
 		const UINT width,
 		const UINT height,
 		const unsigned int controlId)
-		: _text(text), _width(width), _height(height), _controlId(controlId), _wndHandle(nullptr), _parent(nullptr)
+		: BaseControl(controlId, width, height, nullptr, nullptr)
 	{
 
 	}
-	
+
 	TextInput::~TextInput()
 	{
 		DestroyWindow(_wndHandle);
@@ -24,36 +23,6 @@ namespace Onyx32::Gui
 
 	void TextInput::Initialize(IWindow* window)
 	{
-	}
-
-	void TextInput::SetParent(IWindow* parent)
-	{
-		_parent = parent;
-	}
-
-	UINT TextInput::GetId()
-	{
-		return _controlId;
-	}
-
-	const std::wstring& TextInput::GetName()
-	{
-		return TextInput::Class;
-	}
-
-	UINT TextInput::GetWidth()
-	{
-		return _width;
-	}
-
-	UINT TextInput::GetHeight()
-	{
-		return _height;
-	}
-
-	int TextInput::GetStyles()
-	{
-		return TextInput::Styles;
 	}
 
 	const wstring TextInput::GetText()
@@ -71,25 +40,25 @@ namespace Onyx32::Gui
 		_text = str;
 		SetWindowText(_wndHandle, _text.c_str());
 	}
-	
+
+	int TextInput::GetStyles()
+	{
+		return TextInput::Styles;
+	}
+
+	const std::wstring& TextInput::GetName()
+	{
+		return TextInput::Class;
+	}
+
 	LRESULT TextInput::Process(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		switch (message)
 		{
-			default:
-				return DefSubclassProc(_wndHandle, message, wParam, lParam);
+		default:
+			return DefSubclassProc(_wndHandle, message, wParam, lParam);
 		}
 
 		return DefSubclassProc(_wndHandle, message, wParam, lParam);
-	}
-	
-	void TextInput::SetHwnd(HWND hWnd)
-	{
-		_wndHandle = hWnd;
-	}
-	
-	HWND TextInput::GetHwnd()
-	{
-		return nullptr;
 	}
 }

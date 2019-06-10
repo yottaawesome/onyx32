@@ -70,7 +70,7 @@ namespace Onyx32::Gui
 			0, 
 			L"EDIT",   // predefined class 
 			NULL,         // no window title 
-			WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL,
+			control->GetStyles(),
 			xPos, 
 			yPos, 
 			control->GetWidth(),

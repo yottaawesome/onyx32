@@ -1,11 +1,11 @@
 #pragma once
 #include "stdafx.h"
-#include "../../include/Onyx32.Gui.h"
+#include "../h/Onyx32.Gui.internal.h"
 #include "Window.h"
 
 namespace Onyx32::Gui
 {
-	class TextInput : public ITextInput
+	class TextInput : public BaseControl<ITextInput>
 	{
 		public:
 			TextInput(
@@ -17,24 +17,13 @@ namespace Onyx32::Gui
 
 			virtual void Initialize(IWindow* window) override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
-			virtual void SetHwnd(HWND hWnd) override;
-			virtual HWND GetHwnd() override;
 			virtual const wstring GetText() override;
 			virtual void SetText(wstring_view str) override;
 			virtual const std::wstring& GetName();
-			virtual UINT GetId() override;
 			virtual int GetStyles();
-			virtual void SetParent(IWindow* parent);
-			virtual UINT GetWidth() override;
-			virtual UINT GetHeight() override;
 
 		protected:
 			wstring _text;
-			HWND _wndHandle;
-			IWindow* _parent;
-			unsigned int const _controlId;
-			unsigned int _width;
-			unsigned int _height;
 			static const std::wstring Class;
 			static const int Styles = WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL;
 	};
