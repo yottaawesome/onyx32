@@ -5,13 +5,13 @@
 #include "../../include/Onyx32.Gui.h"
 #include "../h/Window.h"
 
-using namespace Onyx32::Gui;
-
 namespace Onyx32::Gui
 {
+	//https://stackoverflow.com/questions/3628529/should-c-interfaces-have-a-virtual-destructor
+	//https://stackoverflow.com/questions/2691611/destructors-for-c-interface-like-classes
 	inline IControl::~IControl() { }
 	inline IWindow::~IWindow() { }
 	inline IButton::~IButton() { }
 	inline IFormBuilder::~IFormBuilder() { }
-	inline IInput::~IInput() { }
+	inline ITextInput::~ITextInput() { }
 }

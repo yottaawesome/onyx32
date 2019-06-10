@@ -62,7 +62,7 @@ namespace Onyx32::Gui
 		return hwndButton;
 	}
 
-	HWND Win32Renderer::Render(Window* parent, Input* control, const UINT xPos, const UINT yPos)
+	HWND Win32Renderer::Render(Window* parent, TextInput* control, const UINT xPos, const UINT yPos)
 	{
 		control->SetParent(parent);
 

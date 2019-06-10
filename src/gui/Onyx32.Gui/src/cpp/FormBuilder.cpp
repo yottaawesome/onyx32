@@ -3,7 +3,7 @@
 #include "../h/FormBuilder.h"
 #include "../h/Window.h"
 #include "../h/Button.h"
-#include "../h/Input.h"
+#include "../h/TextInput.h"
 #include "../h/DllMain.h"
 #include "../h/StaticFunctions.h"
 
@@ -26,9 +26,9 @@ namespace Onyx32::Gui
 		return button;
 	}
 
-	IInput* FormBuilder::AddTextInput(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	ITextInput* FormBuilder::AddTextInput(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		Input* input = new Input(text, width, height, 100);
+		ITextInput* input = new TextInput(text, width, height, 100);
 		window->AddControl(*input, xPos, yPos);
 		return input;
 	}

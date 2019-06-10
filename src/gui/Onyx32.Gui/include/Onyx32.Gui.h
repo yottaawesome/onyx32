@@ -47,10 +47,10 @@ namespace Onyx32::Gui
 			virtual const std::wstring& GetText() = 0;
 	};
 
-	class ONYXWINDOWING_API IInput : public IControl
+	class ONYXWINDOWING_API ITextInput : public IControl
 	{
 		public:
-			virtual ~IInput() = 0;
+			virtual ~ITextInput() = 0;
 			virtual const std::wstring GetText() = 0;
 			virtual void SetText(std::wstring_view str) = 0;
 	};
@@ -77,7 +77,7 @@ namespace Onyx32::Gui
 			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
 
 			virtual IButton* AddButton(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick) = 0;
-			virtual IInput* AddTextInput(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			virtual ITextInput* AddTextInput(IWindow* window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 
 			virtual ~IFormBuilder() = 0;
 	};

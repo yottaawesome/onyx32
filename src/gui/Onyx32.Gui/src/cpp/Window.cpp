@@ -62,7 +62,7 @@ namespace Onyx32::Gui
 		if(control.GetName() == L"BUTTON")
 			control.SetHwnd(renderer.Render((Window*)this, (Button*)&control, xPos, yPos));
 		else if(control.GetName() == L"EDIT")
-			control.SetHwnd(renderer.Render((Window*)this, (Input*)&control, xPos, yPos));
+			control.SetHwnd(renderer.Render((Window*)this, (TextInput*)&control, xPos, yPos));
 
 		_children[&control] = new ControlInfo(control, xPos, yPos);
 		//_children.push_back(ControlInfo(control, xPos, yPos));

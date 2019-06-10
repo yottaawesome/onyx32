@@ -5,15 +5,15 @@
 
 namespace Onyx32::Gui
 {
-	class Input : public IInput
+	class TextInput : public ITextInput
 	{
 		public:
-			Input(
+			TextInput(
 				std::wstring_view text = L"",
 				const UINT width = 100,
 				const UINT height = 100,
 				const unsigned int controlId = 0);
-			virtual ~Input();
+			virtual ~TextInput();
 
 			virtual void Initialize(IWindow* window) override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
@@ -29,7 +29,7 @@ namespace Onyx32::Gui
 			virtual UINT GetHeight() override;
 
 		protected:
-			wstring text;
+			wstring _text;
 			HWND _wndHandle;
 			IWindow* _parent;
 			unsigned int const _controlId;
