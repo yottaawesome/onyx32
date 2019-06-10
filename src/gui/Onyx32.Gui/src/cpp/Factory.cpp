@@ -1,12 +1,10 @@
 #include "../h/stdafx.h"
 #include "../../include/Onyx32.Gui.h"
 #include "../Window/Window.h"
-#include "../h/WindowClassManager.h"
+#include "../WindowClassManager/WindowClassManager.h"
 #include "../FormBuilder/FormBuilder.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
-
-using namespace Onyx32::Gui;
 
 namespace Onyx32::Gui
 {

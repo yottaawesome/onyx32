@@ -176,7 +176,7 @@
     <ClInclude Include="src\h\targetver.h" />
     <ClInclude Include="src\h\Win32Renderer.h" />
     <ClInclude Include="src\Window\Window.h" />
-    <ClInclude Include="src\h\WindowClassManager.h" />
+    <ClInclude Include="src\WindowClassManager\WindowClassManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button\Button.cpp" />
@@ -208,7 +208,7 @@
     </ClCompile>
     <ClCompile Include="src\cpp\Win32Renderer.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
-    <ClCompile Include="src\cpp\WindowClassManager.cpp" />
+    <ClCompile Include="src\WindowClassManager\WindowClassManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

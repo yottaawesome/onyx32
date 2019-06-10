@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "../h/Onyx32.Gui.internal.h"
-#include "../h/WindowClassManager.h"
+#include "../WindowClassManager/WindowClassManager.h"
 #include <vector>
 #include "../h/ControlInfo.h"
 #include <map>
