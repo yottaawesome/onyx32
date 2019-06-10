@@ -1,7 +1,6 @@
 #pragma once
-#include "stdafx.h"
 #include "../../include/Onyx32.Gui.h"
-#include "../h/Window.h"
+#include "../Window/Window.h"
 #include "../Button/Button.h"
 #include "../TextInput/TextInput.h"
 

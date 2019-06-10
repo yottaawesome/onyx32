@@ -3,7 +3,7 @@
 
 #include "../h/stdafx.h"
 #include "../h/Onyx32.Gui.internal.h"
-#include "../h/Window.h"
+#include "../Window/Window.h"
 
 namespace Onyx32::Gui
 {
@@ -14,6 +14,4 @@ namespace Onyx32::Gui
 	inline IButton::~IButton() { }
 	inline IFormBuilder::~IFormBuilder() { }
 	inline ITextInput::~ITextInput() { }
-
-	
 }

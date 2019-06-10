@@ -33,9 +33,6 @@
     <ClInclude Include="src\h\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\h\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\h\WindowClassManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,6 +57,9 @@
     <ClInclude Include="src\TextInput\TextInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Window\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\dllmain.cpp">
@@ -80,9 +80,6 @@
     <ClCompile Include="src\cpp\WindowClassManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\FormBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -96,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\TextInput\TextInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

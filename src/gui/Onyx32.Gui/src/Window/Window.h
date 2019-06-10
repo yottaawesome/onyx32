@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../../include/Onyx32.Gui.h"
+#include "../h/Onyx32.Gui.internal.h"
 #include "../h/WindowClassManager.h"
 #include <vector>
 #include "../h/ControlInfo.h"

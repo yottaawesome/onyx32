@@ -1,5 +1,4 @@
 #pragma once
-#include "../h/stdafx.h"
 #include "../h/Onyx32.Gui.internal.h"
 #include <string>
 

@@ -1,3 +1,4 @@
+#include "../h/stdafx.h"
 #include "TextInput.h"
 #include  <Commctrl.h>
 

@@ -1,6 +1,6 @@
 #include "../h/stdafx.h"
 #include "../../include/Onyx32.Gui.h"
-#include "../h/Window.h"
+#include "../Window/Window.h"
 #include "../h/WindowClassManager.h"
 #include "../h/FormBuilder.h"
 #include "../h/Resource.h"
