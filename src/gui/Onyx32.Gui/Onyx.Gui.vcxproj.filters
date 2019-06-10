@@ -42,9 +42,6 @@
     <ClInclude Include="src\h\dllmain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\h\Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\h\FormBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -58,6 +55,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\h\Onyx32.Gui.Internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,9 +83,6 @@
     <ClCompile Include="src\cpp\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cpp\FormBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -96,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cpp\TextInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

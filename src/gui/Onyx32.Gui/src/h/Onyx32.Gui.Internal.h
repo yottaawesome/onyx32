@@ -16,14 +16,17 @@ namespace Onyx32::Gui
 			virtual UINT GetHeight() override;
 			virtual UINT GetId() override;
 			virtual void SetParent(IWindow* parent);
-			//virtual const std::wstring& GetName() = 0;
-			//virtual int GetStyles() = 0;
+			virtual const std::wstring& GetName();
+			virtual int GetStyles();
+
 		protected:
 			HWND _wndHandle;
 			IWindow* _parent;
 			unsigned int const _controlId;
 			unsigned int _width;
 			unsigned int _height;
+			static const std::wstring Class;
+			static const int Styles;
 	};
 
 	template<typename ControlType>
@@ -37,6 +40,18 @@ namespace Onyx32::Gui
 	void BaseControl<ControlType>::SetHwnd(HWND hWnd)
 	{
 		_wndHandle = hWnd;
+	}
+
+	template<typename ControlType>
+	int BaseControl<ControlType>::GetStyles()
+	{
+		return BaseControl<ControlType>::Styles;
+	}
+
+	template<typename ControlType>
+	const std::wstring& BaseControl<ControlType>::GetName()
+	{
+		return BaseControl<ControlType>::Class;
 	}
 
 	template<typename ControlType>

@@ -2,7 +2,7 @@
 #include "../../include/Onyx32.Gui.h"
 #include "../h/FormBuilder.h"
 #include "../h/Window.h"
-#include "../h/Button.h"
+#include "../Button/Button.h"
 #include "../h/TextInput.h"
 #include "../h/DllMain.h"
 #include "../h/StaticFunctions.h"

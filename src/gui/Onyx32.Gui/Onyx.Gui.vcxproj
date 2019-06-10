@@ -164,7 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Onyx32.Gui.h" />
-    <ClInclude Include="src\h\Button.h" />
+    <ClInclude Include="src\Button\Button.h" />
     <ClInclude Include="src\h\ControlInfo.h" />
     <ClInclude Include="src\h\dllmain.h" />
     <ClInclude Include="src\h\FormBuilder.h" />
@@ -179,7 +179,7 @@
     <ClInclude Include="src\h\WindowClassManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\cpp\Button.cpp" />
+    <ClCompile Include="src\Button\Button.cpp" />
     <ClCompile Include="src\cpp\dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

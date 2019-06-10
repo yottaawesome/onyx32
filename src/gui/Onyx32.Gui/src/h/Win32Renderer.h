@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "../../include/Onyx32.Gui.h"
 #include "../h/Window.h"
-#include "../h/Button.h"
+#include "../Button/Button.h"
 #include "../h/TextInput.h"
 
 namespace Onyx32::Gui

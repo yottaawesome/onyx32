@@ -5,6 +5,7 @@
 namespace Onyx32::Gui
 {
 	const std::wstring TextInput::Class = L"EDIT";
+	const int TextInput::Styles = WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL;
 
 	TextInput::TextInput(
 		std::wstring_view text,
@@ -39,16 +40,6 @@ namespace Onyx32::Gui
 	{
 		_text = str;
 		SetWindowText(_wndHandle, _text.c_str());
-	}
-
-	int TextInput::GetStyles()
-	{
-		return TextInput::Styles;
-	}
-
-	const std::wstring& TextInput::GetName()
-	{
-		return TextInput::Class;
 	}
 
 	LRESULT TextInput::Process(UINT message, WPARAM wParam, LPARAM lParam)

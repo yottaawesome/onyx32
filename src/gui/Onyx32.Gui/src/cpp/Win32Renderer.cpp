@@ -1,5 +1,4 @@
 #include "../h/stdafx.h"
-#include "../h/Button.h"
 #include "../h/Win32Renderer.h"
 #include "../h/dllmain.h"
 #include "../h/StaticFunctions.h"

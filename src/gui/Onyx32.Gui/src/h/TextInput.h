@@ -19,12 +19,8 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 			virtual const wstring GetText() override;
 			virtual void SetText(wstring_view str) override;
-			virtual const std::wstring& GetName();
-			virtual int GetStyles();
 
 		protected:
 			wstring _text;
-			static const std::wstring Class;
-			static const int Styles = WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL;
 	};
 }

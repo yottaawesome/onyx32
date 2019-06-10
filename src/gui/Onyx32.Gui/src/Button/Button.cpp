@@ -1,8 +1,8 @@
 #include "../h/stdafx.h"
-#include "../h/Button.h"
+#include "Button.h"
 #include "../h/Win32Renderer.h"
 #include "../h/StaticFunctions.h"
-#include  <Commctrl.h>
+#include <Commctrl.h>
 
 function<void(void)> defaultClickHandler = []() -> void
 {
@@ -13,6 +13,7 @@ namespace Onyx32::Gui
 {
 	FunctionHandler Button::DefaultClickHandler = []() -> void {};
 	const std::wstring Button::Class = L"BUTTON";
+	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON;
 
 	Button::Button(
 		std::wstring_view text,
@@ -20,13 +21,9 @@ namespace Onyx32::Gui
 		const UINT height,
 		FunctionHandler& onClick,
 		const unsigned int controlId)
-		:	_parent(nullptr),
+		: BaseControl(controlId, width, height, nullptr, nullptr),
 			_text(text),
-			_onClick(defaultClickHandler),
-			_controlId(controlId),
-			_width(width),
-			_height(height),
-			_wndHandle(nullptr)
+			_onClick(defaultClickHandler)
 	{
 	}
 
@@ -35,44 +32,9 @@ namespace Onyx32::Gui
 		DestroyWindow(_wndHandle);
 	}
 
-	const std::wstring& Button::GetName()
-	{
-		return Button::Class;
-	}
-
-	int Button::GetStyles()
-	{
-		return Button::Styles;
-	}
-
-	void Button::SetHwnd(HWND hWnd)
-	{
-		_wndHandle = hWnd;
-	}
-
-	HWND Button::GetHwnd()
-	{
-		return _wndHandle;
-	}
-
-	void Button::SetParent(IWindow* parent)
-	{
-		_parent = parent;
-	}
-
 	void Button::SetClickHandler(FunctionHandler& onClick)
 	{
 		_onClick = onClick;
-	}
-
-	UINT Button::GetWidth()
-	{
-		return _width;
-	}
-
-	UINT Button::GetHeight()
-	{
-		return _height;
 	}
 
 	const std::wstring& Button::GetText()
@@ -91,11 +53,6 @@ namespace Onyx32::Gui
 			height,
 			true
 		);
-	}
-
-	UINT Button::GetId()
-	{
-		return _controlId;
 	}
 
 	void Button::Initialize(IWindow* parent)
