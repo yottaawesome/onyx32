@@ -51,13 +51,13 @@
     <ClInclude Include="src\h\ControlInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\h\TextInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\h\Onyx32.Gui.Internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Button\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextInput\TextInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,10 +92,10 @@
     <ClCompile Include="src\cpp\Win32Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\cpp\TextInput.cpp">
+    <ClCompile Include="src\Button\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Button\Button.cpp">
+    <ClCompile Include="src\TextInput\TextInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

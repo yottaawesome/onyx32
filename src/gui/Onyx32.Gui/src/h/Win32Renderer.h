@@ -3,7 +3,7 @@
 #include "../../include/Onyx32.Gui.h"
 #include "../h/Window.h"
 #include "../Button/Button.h"
-#include "../h/TextInput.h"
+#include "../TextInput/TextInput.h"
 
 namespace Onyx32::Gui
 {

@@ -3,7 +3,7 @@
 #include "../h/FormBuilder.h"
 #include "../h/Window.h"
 #include "../Button/Button.h"
-#include "../h/TextInput.h"
+#include "../TextInput/TextInput.h"
 #include "../h/DllMain.h"
 #include "../h/StaticFunctions.h"
 

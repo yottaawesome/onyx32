@@ -1,5 +1,4 @@
-#include "../h/stdafx.h"
-#include "../h/TextInput.h"
+#include "TextInput.h"
 #include  <Commctrl.h>
 
 namespace Onyx32::Gui

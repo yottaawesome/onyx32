@@ -1,7 +1,7 @@
 #pragma once
-#include "stdafx.h"
+#include "../h/stdafx.h"
 #include "../h/Onyx32.Gui.internal.h"
-#include "Window.h"
+#include "../h/Window.h"
 
 namespace Onyx32::Gui
 {
