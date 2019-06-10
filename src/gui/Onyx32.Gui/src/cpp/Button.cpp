@@ -30,6 +30,11 @@ namespace Onyx32::Gui
 	{
 	}
 
+	Button::~Button()
+	{
+		DestroyWindow(_wndHandle);
+	}
+
 	const std::wstring& Button::GetName()
 	{
 		return Button::Class;
@@ -110,10 +115,5 @@ namespace Onyx32::Gui
 		}
 
 		return DefSubclassProc(_wndHandle, message, wParam, lParam);
-	}
-
-	Button::~Button() 
-	{
-		DestroyWindow(_wndHandle);
 	}
 }

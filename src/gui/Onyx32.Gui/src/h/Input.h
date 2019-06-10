@@ -19,9 +19,8 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 			virtual void SetHwnd(HWND hWnd) override;
 			virtual HWND GetHwnd() override;
-			virtual wstring GetText() override;
-			virtual void SetText(wstring* str) override;
-			virtual void SetText(wstring&& str) override;
+			virtual const wstring GetText() override;
+			virtual void SetText(wstring_view str) override;
 			virtual const std::wstring& GetName();
 			virtual UINT GetId() override;
 			virtual int GetStyles();
@@ -31,7 +30,7 @@ namespace Onyx32::Gui
 
 		protected:
 			wstring text;
-			HWND hwndEdit;
+			HWND _wndHandle;
 			IWindow* _parent;
 			unsigned int const _controlId;
 			unsigned int _width;
