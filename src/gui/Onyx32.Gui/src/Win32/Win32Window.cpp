@@ -55,37 +55,6 @@ namespace Onyx32::Gui
 		return hWnd;
 	}
 
-
-	HWND Win32Window::CreateParentWindow(Window* window)
-	{
-		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
-		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
-		HWND hWnd = CreateWindowEx
-		(
-			0,
-			window->WndClass.ClassName.c_str(), // class name
-			window->GetTitle().c_str(), // window title
-			WS_OVERLAPPEDWINDOW, // window styles
-			CW_USEDEFAULT, // initial horizontal x position
-			0,  // initial horizontal y position
-			window->GetWidth(),  // window width
-			window->GetHeight(), // window height
-			NULL, // parent HWND
-			NULL, // HWND menu/child
-			Dll::GetModule(),//hInstance, // instance of the module
-			window // additional data
-		);
-
-		if (!hWnd)
-			return nullptr;
-
-		// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx
-		ShowWindow(hWnd, SW_SHOWDEFAULT);
-		UpdateWindow(hWnd);
-
-		return hWnd;
-	}
-
 	void Win32Window::Resize(Button* button, const UINT width, const UINT height)
 	{
 		MoveWindow(
