@@ -9,6 +9,7 @@
 namespace Onyx32::Gui
 {
 	FormBuilder::FormBuilder() { }
+	FormBuilder::~FormBuilder() { }
 
 	IWindow* FormBuilder::CreateDefaultWindow(std::wstring_view title, UINT width, UINT height)
 	{
@@ -32,5 +33,4 @@ namespace Onyx32::Gui
 		return input;
 	}
 
-	FormBuilder::~FormBuilder() { }
 }

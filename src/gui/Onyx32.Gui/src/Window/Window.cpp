@@ -43,6 +43,16 @@ namespace Onyx32::Gui
 		return _height;
 	}
 
+	void Window::SetHwnd(HWND hWnd)
+	{
+		_hWnd = hWnd;
+	}
+
+	HWND Window::GetHwnd()
+	{
+		return _hWnd;
+	}
+
 	void Window::Initialize()
 	{
 		Win32ParentWindowCreationArgs args(
@@ -114,15 +124,5 @@ namespace Onyx32::Gui
 				return DefWindowProc(_hWnd, message, wParam, lParam);
 		}
 		return 0;
-	}
-
-	void Window::SetHwnd(HWND hWnd)
-	{
-		_hWnd = hWnd;
-	}
-
-	HWND Window::GetHwnd()
-	{
-		return _hWnd;
 	}
 }
