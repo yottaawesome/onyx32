@@ -58,8 +58,27 @@ namespace Onyx32::Gui
 
 	void Button::Initialize(IWindow* parent)
 	{
-		Renderer renderer;
-		_wndHandle = renderer.Render(static_cast<Window*>(parent), this, _xPos, _yPos);
+		if (_state == ControlState::Uninitialized)
+		{
+			_parent = parent;
+			Win32CreationArgs args(
+				0,
+				Button::Class,
+				_text,
+				Button::Styles,
+				_xPos,
+				_yPos,
+				_width,
+				_height,
+				parent->GetHwnd(),
+				(HMENU)_controlId,
+				this,
+				Static::DefCtrlProc
+			);
+
+			_wndHandle = Win32Window::CreateChildWindow(args);
+			_state = ControlState::Initialized;
+		}
 	}
 
 	LRESULT Button::Process(UINT message, WPARAM wParam, LPARAM lParam)

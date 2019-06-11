@@ -1,7 +1,9 @@
 #include "../h/stdafx.h"
 #include "TextInput.h"
 #include "../Renderer/Renderer.h"
+#include "../h/StaticFunctions.h"
 #include  <Commctrl.h>
+
 
 namespace Onyx32::Gui
 {
@@ -15,7 +17,7 @@ namespace Onyx32::Gui
 		const UINT xPos,
 		const UINT yPos,
 		const unsigned int controlId)
-		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr)
+		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr), _text(text)
 	{ }
 
 	TextInput::~TextInput() { }
@@ -29,8 +31,23 @@ namespace Onyx32::Gui
 	{
 		if (_state == ControlState::Uninitialized)
 		{
-			Renderer renderer;
-			_wndHandle = renderer.Render(static_cast<Window*>(window), this, _xPos, _yPos);
+			_parent = window;
+			Win32CreationArgs args(
+				0,
+				TextInput::Class,
+				_text, 
+				TextInput::Styles, 
+				_xPos, 
+				_yPos, 
+				_width, 
+				_height, 
+				window->GetHwnd(), 
+				(HMENU)_controlId, 
+				this, 
+				Static::DefCtrlProc
+			);
+
+			_wndHandle = Win32Window::CreateChildWindow(args);
 			_state = ControlState::Initialized;
 		}
 	}

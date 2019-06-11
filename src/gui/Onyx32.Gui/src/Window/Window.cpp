@@ -45,8 +45,7 @@ namespace Onyx32::Gui
 
 	void Window::Initialize()
 	{
-		Renderer renderer;
-		_hWnd = renderer.Render(this);
+		_hWnd = Win32Window::CreateParentWindow(this);
 
 		if (!_hWnd)
 			return;

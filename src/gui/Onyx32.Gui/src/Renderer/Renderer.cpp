@@ -6,11 +6,31 @@
 
 namespace Onyx32::Gui
 {
-	Renderer::~Renderer()
+	HWND Win32Window::CreateChildWindow(const Win32CreationArgs& args)
 	{
+		HWND hWnd = CreateWindowEx
+		(
+			args.ExtendedStyles,
+			args.ClassName.c_str(),  // Predefined class; Unicode assumed 
+			args.WindowName.c_str(),      // Button text 
+			args.Styles,  // Styles 
+			args.X,         // x position 
+			args.Y,         // y position 
+			args.Width,        // Button width
+			args.Height,        // Button height
+			args.Parent,     // Parent window
+			args.MenuOrId,       // Menu or control id
+			Dll::GetModule(),// can also use (HINSTANCE)GetWindowLongPtr(args.Parent, GWLP_HINSTANCE),
+			(LPVOID)args.Control
+		);
+		
+		// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
+		SetWindowSubclass(hWnd, args.SubclassProc, 0, (DWORD_PTR)args.Control);
+
+		return hWnd;
 	}
 
-	HWND Renderer::Render(Window* window)
+	HWND Win32Window::CreateParentWindow(Window* window)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
@@ -39,44 +59,7 @@ namespace Onyx32::Gui
 		return hWnd;
 	}
 
-	template<typename ControlType>
-	HWND Renderer::RenderInternal(Window* parent, BaseControl<ControlType>* control, const UINT xPos, const UINT yPos)
-	{
-		control->SetParent(parent);
-
-		HWND parentHwnd = parent->GetHwnd();
-		HWND hwndButton = CreateWindowEx
-		(
-			0,
-			control->GetName().c_str(),  // Predefined class; Unicode assumed 
-			control->GetText().c_str(),      // Button text 
-			control->GetStyles(),  // Styles 
-			xPos,         // x position 
-			yPos,         // y position 
-			control->GetWidth(),        // Button width
-			control->GetHeight(),        // Button height
-			parentHwnd,     // Parent window
-			(HMENU)control->GetId(),       // No menu.
-			(HINSTANCE)GetWindowLongPtr(parentHwnd, GWLP_HINSTANCE),
-			control
-		);
-
-		// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
-		SetWindowSubclass(hwndButton, Static::DefCtrlProc, 0, (DWORD_PTR)control);
-
-		return hwndButton;
-	}
-
-	HWND Renderer::Render(Window* parent, BaseControl<IButton>* control, const UINT xPos, const UINT yPos)
-	{
-		return RenderInternal(parent, control, xPos, yPos);
-	}
-	HWND Renderer::Render(Window* parent, BaseControl<ITextInput>* control, const UINT xPos, const UINT yPos)
-	{
-		return RenderInternal(parent, control, xPos, yPos);
-	}
-
-	void Renderer::Resize(Button* button, const UINT width, const UINT height)
+	void Win32Window::Resize(Button* button, const UINT width, const UINT height)
 	{
 		MoveWindow(
 			button->GetHwnd(),

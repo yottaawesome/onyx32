@@ -172,6 +172,7 @@
     <ClInclude Include="src\h\stdafx.h" />
     <ClInclude Include="src\h\targetver.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
+    <ClInclude Include="src\Win32CreationArgs\Win32CreationArgs.h" />
     <ClInclude Include="src\Window\Window.h" />
     <ClInclude Include="src\WindowClassManager\WindowClassManager.h" />
   </ItemGroup>
@@ -192,6 +193,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\cpp\Factory.cpp" />
+    <ClCompile Include="src\Win32CreationArgs\Win32CreationArgs.cpp" />
     <ClCompile Include="src\FormBuilder\FormBuilder.cpp" />
     <ClCompile Include="src\TextInput\TextInput.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />

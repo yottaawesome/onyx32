@@ -8,10 +8,10 @@
 #include <string>
 #include <functional>
 
-typedef std::function<void(void)> FunctionHandler;
-
 namespace Onyx32::Gui
 {
+	typedef std::function<void(void)> FunctionHandler;
+
 	enum ONYXWINDOWING_API ControlState
 	{
 		Uninitialized = 1,
@@ -45,6 +45,7 @@ namespace Onyx32::Gui
 			virtual UINT GetYPos() = 0;
 			virtual UINT GetId() = 0;
 			virtual const std::wstring& GetName() = 0;
+			virtual ControlState GetState() = 0;
 			virtual int GetStyles() = 0;
 			virtual ~IControl() = 0;
 	};

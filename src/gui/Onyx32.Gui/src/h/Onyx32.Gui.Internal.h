@@ -4,12 +4,45 @@
 
 namespace Onyx32::Gui
 {
+	class Win32CreationArgs
+	{
+		public:
+			Win32CreationArgs(
+				const DWORD extendedStyles,
+				std::wstring_view className,
+				std::wstring_view windowName,
+				const DWORD styles,
+				const int x,
+				const int y,
+				const int width,
+				const int height,
+				const HWND parent,
+				const HMENU menuOrId,
+				const IControl* control,
+				const SUBCLASSPROC subclassProc
+			);
+
+			const DWORD ExtendedStyles;
+			const std::wstring ClassName;
+			const std::wstring WindowName;
+			const DWORD Styles;
+			const int X;
+			const int Y;
+			const int Width;
+			const int Height;
+			const HWND Parent;
+			const HMENU MenuOrId;
+			const IControl* Control;
+			const SUBCLASSPROC SubclassProc;
+	};
+
 	template<typename ControlType>
 	class BaseControl : public ControlType
 	{
 		public:
 			BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent);
 			virtual ~BaseControl();
+
 			virtual void SetHwnd(HWND hWnd) override;
 			virtual HWND GetHwnd() override;
 			virtual UINT GetWidth() override;
@@ -17,10 +50,11 @@ namespace Onyx32::Gui
 			virtual UINT GetXPos() override;
 			virtual UINT GetYPos() override;
 			virtual UINT GetId() override;
-			virtual ControlState GetState();
+			virtual ControlState GetState() override;
+			virtual int GetStyles() override;
+			virtual const std::wstring& GetName() override;
+
 			virtual void SetParent(IWindow* parent);
-			virtual const std::wstring& GetName();
-			virtual int GetStyles();
 			virtual const std::wstring& GetCreateWindowText() = 0;
 
 		protected:
