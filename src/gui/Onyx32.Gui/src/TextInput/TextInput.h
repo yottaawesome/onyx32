@@ -11,6 +11,8 @@ namespace Onyx32::Gui
 				std::wstring_view text = L"",
 				const UINT width = 100,
 				const UINT height = 100,
+				const UINT xPos = 100,
+				const UINT yPos = 100,
 				const unsigned int controlId = 0);
 			virtual ~TextInput();
 

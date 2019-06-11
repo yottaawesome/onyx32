@@ -1,5 +1,6 @@
 #include "../h/stdafx.h"
 #include "TextInput.h"
+#include "../Renderer/Renderer.h"
 #include  <Commctrl.h>
 
 namespace Onyx32::Gui
@@ -11,14 +12,13 @@ namespace Onyx32::Gui
 		std::wstring_view text,
 		const UINT width,
 		const UINT height,
+		const UINT xPos,
+		const UINT yPos,
 		const unsigned int controlId)
-		: BaseControl(controlId, width, height, nullptr, nullptr)
+		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr)
 	{ }
 
-	TextInput::~TextInput()
-	{
-		DestroyWindow(_wndHandle);
-	}
+	TextInput::~TextInput() { }
 
 	const std::wstring& TextInput::GetCreateWindowText()
 	{
@@ -26,7 +26,14 @@ namespace Onyx32::Gui
 	}
 
 	void TextInput::Initialize(IWindow* window)
-	{ }
+	{
+		if (_state == ControlState::Uninitialized)
+		{
+			Renderer renderer;
+			_wndHandle = renderer.Render(static_cast<Window*>(window), this, _xPos, _yPos);
+			_state = ControlState::Initialized;
+		}
+	}
 
 	const wstring TextInput::GetText()
 	{

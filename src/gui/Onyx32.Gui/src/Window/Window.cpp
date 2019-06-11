@@ -56,22 +56,10 @@ namespace Onyx32::Gui
 		UpdateWindow(_hWnd);
 	}
 
-	void Window::AddControl(IButton& control, UINT xPos, UINT yPos)
+	void Window::AddControl(IControl& control)
 	{
 		control.Initialize(this);
-		Renderer renderer;
-		control.SetHwnd(renderer.Render((Window*)this, (BaseControl<IButton>*) & control, xPos, yPos));
-
-		_children[&control] = new ControlInfo(control, xPos, yPos);
-	}
-
-	void Window::AddControl(ITextInput& control, UINT xPos, UINT yPos)
-	{
-		control.Initialize(this);
-		Renderer renderer;
-		control.SetHwnd(renderer.Render((Window*)this, (BaseControl<ITextInput>*) &control, xPos, yPos));
-
-		_children[&control] = new ControlInfo(control, xPos, yPos);
+		_children[&control] = new ControlInfo(control);
 	}
 
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)

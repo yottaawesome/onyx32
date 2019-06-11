@@ -19,18 +19,17 @@ namespace Onyx32::Gui
 		std::wstring_view text,
 		const UINT width,
 		const UINT height,
+		const UINT xPos,
+		const UINT yPos,
 		FunctionHandler& onClick,
 		const unsigned int controlId)
-		: BaseControl(controlId, width, height, nullptr, nullptr),
+		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
 			_text(text),
 			_onClick(defaultClickHandler)
 	{
 	}
 
-	Button::~Button()
-	{
-		DestroyWindow(_wndHandle);
-	}
+	Button::~Button() { }
 
 	const std::wstring& Button::GetCreateWindowText()
 	{
@@ -50,20 +49,17 @@ namespace Onyx32::Gui
 	void Button::Resize(const UINT width, const UINT height)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-movewindow
-		MoveWindow(
-			_wndHandle,
-			0,
-			0,
-			width,
-			height,
-			true
-		);
+		if (MoveWindow(_wndHandle, _xPos, _yPos, width, height, true))
+		{
+			_width = width;
+			_height = height;
+		}
 	}
 
 	void Button::Initialize(IWindow* parent)
 	{
-		//Win32Renderer renderer;
-		//_wndHandle = renderer.Render(static_cast<Window*>(parent), this, 10, 10);
+		Renderer renderer;
+		_wndHandle = renderer.Render(static_cast<Window*>(parent), this, _xPos, _yPos);
 	}
 
 	LRESULT Button::Process(UINT message, WPARAM wParam, LPARAM lParam)

@@ -12,6 +12,13 @@ typedef std::function<void(void)> FunctionHandler;
 
 namespace Onyx32::Gui
 {
+	enum ONYXWINDOWING_API ControlState
+	{
+		Uninitialized = 1,
+		Initialized,
+		Destroyed
+	};
+
 	class ONYXWINDOWING_API Application
 	{
 		public:
@@ -34,6 +41,8 @@ namespace Onyx32::Gui
 			virtual HWND GetHwnd() = 0;
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
+			virtual UINT GetXPos() = 0;
+			virtual UINT GetYPos() = 0;
 			virtual UINT GetId() = 0;
 			virtual const std::wstring& GetName() = 0;
 			virtual int GetStyles() = 0;
@@ -62,8 +71,7 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
-			virtual void AddControl(IButton& control, unsigned int xPos, unsigned int yPos) = 0;
-			virtual void AddControl(ITextInput& control, unsigned int xPos, unsigned int yPos) = 0;
+			virtual void AddControl(IControl& control) = 0;
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;

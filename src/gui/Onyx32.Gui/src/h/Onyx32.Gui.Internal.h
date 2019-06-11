@@ -8,13 +8,16 @@ namespace Onyx32::Gui
 	class BaseControl : public ControlType
 	{
 		public:
-			BaseControl(int id, UINT width, UINT height, HWND wndHandle, IWindow* parent);
+			BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent);
 			virtual ~BaseControl();
 			virtual void SetHwnd(HWND hWnd) override;
 			virtual HWND GetHwnd() override;
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
+			virtual UINT GetXPos() override;
+			virtual UINT GetYPos() override;
 			virtual UINT GetId() override;
+			virtual ControlState GetState();
 			virtual void SetParent(IWindow* parent);
 			virtual const std::wstring& GetName();
 			virtual int GetStyles();
@@ -24,18 +27,28 @@ namespace Onyx32::Gui
 			HWND _wndHandle;
 			IWindow* _parent;
 			unsigned int const _controlId;
-			unsigned int _width;
-			unsigned int _height;
+			UINT _width;
+			UINT _height;
+			UINT _xPos;
+			UINT _yPos;
+			ControlState _state;
 			static const std::wstring Class;
 			static const int Styles;
 	};
 
 	template<typename ControlType>
-	BaseControl<ControlType>::BaseControl(int id, UINT width, UINT height, HWND wndHandle, IWindow* parent) 
-		: _controlId(id), _width(width), _height(height), _wndHandle(wndHandle), _parent(parent) {}
+	BaseControl<ControlType>::BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent)
+		: _controlId(id), _state(state), _width(width), _height(height), _xPos(xPos), _yPos(yPos), _wndHandle(wndHandle), _parent(parent) {}
 
 	template<typename ControlType>
-	BaseControl<ControlType>::~BaseControl() {}
+	BaseControl<ControlType>::~BaseControl()
+	{
+		if (_wndHandle)
+		{
+			DestroyWindow(_wndHandle);
+			_wndHandle = nullptr;
+		}
+	}
 
 	template<typename ControlType>
 	void BaseControl<ControlType>::SetHwnd(HWND hWnd)
@@ -74,6 +87,18 @@ namespace Onyx32::Gui
 	}
 
 	template<typename ControlType>
+	UINT BaseControl<ControlType>::GetXPos()
+	{
+		return _xPos;
+	}
+
+	template<typename ControlType>
+	UINT BaseControl<ControlType>::GetYPos()
+	{
+		return _yPos;
+	}
+
+	template<typename ControlType>
 	void BaseControl<ControlType>::SetParent(IWindow* parent)
 	{
 		_parent = parent;
@@ -84,4 +109,11 @@ namespace Onyx32::Gui
 	{
 		return _controlId;
 	}
+
+	template<typename ControlType>
+	ControlState BaseControl<ControlType>::GetState()
+	{
+		return _state;
+	}
+
 }

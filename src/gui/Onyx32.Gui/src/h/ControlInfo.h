@@ -6,11 +6,9 @@ namespace Onyx32::Gui
 	class ControlInfo
 	{
 		public:
-			ControlInfo(const IControl& control, UINT xPos, UINT yPos)
-				: control(control), xPos(xPos), yPos(yPos) {}
+			ControlInfo(const IControl& control)
+				: control(control) {}
 
 			const IControl& control;
-			UINT xPos;
-			UINT yPos;
 	};
 }

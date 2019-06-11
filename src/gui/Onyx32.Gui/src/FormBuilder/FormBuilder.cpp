@@ -20,15 +20,15 @@ namespace Onyx32::Gui
 
 	IButton* FormBuilder::AddButton(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick)
 	{
-		Button* button = new Button(text, width, height, onClick);
-		window.AddControl(*button, xPos, yPos);
+		Button* button = new Button(text, width, height, xPos, yPos, onClick);
+		window.AddControl(*button);
 		return button;
 	}
 
 	ITextInput* FormBuilder::AddTextInput(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		ITextInput* input = new TextInput(text, width, height, 100);
-		window.AddControl(*input, xPos, yPos);
+		ITextInput* input = new TextInput(text, width, height, xPos, yPos, 100);
+		window.AddControl(*input);
 		return input;
 	}
 
