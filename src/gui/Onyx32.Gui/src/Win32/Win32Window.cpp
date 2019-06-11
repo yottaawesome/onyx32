@@ -1,13 +1,15 @@
 #include "../h/stdafx.h"
-#include "Renderer.h"
+#include "Win32Window.h"
 #include "../h/dllmain.h"
 #include "../h/StaticFunctions.h"
 #include  <Commctrl.h>
 
 namespace Onyx32::Gui
 {
-	HWND Win32Window::CreateChildWindow(const Win32CreationArgs& args)
+	HWND Win32Window::CreateChildWindow(const Win32ChildWindowCreationArgs& args)
 	{
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
 		HWND hWnd = CreateWindowEx
 		(
 			args.ExtendedStyles,
@@ -30,12 +32,37 @@ namespace Onyx32::Gui
 		return hWnd;
 	}
 
+	HWND Win32Window::CreateParentWindow(const Win32ParentWindowCreationArgs& args)
+	{
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
+		HWND hWnd = CreateWindowEx
+		(
+			args.ExtendedStyles,
+			args.WndClass.lpszClassName, // class name
+			args.WindowName.c_str(), // window title
+			args.Styles, // window styles
+			args.X, // initial horizontal x position
+			args.Y,  // initial horizontal y position
+			args.Width,  // window width
+			args.Height, // window height
+			args.ParentOrOwner, // parent HWND
+			args.Menu, // HWND menu/child
+			Dll::GetModule(),//hInstance, // instance of the module
+			(LPVOID)args.Window // additional data
+		);
+
+		return hWnd;
+	}
+
+
 	HWND Win32Window::CreateParentWindow(Window* window)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
-		HWND hWnd = CreateWindow
+		HWND hWnd = CreateWindowEx
 		(
+			0,
 			window->WndClass.ClassName.c_str(), // class name
 			window->GetTitle().c_str(), // window title
 			WS_OVERLAPPEDWINDOW, // window styles

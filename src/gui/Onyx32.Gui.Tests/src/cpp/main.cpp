@@ -8,6 +8,7 @@ using std::function;
 using Onyx32::Gui::IFormBuilder;
 using Onyx32::Gui::IWindow;
 using Onyx32::Gui::Factory;
+using Onyx32::Gui::ITextInput;
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
@@ -32,7 +33,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		100,
 		clickHandler);
 
-	auto input = fct->AddTextInput(*wnd, L"", 350, 50, 25, 25);
+	ITextInput* input = fct->AddTextInput(*wnd, L"", 350, 50, 25, 25);
 	input->SetText(L"Test input");
 	MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
 

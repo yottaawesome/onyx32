@@ -1,9 +1,8 @@
 #include "../h/stdafx.h"
 #include "TextInput.h"
-#include "../Renderer/Renderer.h"
+#include "../Win32/Win32Window.h"
 #include "../h/StaticFunctions.h"
 #include  <Commctrl.h>
-
 
 namespace Onyx32::Gui
 {
@@ -32,7 +31,7 @@ namespace Onyx32::Gui
 		if (_state == ControlState::Uninitialized)
 		{
 			_parent = window;
-			Win32CreationArgs args(
+			Win32ChildWindowCreationArgs args(
 				0,
 				TextInput::Class,
 				_text, 

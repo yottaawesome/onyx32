@@ -1,17 +1,13 @@
 #include "../h/stdafx.h"
 #include "Button.h"
-#include "../Renderer/Renderer.h"
+#include "../Win32/Win32Window.h"
 #include "../h/StaticFunctions.h"
 #include <Commctrl.h>
-
-function<void(void)> defaultClickHandler = []() -> void
-{
-	MessageBox(nullptr, L"You rock!", L"Brilliant", MB_OK);
-};
 
 namespace Onyx32::Gui
 {
 	FunctionHandler Button::DefaultClickHandler = []() -> void {};
+
 	const std::wstring Button::Class = L"BUTTON";
 	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON;
 
@@ -25,7 +21,7 @@ namespace Onyx32::Gui
 		const unsigned int controlId)
 		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
 			_text(text),
-			_onClick(defaultClickHandler)
+			_onClick(onClick)
 	{
 	}
 
@@ -61,7 +57,8 @@ namespace Onyx32::Gui
 		if (_state == ControlState::Uninitialized)
 		{
 			_parent = parent;
-			Win32CreationArgs args(
+
+			Win32ChildWindowCreationArgs args(
 				0,
 				Button::Class,
 				_text,
@@ -70,13 +67,13 @@ namespace Onyx32::Gui
 				_yPos,
 				_width,
 				_height,
-				parent->GetHwnd(),
+				_parent->GetHwnd(),
 				(HMENU)_controlId,
 				this,
 				Static::DefCtrlProc
 			);
-
 			_wndHandle = Win32Window::CreateChildWindow(args);
+			
 			_state = ControlState::Initialized;
 		}
 	}

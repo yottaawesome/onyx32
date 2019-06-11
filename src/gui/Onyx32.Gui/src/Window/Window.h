@@ -11,7 +11,7 @@ namespace Onyx32::Gui
 	class Window : public IWindow
 	{
 		public:
-			Window(const WindowClass& wcex, wstring_view title, unsigned int width = CW_USEDEFAULT, unsigned int height = 0);
+			Window(const WindowClass& wcex, wstring_view title, unsigned int width = CW_USEDEFAULT, unsigned int height = CW_USEDEFAULT);
 			virtual ~Window();
 
 			virtual void Initialize() override;

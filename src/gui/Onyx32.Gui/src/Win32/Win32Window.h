@@ -10,7 +10,8 @@ namespace Onyx32::Gui
 	{
 		public:
 			static HWND CreateParentWindow(Window* window);
-			static HWND CreateChildWindow(const Win32CreationArgs& args);
+			static HWND CreateParentWindow(const Win32ParentWindowCreationArgs& args);
+			static HWND CreateChildWindow(const Win32ChildWindowCreationArgs& args);
 			static void Resize(Button* button, const UINT width, const UINT height);
 	};
 }

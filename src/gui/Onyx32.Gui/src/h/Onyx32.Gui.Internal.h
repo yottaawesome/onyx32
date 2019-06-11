@@ -4,10 +4,40 @@
 
 namespace Onyx32::Gui
 {
-	class Win32CreationArgs
+	class Win32ParentWindowCreationArgs
 	{
 		public:
-			Win32CreationArgs(
+			Win32ParentWindowCreationArgs(
+				const DWORD extendedStyles,
+				std::wstring_view windowName,
+				const DWORD styles,
+				const int x,
+				const int y,
+				const int width,
+				const int height,
+				const HWND parentOrOwner,
+				const HMENU menu,
+				const IWindow* window,
+				const WNDCLASSEX& wndClass
+			);
+
+			const DWORD ExtendedStyles;
+			const std::wstring WindowName;
+			const DWORD Styles;
+			const int X;
+			const int Y;
+			const int Width;
+			const int Height;
+			const HWND ParentOrOwner;
+			const HMENU Menu;
+			const IWindow* Window;
+			const WNDCLASSEX& WndClass;
+	};
+
+	class Win32ChildWindowCreationArgs
+	{
+		public:
+			Win32ChildWindowCreationArgs(
 				const DWORD extendedStyles,
 				std::wstring_view className,
 				std::wstring_view windowName,

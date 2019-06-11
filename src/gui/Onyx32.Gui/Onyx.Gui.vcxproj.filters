@@ -54,10 +54,10 @@
     <ClInclude Include="src\WindowClassManager\WindowClassManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\Renderer.h">
+    <ClInclude Include="src\Win32\Win32CreationArgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Win32CreationArgs\Win32CreationArgs.h">
+    <ClInclude Include="src\Win32\Win32Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,10 +95,10 @@
     <ClCompile Include="src\cpp\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\Renderer.cpp">
+    <ClCompile Include="src\Win32\Win32CreationArgs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Win32CreationArgs\Win32CreationArgs.cpp">
+    <ClCompile Include="src\Win32\Win32Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

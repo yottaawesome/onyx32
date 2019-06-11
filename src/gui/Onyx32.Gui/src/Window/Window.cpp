@@ -5,7 +5,7 @@
 #include "../WindowClassManager/WindowClassManager.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
-#include "../Renderer/Renderer.h"
+#include "../Win32/Win32Window.h"
 
 namespace Onyx32::Gui
 {
@@ -45,8 +45,20 @@ namespace Onyx32::Gui
 
 	void Window::Initialize()
 	{
-		_hWnd = Win32Window::CreateParentWindow(this);
-
+		Win32ParentWindowCreationArgs args(
+			0,
+			_title,
+			WS_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			_width,
+			_height,
+			nullptr,
+			nullptr,
+			this,
+			WndClass.WndClass
+		);
+		_hWnd = Win32Window::CreateParentWindow(args);
 		if (!_hWnd)
 			return;
 
