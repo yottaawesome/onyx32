@@ -211,10 +211,9 @@
     <ClCompile Include="src\WindowClassManager\WindowClassManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Onyx32.rc" />
+    <ResourceCompile Include="Onyx32.Gui.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
     <Image Include="Onyx32.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
