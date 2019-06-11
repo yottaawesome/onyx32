@@ -45,9 +45,10 @@ namespace Onyx32::Gui
 				this, 
 				Static::DefCtrlProc
 			);
-
 			_wndHandle = Win32Window::CreateChildWindow(args);
-			_state = ControlState::Initialized;
+			_state = _wndHandle
+				? ControlState::Initialized
+				: ControlState::Error;
 		}
 	}
 
@@ -71,8 +72,8 @@ namespace Onyx32::Gui
 	{
 		switch (message)
 		{
-		default:
-			return DefSubclassProc(_wndHandle, message, wParam, lParam);
+			default:
+				return DefSubclassProc(_wndHandle, message, wParam, lParam);
 		}
 
 		return DefSubclassProc(_wndHandle, message, wParam, lParam);

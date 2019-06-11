@@ -86,6 +86,7 @@ namespace Onyx32::Gui
 
 			virtual void SetParent(IWindow* parent);
 			virtual const std::wstring& GetCreateWindowText() = 0;
+			virtual void Resize(const UINT width, const UINT height) override;
 
 		protected:
 			HWND _wndHandle;
@@ -107,7 +108,7 @@ namespace Onyx32::Gui
 	template<typename ControlType>
 	BaseControl<ControlType>::~BaseControl()
 	{
-		if (_wndHandle)
+		if (_wndHandle && _state == ControlState::Initialized)
 		{
 			DestroyWindow(_wndHandle);
 			_wndHandle = nullptr;
@@ -180,4 +181,17 @@ namespace Onyx32::Gui
 		return _state;
 	}
 
+	template<typename ControlType>
+	void BaseControl<ControlType>::Resize(const UINT width, const UINT height)
+	{
+		if (_state != ControlState::Initialized)
+			return;
+
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-movewindow
+		if (MoveWindow(_wndHandle, _xPos, _yPos, width, height, true))
+		{
+			_width = width;
+			_height = height;
+		}
+	}
 }

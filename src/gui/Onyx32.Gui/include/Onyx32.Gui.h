@@ -5,6 +5,7 @@
 #else
 #define ONYXWINDOWING_API __declspec(dllimport)
 #endif
+
 #include <string>
 #include <functional>
 
@@ -16,7 +17,8 @@ namespace Onyx32::Gui
 	{
 		Uninitialized = 1,
 		Initialized,
-		Destroyed
+		Destroyed,
+		Error
 	};
 
 	class ONYXWINDOWING_API Application
@@ -35,6 +37,7 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IControl
 	{
 		public:
+			virtual ~IControl() = 0;
 			virtual void Initialize(IWindow* window) = 0;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
@@ -47,7 +50,7 @@ namespace Onyx32::Gui
 			virtual const std::wstring& GetName() = 0;
 			virtual ControlState GetState() = 0;
 			virtual int GetStyles() = 0;
-			virtual ~IControl() = 0;
+			virtual void Resize(const UINT width, const UINT height) = 0;
 	};
 
 	class ONYXWINDOWING_API IButton : public IControl

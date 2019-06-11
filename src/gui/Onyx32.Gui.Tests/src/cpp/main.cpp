@@ -9,6 +9,7 @@ using Onyx32::Gui::IFormBuilder;
 using Onyx32::Gui::IWindow;
 using Onyx32::Gui::Factory;
 using Onyx32::Gui::ITextInput;
+using Onyx32::Gui::IButton;
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
@@ -18,13 +19,15 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	IFormBuilder* fct = Factory::GetFormBuilder();
 	IWindow* wnd = fct->CreateDefaultWindow(L"This is a test", 500, 500);
 	
-	function<void(void)> clickHandler = []() -> void
+	IButton* button = nullptr;
+	function<void(void)> clickHandler = [&button]() -> void
 	{
-		MessageBox(nullptr, L"You rock!", L"Brilliant", MB_OK);
+		MessageBox(nullptr, L"Let's resize the button you clicked, no?", L"Resize!", MB_OK);
+		button->Resize(75, 75);
 	};
 
 	wnd->Initialize();
-	fct->AddButton(
+	button = fct->AddButton(
 		*wnd,
 		L"Button",
 		100,

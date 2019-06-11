@@ -42,16 +42,6 @@ namespace Onyx32::Gui
 		return _text;
 	}
 
-	void Button::Resize(const UINT width, const UINT height)
-	{
-		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-movewindow
-		if (MoveWindow(_wndHandle, _xPos, _yPos, width, height, true))
-		{
-			_width = width;
-			_height = height;
-		}
-	}
-
 	void Button::Initialize(IWindow* parent)
 	{
 		if (_state == ControlState::Uninitialized)
@@ -73,8 +63,9 @@ namespace Onyx32::Gui
 				Static::DefCtrlProc
 			);
 			_wndHandle = Win32Window::CreateChildWindow(args);
-			
-			_state = ControlState::Initialized;
+			_state = _wndHandle 
+				? ControlState::Initialized 
+				: ControlState::Error;
 		}
 	}
 
