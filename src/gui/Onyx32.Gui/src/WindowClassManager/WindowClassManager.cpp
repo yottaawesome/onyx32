@@ -27,7 +27,9 @@ namespace Onyx32::Gui
 			DefaultWindowClass.WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 			DefaultWindowClass.WndClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 			DefaultWindowClass.WndClass.lpszMenuName = MAKEINTRESOURCE(IDC_ONYX32);
-			DefaultWindowClass.WndClass.hIconSm = LoadIcon(Dll::GetModule(), MAKEINTRESOURCE(IDI_SMALL));
+			DefaultWindowClass.WndClass.hIconSm = 
+				(HICON)LoadImage(Dll::GetModule(), MAKEINTRESOURCE(IDI_SMALL), IMAGE_ICON, 0, 0, LR_DEFAULTSIZE); 
+				//LoadIcon(Dll::GetModule(), MAKEINTRESOURCE(IDI_SMALL));
 
 			RegisterClassEx(&DefaultWindowClass.WndClass);
 

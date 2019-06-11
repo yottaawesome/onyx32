@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Onyx32.Gui.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\Button\Button.h" />
     <ClInclude Include="src\h\ControlInfo.h" />
     <ClInclude Include="src\h\dllmain.h" />
@@ -213,6 +214,7 @@
     <ResourceCompile Include="Onyx32.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="icon1.ico" />
     <Image Include="Onyx32.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
