@@ -6,7 +6,7 @@
 
 namespace Onyx32::Gui
 {
-	class Win32Renderer
+	class Renderer
 	{
 		public:
 			virtual HWND Render(Window* window);
@@ -17,7 +17,7 @@ namespace Onyx32::Gui
 			template<typename ControlType>
 			HWND RenderInternal(Window* parent, BaseControl<ControlType>* control, const UINT xPos, const UINT yPos);
 
-			virtual ~Win32Renderer();
+			virtual ~Renderer();
 
 		protected:
 	};

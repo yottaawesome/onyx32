@@ -1,12 +1,12 @@
 #include "../h/stdafx.h"
-#include "../h/Win32Renderer.h"
+#include "Renderer.h"
 #include "../h/dllmain.h"
 #include "../h/StaticFunctions.h"
 #include  <Commctrl.h>
 
 namespace Onyx32::Gui
 {
-	HWND Win32Renderer::Render(Window* window)
+	HWND Renderer::Render(Window* window)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
@@ -36,7 +36,7 @@ namespace Onyx32::Gui
 	}
 
 	template<typename ControlType>
-	HWND Win32Renderer::RenderInternal(Window* parent, BaseControl<ControlType>* control, const UINT xPos, const UINT yPos)
+	HWND Renderer::RenderInternal(Window* parent, BaseControl<ControlType>* control, const UINT xPos, const UINT yPos)
 	{
 		control->SetParent(parent);
 
@@ -63,11 +63,11 @@ namespace Onyx32::Gui
 		return hwndButton;
 	}
 
-	HWND Win32Renderer::Render(Window* parent, BaseControl<IButton>* control, const UINT xPos, const UINT yPos)
+	HWND Renderer::Render(Window* parent, BaseControl<IButton>* control, const UINT xPos, const UINT yPos)
 	{
 		return RenderInternal(parent, control, xPos, yPos);
 	}
-	HWND Win32Renderer::Render(Window* parent, BaseControl<ITextInput>* control, const UINT xPos, const UINT yPos)
+	HWND Renderer::Render(Window* parent, BaseControl<ITextInput>* control, const UINT xPos, const UINT yPos)
 	{
 		return RenderInternal(parent, control, xPos, yPos);
 	}
@@ -120,7 +120,7 @@ namespace Onyx32::Gui
 		return hwndEdit;
 	}*/
 
-	void Win32Renderer::Resize(Button* button, const UINT width, const UINT height)
+	void Renderer::Resize(Button* button, const UINT width, const UINT height)
 	{
 		MoveWindow(
 			button->GetHwnd(),
@@ -132,7 +132,7 @@ namespace Onyx32::Gui
 		);
 	}
 
-	Onyx32::Gui::Win32Renderer::~Win32Renderer()
+	Renderer::~Renderer()
 	{
 	}
 }

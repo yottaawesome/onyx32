@@ -1,6 +1,6 @@
 #include "../h/stdafx.h"
 #include "Button.h"
-#include "../h/Win32Renderer.h"
+#include "../Renderer/Renderer.h"
 #include "../h/StaticFunctions.h"
 #include <Commctrl.h>
 

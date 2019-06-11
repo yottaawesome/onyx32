@@ -5,7 +5,7 @@
 #include "../WindowClassManager/WindowClassManager.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
-#include "../h/Win32Renderer.h"
+#include "../Renderer/Renderer.h"
 
 namespace Onyx32::Gui
 {
@@ -45,7 +45,7 @@ namespace Onyx32::Gui
 
 	void Window::Initialize()
 	{
-		Win32Renderer renderer;
+		Renderer renderer;
 		_hWnd = renderer.Render(this);
 
 		if (!_hWnd)
@@ -59,7 +59,7 @@ namespace Onyx32::Gui
 	void Window::AddControl(IButton& control, UINT xPos, UINT yPos)
 	{
 		control.Initialize(this);
-		Win32Renderer renderer;
+		Renderer renderer;
 		control.SetHwnd(renderer.Render((Window*)this, (BaseControl<IButton>*) & control, xPos, yPos));
 
 		_children[&control] = new ControlInfo(control, xPos, yPos);
@@ -68,7 +68,7 @@ namespace Onyx32::Gui
 	void Window::AddControl(ITextInput& control, UINT xPos, UINT yPos)
 	{
 		control.Initialize(this);
-		Win32Renderer renderer;
+		Renderer renderer;
 		control.SetHwnd(renderer.Render((Window*)this, (BaseControl<ITextInput>*) &control, xPos, yPos));
 
 		_children[&control] = new ControlInfo(control, xPos, yPos);
