@@ -33,22 +33,22 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		L"Button",
 		100,
 		100,
-		200,
-		200,
+		10,
+		10,
 		clickHandler);
 
-	IDateTime* dateTime = fct->AddDateTime(*wnd, 220, 20, 20, 100);
-	Onyx32::Gui::OnDateTimeChangeHandler changeHandler = [&dateTime](IDateTime& control, unsigned short day, unsigned short month, unsigned short year) -> void
+	IDateTime* dateTime = fct->AddDateTime(*wnd, 220, 20, 120, 100);
+	Onyx32::Gui::OnDateTimeChangeHandler changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
 	{
 		char box[150];
-		sprintf_s(box, 150, "%u/%u/%u", day, month, year);
+		sprintf_s(box, 150, "%u/%u/%u", dt.wDay, dt.wMonth, dt.wYear);
 		MessageBoxA(nullptr, box, "Changed!", MB_OK);
 	};
 	dateTime->SetOnChange(changeHandler);
 
-	ITextInput* input = fct->AddTextInput(*wnd, L"", 350, 50, 25, 25);
-	input->SetText(L"Test input");
-	MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
+	//ITextInput* input = fct->AddTextInput(*wnd, L"", 350, 50, 25, 25);
+	//input->SetText(L"Test input");
+	//MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
 
 	Onyx32::Gui::Application app;
 	int retVal = app.MainLoop();

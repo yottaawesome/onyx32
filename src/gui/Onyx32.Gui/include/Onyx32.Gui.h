@@ -17,9 +17,7 @@ namespace Onyx32::Gui
 	typedef std::function<void(void)> FunctionHandler;
 	typedef std::function<void(
 		IDateTime& control, 
-		unsigned short day, 
-		unsigned short month, 
-		unsigned short year)> OnDateTimeChangeHandler;
+		SYSTEMTIME& dateTime)> OnDateTimeChangeHandler;
 
 	enum ONYXWINDOWING_API ControlState
 	{
@@ -72,7 +70,7 @@ namespace Onyx32::Gui
 	{
 		public:
 			virtual ~IDateTime() = 0;
-			virtual void GetDateTime(unsigned short& day, unsigned short& month, unsigned short& year) = 0;
+			virtual void GetDateTime(SYSTEMTIME& dateTime) = 0;
 			virtual void SetOnChange(OnDateTimeChangeHandler& onChange) = 0;
 	};
 
