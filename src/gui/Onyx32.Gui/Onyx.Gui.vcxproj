@@ -163,6 +163,7 @@
     <ClInclude Include="include\Onyx32.Gui.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\Button\Button.h" />
+    <ClInclude Include="src\DateTime\DateTime.h" />
     <ClInclude Include="src\h\ControlInfo.h" />
     <ClInclude Include="src\h\dllmain.h" />
     <ClInclude Include="src\FormBuilder\FormBuilder.h" />
@@ -194,6 +195,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\cpp\Factory.cpp" />
+    <ClCompile Include="src\DateTime\DateTime.cpp" />
     <ClCompile Include="src\Win32\Win32CreationArgs.cpp" />
     <ClCompile Include="src\FormBuilder\FormBuilder.cpp" />
     <ClCompile Include="src\TextInput\TextInput.cpp" />

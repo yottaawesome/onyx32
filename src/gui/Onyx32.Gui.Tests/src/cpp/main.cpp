@@ -10,6 +10,7 @@ using Onyx32::Gui::IWindow;
 using Onyx32::Gui::Factory;
 using Onyx32::Gui::ITextInput;
 using Onyx32::Gui::IButton;
+using Onyx32::Gui::IDateTime;
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
@@ -32,9 +33,11 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		L"Button",
 		100,
 		100,
-		100,
-		100,
+		200,
+		200,
 		clickHandler);
+
+	IDateTime* dateTime = fct->AddDateTime(*wnd, 220, 20, 20, 100);
 
 	ITextInput* input = fct->AddTextInput(*wnd, L"", 350, 50, 25, 25);
 	input->SetText(L"Test input");

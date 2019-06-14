@@ -20,7 +20,7 @@ namespace Onyx32::Gui
 			virtual HWND GetHwnd() override;
 
 			virtual void SetTitle(wstring_view title) override;
-			virtual wstring& GetTitle() override;
+			virtual const wstring& GetTitle() override;
 			
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;

@@ -2,6 +2,7 @@
 #include "FormBuilder.h"
 #include "../Window/Window.h"
 #include "../Button/Button.h"
+#include "../DateTime/DateTime.h"
 #include "../TextInput/TextInput.h"
 #include "../h/DllMain.h"
 #include "../h/StaticFunctions.h"
@@ -33,4 +34,10 @@ namespace Onyx32::Gui
 		return input;
 	}
 
+	IDateTime* FormBuilder::AddDateTime(IWindow& window, UINT width, UINT height, UINT xPos, UINT yPos)
+	{
+		IDateTime* input = new DateTime(width, height, xPos, yPos, 110);
+		window.AddControl(*input);
+		return input;
+	}
 }

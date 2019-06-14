@@ -21,11 +21,6 @@ namespace Onyx32::Gui
 
 	TextInput::~TextInput() { }
 
-	const std::wstring& TextInput::GetCreateWindowText()
-	{
-		return L"";
-	}
-
 	void TextInput::Initialize(IWindow* window)
 	{
 		if (_state == ControlState::Uninitialized)

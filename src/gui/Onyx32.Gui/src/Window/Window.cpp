@@ -28,7 +28,7 @@ namespace Onyx32::Gui
 		SetWindowText(_hWnd, _title.c_str());
 	}
 
-	std::wstring& Window::GetTitle()
+	const std::wstring& Window::GetTitle()
 	{
 		return _title;
 	}

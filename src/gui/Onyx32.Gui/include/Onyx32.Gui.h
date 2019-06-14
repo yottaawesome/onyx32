@@ -60,6 +60,12 @@ namespace Onyx32::Gui
 			virtual const std::wstring& GetText() = 0;
 	};
 
+	class ONYXWINDOWING_API IDateTime : public IControl
+	{
+		public:
+			virtual ~IDateTime() = 0;
+	};
+
 	class ONYXWINDOWING_API ITextInput : public IControl
 	{
 		public:
@@ -77,7 +83,7 @@ namespace Onyx32::Gui
 			virtual HWND GetHwnd() = 0;
 			virtual void AddControl(IControl& control) = 0;
 			virtual void SetTitle(std::wstring_view title) = 0;
-			virtual std::wstring& GetTitle() = 0;
+			virtual const std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
 
@@ -91,6 +97,7 @@ namespace Onyx32::Gui
 
 			virtual IButton* AddButton(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick) = 0;
 			virtual ITextInput* AddTextInput(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			virtual IDateTime* AddDateTime(IWindow& window, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 
 			virtual ~IFormBuilder() = 0;
 	};

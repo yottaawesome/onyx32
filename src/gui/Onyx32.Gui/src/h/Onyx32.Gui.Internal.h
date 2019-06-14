@@ -85,7 +85,6 @@ namespace Onyx32::Gui
 			virtual const std::wstring& GetName() override;
 
 			virtual void SetParent(IWindow* parent);
-			virtual const std::wstring& GetCreateWindowText() = 0;
 			virtual void Resize(const UINT width, const UINT height) override;
 
 		protected:

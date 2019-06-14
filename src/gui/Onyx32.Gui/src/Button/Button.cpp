@@ -27,11 +27,6 @@ namespace Onyx32::Gui
 
 	Button::~Button() { }
 
-	const std::wstring& Button::GetCreateWindowText()
-	{
-		return _text;
-	}
-
 	void Button::SetClickHandler(FunctionHandler& onClick)
 	{
 		_onClick = onClick;
