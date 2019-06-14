@@ -5,6 +5,8 @@
 
 namespace Onyx32::Gui
 {
+	OnDateTimeChangeHandler DateTime::DefaultDateTimeChangeHandler = [](IDateTime& control, unsigned short day, unsigned short month, unsigned short year) -> void {};
+
 	//https://docs.microsoft.com/en-us/windows/desktop/Controls/date-and-time-picker-control-reference
 	//https://docs.microsoft.com/en-us/windows/desktop/Controls/date-and-time-picker-controls
 	//https://docs.microsoft.com/en-us/windows/desktop/Controls/date-and-time-picker-control-styles
@@ -18,11 +20,16 @@ namespace Onyx32::Gui
 		const UINT xPos,
 		const UINT yPos,
 		const unsigned int controlId)
-		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr)
-	{
-	}
+			: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
+			_onChange(DateTime::DefaultDateTimeChangeHandler)
+	{ }
 
 	DateTime::~DateTime() { }
+
+	void DateTime::SetOnChange(OnDateTimeChangeHandler& onChange)
+	{
+		_onChange = onChange;
+	}
 
 	void DateTime::Initialize(IWindow* parent)
 	{
@@ -63,12 +70,62 @@ namespace Onyx32::Gui
 		}
 	}
 
+	void DateTime::GetDateTime(unsigned short& day, unsigned short& month, unsigned short& year)
+	{
+		SYSTEMTIME st;
+		LRESULT value = SendMessage(_wndHandle, DTM_GETSYSTEMTIME, 0, (LPARAM)&st);
+		
+		if (value == GDT_VALID)
+		{
+			day = st.wDay;
+			month = st.wMonth;
+			year = st.wYear;
+		}
+		if (value == GDT_NONE || value == GDT_ERROR)
+		{
+			day = 0;
+			month = 0;
+			year = 0;
+		}
+	}
+
 	LRESULT DateTime::Process(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		switch (message)
 		{
-		default:
-			return DefSubclassProc(_wndHandle, message, wParam, lParam);
+			case WM_NOTIFY:
+			{
+				NMHDR* nmh = (NMHDR*)lParam;
+				switch (nmh->code)
+				{
+					case DTN_DATETIMECHANGE:
+					{
+						LPNMDATETIMECHANGE lpChange = (LPNMDATETIMECHANGE)lParam;
+						if (lpChange->dwFlags == GDT_VALID)
+						{
+							unsigned short day; 
+							unsigned short month; 
+							unsigned short year;
+							this->GetDateTime(day, month, year);
+							_onChange(*this, day, month, year);
+						}
+						if (lpChange->dwFlags == GDT_NONE)
+						{
+
+						}
+						if (lpChange->dwFlags == GDT_ERROR)
+						{
+
+						}
+						return 0;
+					}
+				}
+
+				return DefSubclassProc(_wndHandle, message, wParam, lParam);
+			}
+
+			default:
+				return DefSubclassProc(_wndHandle, message, wParam, lParam);
 		}
 	}
 }

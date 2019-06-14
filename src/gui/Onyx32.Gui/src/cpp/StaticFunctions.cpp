@@ -15,6 +15,19 @@ LRESULT CALLBACK Static::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 		SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
 		pThis->SetHwnd(hWnd);
 	}
+	// We need these cases to bounce back messages sent to the parent from
+	// child controls.
+	else if (message == WM_COMMAND)
+	{
+		return SendMessage((HWND)lParam, message, wParam, lParam);
+	}
+	else if(message == WM_NOTIFY)
+	{
+		// WARNING: never send the sub-message directly to the child window.
+		// SendMessage() quietly blocks the message, probably due to security.
+		NMHDR* nmh = (NMHDR*) lParam;
+		return SendMessage(nmh->hwndFrom, message, wParam, lParam);
+	}
 	else
 	{
 		pThis = (IWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);

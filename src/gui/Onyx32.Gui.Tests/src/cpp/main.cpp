@@ -38,6 +38,13 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		clickHandler);
 
 	IDateTime* dateTime = fct->AddDateTime(*wnd, 220, 20, 20, 100);
+	Onyx32::Gui::OnDateTimeChangeHandler changeHandler = [&dateTime](IDateTime& control, unsigned short day, unsigned short month, unsigned short year) -> void
+	{
+		char box[150];
+		sprintf_s(box, 150, "%u/%u/%u", day, month, year);
+		MessageBoxA(nullptr, box, "Changed!", MB_OK);
+	};
+	dateTime->SetOnChange(changeHandler);
 
 	ITextInput* input = fct->AddTextInput(*wnd, L"", 350, 50, 25, 25);
 	input->SetText(L"Test input");

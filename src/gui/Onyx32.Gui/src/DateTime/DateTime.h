@@ -13,7 +13,13 @@ namespace Onyx32::Gui
 				const UINT yPos,
 				const unsigned int controlId);
 			virtual ~DateTime();
-			virtual void DateTime::Initialize(IWindow* parent) override;
+
+			virtual void Initialize(IWindow* parent) override;
+			virtual void GetDateTime(unsigned short& day, unsigned short& month, unsigned short& year) override;
+			virtual void SetOnChange(OnDateTimeChangeHandler& onChange) override;
 			LRESULT DateTime::Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+		private:
+			OnDateTimeChangeHandler& _onChange;
+			static OnDateTimeChangeHandler DefaultDateTimeChangeHandler;
 	};
 }
