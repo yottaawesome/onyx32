@@ -10,6 +10,8 @@ namespace Onyx32::Gui
 {
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/windows
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/about-window-classes
+	// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
+	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/using-windows
 	class Window : public IWindow
 	{
 		public:

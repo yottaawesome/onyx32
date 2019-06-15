@@ -86,6 +86,11 @@ namespace Onyx32::Gui
 	void Window::Resize(const UINT width, const UINT height)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-movewindow
+		// See also: https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-setwindowpos
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-adjustwindowrectex
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-begindeferwindowpos
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-enddeferwindowpos
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-deferwindowpos
 		if (MoveWindow(_wndHandle, _xPos, _yPos, width, height, true))
 		{
 			_width = width;

@@ -12,6 +12,8 @@ using Onyx32::Gui::ITextInput;
 using Onyx32::Gui::IButton;
 using Onyx32::Gui::IDateTime;
 
+// https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
+
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);

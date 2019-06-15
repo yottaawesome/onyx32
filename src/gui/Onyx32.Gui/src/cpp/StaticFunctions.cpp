@@ -17,6 +17,7 @@ LRESULT CALLBACK Static::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	}
 	// We need these cases to bounce back messages sent to the parent from
 	// child controls.
+	// See also: https://stackoverflow.com/questions/29442905/win32-api-process-wm-in-tab-controls-wndproc-instead-of-parents
 	else if (message == WM_COMMAND)
 	{
 		return SendMessage((HWND)lParam, message, wParam, lParam);
