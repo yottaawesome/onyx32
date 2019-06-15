@@ -9,8 +9,14 @@
 
 namespace Onyx32::Gui
 {
-	Window::Window(const WindowClass& wndClass, wstring_view title, unsigned int width, unsigned int height)
-		: _width(width), _height(height), _title(title), WndClass(wndClass), _hWnd(nullptr) { }
+	Window::Window(const WindowClass& wndClass, wstring_view title, UINT width, UINT height, UINT xPos, UINT yPos)
+		: _width(width), 
+		_height(height),
+		_xPos(xPos),
+		_yPos(yPos),
+		_title(title),
+		WndClass(wndClass), 
+		_wndHandle(nullptr) { }
 
 	Window::~Window()
 	{
@@ -19,13 +25,13 @@ namespace Onyx32::Gui
 			delete item.first;
 			delete item.second;
 		}
-		DestroyWindow(_hWnd);
+		DestroyWindow(_wndHandle);
 	}
 
 	void Window::SetTitle(wstring_view title)
 	{
 		_title = title;
-		SetWindowText(_hWnd, _title.c_str());
+		SetWindowText(_wndHandle, _title.c_str());
 	}
 
 	const std::wstring& Window::GetTitle()
@@ -45,12 +51,12 @@ namespace Onyx32::Gui
 
 	void Window::SetHwnd(HWND hWnd)
 	{
-		_hWnd = hWnd;
+		_wndHandle = hWnd;
 	}
 
 	HWND Window::GetHwnd()
 	{
-		return _hWnd;
+		return _wndHandle;
 	}
 
 	void Window::Initialize()
@@ -68,13 +74,23 @@ namespace Onyx32::Gui
 			this,
 			WndClass.WndClass
 		);
-		_hWnd = Win32Window::CreateParentWindow(args);
-		if (!_hWnd)
+		_wndHandle = Win32Window::CreateParentWindow(args);
+		if (!_wndHandle)
 			return;
 
 		// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx
-		ShowWindow(_hWnd, SW_SHOWDEFAULT);
-		UpdateWindow(_hWnd);
+		ShowWindow(_wndHandle, SW_SHOWDEFAULT);
+		UpdateWindow(_wndHandle);
+	}
+
+	void Window::Resize(const UINT width, const UINT height)
+	{
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-movewindow
+		if (MoveWindow(_wndHandle, _xPos, _yPos, width, height, true))
+		{
+			_width = width;
+			_height = height;
+		}
 	}
 
 	void Window::AddControl(IControl& control)
@@ -102,18 +118,18 @@ namespace Onyx32::Gui
 						break;
 
 					case IDM_EXIT:
-						DestroyWindow(_hWnd);
+						DestroyWindow(_wndHandle);
 						break;
 
 					default:
-						return DefWindowProc(_hWnd, message, wParam, lParam);
+						return DefWindowProc(_wndHandle, message, wParam, lParam);
 				}
 				break;
 
 			case WM_PAINT:
-				hdc = BeginPaint(_hWnd, &ps);
+				hdc = BeginPaint(_wndHandle, &ps);
 				// TODO: Add any drawing code here...
-				EndPaint(_hWnd, &ps);
+				EndPaint(_wndHandle, &ps);
 				break;
 
 			case WM_DESTROY:
@@ -121,7 +137,7 @@ namespace Onyx32::Gui
 				break;
 
 			default:
-				return DefWindowProc(_hWnd, message, wParam, lParam);
+				return DefWindowProc(_wndHandle, message, wParam, lParam);
 		}
 		return 0;
 	}

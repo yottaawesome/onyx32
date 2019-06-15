@@ -94,6 +94,7 @@ namespace Onyx32::Gui
 			virtual const std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
+			virtual void Resize(const UINT width, const UINT height) = 0;
 
 			virtual ~IWindow() = 0;
 	};

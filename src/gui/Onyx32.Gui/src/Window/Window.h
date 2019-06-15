@@ -8,10 +8,16 @@
 
 namespace Onyx32::Gui
 {
+	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/windows
+	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/about-window-classes
 	class Window : public IWindow
 	{
 		public:
-			Window(const WindowClass& wcex, wstring_view title, unsigned int width = CW_USEDEFAULT, unsigned int height = CW_USEDEFAULT);
+			Window(const WindowClass& wcex, wstring_view title, 
+				UINT width = CW_USEDEFAULT, 
+				UINT height = CW_USEDEFAULT,
+				UINT xPos = CW_USEDEFAULT,
+				UINT yPos = CW_USEDEFAULT);
 			virtual ~Window();
 
 			virtual void Initialize() override;
@@ -24,16 +30,20 @@ namespace Onyx32::Gui
 			
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
+			virtual void Resize(const UINT width, const UINT height) override;
 
 			virtual void AddControl(IControl& control) override;
 
 			const WindowClass WndClass;
 
 		protected:
-			HWND _hWnd;
+			HWND _wndHandle;
 			wstring _title = L"Default";
-			unsigned int _width;
-			unsigned int _height;
+			UINT _width;
+			UINT _height;
+			UINT _xPos;
+			UINT _yPos;
+
 			std::map<IControl*, ControlInfo*> _children;
 	};
 }
