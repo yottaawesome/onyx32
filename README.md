@@ -29,13 +29,13 @@ Really simple example below.
 
 ```C++
 // Load library
-Onyx32Lib lib;
+Onyx32::Gui::Onyx32Lib lib;
 // Get factory
-IFactory* factory = lib.GetMainFactory();
+Onyx32::Gui::IFactory* factory = lib.GetMainFactory();
 // Get a form builder
-IFormBuilder* fmBuilder = factory->GetFormBuilder();
+Onyx32::Gui::IFormBuilder* fmBuilder = factory->GetFormBuilder();
 // Create a default top-level window
-IWindow* wnd = fmBuilder->CreateDefaultWindow(L"This is a test", 500, 500);
+Onyx32::Gui::IWindow* wnd = fmBuilder->CreateDefaultWindow(L"This is a test", 500, 500);
 // Create an application
 Onyx32::Gui::IApplication* app = factory->GetApplication();
 // Enter the main lopp
