@@ -62,6 +62,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 
 	delete wnd;
 	delete app;
+	delete fct;
 	delete factory;
 
 	return retVal;
