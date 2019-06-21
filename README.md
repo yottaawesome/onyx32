@@ -30,7 +30,7 @@ Really simple example below.
 ```C++
 // Update this as per your folder set up
 #include "Onyx32.Gui.Lib.h"
-// Load the library
+// Load the library -- this example assumes the DLL exists in the same directory as your executable
 Onyx32::Gui::Onyx32Lib lib;
 // Get factory
 Onyx32::Gui::IFactory* factory = lib.GetMainFactory();
