@@ -1,25 +1,30 @@
 #include "../h/stdafx.h"
 #include "../h/Onyx32.h"
 #include "../../../Onyx32.Gui/include/Onyx32.Gui.h"
+#include "../../../Onyx32.Gui/include/Onyx32.Gui.Lib.h"
 #include <functional>
 
 using std::wstring;
 using std::function;
 using Onyx32::Gui::IFormBuilder;
 using Onyx32::Gui::IWindow;
-using Onyx32::Gui::Factory;
+using Onyx32::Gui::IFactory;
 using Onyx32::Gui::ITextInput;
 using Onyx32::Gui::IButton;
 using Onyx32::Gui::IDateTime;
+using Onyx32::Gui::Onyx32Lib;
 
 // https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
+	
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 	
-	IFormBuilder* fct = Factory::GetFormBuilder();
+	Onyx32Lib lib;
+	IFactory* factory = lib.GetMainFactory();
+	IFormBuilder* fct = factory->GetFormBuilder();
 	IWindow* wnd = fct->CreateDefaultWindow(L"This is a test", 500, 500);
 	
 	IButton* button = nullptr;
@@ -52,10 +57,12 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	//input->SetText(L"Test input");
 	//MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
 
-	Onyx32::Gui::Application app;
-	int retVal = app.MainLoop();
+	Onyx32::Gui::IApplication* app = factory->GetApplication();
+	int retVal = app->MainLoop();
 
 	delete wnd;
+	delete app;
+	delete factory;
 
 	return retVal;
 }

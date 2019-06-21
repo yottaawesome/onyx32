@@ -1,11 +1,13 @@
 #include "../h/stdafx.h"
-#include "../../include/Onyx32.Gui.h"
+#include "Application.h"
 
 namespace Onyx32::Gui
 {
 	Application::Application() : accelerators(nullptr) { }
 
 	Application::Application(HACCEL accelerators) : accelerators(accelerators) { }
+
+	Application::~Application() { }
 
 	int Application::MainLoop()
 	{

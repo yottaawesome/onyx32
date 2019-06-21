@@ -27,15 +27,13 @@ namespace Onyx32::Gui
 		Error
 	};
 
-	class ONYXWINDOWING_API Application
+	class ONYXWINDOWING_API IApplication
 	{
 		public:
-			Application();
-			Application(HACCEL accelerators);
-			virtual int MainLoop();
-
-		private:
-			HACCEL accelerators;
+			virtual ~IApplication() = 0;
+			//Application();
+			//Application(HACCEL accelerators);
+			virtual int MainLoop() = 0;
 	};
 
 	class ONYXWINDOWING_API IWindow;
@@ -111,9 +109,15 @@ namespace Onyx32::Gui
 			virtual ~IFormBuilder() = 0;
 	};
 
-	class ONYXWINDOWING_API Factory
+	class ONYXWINDOWING_API IFactory
 	{
 		public:
-			static IFormBuilder* GetFormBuilder();
+			virtual ~IFactory() = 0;
+			virtual IFormBuilder* GetFormBuilder() = 0;
+			virtual IApplication* GetApplication() = 0;
 	};
+
+	#define GETMAINFACTFUNC_NAME GetMainFactory
+	typedef IFactory* (*getMainFactory)();
+	extern "C" ONYXWINDOWING_API IFactory* GETMAINFACTFUNC_NAME();
 }

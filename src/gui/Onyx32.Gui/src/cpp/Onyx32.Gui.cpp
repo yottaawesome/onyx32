@@ -4,6 +4,7 @@
 #include "../h/stdafx.h"
 #include "../h/Onyx32.Gui.internal.h"
 #include "../Window/Window.h"
+#include "../Factory/Factory.h"
 
 namespace Onyx32::Gui
 {
@@ -15,4 +16,11 @@ namespace Onyx32::Gui
 	inline IFormBuilder::~IFormBuilder() { }
 	inline ITextInput::~ITextInput() { }
 	inline IDateTime::~IDateTime() { }
+	inline IFactory::~IFactory() { }
+	inline IApplication::~IApplication() { }
+
+	IFactory* GETMAINFACTFUNC_NAME()
+	{
+		return new Factory();
+	}
 }
