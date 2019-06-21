@@ -28,7 +28,9 @@ Check `Onyx32.Gui.Tests project` for an example. Essentially, in your project in
 Really simple example below.
 
 ```C++
-// Load library
+// Update this as per your folder set up
+#include "Onyx32.Gui.Lib.h"
+// Load the library
 Onyx32::Gui::Onyx32Lib lib;
 // Get factory
 Onyx32::Gui::IFactory* factory = lib.GetMainFactory();
