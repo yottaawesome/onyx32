@@ -43,7 +43,8 @@ namespace Onyx32::Gui
 
 	Onyx32Lib::~Onyx32Lib()
 	{
-		FreeLibrary(libraryHandle);
+		if(libraryHandle)
+			FreeLibrary(libraryHandle);
 	}
 
 	const std::wstring& Onyx32Lib::GetPath()
