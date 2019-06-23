@@ -17,7 +17,8 @@ namespace Onyx32::Gui
 	typedef std::function<void(void)> FunctionHandler;
 	typedef std::function<void(
 		IDateTime& control, 
-		SYSTEMTIME& dateTime)> OnDateTimeChangeHandler;
+		SYSTEMTIME& dateTime)> OnDateTimeChange;
+	typedef std::function<void(bool isActive)> OnWindowActivateChange;
 
 	enum ONYXWINDOWING_API ControlState
 	{
@@ -69,7 +70,7 @@ namespace Onyx32::Gui
 		public:
 			virtual ~IDateTime() = 0;
 			virtual void GetDateTime(SYSTEMTIME& dateTime) = 0;
-			virtual void SetOnChange(OnDateTimeChangeHandler& onChange) = 0;
+			virtual void SetOnChange(OnDateTimeChange& onChange) = 0;
 	};
 
 	class ONYXWINDOWING_API ITextInput : public IControl
@@ -93,6 +94,7 @@ namespace Onyx32::Gui
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
+			virtual void SetOnActivate(OnWindowActivateChange evtHandler) = 0;
 
 			virtual ~IWindow() = 0;
 	};

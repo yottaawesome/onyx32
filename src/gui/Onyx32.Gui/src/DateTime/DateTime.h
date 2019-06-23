@@ -16,10 +16,10 @@ namespace Onyx32::Gui
 
 			virtual void Initialize(IWindow* parent) override;
 			virtual void GetDateTime(SYSTEMTIME& dateTime) override;
-			virtual void SetOnChange(OnDateTimeChangeHandler& onChange) override;
+			virtual void SetOnChange(OnDateTimeChange& onChange) override;
 			LRESULT DateTime::Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 		private:
-			OnDateTimeChangeHandler& _onChange;
-			static OnDateTimeChangeHandler DefaultDateTimeChangeHandler;
+			OnDateTimeChange& _onChange;
+			static OnDateTimeChange DefaultDateTimeChangeHandler;
 	};
 }

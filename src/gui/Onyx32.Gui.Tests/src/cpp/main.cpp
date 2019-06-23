@@ -44,8 +44,10 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		10,
 		clickHandler);
 
+	wnd->SetOnActivate([](bool isActive) -> void { OutputDebugStringA(isActive ? "active" : "inactive"); });
+
 	IDateTime* dateTime = fct->AddDateTime(*wnd, 220, 20, 120, 100);
-	Onyx32::Gui::OnDateTimeChangeHandler changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
+	Onyx32::Gui::OnDateTimeChange changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
 	{
 		char box[150];
 		sprintf_s(box, 150, "%u/%u/%u", dt.wDay, dt.wMonth, dt.wYear);

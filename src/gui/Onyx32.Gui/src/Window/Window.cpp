@@ -9,6 +9,8 @@
 
 namespace Onyx32::Gui
 {
+	OnWindowActivateChange defaultActivateChange = [](bool isActive) -> void {};
+
 	Window::Window(const WindowClass& wndClass, wstring_view title, UINT width, UINT height, UINT xPos, UINT yPos)
 		: _width(width), 
 		_height(height),
@@ -16,7 +18,9 @@ namespace Onyx32::Gui
 		_yPos(yPos),
 		_title(title),
 		WndClass(wndClass), 
-		_wndHandle(nullptr) { }
+		_wndHandle(nullptr),
+		_activateEvtHandler(defaultActivateChange)
+	{ }
 
 	Window::~Window()
 	{
@@ -57,6 +61,11 @@ namespace Onyx32::Gui
 	HWND Window::GetHwnd()
 	{
 		return _wndHandle;
+	}
+
+	void Window::SetOnActivate(OnWindowActivateChange evtHandler)
+	{
+		_activateEvtHandler = evtHandler;
 	}
 
 	void Window::Initialize()
@@ -104,6 +113,26 @@ namespace Onyx32::Gui
 		_children[&control] = new ControlInfo(control);
 	}
 
+	int Window::OnActivate(bool isActive)
+	{
+		_activateEvtHandler(isActive);
+		return 0;
+	}
+
+	int Window::OnResize(UINT_PTR operation, UINT clientWidth, UINT clientHeight)
+	{
+		if (operation == SIZE_MINIMIZED)
+		{
+		}
+		else if (operation == SIZE_MAXIMIZED)
+		{
+		}
+		else if (operation == SIZE_RESTORED)
+		{
+		}
+		return 0;
+	}
+
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		int wmId, wmEvent;
@@ -113,6 +142,7 @@ namespace Onyx32::Gui
 		switch (message)
 		{
 			case WM_COMMAND:
+			{
 				wmId = LOWORD(wParam);
 				wmEvent = HIWORD(wParam);
 				// Parse the menu selections:
@@ -130,12 +160,21 @@ namespace Onyx32::Gui
 						return DefWindowProc(_wndHandle, message, wParam, lParam);
 				}
 				break;
+			}
+
+			case WM_SIZE:
+				return OnResize(wParam, LOWORD(lParam), HIWORD(lParam));
+
+			case WM_ACTIVATE:
+				return OnActivate(LOWORD(wParam) != WA_INACTIVE);
 
 			case WM_PAINT:
+			{
 				hdc = BeginPaint(_wndHandle, &ps);
 				// TODO: Add any drawing code here...
 				EndPaint(_wndHandle, &ps);
 				break;
+			}
 
 			case WM_DESTROY:
 				PostQuitMessage(0);
