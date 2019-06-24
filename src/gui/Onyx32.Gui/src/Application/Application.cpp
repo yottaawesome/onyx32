@@ -44,35 +44,26 @@ namespace Onyx32::Gui
 	{
 		unsigned long long int counter = 0;
 		MSG msg = { 0 };
+
 		// If there are Window messages then process them.
 		while (msg.message != WM_QUIT)
 		{
-			if (this->_accelerators == nullptr)
+			if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 			{
-				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+				if (this->_accelerators == nullptr)
 				{
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
 				}
-				else
+				else if (!TranslateAccelerator(msg.hwnd, _accelerators, &msg))
 				{
-					callback(counter);
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
 				}
 			}
 			else
 			{
-				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-				{
-					if (!TranslateAccelerator(msg.hwnd, _accelerators, &msg))
-					{
-						TranslateMessage(&msg);
-						DispatchMessage(&msg);
-					}
-				}
-				else
-				{
-					callback(counter);
-				}
+				callback(counter);
 			}
 			counter++;
 		}
