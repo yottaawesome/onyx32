@@ -11,6 +11,7 @@ namespace Onyx32::Gui
 			virtual ~Application();
 
 			virtual int MainLoop() override;
+			virtual int MainLoop(IdleCallback callback) override;
 			virtual void SetAccelerators(HACCEL accelerators) override;
 
 		private:

@@ -28,6 +28,7 @@ namespace Onyx32::Gui
 		SYSTEMTIME& dateTime)> OnDateTimeChange;
 	typedef std::function<void(IWindow& window)> OnWindowResized;
 	typedef std::function<void(IWindow& window, bool isActive)> OnWindowActivateChange;
+	typedef std::function<void(unsigned long long int counter)> IdleCallback;
 
 	enum ONYXWINDOWING_API ControlState
 	{
@@ -64,6 +65,7 @@ namespace Onyx32::Gui
 			virtual ~IApplication() = 0;
 			//Application(HACCEL accelerators);
 			virtual int MainLoop() = 0;
+			virtual int MainLoop(IdleCallback callback) = 0;
 			virtual void SetAccelerators(HACCEL accelerators) = 0;
 	};
 

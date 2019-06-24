@@ -39,4 +39,44 @@ namespace Onyx32::Gui
 		
 		return (int)msg.wParam;
 	}
+
+	int Application::MainLoop(IdleCallback callback)
+	{
+		unsigned long long int counter = 0;
+		MSG msg = { 0 };
+		// If there are Window messages then process them.
+		while (msg.message != WM_QUIT)
+		{
+			if (this->_accelerators == nullptr)
+			{
+				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+				{
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+				else
+				{
+					callback(counter);
+				}
+			}
+			else
+			{
+				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+				{
+					if (!TranslateAccelerator(msg.hwnd, _accelerators, &msg))
+					{
+						TranslateMessage(&msg);
+						DispatchMessage(&msg);
+					}
+				}
+				else
+				{
+					callback(counter);
+				}
+			}
+			counter++;
+		}
+
+		return (int)msg.wParam;
+	}
 }
