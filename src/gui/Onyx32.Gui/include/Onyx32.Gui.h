@@ -11,14 +11,22 @@
 
 namespace Onyx32::Gui
 {
+	// Forward declarations
+	class ONYXWINDOWING_API IWindow;
 	class ONYXWINDOWING_API IControl;
 	class ONYXWINDOWING_API IDateTime;
+	class ONYXWINDOWING_API IButton;
+	class ONYXWINDOWING_API ITextInput;
+	class ONYXWINDOWING_API IFormBuilder;
+	class ONYXWINDOWING_API IFactory;
 
+	// Event signatures
 	typedef std::function<void(void)> FunctionHandler;
 	typedef std::function<void(
 		IDateTime& control, 
 		SYSTEMTIME& dateTime)> OnDateTimeChange;
-	typedef std::function<void(bool isActive)> OnWindowActivateChange;
+	typedef std::function<void(IWindow& window)> OnWindowResized;
+	typedef std::function<void(IWindow& window, bool isActive)> OnWindowActivateChange;
 
 	enum ONYXWINDOWING_API ControlState
 	{
@@ -26,6 +34,13 @@ namespace Onyx32::Gui
 		Initialized,
 		Destroyed,
 		Error
+	};
+
+	enum ONYXWINDOWING_API WindowResizeState
+	{
+		Restored = 0, // Matches SIZE_RESTORED
+		Minimized = 1, // Matches SIZE_MINIMIZED
+		Maximixed = 2, // Matches SIZE_MAXIMIZED
 	};
 
 	class ONYXWINDOWING_API IApplication
@@ -36,8 +51,6 @@ namespace Onyx32::Gui
 			//Application(HACCEL accelerators);
 			virtual int MainLoop() = 0;
 	};
-
-	class ONYXWINDOWING_API IWindow;
 
 	class ONYXWINDOWING_API IControl
 	{
@@ -84,6 +97,7 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IWindow 
 	{
 		public: 
+			virtual ~IWindow() = 0;
 			virtual void Initialize() = 0;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
@@ -94,9 +108,9 @@ namespace Onyx32::Gui
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
-			virtual void SetOnActivate(OnWindowActivateChange evtHandler) = 0;
 
-			virtual ~IWindow() = 0;
+			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) = 0;
+			virtual void SetOnResized(OnWindowResized&& evtHandler) = 0;
 	};
 
 	class ONYXWINDOWING_API IFormBuilder

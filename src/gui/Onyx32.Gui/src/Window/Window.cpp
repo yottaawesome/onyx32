@@ -6,10 +6,12 @@
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
 #include "../Win32/Win32Window.h"
+#include <map>
 
 namespace Onyx32::Gui
 {
-	OnWindowActivateChange defaultActivateChange = [](bool isActive) -> void {};
+	OnWindowActivateChange defaultActivateChange = [](IWindow& window, bool isActive) -> void {};
+	OnWindowResized defaultOnResized = [](IWindow& window) -> void {};
 
 	Window::Window(const WindowClass& wndClass, wstring_view title, UINT width, UINT height, UINT xPos, UINT yPos)
 		: _width(width), 
@@ -19,7 +21,8 @@ namespace Onyx32::Gui
 		_title(title),
 		WndClass(wndClass), 
 		_wndHandle(nullptr),
-		_activateEvtHandler(defaultActivateChange)
+		_activateEvtHandler(defaultActivateChange),
+		_onResized(defaultOnResized)
 	{ }
 
 	Window::~Window()
@@ -61,11 +64,6 @@ namespace Onyx32::Gui
 	HWND Window::GetHwnd()
 	{
 		return _wndHandle;
-	}
-
-	void Window::SetOnActivate(OnWindowActivateChange evtHandler)
-	{
-		_activateEvtHandler = evtHandler;
 	}
 
 	void Window::Initialize()
@@ -113,26 +111,6 @@ namespace Onyx32::Gui
 		_children[&control] = new ControlInfo(control);
 	}
 
-	int Window::OnActivate(bool isActive)
-	{
-		_activateEvtHandler(isActive);
-		return 0;
-	}
-
-	int Window::OnResize(UINT_PTR operation, UINT clientWidth, UINT clientHeight)
-	{
-		if (operation == SIZE_MINIMIZED)
-		{
-		}
-		else if (operation == SIZE_MAXIMIZED)
-		{
-		}
-		else if (operation == SIZE_RESTORED)
-		{
-		}
-		return 0;
-	}
-
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		int wmId, wmEvent;
@@ -162,8 +140,20 @@ namespace Onyx32::Gui
 				break;
 			}
 
+			// Continually sent while the window is being resized. wParam is always SIZE_RESTORED
+			// if the user is dragging the resize bars.
 			case WM_SIZE:
-				return OnResize(wParam, LOWORD(lParam), HIWORD(lParam));
+				//LOWORD(lParam) = client width
+				//HIWORD(lParam) = client height
+				return OnResizing((WindowResizeState)wParam);
+
+			// WM_EXITSIZEMOVE is sent when the user grabs the resize bars.
+			case WM_ENTERSIZEMOVE:
+				return OnBeginUserResize();
+
+			// WM_EXITSIZEMOVE is sent when the user releases the resize bars.
+			case WM_EXITSIZEMOVE:
+				return OnEndUserResize();
 
 			case WM_ACTIVATE:
 				return OnActivate(LOWORD(wParam) != WA_INACTIVE);

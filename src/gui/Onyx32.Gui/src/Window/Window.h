@@ -33,22 +33,28 @@ namespace Onyx32::Gui
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
 			virtual void Resize(const UINT width, const UINT height) override;
-			virtual void SetOnActivate(OnWindowActivateChange evtHandler) override;
 			virtual void AddControl(IControl& control) override;
+
+			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) override;
+			virtual void SetOnResized(OnWindowResized&& evtHandler) override;
 
 			const WindowClass WndClass;
 
 		protected:
+			OnWindowActivateChange _activateEvtHandler;
 			int OnActivate(bool isActive);
-			int OnResize(UINT_PTR operation, UINT clientWidth, UINT clientHeight);
+			OnWindowResized _onResized;
+			int OnResizing(WindowResizeState operation);
+			int OnBeginUserResize();
+			int OnEndUserResize();
 
+			//WindowResizeOperation _current
 			HWND _wndHandle;
 			wstring _title = L"Default";
 			UINT _width;
 			UINT _height;
 			UINT _xPos;
 			UINT _yPos;
-			OnWindowActivateChange _activateEvtHandler;
 			std::map<IControl*, ControlInfo*> _children;
 	};
 }

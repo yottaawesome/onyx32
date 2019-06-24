@@ -44,7 +44,8 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		10,
 		clickHandler);
 
-	wnd->SetOnActivate([](bool isActive) -> void { OutputDebugStringA(isActive ? "active" : "inactive"); });
+	wnd->SetOnActivate([](IWindow& window, bool isActive) -> void { OutputDebugStringA(isActive ? "\nWindow focus: active" : "\nWindow focus: inactive"); });
+	wnd->SetOnResized([](IWindow& window) -> void { OutputDebugStringA("\nWindow resized"); });
 
 	IDateTime* dateTime = fct->AddDateTime(*wnd, 220, 20, 120, 100);
 	Onyx32::Gui::OnDateTimeChange changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
