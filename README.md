@@ -19,11 +19,10 @@ Check `Onyx32.Gui.Tests project` for an example. Essentially, in your project in
 1. Include `Onyx32.Gui.h` and `Onyx32.Gui.Lib.h` (or just the latter, since it includes the former) located in the `Onyx32.Gui/include/` directory.
 2. Create an instance of `Onyx32Lib` -- this library will automatically load the DLL.
 3. Create the main factory via `Onyx32Lib::GetMainFactory()`.
-4. Create a form builder via `IFormBuilder::GetFormBuilder()`.
-5. Use the form builder to create windows and add controls.
-6. Create the application loop via `Onyx32Lib::GetApplication()`.
-7. Enter the message pump loop `IApplication::MainLoop()`.
-8. Bob's your uncle.
+4. Use the form builder to create windows and add controls.
+5. Create the application loop via `Onyx32Lib::GetApplication()`.
+6. Enter the message pump loop `IApplication::MainLoop()`.
+7. Bob's your uncle.
 
 Really simple example below.
 
@@ -31,7 +30,6 @@ Really simple example below.
 // Update this as per your folder set up
 #include "Onyx32.Gui.Lib.h"
 
-using Onyx32::Gui::IFormBuilder;
 using Onyx32::Gui::IWindow;
 using Onyx32::Gui::IFactory;
 using Onyx32::Gui::IApplication;
@@ -40,10 +38,8 @@ using Onyx32::Gui::IApplication;
 Onyx32::Gui::Onyx32Lib lib;
 // Get factory
 std::shared_ptr<IFactory> factory(lib.GetMainFactory());
-// Get a form builder
-std::shared_ptr<IFormBuilder> fct(factory->GetFormBuilder());
 // Create a default top-level window
-std::shared_ptr<IWindow> wnd(fct->CreateDefaultWindow(L"This is a test", 500, 500));
+std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500));
 // Create an application
 std::shared_ptr<IApplication> app(factory->GetApplication());
 // Initialize main window

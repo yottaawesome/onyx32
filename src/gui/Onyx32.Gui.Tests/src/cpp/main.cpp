@@ -6,7 +6,6 @@
 
 using std::wstring;
 using std::function;
-using Onyx32::Gui::IFormBuilder;
 using Onyx32::Gui::IWindow;
 using Onyx32::Gui::IFactory;
 using Onyx32::Gui::ITextInput;
@@ -24,16 +23,15 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	
 	Onyx32Lib lib;
 	std::shared_ptr<IFactory> factory(lib.GetMainFactory());
-	std::shared_ptr<IFormBuilder> fct(factory->GetFormBuilder());
-	std::shared_ptr<IWindow> wnd(fct->CreateDefaultWindow(L"This is a test", 500, 500));
+	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500));
 	std::shared_ptr<IApplication> app(factory->GetApplication());
 
 	wnd->Initialize();
 
 	// Ownership of controls is done by the parent window, so do not use shared_ptr
-	IButton* button = fct->CreateButton(100, L"Button", 100, 100, 10, 10);
-	ITextInput* input = fct->CreateTextInput(101, L"", 350, 50, 25, 125);
-	IDateTime* dateTime = fct->CreateDateTime(102, 220, 20, 120, 100);
+	IButton* button = factory->CreateButton(100, L"Button", 100, 100, 10, 10);
+	ITextInput* input = factory->CreateTextInput(101, L"", 350, 50, 25, 125);
+	IDateTime* dateTime = factory->CreateDateTime(102, 220, 20, 120, 100);
 	wnd->AddControl(*button);
 	wnd->AddControl(*input);
 	wnd->AddControl(*dateTime);

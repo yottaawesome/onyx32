@@ -171,7 +171,6 @@
     <ClInclude Include="src\Factory\Factory.h" />
     <ClInclude Include="src\h\ControlInfo.h" />
     <ClInclude Include="src\h\dllmain.h" />
-    <ClInclude Include="src\FormBuilder\FormBuilder.h" />
     <ClInclude Include="src\h\Onyx32.Gui.Internal.h" />
     <ClInclude Include="src\TextInput\TextInput.h" />
     <ClInclude Include="src\h\Resource.h" />
@@ -202,7 +201,6 @@
     <ClCompile Include="src\Factory\Factory.cpp" />
     <ClCompile Include="src\DateTime\DateTime.cpp" />
     <ClCompile Include="src\Win32\Win32CreationArgs.cpp" />
-    <ClCompile Include="src\FormBuilder\FormBuilder.cpp" />
     <ClCompile Include="src\TextInput\TextInput.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />

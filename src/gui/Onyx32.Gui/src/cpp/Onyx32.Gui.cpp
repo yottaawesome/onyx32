@@ -1,6 +1,3 @@
-// Onyx.Windowing.cpp : Defines the exported functions for the DLL application.
-//
-
 #include "../h/stdafx.h"
 #include "../h/Onyx32.Gui.internal.h"
 #include "../Window/Window.h"
@@ -13,7 +10,6 @@ namespace Onyx32::Gui
 	inline IControl::~IControl() { }
 	inline IWindow::~IWindow() { }
 	inline IButton::~IButton() { }
-	inline IFormBuilder::~IFormBuilder() { }
 	inline ITextInput::~ITextInput() { }
 	inline IDateTime::~IDateTime() { }
 	inline IFactory::~IFactory() { }

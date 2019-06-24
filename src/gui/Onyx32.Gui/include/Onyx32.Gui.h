@@ -129,23 +129,14 @@ namespace Onyx32::Gui
 			virtual void SetOnResized(OnWindowResized&& evtHandler) = 0;
 	};
 
-	class ONYXWINDOWING_API IFormBuilder
-	{
-		public:
-			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
-
-			virtual IDateTime* CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			virtual ITextInput* CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			virtual IButton* CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-
-			virtual ~IFormBuilder() = 0;
-	};
-
 	class ONYXWINDOWING_API IFactory
 	{
 		public:
 			virtual ~IFactory() = 0;
-			virtual IFormBuilder* GetFormBuilder() = 0;
+			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
+			virtual IDateTime* CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			virtual ITextInput* CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			virtual IButton* CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 			virtual IApplication* GetApplication() = 0;
 	};
 
