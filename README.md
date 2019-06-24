@@ -63,4 +63,5 @@ The project is undergoing refactoring and I'm slowly adding more features. Featu
 * Better support for owner drawn windows and controls.
 * Networking.
 * Drawing.
+* DirectX support.
 * And more!
