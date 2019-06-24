@@ -18,6 +18,7 @@ namespace Onyx32::Gui
 	inline IDateTime::~IDateTime() { }
 	inline IFactory::~IFactory() { }
 	inline IApplication::~IApplication() { }
+	inline IMenu::~IMenu() { }
 
 	IFactory* GETMAINFACTFUNC_NAME()
 	{

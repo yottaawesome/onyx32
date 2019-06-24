@@ -12,12 +12,12 @@ _In development._ The framework is continually being improved and refactored wit
 
 Development is best done in Visual Studio 2019. Onyx32 targets the latest Windows SDK. Simply clone this repo and open it in Visual Studio -- you should be able to build immediately.
 
-### Using Win32.Gui.dll
+### Using Onyx32.Gui.dll
 
-Check `Onyx32.Gui.Tests project` for an example. Essentially, in your project in which you want to use Win32.Gui.dll, do the following:
+Check `Onyx32.Gui.Tests project` for an example. Essentially, in your project in which you want to use Onyx32.Gui.dll, do the following:
 
 1. Include `Onyx32.Gui.h` and `Onyx32.Gui.Lib.h` (or just the latter, since it includes the former) located in the `Onyx32.Gui/include/` directory.
-2. Create an instance of `Onyx32Lib`.
+2. Create an instance of `Onyx32Lib` -- this library will automatically load the DLL.
 3. Create the main factory via `Onyx32Lib::GetMainFactory()`.
 4. Create a form builder via `IFormBuilder::GetFormBuilder()`.
 5. Use the form builder to create windows and add controls.

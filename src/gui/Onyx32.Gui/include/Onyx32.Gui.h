@@ -19,6 +19,7 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API ITextInput;
 	class ONYXWINDOWING_API IFormBuilder;
 	class ONYXWINDOWING_API IFactory;
+	class ONYXWINDOWING_API IMenu;
 
 	// Event signatures
 	typedef std::function<void(void)> OnClick;
@@ -41,6 +42,12 @@ namespace Onyx32::Gui
 		Restored = 0, // Matches SIZE_RESTORED
 		Minimized = 1, // Matches SIZE_MINIMIZED
 		Maximixed = 2, // Matches SIZE_MAXIMIZED
+	};
+
+	class ONYXWINDOWING_API IMenu
+	{
+		public:
+			virtual ~IMenu() = 0;
 	};
 
 	class ONYXWINDOWING_API IApplication
