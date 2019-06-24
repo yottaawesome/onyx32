@@ -39,11 +39,11 @@ Onyx32::Gui::Onyx32Lib lib;
 // Get factory
 std::shared_ptr<IFactory> factory(lib.GetMainFactory());
 // Create a default top-level window
-std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500));
+std::shared_ptr<IWindow> window(factory->CreateDefaultWindow(L"This is a test", 500, 500));
 // Create an application
 std::shared_ptr<IApplication> app(factory->GetApplication());
 // Initialize main window
-wnd->Initialize();
+window->Initialize();
 // Enter the main lopp
 int retVal = app->MainLoop();
 // End -- lib will automatically unload the DLL when it goes out of scope
