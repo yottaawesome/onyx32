@@ -13,19 +13,17 @@ namespace Onyx32::Gui
 				const UINT height = 100,
 				const UINT xPos = 100,
 				const UINT yPos = 100,
-				FunctionHandler& onClick = Button::DefaultClickHandler,
 				const unsigned int controlId = 0);
 			virtual ~Button();
 
 			virtual void Initialize(IWindow* parent) override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 			virtual const std::wstring& GetText() override;
-			virtual void SetClickHandler(FunctionHandler& onClick);
+
+			virtual void SetOnClick(OnClick&& onClick);
 
 		protected:
 			std::wstring _text;
-			//void (*onClick)();
-			FunctionHandler& _onClick;
-			static FunctionHandler DefaultClickHandler;
+			OnClick _onClick;
 	};
 }

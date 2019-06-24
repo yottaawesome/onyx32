@@ -30,23 +30,26 @@ Really simple example below.
 ```C++
 // Update this as per your folder set up
 #include "Onyx32.Gui.Lib.h"
+
+using Onyx32::Gui::IFormBuilder;
+using Onyx32::Gui::IWindow;
+using Onyx32::Gui::IFactory;
+using Onyx32::Gui::IApplication;
+
 // Load the library -- this example assumes the DLL exists in the same directory as your executable
 Onyx32::Gui::Onyx32Lib lib;
 // Get factory
-Onyx32::Gui::IFactory* factory = lib.GetMainFactory();
+std::shared_ptr<IFactory> factory(lib.GetMainFactory());
 // Get a form builder
-Onyx32::Gui::IFormBuilder* fmBuilder = factory->GetFormBuilder();
+std::shared_ptr<IFormBuilder> fct(factory->GetFormBuilder());
 // Create a default top-level window
-Onyx32::Gui::IWindow* wnd = fmBuilder->CreateDefaultWindow(L"This is a test", 500, 500);
+std::shared_ptr<IWindow> wnd(fct->CreateDefaultWindow(L"This is a test", 500, 500));
 // Create an application
-Onyx32::Gui::IApplication* app = factory->GetApplication();
+std::shared_ptr<IApplication> app(factory->GetApplication());
+// Initialize main window
+wnd->Initialize();
 // Enter the main lopp
 int retVal = app->MainLoop();
-// Clean up -- obviously, use something like std::shared_pointer
-delete wnd;
-delete app;
-delete fmBuilder;
-delete factory;
 // End -- lib will automatically unload the DLL when it goes out of scope
 return retVal;
 ```

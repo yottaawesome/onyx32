@@ -6,7 +6,7 @@
 
 namespace Onyx32::Gui
 {
-	FunctionHandler Button::DefaultClickHandler = []() -> void {};
+	OnClick DefaultClickHandler = []() -> void {};
 
 	const std::wstring Button::Class = L"BUTTON";
 	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON;
@@ -17,24 +17,23 @@ namespace Onyx32::Gui
 		const UINT height,
 		const UINT xPos,
 		const UINT yPos,
-		FunctionHandler& onClick,
 		const unsigned int controlId)
 		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
 			_text(text),
-			_onClick(onClick)
+			_onClick(DefaultClickHandler)
 	{
 	}
 
 	Button::~Button() { }
 
-	void Button::SetClickHandler(FunctionHandler& onClick)
-	{
-		_onClick = onClick;
-	}
-
 	const std::wstring& Button::GetText()
 	{
 		return _text;
+	}
+
+	void Button::SetOnClick(OnClick&& onClick)
+	{
+		_onClick = std::move(onClick);
 	}
 
 	void Button::Initialize(IWindow* parent)

@@ -20,9 +20,9 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
-	IButton* FormBuilder::AddButton(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos, std::function<void(void)>& onClick)
+	IButton* FormBuilder::AddButton(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		Button* button = new Button(text, width, height, xPos, yPos, onClick);
+		Button* button = new Button(text, width, height, xPos, yPos);
 		window.AddControl(*button);
 		return button;
 	}
