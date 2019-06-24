@@ -43,10 +43,11 @@ namespace Onyx32::Gui
 	int Application::MainLoop(IdleCallback callback)
 	{
 		unsigned long long int counter = 0;
+		bool continueLoop = true;
 		MSG msg = { 0 };
 
 		// If there are Window messages then process them.
-		while (msg.message != WM_QUIT)
+		while (msg.message != WM_QUIT && continueLoop)
 		{
 			if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 			{
@@ -63,7 +64,7 @@ namespace Onyx32::Gui
 			}
 			else
 			{
-				callback(counter);
+				continueLoop = callback(counter);
 			}
 			counter++;
 		}
