@@ -4,7 +4,7 @@
 #include "../WindowClassManager/WindowClassManager.h"
 #include <vector>
 #include "../h/ControlInfo.h"
-#include <map>
+#include <vector>
 
 namespace Onyx32::Gui
 {
@@ -55,6 +55,6 @@ namespace Onyx32::Gui
 			UINT _height;
 			UINT _xPos;
 			UINT _yPos;
-			std::map<IControl*, ControlInfo*> _children;
+			std::vector<IControl*> _children;
 	};
 }

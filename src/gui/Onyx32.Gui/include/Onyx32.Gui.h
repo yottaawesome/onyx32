@@ -22,7 +22,7 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IMenu;
 
 	// Event signatures
-	typedef std::function<void(void)> OnClick;
+	typedef std::function<void(IButton& button)> OnClick;
 	typedef std::function<void(
 		IDateTime& control, 
 		SYSTEMTIME& dateTime)> OnDateTimeChange;
@@ -35,6 +35,14 @@ namespace Onyx32::Gui
 		Initialized,
 		Destroyed,
 		Error
+	};
+
+	struct ONYXWINDOWING_API Dimensions
+	{
+		UINT xPos;
+		UINT yPos;
+		UINT width;
+		UINT height;
 	};
 
 	enum ONYXWINDOWING_API WindowResizeState
@@ -54,9 +62,9 @@ namespace Onyx32::Gui
 	{
 		public:
 			virtual ~IApplication() = 0;
-			//Application();
 			//Application(HACCEL accelerators);
 			virtual int MainLoop() = 0;
+			virtual void SetAccelerators(HACCEL accelerators) = 0;
 	};
 
 	class ONYXWINDOWING_API IControl
@@ -67,15 +75,13 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
-			virtual UINT GetWidth() = 0;
-			virtual UINT GetHeight() = 0;
-			virtual UINT GetXPos() = 0;
-			virtual UINT GetYPos() = 0;
+			virtual void GetDimensions(Dimensions& dimensions) = 0;
 			virtual UINT GetId() = 0;
 			virtual const std::wstring& GetName() = 0;
 			virtual ControlState GetState() = 0;
 			virtual int GetStyles() = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
+			virtual void Move(const UINT xPos, const UINT yPos) = 0;
 	};
 
 	class ONYXWINDOWING_API IButton : public IControl
@@ -84,6 +90,7 @@ namespace Onyx32::Gui
 			virtual ~IButton() = 0;
 			virtual const std::wstring& GetText() = 0;
 			virtual void SetOnClick(OnClick&& onClick) = 0;
+			virtual void SetText(std::wstring_view str) = 0;
 	};
 
 	class ONYXWINDOWING_API IDateTime : public IControl
@@ -126,9 +133,9 @@ namespace Onyx32::Gui
 		public:
 			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
 
-			virtual IButton* AddButton(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			virtual ITextInput* AddTextInput(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			virtual IDateTime* AddDateTime(IWindow& window, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			virtual IDateTime* CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			virtual ITextInput* CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			virtual IButton* CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 
 			virtual ~IFormBuilder() = 0;
 	};

@@ -27,18 +27,15 @@ namespace Onyx32::Gui
 
 	Window::~Window()
 	{
-		for (auto item : _children)
-		{
-			delete item.first;
-			delete item.second;
-		}
+		for (auto const i : _children)
+			delete i;
 		DestroyWindow(_wndHandle);
 	}
 
 	void Window::SetTitle(wstring_view title)
 	{
-		_title = title;
-		SetWindowText(_wndHandle, _title.c_str());
+		if(SetWindowText(_wndHandle, wstring(_title).c_str()))
+			_title = title;
 	}
 
 	const std::wstring& Window::GetTitle()
@@ -108,7 +105,7 @@ namespace Onyx32::Gui
 	void Window::AddControl(IControl& control)
 	{
 		control.Initialize(this);
-		_children[&control] = new ControlInfo(control);
+		_children.push_back(&control);
 	}
 
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)

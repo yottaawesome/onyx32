@@ -3,16 +3,21 @@
 
 namespace Onyx32::Gui
 {
-	Application::Application() : accelerators(nullptr) { }
+	Application::Application() : _accelerators(nullptr) { }
 
-	Application::Application(HACCEL accelerators) : accelerators(accelerators) { }
+	Application::Application(HACCEL accelerators) : _accelerators(accelerators) { }
 
 	Application::~Application() { }
+
+	void Application::SetAccelerators(HACCEL accelerators)
+	{
+		_accelerators = accelerators;
+	}
 
 	int Application::MainLoop()
 	{
 		MSG msg;
-		if (this->accelerators == nullptr)
+		if (this->_accelerators == nullptr)
 		{
 			while (GetMessage(&msg, nullptr, 0, 0))
 			{
@@ -24,7 +29,7 @@ namespace Onyx32::Gui
 		{
 			while (GetMessage(&msg, nullptr, 0, 0))
 			{
-				if (!TranslateAccelerator(msg.hwnd, this->accelerators, &msg))
+				if (!TranslateAccelerator(msg.hwnd, _accelerators, &msg))
 				{
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);

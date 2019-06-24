@@ -6,7 +6,7 @@
 
 namespace Onyx32::Gui
 {
-	OnClick DefaultClickHandler = []() -> void {};
+	OnClick DefaultClickHandler = [](IButton& button) -> void {};
 
 	const std::wstring Button::Class = L"BUTTON";
 	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON;
@@ -24,7 +24,7 @@ namespace Onyx32::Gui
 	{
 	}
 
-	Button::~Button() { }
+	Button::~Button() { OutputDebugString(L"\nButton destroyed"); }
 
 	const std::wstring& Button::GetText()
 	{
@@ -34,6 +34,12 @@ namespace Onyx32::Gui
 	void Button::SetOnClick(OnClick&& onClick)
 	{
 		_onClick = std::move(onClick);
+	}
+
+	void Button::SetText(std::wstring_view str)
+	{
+		if (SetWindowText(_wndHandle, wstring(str).c_str()))
+			_text = str;
 	}
 
 	void Button::Initialize(IWindow* parent)
@@ -69,7 +75,7 @@ namespace Onyx32::Gui
 		switch (message)
 		{
 			case WM_LBUTTONUP:
-				_onClick();
+				_onClick(*this);
 			default:
 				return DefSubclassProc(_wndHandle, message, wParam, lParam);
 		}

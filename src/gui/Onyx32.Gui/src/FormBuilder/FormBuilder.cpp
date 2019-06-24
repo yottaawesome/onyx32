@@ -20,24 +20,18 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
-	IButton* FormBuilder::AddButton(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	ITextInput* FormBuilder::CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		Button* button = new Button(text, width, height, xPos, yPos);
-		window.AddControl(*button);
-		return button;
+		return new TextInput(text, width, height, xPos, yPos, controlId);
 	}
 
-	ITextInput* FormBuilder::AddTextInput(IWindow& window, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	IDateTime* FormBuilder::CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		ITextInput* input = new TextInput(text, width, height, xPos, yPos, 100);
-		window.AddControl(*input);
-		return input;
+		return new DateTime(width, height, xPos, yPos, controlId);
 	}
 
-	IDateTime* FormBuilder::AddDateTime(IWindow& window, UINT width, UINT height, UINT xPos, UINT yPos)
+	IButton* FormBuilder::CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		IDateTime* input = new DateTime(width, height, xPos, yPos, 110);
-		window.AddControl(*input);
-		return input;
+		return new Button(text, width, height, xPos, yPos, controlId);
 	}
 }

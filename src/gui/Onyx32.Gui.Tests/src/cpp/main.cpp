@@ -29,24 +29,24 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	std::shared_ptr<IApplication> app(factory->GetApplication());
 
 	wnd->Initialize();
-	std::shared_ptr<IButton> button(fct->AddButton(
-		*wnd,
-		L"Button",
-		100,
-		100,
-		10,
-		10));
+
+	// Ownership of controls is done by the parent window, so do not use shared_ptr
+	IButton* button = fct->CreateButton(100, L"Button", 100, 100, 10, 10);
+	ITextInput* input = fct->CreateTextInput(101, L"", 350, 50, 25, 125);
+	IDateTime* dateTime = fct->CreateDateTime(102, 220, 20, 120, 100);
+	wnd->AddControl(*button);
+	wnd->AddControl(*input);
+	wnd->AddControl(*dateTime);
+
 	button->SetOnClick(
-		[&button]() -> void
+		[](IButton& button) -> void
 		{
 			MessageBox(nullptr, L"Let's resize the button you clicked, no?", L"Resize!", MB_OK);
-			button->Resize(75, 75);
+			button.Resize(75, 75);
 		});
-
 	wnd->SetOnActivate([](IWindow& window, bool isActive) -> void { OutputDebugStringA(isActive ? "\nWindow focus: active" : "\nWindow focus: inactive"); });
 	wnd->SetOnResized([](IWindow& window) -> void { OutputDebugStringA("\nWindow resized"); });
 
-	IDateTime* dateTime = fct->AddDateTime(*wnd, 220, 20, 120, 100);
 	Onyx32::Gui::OnDateTimeChange changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
 	{
 		char box[150];
@@ -55,7 +55,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	};
 	dateTime->SetOnChange(changeHandler);
 
-	ITextInput* input = fct->AddTextInput(*wnd, L"", 350, 50, 25, 125);
 	input->SetText(L"Test input");
 	MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
 

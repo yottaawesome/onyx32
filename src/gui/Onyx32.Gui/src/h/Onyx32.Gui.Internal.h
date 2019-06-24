@@ -75,17 +75,15 @@ namespace Onyx32::Gui
 
 			virtual void SetHwnd(HWND hWnd) override;
 			virtual HWND GetHwnd() override;
-			virtual UINT GetWidth() override;
-			virtual UINT GetHeight() override;
-			virtual UINT GetXPos() override;
-			virtual UINT GetYPos() override;
 			virtual UINT GetId() override;
 			virtual ControlState GetState() override;
 			virtual int GetStyles() override;
 			virtual const std::wstring& GetName() override;
+			virtual void GetDimensions(Dimensions& dimensions) override;
 
 			virtual void SetParent(IWindow* parent);
 			virtual void Resize(const UINT width, const UINT height) override;
+			virtual void Move(const UINT xPos, const UINT yPos) override;
 
 		protected:
 			HWND _wndHandle;
@@ -99,6 +97,25 @@ namespace Onyx32::Gui
 			static const std::wstring Class;
 			static const int Styles;
 	};
+
+	template<typename ControlType>
+	void BaseControl<ControlType>::Move(const UINT xPos, const UINT yPos)
+	{
+		if (MoveWindow(_wndHandle, xPos, yPos, _width, _height, true))
+		{
+			_xPos = xPos;
+			_yPos = yPos;
+		}
+	}
+
+	template<typename ControlType>
+	void BaseControl<ControlType>::GetDimensions(Dimensions& dimensions)
+	{
+		dimensions.xPos = _xPos;
+		dimensions.yPos = _yPos;
+		dimensions.width = _width;
+		dimensions.height = _height;
+	}
 
 	template<typename ControlType>
 	BaseControl<ControlType>::BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent)
@@ -136,30 +153,6 @@ namespace Onyx32::Gui
 	HWND BaseControl<ControlType>::GetHwnd()
 	{
 		return _wndHandle;
-	}
-
-	template<typename ControlType>
-	UINT BaseControl<ControlType>::GetWidth()
-	{
-		return _width;
-	}
-
-	template<typename ControlType>
-	UINT BaseControl<ControlType>::GetHeight()
-	{
-		return _height;
-	}
-
-	template<typename ControlType>
-	UINT BaseControl<ControlType>::GetXPos()
-	{
-		return _xPos;
-	}
-
-	template<typename ControlType>
-	UINT BaseControl<ControlType>::GetYPos()
-	{
-		return _yPos;
 	}
 
 	template<typename ControlType>

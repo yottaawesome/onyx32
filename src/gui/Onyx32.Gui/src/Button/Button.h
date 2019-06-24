@@ -16,6 +16,7 @@ namespace Onyx32::Gui
 				const unsigned int controlId = 0);
 			virtual ~Button();
 
+			virtual void SetText(std::wstring_view str) override;
 			virtual void Initialize(IWindow* parent) override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 			virtual const std::wstring& GetText() override;
