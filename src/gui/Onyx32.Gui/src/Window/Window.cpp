@@ -27,8 +27,8 @@ namespace Onyx32::Gui
 
 	Window::~Window()
 	{
-		for (auto const i : _children)
-			delete i;
+		//for (auto& key : _children)
+		//	delete key.second;
 		DestroyWindow(_wndHandle);
 	}
 
@@ -102,10 +102,18 @@ namespace Onyx32::Gui
 		}
 	}
 
-	void Window::AddControl(IControl& control)
+	void Window::AddControl(IControl* control)
 	{
-		control.Initialize(this);
-		_children.push_back(&control);
+		control->Initialize(this);
+		_children[control] = std::shared_ptr<IControl>(control);
+	}
+
+	void Window::DestroyControl(IControl* control)
+	{
+		if (_children.count(control))
+		{
+			_children.erase(control);
+		}
 	}
 
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)

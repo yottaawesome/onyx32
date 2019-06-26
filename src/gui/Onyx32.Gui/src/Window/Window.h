@@ -4,7 +4,7 @@
 #include "../WindowClassManager/WindowClassManager.h"
 #include <vector>
 #include "../h/ControlInfo.h"
-#include <vector>
+#include <unordered_map>
 
 namespace Onyx32::Gui
 {
@@ -33,7 +33,8 @@ namespace Onyx32::Gui
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
 			virtual void Resize(const UINT width, const UINT height) override;
-			virtual void AddControl(IControl& control) override;
+			virtual void AddControl(IControl* control) override;
+			virtual void DestroyControl(IControl* control) override;
 
 			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) override;
 			virtual void SetOnResized(OnWindowResized&& evtHandler) override;
@@ -55,6 +56,6 @@ namespace Onyx32::Gui
 			UINT _height;
 			UINT _xPos;
 			UINT _yPos;
-			std::vector<IControl*> _children;
+			std::unordered_map<IControl*, std::shared_ptr<IControl>> _children;
 	};
 }

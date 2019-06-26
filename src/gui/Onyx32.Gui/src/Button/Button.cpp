@@ -9,7 +9,7 @@ namespace Onyx32::Gui
 	OnClick DefaultClickHandler = [](IButton& button) -> void {};
 
 	const std::wstring Button::Class = L"BUTTON";
-	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON;
+	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON | BS_NOTIFY;
 
 	Button::Button(
 		std::wstring_view text,
@@ -20,11 +20,15 @@ namespace Onyx32::Gui
 		const unsigned int controlId)
 		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
 			_text(text),
-			_onClick(DefaultClickHandler)
+			_onClick(DefaultClickHandler),
+			_onDblClick(DefaultClickHandler)
 	{
 	}
 
-	Button::~Button() { OutputDebugString(L"\nButton destroyed"); }
+	Button::~Button() 
+	{
+		OutputDebugString(L"\nButton destroyed"); 
+	}
 
 	const std::wstring& Button::GetText()
 	{
@@ -34,6 +38,11 @@ namespace Onyx32::Gui
 	void Button::SetOnClick(OnClick&& onClick)
 	{
 		_onClick = std::move(onClick);
+	}
+
+	void Button::SetOnDoubleClick(OnClick&& onDblClick)
+	{
+		_onDblClick = std::move(onDblClick);
 	}
 
 	void Button::SetText(std::wstring_view str)
@@ -74,8 +83,24 @@ namespace Onyx32::Gui
 		// https://docs.microsoft.com/en-us/windows/desktop/Controls/button-messages
 		switch (message)
 		{
-			case WM_LBUTTONUP:
-				_onClick(*this);
+			case WM_COMMAND:
+			{
+				switch (HIWORD(wParam))
+				{
+					case BN_CLICKED:
+						_onClick(*this);
+					break;
+					
+					case BN_DBLCLK:
+						_onDblClick(*this);
+					break;
+
+					default:
+						return DefSubclassProc(_wndHandle, message, wParam, lParam);
+				}
+				return 0;
+			}
+				
 			default:
 				return DefSubclassProc(_wndHandle, message, wParam, lParam);
 		}

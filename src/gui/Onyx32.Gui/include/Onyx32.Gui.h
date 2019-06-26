@@ -91,6 +91,7 @@ namespace Onyx32::Gui
 			virtual ~IButton() = 0;
 			virtual const std::wstring& GetText() = 0;
 			virtual void SetOnClick(OnClick&& onClick) = 0;
+			virtual void SetOnDoubleClick(OnClick&& onDblClick) = 0;
 			virtual void SetText(std::wstring_view str) = 0;
 	};
 
@@ -118,7 +119,12 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
-			virtual void AddControl(IControl& control) = 0;
+
+			/**
+			 Adds a control as a child to a Window. The Window assumes ownership of the Control's lifetime.
+			*/
+			virtual void AddControl(IControl* control) = 0;
+			virtual void DestroyControl(IControl* control) = 0;
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual const std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;

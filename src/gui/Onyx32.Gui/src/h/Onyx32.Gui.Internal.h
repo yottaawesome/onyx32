@@ -80,6 +80,7 @@ namespace Onyx32::Gui
 			virtual int GetStyles() override;
 			virtual const std::wstring& GetName() override;
 			virtual void GetDimensions(Dimensions& dimensions) override;
+			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 
 			virtual void SetParent(IWindow* parent);
 			virtual void Resize(const UINT width, const UINT height) override;
@@ -185,5 +186,15 @@ namespace Onyx32::Gui
 			_width = width;
 			_height = height;
 		}
+	}
+
+	// This function is required because as the window is destroyed, WM_DESTROY and WM_NCDESTROY
+	// are sent to the window and need to be processed. Because the call to DestroyWindow happens
+	// at this class' level (see the destructor), Process() must be defined here as the subclass 
+	// C++ object where Process is normally overridden has already been destructed.
+	template<typename ControlType>
+	LRESULT BaseControl<ControlType>::Process(UINT message, WPARAM wParam, LPARAM lParam)
+	{
+		return DefSubclassProc(_wndHandle, message, wParam, lParam);
 	}
 }

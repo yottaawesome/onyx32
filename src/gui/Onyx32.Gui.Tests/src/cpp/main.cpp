@@ -32,16 +32,21 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	IButton* button = factory->CreateButton(100, L"Button", 100, 100, 10, 10);
 	ITextInput* input = factory->CreateTextInput(101, L"", 350, 50, 25, 125);
 	IDateTime* dateTime = factory->CreateDateTime(102, 220, 20, 120, 100);
-	wnd->AddControl(*button);
-	wnd->AddControl(*input);
-	wnd->AddControl(*dateTime);
+	wnd->AddControl(button);
+	wnd->AddControl(input);
+	wnd->AddControl(dateTime);
 
 	button->SetOnClick(
 		[](IButton& button) -> void
 		{
-			MessageBox(nullptr, L"Let's resize the button you clicked, no?", L"Resize!", MB_OK);
 			button.Resize(75, 75);
 		});
+	button->SetOnDoubleClick(
+		[](IButton& button) -> void
+		{
+			MessageBox(nullptr, L"Double clicked!", L"Double Clicked!", MB_OK);
+		});
+
 	wnd->SetOnActivate([](IWindow& window, bool isActive) -> void { OutputDebugStringA(isActive ? "\nWindow focus: active" : "\nWindow focus: inactive"); });
 	wnd->SetOnResized([](IWindow& window) -> void { OutputDebugStringA("\nWindow resized"); });
 
@@ -54,8 +59,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	dateTime->SetOnChange(changeHandler);
 
 	input->SetText(L"Test input");
-	MessageBox(nullptr, input->GetText().c_str(), L"Get input text", MB_OK);
-
+	
 	int retVal = app->MainLoop();
 
 	return retVal;

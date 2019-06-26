@@ -22,9 +22,11 @@ namespace Onyx32::Gui
 			virtual const std::wstring& GetText() override;
 
 			virtual void SetOnClick(OnClick&& onClick);
+			virtual void SetOnDoubleClick(OnClick&& onDblClick);
 
 		protected:
 			std::wstring _text;
 			OnClick _onClick;
+			OnClick _onDblClick;
 	};
 }
