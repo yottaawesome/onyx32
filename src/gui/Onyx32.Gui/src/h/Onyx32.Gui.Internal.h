@@ -73,7 +73,6 @@ namespace Onyx32::Gui
 			BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent);
 			virtual ~BaseControl();
 
-			virtual void SetHwnd(HWND hWnd) override;
 			virtual HWND GetHwnd() override;
 			virtual UINT GetId() override;
 			virtual ControlState GetState() override;
@@ -130,12 +129,6 @@ namespace Onyx32::Gui
 			DestroyWindow(_wndHandle);
 			_wndHandle = nullptr;
 		}
-	}
-
-	template<typename ControlType>
-	void BaseControl<ControlType>::SetHwnd(HWND hWnd)
-	{
-		_wndHandle = hWnd;
 	}
 
 	template<typename ControlType>

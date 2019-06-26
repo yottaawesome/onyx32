@@ -1,5 +1,6 @@
 #include "../h/StaticFunctions.h"
-#include "../../include/Onyx32.Gui.h"
+#include "../h/Onyx32.Gui.internal.h"
+#include "../Window/Window.h"
 #include  <Commctrl.h>
 
 using namespace Onyx32::Gui;
@@ -11,7 +12,7 @@ LRESULT CALLBACK Static::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	if (message == WM_NCCREATE)
 	{
 		CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
-		IWindow* pThis = (IWindow*)pCreate->lpCreateParams;
+		Window* pThis = (Window*)pCreate->lpCreateParams;
 		SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
 		pThis->SetHwnd(hWnd);
 	}

@@ -34,7 +34,7 @@ namespace Onyx32::Gui
 
 			virtual void Initialize() override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
-			virtual void SetHwnd(HWND hWnd) override;
+			virtual void SetHwnd(HWND hWnd);
 			virtual HWND GetHwnd() override;
 
 			virtual void SetTitle(std::wstring_view title) override;

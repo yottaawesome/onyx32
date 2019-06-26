@@ -79,7 +79,6 @@ namespace Onyx32::Gui
 			virtual ~IControl() = 0;
 			virtual void Initialize(IWindow* window) = 0;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
-			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
 			virtual void GetDimensions(Dimensions& dimensions) = 0;
 			virtual UINT GetId() = 0;
@@ -122,7 +121,6 @@ namespace Onyx32::Gui
 			virtual ~IWindow() = 0;
 			virtual void Initialize() = 0;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
-			virtual void SetHwnd(HWND hWnd) = 0;
 			virtual HWND GetHwnd() = 0;
 
 			/**
