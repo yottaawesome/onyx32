@@ -15,7 +15,17 @@ namespace Onyx32::Gui
 	class Window : public IWindow
 	{
 		public:
-			Window(const WindowClass& wcex, wstring_view title, 
+			Window(
+				const WindowClass& wcex,
+				std::wstring_view title,
+				UINT width = CW_USEDEFAULT,
+				UINT height = CW_USEDEFAULT,
+				UINT xPos = CW_USEDEFAULT,
+				UINT yPos = CW_USEDEFAULT);
+			Window(
+				const WindowClass& wcex, 
+				std::wstring_view title,
+				const int customStyle,
 				UINT width = CW_USEDEFAULT, 
 				UINT height = CW_USEDEFAULT,
 				UINT xPos = CW_USEDEFAULT,
@@ -27,8 +37,8 @@ namespace Onyx32::Gui
 			virtual void SetHwnd(HWND hWnd) override;
 			virtual HWND GetHwnd() override;
 
-			virtual void SetTitle(wstring_view title) override;
-			virtual const wstring& GetTitle() override;
+			virtual void SetTitle(std::wstring_view title) override;
+			virtual const std::wstring& GetTitle() override;
 			
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
@@ -39,9 +49,9 @@ namespace Onyx32::Gui
 			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) override;
 			virtual void SetOnResized(OnWindowResized&& evtHandler) override;
 
+		protected:
 			const WindowClass WndClass;
 
-		protected:
 			OnWindowActivateChange _activateEvtHandler;
 			int OnActivate(bool isActive);
 			OnWindowResized _onResized;
@@ -51,11 +61,12 @@ namespace Onyx32::Gui
 
 			//WindowResizeOperation _current
 			HWND _wndHandle;
-			wstring _title = L"Default";
+			std::wstring _title = L"Default";
 			UINT _width;
 			UINT _height;
 			UINT _xPos;
 			UINT _yPos;
 			std::unordered_map<IControl*, std::shared_ptr<IControl>> _children;
+			const int _styles;
 	};
 }

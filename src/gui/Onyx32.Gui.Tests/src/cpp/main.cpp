@@ -24,9 +24,11 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	Onyx32Lib lib;
 	std::shared_ptr<IFactory> factory(lib.GetMainFactory());
 	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500));
+	std::shared_ptr<IWindow> wnd2(factory->CreateStyledWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500));
 	std::shared_ptr<IApplication> app(factory->GetApplication());
 
 	wnd->Initialize();
+	wnd2->Initialize();
 
 	// Ownership of controls is done by the parent window, so do not use shared_ptr
 	IButton* button = factory->CreateButton(100, L"Button", 100, 100, 10, 10);

@@ -46,6 +46,11 @@ namespace Onyx32::Gui
 		UINT height;
 	};
 
+	struct ONYXWINDOWING_API WindowClass
+	{
+		WNDCLASSEX WndClass;
+	};
+
 	enum ONYXWINDOWING_API WindowResizeState
 	{
 		Restored = 0, // Matches SIZE_RESTORED
@@ -140,6 +145,7 @@ namespace Onyx32::Gui
 		public:
 			virtual ~IFactory() = 0;
 			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
+			virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, UINT width = 0, UINT height = 0) = 0;
 			virtual IDateTime* CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 			virtual ITextInput* CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 			virtual IButton* CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;

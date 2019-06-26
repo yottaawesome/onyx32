@@ -25,6 +25,14 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
+	IWindow* Factory::CreateStyledWindow(std::wstring_view title, const int styles, UINT width, UINT height)
+	{
+		if (width > 0 && height > 0)
+			return new Window(WindowClassManager::GetDefaultWindowClass(), title, styles, width, height);
+
+		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
+	}
+
 	ITextInput* Factory::CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
 		return new TextInput(text, width, height, xPos, yPos, controlId);

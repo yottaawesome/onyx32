@@ -8,10 +8,27 @@
 #include "../Win32/Win32Window.h"
 #include <map>
 
+using std::wstring;
+using std::wstring_view;
+
 namespace Onyx32::Gui
 {
 	OnWindowActivateChange defaultActivateChange = [](IWindow& window, bool isActive) -> void {};
 	OnWindowResized defaultOnResized = [](IWindow& window) -> void {};
+	const int DefaultWindowStyles = WS_OVERLAPPEDWINDOW;
+
+	Window::Window(const WindowClass& wndClass, wstring_view title, const int customStyle, UINT width, UINT height, UINT xPos, UINT yPos)
+		: _width(width),
+		_height(height),
+		_xPos(xPos),
+		_yPos(yPos),
+		_title(title),
+		WndClass(wndClass),
+		_wndHandle(nullptr),
+		_activateEvtHandler(defaultActivateChange),
+		_onResized(defaultOnResized),
+		_styles(customStyle)
+	{ }
 
 	Window::Window(const WindowClass& wndClass, wstring_view title, UINT width, UINT height, UINT xPos, UINT yPos)
 		: _width(width), 
@@ -22,7 +39,8 @@ namespace Onyx32::Gui
 		WndClass(wndClass), 
 		_wndHandle(nullptr),
 		_activateEvtHandler(defaultActivateChange),
-		_onResized(defaultOnResized)
+		_onResized(defaultOnResized), 
+		_styles(DefaultWindowStyles)
 	{ }
 
 	Window::~Window()
@@ -68,7 +86,7 @@ namespace Onyx32::Gui
 		Win32ParentWindowCreationArgs args(
 			0,
 			_title,
-			WS_OVERLAPPEDWINDOW,
+			_styles,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
 			_width,

@@ -4,6 +4,8 @@
 #include "../h/StaticFunctions.h"
 #include <Commctrl.h>
 
+using std::wstring;
+
 namespace Onyx32::Gui
 {
 	OnClick DefaultClickHandler = [](IButton& button) -> void {};

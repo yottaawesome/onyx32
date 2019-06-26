@@ -4,6 +4,9 @@
 #include "../h/StaticFunctions.h"
 #include  <Commctrl.h>
 
+using std::wstring;
+using std::wstring_view;
+
 namespace Onyx32::Gui
 {
 	const std::wstring TextInput::Class = L"EDIT";

@@ -18,7 +18,8 @@ namespace Onyx32::Gui
 			virtual void GetDateTime(SYSTEMTIME& dateTime) override;
 			virtual void SetOnChange(OnDateTimeChange& onChange) override;
 			LRESULT DateTime::Process(UINT message, WPARAM wParam, LPARAM lParam) override;
-		private:
+
+		protected:
 			OnDateTimeChange& _onChange;
 			static OnDateTimeChange DefaultDateTimeChangeHandler;
 	};

@@ -13,9 +13,8 @@ namespace Onyx32::Gui
 		static bool created = false;
 		if (!created)
 		{
-			DefaultWindowClass.ClassName = L"Onyx32DefaultWindow";
 			DefaultWindowClass.WndClass.cbSize = sizeof(WNDCLASSEX);
-			DefaultWindowClass.WndClass.lpszClassName = DefaultWindowClass.ClassName.c_str();
+			DefaultWindowClass.WndClass.lpszClassName = L"Onyx32DefaultWindow";
 			DefaultWindowClass.WndClass.style = CS_HREDRAW | CS_VREDRAW;
 			DefaultWindowClass.WndClass.lpfnWndProc = Static::WndProc;
 			DefaultWindowClass.WndClass.cbClsExtra = 0;
