@@ -23,7 +23,7 @@ namespace Onyx32::Gui
 		_xPos(xPos),
 		_yPos(yPos),
 		_title(title),
-		WndClass(wndClass),
+		_windowClass(wndClass),
 		_wndHandle(nullptr),
 		_activateEvtHandler(defaultActivateChange),
 		_onResized(defaultOnResized),
@@ -36,7 +36,7 @@ namespace Onyx32::Gui
 		_xPos(xPos),
 		_yPos(yPos),
 		_title(title),
-		WndClass(wndClass), 
+		_windowClass(wndClass),
 		_wndHandle(nullptr),
 		_activateEvtHandler(defaultActivateChange),
 		_onResized(defaultOnResized), 
@@ -76,6 +76,11 @@ namespace Onyx32::Gui
 		_wndHandle = hWnd;
 	}
 
+	int Window::GetStyles()
+	{
+		return _styles;
+	}
+
 	HWND Window::GetHwnd()
 	{
 		return _wndHandle;
@@ -94,7 +99,7 @@ namespace Onyx32::Gui
 			nullptr,
 			nullptr,
 			this,
-			WndClass.WndClass
+			_windowClass.WndClass
 		);
 		_wndHandle = Win32Window::CreateParentWindow(args);
 		if (!_wndHandle)

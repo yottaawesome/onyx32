@@ -39,7 +39,8 @@ namespace Onyx32::Gui
 
 			virtual void SetTitle(std::wstring_view title) override;
 			virtual const std::wstring& GetTitle() override;
-			
+			virtual int GetStyles() override;
+
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
 			virtual void Resize(const UINT width, const UINT height) override;
@@ -50,7 +51,7 @@ namespace Onyx32::Gui
 			virtual void SetOnResized(OnWindowResized&& evtHandler) override;
 
 		protected:
-			const WindowClass WndClass;
+			const WindowClass _windowClass;
 
 			OnWindowActivateChange _activateEvtHandler;
 			int OnActivate(bool isActive);

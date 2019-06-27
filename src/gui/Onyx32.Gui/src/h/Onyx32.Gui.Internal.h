@@ -77,7 +77,7 @@ namespace Onyx32::Gui
 			virtual UINT GetId() override;
 			virtual ControlState GetState() override;
 			virtual int GetStyles() override;
-			virtual const std::wstring& GetName() override;
+			virtual const std::wstring& GetClass() override;
 			virtual void GetDimensions(Dimensions& dimensions) override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 
@@ -138,7 +138,7 @@ namespace Onyx32::Gui
 	}
 
 	template<typename ControlType>
-	const std::wstring& BaseControl<ControlType>::GetName()
+	const std::wstring& BaseControl<ControlType>::GetClass()
 	{
 		return BaseControl<ControlType>::Class;
 	}

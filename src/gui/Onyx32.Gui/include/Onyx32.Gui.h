@@ -77,14 +77,16 @@ namespace Onyx32::Gui
 	{
 		public:
 			virtual ~IControl() = 0;
-			virtual void Initialize(IWindow* window) = 0;
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
+
 			virtual HWND GetHwnd() = 0;
 			virtual void GetDimensions(Dimensions& dimensions) = 0;
 			virtual UINT GetId() = 0;
-			virtual const std::wstring& GetName() = 0;
+			virtual const std::wstring& GetClass() = 0;
 			virtual ControlState GetState() = 0;
 			virtual int GetStyles() = 0;
+
+			virtual void Initialize(IWindow* window) = 0;
+			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
 			virtual void Move(const UINT xPos, const UINT yPos) = 0;
 	};
@@ -119,23 +121,25 @@ namespace Onyx32::Gui
 	{
 		public: 
 			virtual ~IWindow() = 0;
-			virtual void Initialize() = 0;
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
+
 			virtual HWND GetHwnd() = 0;
+			virtual const std::wstring& GetTitle() = 0;
+			virtual UINT GetWidth() = 0;
+			virtual UINT GetHeight() = 0;
+			virtual int GetStyles() = 0;
+
+			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) = 0;
+			virtual void SetOnResized(OnWindowResized&& evtHandler) = 0;
+			virtual void SetTitle(std::wstring_view title) = 0;
 
 			/**
 			 Adds a control as a child to a Window. The Window assumes ownership of the Control's lifetime.
 			*/
 			virtual void AddControl(IControl* control) = 0;
 			virtual void DestroyControl(IControl* control) = 0;
-			virtual void SetTitle(std::wstring_view title) = 0;
-			virtual const std::wstring& GetTitle() = 0;
-			virtual UINT GetWidth() = 0;
-			virtual UINT GetHeight() = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
-
-			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) = 0;
-			virtual void SetOnResized(OnWindowResized&& evtHandler) = 0;
+			virtual void Initialize() = 0;
+			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 	};
 
 	class ONYXWINDOWING_API IFactory
