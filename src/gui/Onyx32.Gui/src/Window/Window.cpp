@@ -27,7 +27,8 @@ namespace Onyx32::Gui
 		_wndHandle(nullptr),
 		_activateEvtHandler(defaultActivateChange),
 		_onResized(defaultOnResized),
-		_styles(customStyle)
+		_styles(customStyle),
+		_sizeState(WindowResizeState::Restored)
 	{ }
 
 	Window::Window(const WindowClass& wndClass, wstring_view title, UINT width, UINT height, UINT xPos, UINT yPos)
@@ -40,7 +41,8 @@ namespace Onyx32::Gui
 		_wndHandle(nullptr),
 		_activateEvtHandler(defaultActivateChange),
 		_onResized(defaultOnResized), 
-		_styles(DefaultWindowStyles)
+		_styles(DefaultWindowStyles),
+		_sizeState(WindowResizeState::Restored)
 	{ }
 
 	Window::~Window()
@@ -54,6 +56,15 @@ namespace Onyx32::Gui
 	{
 		if(SetWindowText(_wndHandle, wstring(_title).c_str()))
 			_title = title;
+	}
+
+	void Window::Move(const UINT xPos, const UINT yPos)
+	{
+		if (MoveWindow(_wndHandle, xPos, yPos, _width, _height, true))
+		{
+			_xPos = xPos;
+			_yPos = yPos;
+		}
 	}
 
 	const std::wstring& Window::GetTitle()
@@ -84,6 +95,11 @@ namespace Onyx32::Gui
 	HWND Window::GetHwnd()
 	{
 		return _wndHandle;
+	}
+
+	WindowResizeState Window::GetSizeState()
+	{
+		return _sizeState;
 	}
 
 	void Window::Initialize()

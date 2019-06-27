@@ -12,6 +12,7 @@ namespace Onyx32::Gui
 
 	int Window::OnResizing(WindowResizeState operation)
 	{
+		_sizeState = operation;
 		return 0;
 	}
 

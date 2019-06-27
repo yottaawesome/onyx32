@@ -32,26 +32,30 @@ namespace Onyx32::Gui
 				UINT yPos = CW_USEDEFAULT);
 			virtual ~Window();
 
-			virtual void Initialize() override;
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
-			virtual void SetHwnd(HWND hWnd);
 			virtual HWND GetHwnd() override;
-
-			virtual void SetTitle(std::wstring_view title) override;
-			virtual const std::wstring& GetTitle() override;
+			virtual WindowResizeState GetSizeState() override;
 			virtual int GetStyles() override;
-
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
+			virtual const std::wstring& GetTitle() override;
+
+			virtual void SetHwnd(HWND hWnd);
+			virtual void SetTitle(std::wstring_view title) override;
+
+			virtual void Initialize() override;
+			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+
 			virtual void Resize(const UINT width, const UINT height) override;
 			virtual void AddControl(IControl* control) override;
 			virtual void DestroyControl(IControl* control) override;
+			virtual void Move(const UINT xPos, const UINT yPos) override;
 
 			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) override;
 			virtual void SetOnResized(OnWindowResized&& evtHandler) override;
 
 		protected:
 			const WindowClass _windowClass;
+			WindowResizeState _sizeState;
 
 			OnWindowActivateChange _activateEvtHandler;
 			int OnActivate(bool isActive);

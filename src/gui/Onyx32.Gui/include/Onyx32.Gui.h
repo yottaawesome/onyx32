@@ -127,6 +127,7 @@ namespace Onyx32::Gui
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
 			virtual int GetStyles() = 0;
+			virtual WindowResizeState GetSizeState() = 0;
 
 			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) = 0;
 			virtual void SetOnResized(OnWindowResized&& evtHandler) = 0;
@@ -136,6 +137,7 @@ namespace Onyx32::Gui
 			 Adds a control as a child to a Window. The Window assumes ownership of the Control's lifetime.
 			*/
 			virtual void AddControl(IControl* control) = 0;
+			virtual void Move(const UINT xPos, const UINT yPos) = 0;
 			virtual void DestroyControl(IControl* control) = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
 			virtual void Initialize() = 0;
