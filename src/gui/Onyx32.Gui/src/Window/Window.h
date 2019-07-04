@@ -33,14 +33,18 @@ namespace Onyx32::Gui
 			virtual ~Window();
 
 			virtual HWND GetHwnd() override;
-			virtual WindowResizeState GetSizeState() override;
+			virtual WindowDisplayState GetDisplayState() override;
 			virtual int GetStyles() override;
 			virtual UINT GetWidth() override;
 			virtual UINT GetHeight() override;
 			virtual const std::wstring& GetTitle() override;
+			virtual bool IsActive() override;
 
 			virtual void SetHwnd(HWND hWnd);
 			virtual void SetTitle(std::wstring_view title) override;
+			virtual void SetVisibility(const bool isVisible) override;
+			virtual void SetDisplayState(WindowDisplayState state) override;
+			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) override;
 
 			virtual void Initialize() override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
@@ -50,28 +54,20 @@ namespace Onyx32::Gui
 			virtual void DestroyControl(IControl* control) override;
 			virtual void Move(const UINT xPos, const UINT yPos) override;
 
-			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) override;
-			virtual void SetOnResized(OnWindowResized&& evtHandler) override;
-
 		protected:
 			const WindowClass _windowClass;
-			WindowResizeState _sizeState;
+			WindowDisplayState _displayState;
 
-			OnWindowActivateChange _activateEvtHandler;
-			int OnActivate(bool isActive);
-			OnWindowResized _onResized;
-			int OnResizing(WindowResizeState operation);
-			int OnBeginUserResize();
-			int OnEndUserResize();
-
-			//WindowResizeOperation _current
 			HWND _wndHandle;
 			std::wstring _title = L"Default";
 			UINT _width;
 			UINT _height;
 			UINT _xPos;
 			UINT _yPos;
+			bool _isVisible;
 			std::unordered_map<IControl*, std::shared_ptr<IControl>> _children;
 			const int _styles;
+			std::unordered_map<WindowEvents, OnWindowEvent> _eventHandlers;
+			bool _isActive;
 	};
 }

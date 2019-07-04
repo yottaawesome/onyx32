@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable: 5030)
 
 #ifdef ONYXWINDOWING_EXPORTS
 #define ONYXWINDOWING_API __declspec(dllexport)
@@ -20,16 +21,13 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IFormBuilder;
 	class ONYXWINDOWING_API IFactory;
 	class ONYXWINDOWING_API IMenu;
-
-	// Event signatures
-	typedef std::function<void(IButton& button)> OnClick;
-	typedef std::function<void(
-		IDateTime& control, 
-		SYSTEMTIME& dateTime)> OnDateTimeChange;
-	typedef std::function<void(IWindow& window)> OnWindowResized;
-	typedef std::function<void(IWindow& window, bool isActive)> OnWindowActivateChange;
-	typedef std::function<bool(unsigned long long int counter)> IdleCallback;
-
+	
+	enum ONYXWINDOWING_API WindowEvents
+	{
+		OnResized,
+		OnActivateChange,
+		OnClose
+	};
 	enum ONYXWINDOWING_API ControlState
 	{
 		Uninitialized = 1,
@@ -37,7 +35,6 @@ namespace Onyx32::Gui
 		Destroyed,
 		Error
 	};
-
 	struct ONYXWINDOWING_API Dimensions
 	{
 		UINT xPos;
@@ -46,16 +43,24 @@ namespace Onyx32::Gui
 		UINT height;
 	};
 
+	// Event signatures
+	typedef std::function<void(IButton& button)> OnClick;
+	typedef std::function<void(
+		IDateTime& control, 
+		SYSTEMTIME& dateTime)> OnDateTimeChange;
+	typedef std::function<void(WindowEvents eventType, IWindow& window)> OnWindowEvent;
+	typedef std::function<bool(unsigned long long int counter)> IdleCallback;
+
 	struct ONYXWINDOWING_API WindowClass
 	{
 		WNDCLASSEX WndClass;
 	};
 
-	enum ONYXWINDOWING_API WindowResizeState
+	enum ONYXWINDOWING_API WindowDisplayState
 	{
 		Restored = 0, // Matches SIZE_RESTORED
 		Minimized = 1, // Matches SIZE_MINIMIZED
-		Maximixed = 2, // Matches SIZE_MAXIMIZED
+		Maximized = 2, // Matches SIZE_MAXIMIZED
 	};
 
 	class ONYXWINDOWING_API IMenu
@@ -121,24 +126,26 @@ namespace Onyx32::Gui
 	{
 		public: 
 			virtual ~IWindow() = 0;
-
 			virtual HWND GetHwnd() = 0;
 			virtual const std::wstring& GetTitle() = 0;
 			virtual UINT GetWidth() = 0;
 			virtual UINT GetHeight() = 0;
 			virtual int GetStyles() = 0;
-			virtual WindowResizeState GetSizeState() = 0;
+			virtual WindowDisplayState GetDisplayState() = 0;
+			virtual bool IsActive() = 0;
 
-			virtual void SetOnActivate(OnWindowActivateChange&& evtHandler) = 0;
-			virtual void SetOnResized(OnWindowResized&& evtHandler) = 0;
 			virtual void SetTitle(std::wstring_view title) = 0;
+			virtual void SetVisibility(const bool isVisible) = 0;
+			virtual void SetDisplayState(WindowDisplayState state) = 0;
+			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) = 0;
 
-			/**
-			 Adds a control as a child to a Window. The Window assumes ownership of the Control's lifetime.
-			*/
-			virtual void AddControl(IControl* control) = 0;
+			/// <summary>
+			/// Adds the Control to the Window. The Window assumes ownership of the Control's lifetime.
+			/// </summary>
+			/// <param name="control">Cannot be null</param>
+			virtual void AddControl([[notnull]] IControl* control) = 0;
 			virtual void Move(const UINT xPos, const UINT yPos) = 0;
-			virtual void DestroyControl(IControl* control) = 0;
+			virtual void DestroyControl([[notnull]] IControl* control) = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
 			virtual void Initialize() = 0;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
@@ -148,15 +155,15 @@ namespace Onyx32::Gui
 	{
 		public:
 			virtual ~IFactory() = 0;
-			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
-			virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, UINT width = 0, UINT height = 0) = 0;
-			virtual IDateTime* CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			virtual ITextInput* CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			virtual IButton* CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			virtual IApplication* GetApplication() = 0;
+			[[nodiscard]] virtual IWindow* CreateDefaultWindow(std::wstring_view title, UINT width = 0, UINT height = 0) = 0;
+			[[nodiscard]] virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, UINT width = 0, UINT height = 0) = 0;
+			[[nodiscard]] virtual IDateTime* CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			[[nodiscard]] virtual ITextInput* CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			[[nodiscard]] virtual IButton* CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			[[nodiscard]] virtual IApplication* GetApplication() = 0;
 	};
 
 	#define GETMAINFACTFUNC_NAME GetMainFactory
 	typedef IFactory* (*getMainFactory)();
-	extern "C" ONYXWINDOWING_API IFactory* GETMAINFACTFUNC_NAME();
+	extern "C" ONYXWINDOWING_API [[nodiscard]] IFactory* GETMAINFACTFUNC_NAME();
 }

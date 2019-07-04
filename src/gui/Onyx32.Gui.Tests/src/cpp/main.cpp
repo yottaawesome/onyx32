@@ -13,6 +13,7 @@ using Onyx32::Gui::IButton;
 using Onyx32::Gui::IDateTime;
 using Onyx32::Gui::Onyx32Lib;
 using Onyx32::Gui::IApplication;
+using Onyx32::Gui::WindowEvents;
 
 // https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
 
@@ -37,20 +38,32 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	wnd->AddControl(button);
 	wnd->AddControl(input);
 	wnd->AddControl(dateTime);
-
 	button->SetOnClick(
 		[](IButton& button) -> void
 		{
 			button.Resize(75, 75);
 		});
 	button->SetOnDoubleClick(
-		[](IButton& button) -> void
+		[wnd](IButton& button) -> void
 		{
-			MessageBox(nullptr, L"Double clicked!", L"Double Clicked!", MB_OK);
+			wnd->SetDisplayState(Onyx32::Gui::WindowDisplayState::Minimized);
 		});
 
-	wnd->SetOnActivate([](IWindow& window, bool isActive) -> void { OutputDebugStringA(isActive ? "\nWindow focus: active" : "\nWindow focus: inactive"); });
-	wnd->SetOnResized([](IWindow& window) -> void { OutputDebugStringA("\nWindow resized"); });
+	wnd->SetWindowEvent(
+		WindowEvents::OnActivateChange, 
+		[](WindowEvents evt, IWindow& window) -> void
+		{ 
+			if(window.IsActive())
+				OutputDebugStringA("\nWindow gained focus"); 
+			else
+				OutputDebugStringA("\nWindow lost focus");
+		});
+	wnd->SetWindowEvent(
+		WindowEvents::OnResized,
+		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nWindow resized"); });
+	wnd->SetWindowEvent(
+		WindowEvents::OnClose,
+		[](WindowEvents evt, IWindow& window) -> void { PostQuitMessage(0); });
 
 	Onyx32::Gui::OnDateTimeChange changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
 	{

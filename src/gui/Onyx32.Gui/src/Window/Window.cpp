@@ -13,8 +13,6 @@ using std::wstring_view;
 
 namespace Onyx32::Gui
 {
-	OnWindowActivateChange defaultActivateChange = [](IWindow& window, bool isActive) -> void {};
-	OnWindowResized defaultOnResized = [](IWindow& window) -> void {};
 	const int DefaultWindowStyles = WS_OVERLAPPEDWINDOW;
 
 	Window::Window(const WindowClass& wndClass, wstring_view title, const int customStyle, UINT width, UINT height, UINT xPos, UINT yPos)
@@ -25,10 +23,10 @@ namespace Onyx32::Gui
 		_title(title),
 		_windowClass(wndClass),
 		_wndHandle(nullptr),
-		_activateEvtHandler(defaultActivateChange),
-		_onResized(defaultOnResized),
 		_styles(customStyle),
-		_sizeState(WindowResizeState::Restored)
+		_displayState(WindowDisplayState::Restored),
+		_isVisible(false),
+		_isActive(false)
 	{ }
 
 	Window::Window(const WindowClass& wndClass, wstring_view title, UINT width, UINT height, UINT xPos, UINT yPos)
@@ -39,10 +37,10 @@ namespace Onyx32::Gui
 		_title(title),
 		_windowClass(wndClass),
 		_wndHandle(nullptr),
-		_activateEvtHandler(defaultActivateChange),
-		_onResized(defaultOnResized), 
 		_styles(DefaultWindowStyles),
-		_sizeState(WindowResizeState::Restored)
+		_displayState(WindowDisplayState::Restored),
+		_isVisible(false),
+		_isActive(false)
 	{ }
 
 	Window::~Window()
@@ -64,6 +62,41 @@ namespace Onyx32::Gui
 		{
 			_xPos = xPos;
 			_yPos = yPos;
+		}
+	}
+
+	void Window::SetVisibility(const bool isVisible)
+	{
+		int value = isVisible ? SW_SHOW : SW_HIDE;
+		_isActive = isVisible;
+		_isVisible = isVisible;
+		ShowWindow(_wndHandle, value);
+	}
+
+	void Window::SetDisplayState(WindowDisplayState state)
+	{
+		switch (state)
+		{
+			case Onyx32::Gui::Restored:
+				_isVisible = true;
+				ShowWindow(_wndHandle, SW_RESTORE);
+				_displayState = WindowDisplayState::Restored;
+				_isActive = true;
+				break;
+			case Onyx32::Gui::Minimized:
+				_isVisible = false;
+				ShowWindow(_wndHandle, SW_MINIMIZE);
+				_displayState = WindowDisplayState::Minimized;
+				_isActive = false;
+				break;
+			case Onyx32::Gui::Maximized:
+				_isVisible = true;
+				ShowWindow(_wndHandle, SW_MAXIMIZE);
+				_displayState = WindowDisplayState::Maximized;
+				_isActive = true;
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -97,9 +130,14 @@ namespace Onyx32::Gui
 		return _wndHandle;
 	}
 
-	WindowResizeState Window::GetSizeState()
+	WindowDisplayState Window::GetDisplayState()
 	{
-		return _sizeState;
+		return _displayState;
+	}
+
+	void Window::SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler)
+	{
+		_eventHandlers[evt] = std::move(evtHandler);
 	}
 
 	void Window::Initialize()
@@ -123,6 +161,8 @@ namespace Onyx32::Gui
 
 		// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx
 		ShowWindow(_wndHandle, SW_SHOWDEFAULT);
+		_displayState = WindowDisplayState::Restored;
+		_isActive = true;
 		UpdateWindow(_wndHandle);
 	}
 
@@ -150,9 +190,12 @@ namespace Onyx32::Gui
 	void Window::DestroyControl(IControl* control)
 	{
 		if (_children.count(control))
-		{
 			_children.erase(control);
-		}
+	}
+	
+	bool Window::IsActive()
+	{
+		return _isActive;
 	}
 
 	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)
@@ -187,20 +230,46 @@ namespace Onyx32::Gui
 			// Continually sent while the window is being resized. wParam is always SIZE_RESTORED
 			// if the user is dragging the resize bars.
 			case WM_SIZE:
+			{
 				//LOWORD(lParam) = client width
 				//HIWORD(lParam) = client height
-				return OnResizing((WindowResizeState)wParam);
+				_displayState = (WindowDisplayState)wParam;
+				return 0;
+			}
 
 			// WM_EXITSIZEMOVE is sent when the user grabs the resize bars.
 			case WM_ENTERSIZEMOVE:
-				return OnBeginUserResize();
+			{
+				return 0;
+			}
 
 			// WM_EXITSIZEMOVE is sent when the user releases the resize bars.
 			case WM_EXITSIZEMOVE:
-				return OnEndUserResize();
+			{
+				WindowEvents evt = WindowEvents::OnResized;
+				if (_eventHandlers.count(evt))
+					_eventHandlers[evt](evt, *this);
+				return 0;
+			}
 
+			// Window has gained or lost focus
 			case WM_ACTIVATE:
-				return OnActivate(LOWORD(wParam) != WA_INACTIVE);
+			{
+				_isActive = LOWORD(wParam) != WA_INACTIVE;
+				WindowEvents evt = WindowEvents::OnActivateChange;
+				if (_eventHandlers.count(evt))
+					_eventHandlers[evt](evt, *this);
+				return 0;
+			}
+
+			// Close box on the window was clicked
+			case WM_DESTROY:
+			{
+				WindowEvents evt = WindowEvents::OnClose;
+				if (_eventHandlers.count(evt))
+					_eventHandlers[evt](evt, *this);
+				return 0;
+			}
 
 			case WM_PAINT:
 			{
@@ -209,10 +278,6 @@ namespace Onyx32::Gui
 				EndPaint(_wndHandle, &ps);
 				break;
 			}
-
-			case WM_DESTROY:
-				PostQuitMessage(0);
-				break;
 
 			default:
 				return DefWindowProc(_wndHandle, message, wParam, lParam);
