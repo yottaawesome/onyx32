@@ -24,7 +24,11 @@ namespace Onyx32::Gui
 	
 	enum struct ONYXWINDOWING_API WindowEvents
 	{
+		OnBeginResize,
+		OnResizing,
 		OnResized,
+		OnDisplayStateChanged,
+		OnVisibilityChanged,
 		/// This event double fires when the user minimizes the Window by clicking its Task Bar button.
 		OnActivateChange,
 		OnClose,
@@ -147,6 +151,8 @@ namespace Onyx32::Gui
 			virtual int GetStyles() const = 0;
 			virtual WindowDisplayState GetDisplayState() const = 0;
 			virtual bool IsActive() const = 0;
+			virtual bool HasFocus() const = 0;
+			virtual bool IsVisible() const = 0;
 
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual void SetVisibility(const bool isVisible) = 0;

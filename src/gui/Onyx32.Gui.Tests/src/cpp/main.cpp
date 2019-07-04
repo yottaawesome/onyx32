@@ -30,6 +30,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 
 	wnd->Initialize();
 	wnd2->Initialize();
+	
 
 	// Ownership of controls is done by the parent window, so do not use shared_ptr
 	IButton* button = factory->CreateButton(100, L"Button", 100, 100, 10, 10);
@@ -42,6 +43,11 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		[](IButton& button) -> void { button.Resize(75, 75); });
 	button->SetOnDoubleClick(
 		[wnd](IButton& button) -> void { wnd->SetDisplayState(Onyx32::Gui::WindowDisplayState::Minimized); });
+
+	IButton* changeButton = factory->CreateButton(100, L"Show/Hide", 100, 100, 10, 10);
+	wnd2->AddControl(changeButton);
+	changeButton->SetOnClick(
+		[wnd](IButton& button) -> void { wnd->SetVisibility(!wnd->IsVisible()); });
 
 	wnd->SetWindowEvent(
 		WindowEvents::OnActivateChange, 
@@ -58,6 +64,12 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	wnd->SetWindowEvent(
 		WindowEvents::OnClose,
 		[](WindowEvents evt, IWindow& window) -> void { PostQuitMessage(0); });
+	wnd->SetWindowEvent(
+		WindowEvents::OnVisibilityChanged,
+		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nWindow visibility changed"); });
+	wnd->SetWindowEvent(
+		WindowEvents::OnDisplayStateChanged,
+		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nDisplay state changed"); });
 
 	Onyx32::Gui::OnDateTimeChange changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
 	{

@@ -27,7 +27,9 @@ namespace Onyx32::Gui
 		_displayState(WindowDisplayState::Restored),
 		_isVisible(false),
 		_isActive(false),
-		_windowState(WindowState::Uninitialized)
+		_windowState(WindowState::Uninitialized),
+		_isBeingResized(false),
+		_hasFocus(false)
 	{ }
 
 	Window::Window(const WindowClass& wndClass, wstring_view title, const UINT width, const UINT height, const UINT xPos, const UINT yPos)
@@ -42,7 +44,9 @@ namespace Onyx32::Gui
 		_displayState(WindowDisplayState::Restored),
 		_isVisible(false),
 		_isActive(false),
-		_windowState(WindowState::Uninitialized)
+		_windowState(WindowState::Uninitialized),
+		_isBeingResized(false),
+		_hasFocus(false)
 	{ }
 
 	Window::~Window()
@@ -58,6 +62,8 @@ namespace Onyx32::Gui
 	HWND Window::GetHwnd() const { return _wndHandle; }
 	WindowDisplayState Window::GetDisplayState() const { return _displayState; }
 	bool Window::IsActive() const { return _isActive; }
+	bool Window::HasFocus() const { return _hasFocus; }
+	bool Window::IsVisible() const { return _isVisible; }
 	void Window::GetDimensions(Dimensions& dimensions) const
 	{
 		dimensions.xPos = _xPos;
@@ -86,8 +92,6 @@ namespace Onyx32::Gui
 		if (_windowState == WindowState::Initialized)
 		{
 			int value = isVisible ? SW_SHOW : SW_HIDE;
-			_isActive = isVisible;
-			_isVisible = isVisible;
 			ShowWindow(_wndHandle, value);
 		}
 	}
@@ -99,15 +103,12 @@ namespace Onyx32::Gui
 			switch (state)
 			{
 				case WindowDisplayState::Restored:
-					_isVisible = true;
 					ShowWindow(_wndHandle, SW_RESTORE);
 					break;
 				case WindowDisplayState::Minimized:
-					_isVisible = false;
 					ShowWindow(_wndHandle, SW_MINIMIZE);
 					break;
 				case WindowDisplayState::Maximized:
-					_isVisible = true;
 					ShowWindow(_wndHandle, SW_MAXIMIZE);
 					break;
 				default:
@@ -232,6 +233,15 @@ namespace Onyx32::Gui
 				break;
 			}
 
+			// Sent to a window when the window is about to be hidden or shown.
+			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-showwindow
+			case WM_SHOWWINDOW:
+			{
+				_isVisible = wParam;
+				InvokeEvent(WindowEvents::OnVisibilityChanged);
+				return 0;
+			}
+
 			// Continually sent while the window is being resized. wParam is always SIZE_RESTORED
 			// if the user is dragging the resize bars.
 			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-size
@@ -239,8 +249,11 @@ namespace Onyx32::Gui
 			{
 				//LOWORD(lParam) = client width
 				//HIWORD(lParam) = client height
-				OutputDebugStringA("\nWM_SIZE");
 				_displayState = (WindowDisplayState)wParam;
+				if(_isBeingResized)
+					InvokeEvent(WindowEvents::OnResizing);
+				else
+					InvokeEvent(WindowEvents::OnDisplayStateChanged);
 				return 0;
 			}
 
@@ -248,6 +261,8 @@ namespace Onyx32::Gui
 			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-entersizemove
 			case WM_ENTERSIZEMOVE:
 			{
+				_isBeingResized = true;
+				InvokeEvent(WindowEvents::OnBeginResize);
 				return 0;
 			}
 
@@ -255,6 +270,11 @@ namespace Onyx32::Gui
 			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-exitsizemove
 			case WM_EXITSIZEMOVE:
 			{
+				RECT r;
+				GetClientRect(_wndHandle, &r);
+				_width = r.right;
+				_height = r.bottom;
+				_isBeingResized = false;
 				InvokeEvent(WindowEvents::OnResized);
 				return 0;
 			}
@@ -273,6 +293,7 @@ namespace Onyx32::Gui
 			// https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-setfocus
 			case WM_SETFOCUS:
 			{
+				_hasFocus = true;
 				InvokeEvent(WindowEvents::OnGainedFocus);
 				return 0;
 			}
@@ -281,6 +302,7 @@ namespace Onyx32::Gui
 			// https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-killfocus
 			case WM_KILLFOCUS:
 			{
+				_hasFocus = false;
 				InvokeEvent(WindowEvents::OnLosingFocus);
 				return 0;
 			}
