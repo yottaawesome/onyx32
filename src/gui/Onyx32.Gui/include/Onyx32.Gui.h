@@ -22,25 +22,52 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IFactory;
 	class ONYXWINDOWING_API IMenu;
 	
-	enum ONYXWINDOWING_API WindowEvents
+	enum struct ONYXWINDOWING_API WindowEvents
 	{
 		OnResized,
+		/// This event double fires when the user minimizes the Window by clicking its Task Bar button.
 		OnActivateChange,
-		OnClose
+		OnClose,
+		OnMoving,
+		OnMoved,
+		OnGainedFocus,
+		OnLosingFocus
 	};
-	enum ONYXWINDOWING_API ControlState
+
+	enum struct ONYXWINDOWING_API WindowState
 	{
 		Uninitialized = 1,
 		Initialized,
 		Destroyed,
 		Error
 	};
+
+	enum struct ONYXWINDOWING_API ControlState
+	{
+		Uninitialized = 1,
+		Initialized,
+		Destroyed,
+		Error
+	};
+
+	enum struct ONYXWINDOWING_API WindowDisplayState
+	{
+		Restored = 0, // Matches SIZE_RESTORED
+		Minimized = 1, // Matches SIZE_MINIMIZED
+		Maximized = 2, // Matches SIZE_MAXIMIZED
+	};
+
 	struct ONYXWINDOWING_API Dimensions
 	{
 		UINT xPos;
 		UINT yPos;
 		UINT width;
 		UINT height;
+	};
+	
+	struct ONYXWINDOWING_API WindowClass
+	{
+		WNDCLASSEX WndClass;
 	};
 
 	// Event signatures
@@ -50,18 +77,6 @@ namespace Onyx32::Gui
 		SYSTEMTIME& dateTime)> OnDateTimeChange;
 	typedef std::function<void(WindowEvents eventType, IWindow& window)> OnWindowEvent;
 	typedef std::function<bool(unsigned long long int counter)> IdleCallback;
-
-	struct ONYXWINDOWING_API WindowClass
-	{
-		WNDCLASSEX WndClass;
-	};
-
-	enum ONYXWINDOWING_API WindowDisplayState
-	{
-		Restored = 0, // Matches SIZE_RESTORED
-		Minimized = 1, // Matches SIZE_MINIMIZED
-		Maximized = 2, // Matches SIZE_MAXIMIZED
-	};
 
 	class ONYXWINDOWING_API IMenu
 	{
@@ -126,27 +141,33 @@ namespace Onyx32::Gui
 	{
 		public: 
 			virtual ~IWindow() = 0;
-			virtual HWND GetHwnd() = 0;
-			virtual const std::wstring& GetTitle() = 0;
-			virtual UINT GetWidth() = 0;
-			virtual UINT GetHeight() = 0;
-			virtual int GetStyles() = 0;
-			virtual WindowDisplayState GetDisplayState() = 0;
-			virtual bool IsActive() = 0;
+			virtual HWND GetHwnd() const = 0;
+			virtual const std::wstring& GetTitle() const = 0;
+			virtual UINT GetWidth() const = 0;
+			virtual UINT GetHeight() const = 0;
+			virtual int GetStyles() const = 0;
+			virtual WindowDisplayState GetDisplayState() const = 0;
+			virtual bool IsActive() const = 0;
 
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual void SetVisibility(const bool isVisible) = 0;
-			virtual void SetDisplayState(WindowDisplayState state) = 0;
+			virtual void SetDisplayState(const WindowDisplayState state) = 0;
 			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) = 0;
 
 			/// <summary>
 			/// Adds the Control to the Window. The Window assumes ownership of the Control's lifetime.
 			/// </summary>
-			/// <param name="control">Cannot be null</param>
-			virtual void AddControl([[notnull]] IControl* control) = 0;
+			/// <param name="control">The Control to add to the Window. Cannot be null.</param>
+			virtual void AddControl([[notnull]] IControl* const control) = 0;
+			/// <summary>
+			/// Destroys the Control and removes it from the Window. This function has no effect if the Control does not belong to the Window.
+			/// </summary>
+			/// <param name="control">The Control to destroy. Cannot be null.</param>
+			virtual void DestroyControl([[notnull]] IControl* const control) = 0;
 			virtual void Move(const UINT xPos, const UINT yPos) = 0;
-			virtual void DestroyControl([[notnull]] IControl* control) = 0;
 			virtual void Resize(const UINT width, const UINT height) = 0;
+			virtual void RequestFocus() = 0;
+
 			virtual void Initialize() = 0;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 	};

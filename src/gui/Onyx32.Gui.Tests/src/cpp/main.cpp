@@ -39,15 +39,9 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	wnd->AddControl(input);
 	wnd->AddControl(dateTime);
 	button->SetOnClick(
-		[](IButton& button) -> void
-		{
-			button.Resize(75, 75);
-		});
+		[](IButton& button) -> void { button.Resize(75, 75); });
 	button->SetOnDoubleClick(
-		[wnd](IButton& button) -> void
-		{
-			wnd->SetDisplayState(Onyx32::Gui::WindowDisplayState::Minimized);
-		});
+		[wnd](IButton& button) -> void { wnd->SetDisplayState(Onyx32::Gui::WindowDisplayState::Minimized); });
 
 	wnd->SetWindowEvent(
 		WindowEvents::OnActivateChange, 

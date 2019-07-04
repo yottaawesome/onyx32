@@ -18,46 +18,50 @@ namespace Onyx32::Gui
 			Window(
 				const WindowClass& wcex,
 				std::wstring_view title,
-				UINT width = CW_USEDEFAULT,
-				UINT height = CW_USEDEFAULT,
-				UINT xPos = CW_USEDEFAULT,
-				UINT yPos = CW_USEDEFAULT);
+				const UINT width = CW_USEDEFAULT,
+				const UINT height = CW_USEDEFAULT,
+				const UINT xPos = CW_USEDEFAULT,
+				const UINT yPos = CW_USEDEFAULT);
 			Window(
 				const WindowClass& wcex, 
 				std::wstring_view title,
 				const int customStyle,
-				UINT width = CW_USEDEFAULT, 
-				UINT height = CW_USEDEFAULT,
-				UINT xPos = CW_USEDEFAULT,
-				UINT yPos = CW_USEDEFAULT);
+				const UINT width = CW_USEDEFAULT,
+				const UINT height = CW_USEDEFAULT,
+				const UINT xPos = CW_USEDEFAULT,
+				const UINT yPos = CW_USEDEFAULT);
 			virtual ~Window();
 
-			virtual HWND GetHwnd() override;
-			virtual WindowDisplayState GetDisplayState() override;
-			virtual int GetStyles() override;
-			virtual UINT GetWidth() override;
-			virtual UINT GetHeight() override;
-			virtual const std::wstring& GetTitle() override;
-			virtual bool IsActive() override;
+			virtual HWND GetHwnd() const override;
+			virtual WindowDisplayState GetDisplayState() const override;
+			virtual int GetStyles() const override;
+			virtual UINT GetWidth() const override;
+			virtual UINT GetHeight() const override;
+			virtual const std::wstring& GetTitle() const override;
+			virtual bool IsActive() const override;
 
 			virtual void SetHwnd(HWND hWnd);
 			virtual void SetTitle(std::wstring_view title) override;
 			virtual void SetVisibility(const bool isVisible) override;
-			virtual void SetDisplayState(WindowDisplayState state) override;
+			virtual void SetDisplayState(const WindowDisplayState state) override;
 			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) override;
 
 			virtual void Initialize() override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 
 			virtual void Resize(const UINT width, const UINT height) override;
-			virtual void AddControl(IControl* control) override;
-			virtual void DestroyControl(IControl* control) override;
+			virtual void AddControl(IControl* const control) override;
+			virtual void DestroyControl(IControl* const control) override;
 			virtual void Move(const UINT xPos, const UINT yPos) override;
+			virtual void RequestFocus() override;
 
 		protected:
+			void InvokeEvent(const WindowEvents evt);
+
 			const WindowClass _windowClass;
 			WindowDisplayState _displayState;
 
+			WindowState _windowState;
 			HWND _wndHandle;
 			std::wstring _title = L"Default";
 			UINT _width;
