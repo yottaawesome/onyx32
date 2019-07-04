@@ -35,10 +35,9 @@ namespace Onyx32::Gui
 			virtual HWND GetHwnd() const override;
 			virtual WindowDisplayState GetDisplayState() const override;
 			virtual int GetStyles() const override;
-			virtual UINT GetWidth() const override;
-			virtual UINT GetHeight() const override;
 			virtual const std::wstring& GetTitle() const override;
 			virtual bool IsActive() const override;
+			virtual void GetDimensions(Dimensions& dimensions) const override;
 
 			virtual void SetHwnd(HWND hWnd);
 			virtual void SetTitle(std::wstring_view title) override;

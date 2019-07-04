@@ -143,8 +143,7 @@ namespace Onyx32::Gui
 			virtual ~IWindow() = 0;
 			virtual HWND GetHwnd() const = 0;
 			virtual const std::wstring& GetTitle() const = 0;
-			virtual UINT GetWidth() const = 0;
-			virtual UINT GetHeight() const = 0;
+			virtual void GetDimensions(Dimensions& dimensions) const = 0;
 			virtual int GetStyles() const = 0;
 			virtual WindowDisplayState GetDisplayState() const = 0;
 			virtual bool IsActive() const = 0;

@@ -54,12 +54,17 @@ namespace Onyx32::Gui
 	}
 
 	const std::wstring& Window::GetTitle() const { return _title; }
-	UINT Window::GetWidth() const { return _width; }
-	UINT Window::GetHeight() const { return _height; }
 	int Window::GetStyles() const { return _styles; }
 	HWND Window::GetHwnd() const { return _wndHandle; }
 	WindowDisplayState Window::GetDisplayState() const { return _displayState; }
 	bool Window::IsActive() const { return _isActive; }
+	void Window::GetDimensions(Dimensions& dimensions) const
+	{
+		dimensions.xPos = _xPos;
+		dimensions.yPos = _yPos;
+		dimensions.width = _width;
+		dimensions.height = _height;
+	}
 
 	void Window::SetTitle(wstring_view title)
 	{
@@ -292,6 +297,8 @@ namespace Onyx32::Gui
 			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-move
 			case WM_MOVE:
 			{
+				_xPos = (int)(short)LOWORD(lParam);   // horizontal position 
+				_yPos = (int)(short)HIWORD(lParam);   // vertical position 
 				InvokeEvent(WindowEvents::OnMoved);
 				return 0;
 			}
