@@ -44,6 +44,10 @@ std::shared_ptr<IWindow> window(factory->CreateDefaultWindow(L"This is a test", 
 std::shared_ptr<IApplication> app(factory->GetApplication());
 // Initialize main window
 window->Initialize();
+// If the user closes the Window, exit the main loop
+window->SetWindowEvent(
+    WindowEvents::OnClose,
+    [](WindowEvents evt, IWindow& window) -> void { PostQuitMessage(0); });
 // Enter the main lopp
 int retVal = app->MainLoop();
 // End -- lib will automatically unload the DLL when it goes out of scope
