@@ -19,10 +19,12 @@ Check `Onyx32.Gui.Tests project` for an example. Essentially, in your project in
 1. Include `Onyx32.Gui.h` and `Onyx32.Gui.Lib.h` (or just the latter, since it includes the former) located in the `Onyx32.Gui/include/` directory.
 2. Create an instance of `Onyx32Lib` -- this library will automatically load the DLL.
 3. Create the main factory via `Onyx32Lib::GetMainFactory()`.
-4. Use the form builder to create windows and add controls.
-5. Create the application loop via `Onyx32Lib::GetApplication()`.
-6. Enter the message pump loop `IApplication::MainLoop()`.
-7. Bob's your uncle.
+4. Use the factory to create windows and controls.
+5. Add controls to windows.
+6. Add event handlers to windows and controls.
+7. Create the application loop via `Onyx32Lib::GetApplication()`.
+8. Enter the message pump loop `IApplication::MainLoop()`.
+9. Bob's your uncle.
 
 Really simple example below.
 
@@ -65,3 +67,7 @@ The project is undergoing refactoring and I'm slowly adding more features. Featu
 * Drawing.
 * DirectX support.
 * And more!
+
+## Considerations
+
+Note that Win32 imposes restrictions on threads sharing and manipulating windows. Whilst it's possible for threads to [join their thread input state](https://docs.microsoft.com/en-us/windows/win32/procthread/creating-windows-in-threads), certain operations, [such as destroying windows](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow#remarks), can only be performed by the threads that created said windows.
