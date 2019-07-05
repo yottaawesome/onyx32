@@ -41,7 +41,11 @@ namespace Onyx32::Gui
 
 	enum struct ONYXWINDOWING_API ControlEvents
 	{
-		OnVisibilityChanged
+		OnVisibilityChanged,
+		OnDestroy,
+		OnMoved,
+		OnFocusChange,
+		OnEnabledChange
 	};
 
 	enum struct ONYXWINDOWING_API WindowState
@@ -126,6 +130,11 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 	};
 
+	enum struct ONYXWINDOWING_API ButtonEvents
+	{
+		OnClick,
+		OnDoubleClick
+	};
 	class ONYXWINDOWING_API IButton : public IControl
 	{
 		public:

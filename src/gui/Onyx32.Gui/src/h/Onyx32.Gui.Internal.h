@@ -99,6 +99,8 @@ namespace Onyx32::Gui
 			UINT _xPos;
 			UINT _yPos;
 			bool _isVisible;
+			bool _isEnabled;
+			bool _hasFocus;
 			ControlState _state;
 			static const std::wstring Class;
 			static const int Styles;
@@ -116,7 +118,10 @@ namespace Onyx32::Gui
 		_yPos(yPos), 
 		_wndHandle(wndHandle), 
 		_parent(parent), 
-		_isVisible(false) {}
+		_isVisible(false),
+		_isEnabled(false),
+		_hasFocus(false)
+	{}
 
 	template<typename ControlType>
 	BaseControl<ControlType>::~BaseControl()
@@ -223,6 +228,51 @@ namespace Onyx32::Gui
 			{
 				_isVisible = wParam;
 				InvokeEvent(ControlEvents::OnVisibilityChanged);
+				return 0;
+			}
+
+			// Window is being destroyed
+			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
+			case WM_DESTROY:
+			{
+				InvokeEvent(ControlEvents::OnDestroy);
+				return 0;
+			}
+
+			// Window has been moved
+			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-move
+			case WM_MOVE:
+			{
+				_xPos = (int)(short)LOWORD(lParam);   // horizontal position 
+				_yPos = (int)(short)HIWORD(lParam);   // vertical position 
+				InvokeEvent(ControlEvents::OnMoved);
+				return 0;
+			}
+
+			// Window has gained focus
+			// https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-setfocus
+			case WM_SETFOCUS:
+			{
+				_hasFocus = true;
+				InvokeEvent(ControlEvents::OnFocusChange);
+				return 0;
+			}
+
+			// Window is about to lose focus
+			// https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-killfocus
+			case WM_KILLFOCUS:
+			{
+				_hasFocus = false;
+				InvokeEvent(ControlEvents::OnFocusChange);
+				return 0;
+			}
+
+			// Window is being enabled or disabled
+			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-enable
+			case WM_ENABLE:
+			{
+				_isEnabled = wParam;
+				InvokeEvent(ControlEvents::OnEnabledChange);
 				return 0;
 			}
 
