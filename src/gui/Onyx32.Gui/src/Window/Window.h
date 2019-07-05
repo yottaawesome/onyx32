@@ -46,7 +46,7 @@ namespace Onyx32::Gui
 			virtual void SetTitle(std::wstring_view title) override;
 			virtual void SetVisibility(const bool isVisible) override;
 			virtual void SetDisplayState(const WindowDisplayState state) override;
-			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) override;
+			virtual void SetEvent(WindowEvents evt, OnWindowEvent&& evtHandler) override;
 			virtual void SetEnabled(const bool isEnabled);
 
 			virtual void Initialize() override;
@@ -59,7 +59,7 @@ namespace Onyx32::Gui
 			virtual void RequestFocus() override;
 
 		protected:
-			void InvokeEvent(const WindowEvents evt);
+			virtual void InvokeEvent(const WindowEvents evt);
 
 			const WindowClass _windowClass;
 			WindowDisplayState _displayState;

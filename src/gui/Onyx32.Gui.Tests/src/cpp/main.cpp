@@ -15,6 +15,7 @@ using Onyx32::Gui::Onyx32Lib;
 using Onyx32::Gui::IApplication;
 using Onyx32::Gui::WindowEvents;
 using Onyx32::Gui::ControlEvents;
+using Onyx32::Gui::ButtonEvents;
 using Onyx32::Gui::WindowDisplayState;
 using Onyx32::Gui::IControl;
 
@@ -41,24 +42,28 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	wnd->AddControl(button);
 	wnd->AddControl(input);
 	wnd->AddControl(dateTime);
-	button->SetOnClick(
-		[](IButton& button) -> void { button.Resize(75, 75); });
-	button->SetOnDoubleClick(
-		[wnd](IButton& button) -> void { wnd->SetDisplayState(WindowDisplayState::Minimized); });
+	button->SetEvent(
+		ButtonEvents::OnClick,
+		[](ButtonEvents evt, IButton& button) -> void { button.Resize(75, 75); });
+	button->SetEvent(
+		ButtonEvents::OnDoubleClick,
+		[wnd](ButtonEvents evt, IButton& button) -> void { wnd->SetDisplayState(WindowDisplayState::Minimized); });
+
 	button->SetEvent(
 		ControlEvents::OnVisibilityChanged,
 		[](ControlEvents evt, IControl& control) -> void { OutputDebugStringA("\nA button's visibility was changed"); }
 	);
 
 	IButton* changeButton = factory->CreateButton(100, L"Show/Hide", 100, 100, 10, 10);
-	wnd2->SetWindowEvent(
+	wnd2->SetEvent(
 		WindowEvents::OnClose,
 		[](WindowEvents evt, IWindow& window) -> void { window.SetVisibility(false); });
 	wnd2->AddControl(changeButton);
-	changeButton->SetOnClick(
-		[button](IButton& internalButton) -> void { button->SetVisibility(!button->IsVisible()); });
+	changeButton->SetEvent(
+		ButtonEvents::OnClick,
+		[button](ButtonEvents evt, IButton& internalButton) -> void { button->SetVisibility(!button->IsVisible()); });
 
-	wnd->SetWindowEvent(
+	wnd->SetEvent(
 		WindowEvents::OnActivateChange, 
 		[](WindowEvents evt, IWindow& window) -> void
 		{ 
@@ -67,16 +72,16 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 			else
 				OutputDebugStringA("\nWindow deactivated");
 		});
-	wnd->SetWindowEvent(
+	wnd->SetEvent(
 		WindowEvents::OnResized,
 		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nWindow resized"); });
-	wnd->SetWindowEvent(
+	wnd->SetEvent(
 		WindowEvents::OnClose,
 		[](WindowEvents evt, IWindow& window) -> void { PostQuitMessage(0); });
-	wnd->SetWindowEvent(
+	wnd->SetEvent(
 		WindowEvents::OnVisibilityChanged,
 		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nWindow visibility changed"); });
-	wnd->SetWindowEvent(
+	wnd->SetEvent(
 		WindowEvents::OnDisplayStateChanged,
 		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nDisplay state changed"); });
 

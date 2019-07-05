@@ -89,8 +89,6 @@ namespace Onyx32::Gui
 	typedef std::function<void(
 		IDateTime& control, 
 		SYSTEMTIME& dateTime)> OnDateTimeChange;
-	typedef std::function<void(WindowEvents eventType, IWindow& window)> OnWindowEvent;
-	typedef std::function<void(ControlEvents eventType, IControl& control)> OnControlEvent;
 	typedef std::function<bool(unsigned long long int counter)> IdleCallback;
 
 	class ONYXWINDOWING_API IMenu
@@ -108,6 +106,7 @@ namespace Onyx32::Gui
 			virtual void SetAccelerators(HACCEL accelerators) = 0;
 	};
 
+	typedef std::function<void(ControlEvents eventType, IControl& control)> OnControlEvent;
 	class ONYXWINDOWING_API IControl
 	{
 		public:
@@ -135,13 +134,14 @@ namespace Onyx32::Gui
 		OnClick,
 		OnDoubleClick
 	};
+	typedef std::function<void(ButtonEvents eventType, IButton& button)> OnButtonEvent;
 	class ONYXWINDOWING_API IButton : public IControl
 	{
 		public:
 			virtual ~IButton() = 0;
-			virtual const std::wstring& GetText() = 0;
-			virtual void SetOnClick(OnClick&& onClick) = 0;
-			virtual void SetOnDoubleClick(OnClick&& onDblClick) = 0;
+			virtual const std::wstring& GetText() const = 0;
+			using IControl::SetEvent;
+			virtual void SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler) = 0;
 			virtual void SetText(std::wstring_view str) = 0;
 	};
 
@@ -161,7 +161,8 @@ namespace Onyx32::Gui
 			virtual void SetText(std::wstring_view str) = 0;
 	};
 
-	class ONYXWINDOWING_API IWindow 
+	typedef std::function<void(WindowEvents eventType, IWindow& window)> OnWindowEvent;
+	class ONYXWINDOWING_API IWindow
 	{
 		public: 
 			virtual ~IWindow() = 0;
@@ -178,7 +179,7 @@ namespace Onyx32::Gui
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual void SetVisibility(const bool isVisible) = 0;
 			virtual void SetDisplayState(const WindowDisplayState state) = 0;
-			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) = 0;
+			virtual void SetEvent(WindowEvents evt, OnWindowEvent&& evtHandler) = 0;
 			virtual void SetEnabled(const bool isEnabled) = 0;
 
 			/// <summary>

@@ -134,7 +134,7 @@ namespace Onyx32::Gui
 		_wndHandle = hWnd;
 	}
 
-	void Window::SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler)
+	void Window::SetEvent(WindowEvents evt, OnWindowEvent&& evtHandler)
 	{
 		_eventHandlers[evt] = std::move(evtHandler);
 	}
@@ -202,7 +202,6 @@ namespace Onyx32::Gui
 		if (_windowState == WindowState::Initialized && _children.count(control))
 			_children.erase(control);
 	}
-	
 
 	void Window::InvokeEvent(const WindowEvents evt)
 	{

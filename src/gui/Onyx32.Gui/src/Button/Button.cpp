@@ -21,9 +21,7 @@ namespace Onyx32::Gui
 		const UINT yPos,
 		const unsigned int controlId)
 		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
-			_text(text),
-			_onClick(DefaultClickHandler),
-			_onDblClick(DefaultClickHandler)
+			_text(text)
 	{
 	}
 
@@ -32,19 +30,9 @@ namespace Onyx32::Gui
 		OutputDebugString(L"\nButton destroyed"); 
 	}
 
-	const std::wstring& Button::GetText()
+	const std::wstring& Button::GetText() const
 	{
 		return _text;
-	}
-
-	void Button::SetOnClick(OnClick&& onClick)
-	{
-		_onClick = std::move(onClick);
-	}
-
-	void Button::SetOnDoubleClick(OnClick&& onDblClick)
-	{
-		_onDblClick = std::move(onDblClick);
 	}
 
 	void Button::SetText(std::wstring_view str)
@@ -85,6 +73,17 @@ namespace Onyx32::Gui
 		}
 	}
 
+	void Button::SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler)
+	{
+		_buttonEventHandlers[evt] = std::move(evtHandler);
+	}
+
+	void Button::InvokeEvent(const ButtonEvents evt)
+	{
+		if (_state == ControlState::Initialized && _buttonEventHandlers.count(evt))
+			_buttonEventHandlers[evt](evt, *this);
+	}
+
 	LRESULT Button::Process(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/Controls/button-messages
@@ -95,17 +94,16 @@ namespace Onyx32::Gui
 				switch (HIWORD(wParam))
 				{
 					case BN_CLICKED:
-						_onClick(*this);
-					break;
+						InvokeEvent(ButtonEvents::OnClick);
+						return 0;
 					
 					case BN_DBLCLK:
-						_onDblClick(*this);
-					break;
+						InvokeEvent(ButtonEvents::OnDoubleClick);
+						return 0;
 
 					default:
 						return BaseControl<IButton>::Process(message, wParam, lParam);
 				}
-				return 0;
 			}
 				
 			default:

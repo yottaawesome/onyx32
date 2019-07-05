@@ -105,7 +105,7 @@ namespace Onyx32::Gui
 			static const std::wstring Class;
 			static const int Styles;
 			std::unordered_map<ControlEvents, OnControlEvent> _eventHandlers;
-			void InvokeEvent(const ControlEvents evt);
+			virtual void InvokeEvent(const ControlEvents evt);
 	};
 
 	template<typename ControlType>
