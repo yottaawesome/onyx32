@@ -32,10 +32,10 @@ namespace Onyx32::Gui
 		/// This event double fires when the user minimizes the Window by clicking its Task Bar button.
 		OnActivateChange,
 		OnClose,
+		OnDestroy,
 		OnMoving,
 		OnMoved,
-		OnGainedFocus,
-		OnLosingFocus
+		OnFocusChange
 	};
 
 	enum struct ONYXWINDOWING_API WindowState

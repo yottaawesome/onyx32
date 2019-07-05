@@ -294,7 +294,7 @@ namespace Onyx32::Gui
 			case WM_SETFOCUS:
 			{
 				_hasFocus = true;
-				InvokeEvent(WindowEvents::OnGainedFocus);
+				InvokeEvent(WindowEvents::OnFocusChange);
 				return 0;
 			}
 
@@ -303,15 +303,20 @@ namespace Onyx32::Gui
 			case WM_KILLFOCUS:
 			{
 				_hasFocus = false;
-				InvokeEvent(WindowEvents::OnLosingFocus);
+				InvokeEvent(WindowEvents::OnFocusChange);
 				return 0;
+			}
+
+			case WM_CLOSE:
+			{
+				InvokeEvent(WindowEvents::OnClose);
 			}
 
 			// Close box on the window was clicked
 			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
 			case WM_DESTROY:
 			{
-				InvokeEvent(WindowEvents::OnClose);
+				InvokeEvent(WindowEvents::OnDestroy);
 				return 0;
 			}
 

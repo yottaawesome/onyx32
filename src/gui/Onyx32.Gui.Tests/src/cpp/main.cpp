@@ -14,6 +14,7 @@ using Onyx32::Gui::IDateTime;
 using Onyx32::Gui::Onyx32Lib;
 using Onyx32::Gui::IApplication;
 using Onyx32::Gui::WindowEvents;
+using Onyx32::Gui::WindowDisplayState;
 
 // https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
 
@@ -42,9 +43,12 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	button->SetOnClick(
 		[](IButton& button) -> void { button.Resize(75, 75); });
 	button->SetOnDoubleClick(
-		[wnd](IButton& button) -> void { wnd->SetDisplayState(Onyx32::Gui::WindowDisplayState::Minimized); });
+		[wnd](IButton& button) -> void { wnd->SetDisplayState(WindowDisplayState::Minimized); });
 
 	IButton* changeButton = factory->CreateButton(100, L"Show/Hide", 100, 100, 10, 10);
+	wnd2->SetWindowEvent(
+		WindowEvents::OnClose,
+		[](WindowEvents evt, IWindow& window) -> void { window.SetVisibility(false); });
 	wnd2->AddControl(changeButton);
 	changeButton->SetOnClick(
 		[wnd](IButton& button) -> void { wnd->SetVisibility(!wnd->IsVisible()); });
@@ -54,9 +58,9 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		[](WindowEvents evt, IWindow& window) -> void
 		{ 
 			if(window.IsActive())
-				OutputDebugStringA("\nWindow gained focus"); 
+				OutputDebugStringA("\nWindow activated"); 
 			else
-				OutputDebugStringA("\nWindow lost focus");
+				OutputDebugStringA("\nWindow deactivated");
 		});
 	wnd->SetWindowEvent(
 		WindowEvents::OnResized,
