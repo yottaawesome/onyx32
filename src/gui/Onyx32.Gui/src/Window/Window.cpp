@@ -29,7 +29,8 @@ namespace Onyx32::Gui
 		_isActive(false),
 		_windowState(WindowState::Uninitialized),
 		_isBeingResized(false),
-		_hasFocus(false)
+		_hasFocus(false),
+		_isEnabled(false)
 	{ }
 
 	Window::Window(const WindowClass& wndClass, wstring_view title, const UINT width, const UINT height, const UINT xPos, const UINT yPos)
@@ -46,7 +47,8 @@ namespace Onyx32::Gui
 		_isActive(false),
 		_windowState(WindowState::Uninitialized),
 		_isBeingResized(false),
-		_hasFocus(false)
+		_hasFocus(false),
+		_isEnabled(false)
 	{ }
 
 	Window::~Window()
@@ -64,12 +66,22 @@ namespace Onyx32::Gui
 	bool Window::IsActive() const { return _isActive; }
 	bool Window::HasFocus() const { return _hasFocus; }
 	bool Window::IsVisible() const { return _isVisible; }
+	bool Window::IsEnabled() const { return _isEnabled; }
 	void Window::GetDimensions(Dimensions& dimensions) const
 	{
 		dimensions.xPos = _xPos;
 		dimensions.yPos = _yPos;
 		dimensions.width = _width;
 		dimensions.height = _height;
+	}
+
+	void Window::SetEnabled(const bool isEnabled)
+	{
+		if (_windowState == WindowState::Initialized)
+		{
+			_isEnabled = isEnabled;
+			EnableWindow(_wndHandle, isEnabled);
+		}
 	}
 
 	void Window::SetTitle(wstring_view title)
@@ -307,12 +319,24 @@ namespace Onyx32::Gui
 				return 0;
 			}
 
-			case WM_CLOSE:
+			// Window is being enabled or disabled
+			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-enable
+			case WM_ENABLE:
 			{
-				InvokeEvent(WindowEvents::OnClose);
+				_isEnabled = wParam;
+				InvokeEvent(WindowEvents::OnEnabledChange);
+				return 0;
 			}
 
 			// Close box on the window was clicked
+			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-close
+			case WM_CLOSE:
+			{
+				InvokeEvent(WindowEvents::OnClose);
+				return 0;
+			}
+
+			// Window is being destroyed
 			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
 			case WM_DESTROY:
 			{
@@ -338,12 +362,14 @@ namespace Onyx32::Gui
 				return 0;
 			}
 
+			// Window is being painted
+			// https://docs.microsoft.com/en-us/windows/win32/gdi/wm-paint
 			case WM_PAINT:
 			{
 				hdc = BeginPaint(_wndHandle, &ps);
 				// TODO: Add any drawing code here...
 				EndPaint(_wndHandle, &ps);
-				break;
+				return 0;
 			}
 
 			default:

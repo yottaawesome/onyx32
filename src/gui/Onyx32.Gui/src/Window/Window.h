@@ -40,12 +40,14 @@ namespace Onyx32::Gui
 			virtual void GetDimensions(Dimensions& dimensions) const override;
 			virtual bool HasFocus() const override;
 			virtual bool IsVisible() const override;
+			virtual bool IsEnabled() const override;
 
 			virtual void SetHwnd(HWND hWnd);
 			virtual void SetTitle(std::wstring_view title) override;
 			virtual void SetVisibility(const bool isVisible) override;
 			virtual void SetDisplayState(const WindowDisplayState state) override;
 			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) override;
+			virtual void SetEnabled(const bool isEnabled);
 
 			virtual void Initialize() override;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
@@ -72,6 +74,7 @@ namespace Onyx32::Gui
 			bool _isVisible;
 			bool _isBeingResized;
 			bool _hasFocus;
+			bool _isEnabled;
 			std::unordered_map<IControl*, std::shared_ptr<IControl>> _children;
 			const int _styles;
 			std::unordered_map<WindowEvents, OnWindowEvent> _eventHandlers;

@@ -35,7 +35,8 @@ namespace Onyx32::Gui
 		OnDestroy,
 		OnMoving,
 		OnMoved,
-		OnFocusChange
+		OnFocusChange,
+		OnEnabledChange
 	};
 
 	enum struct ONYXWINDOWING_API WindowState
@@ -153,11 +154,13 @@ namespace Onyx32::Gui
 			virtual bool IsActive() const = 0;
 			virtual bool HasFocus() const = 0;
 			virtual bool IsVisible() const = 0;
+			virtual bool IsEnabled() const = 0;
 
 			virtual void SetTitle(std::wstring_view title) = 0;
 			virtual void SetVisibility(const bool isVisible) = 0;
 			virtual void SetDisplayState(const WindowDisplayState state) = 0;
 			virtual void SetWindowEvent(WindowEvents evt, OnWindowEvent&& evtHandler) = 0;
+			virtual void SetEnabled(const bool isEnabled) = 0;
 
 			/// <summary>
 			/// Adds the Control to the Window. The Window assumes ownership of the Control's lifetime.
