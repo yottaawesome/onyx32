@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "../../include/Onyx32.Gui.h"
+#include <unordered_map>
 
 namespace Onyx32::Gui
 {
@@ -73,17 +74,21 @@ namespace Onyx32::Gui
 			BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent);
 			virtual ~BaseControl();
 
-			virtual HWND GetHwnd() override;
-			virtual UINT GetId() override;
-			virtual ControlState GetState() override;
-			virtual int GetStyles() override;
-			virtual const std::wstring& GetClass() override;
-			virtual void GetDimensions(Dimensions& dimensions) override;
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+			virtual HWND GetHwnd() const override;
+			virtual UINT GetId() const override;
+			virtual ControlState GetState() const override;
+			virtual int GetStyles() const override;
+			virtual const std::wstring& GetClass() const override;
+			virtual void GetDimensions(Dimensions& dimensions) const override;
+			virtual bool IsVisible() const override;
 
+			virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) override;
+			virtual void SetVisibility(const bool isVisible) override;
 			virtual void SetParent(IWindow* parent);
 			virtual void Resize(const UINT width, const UINT height) override;
 			virtual void Move(const UINT xPos, const UINT yPos) override;
+
+			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 
 		protected:
 			HWND _wndHandle;
@@ -93,33 +98,25 @@ namespace Onyx32::Gui
 			UINT _height;
 			UINT _xPos;
 			UINT _yPos;
+			bool _isVisible;
 			ControlState _state;
 			static const std::wstring Class;
 			static const int Styles;
+			std::unordered_map<ControlEvents, OnControlEvent> _eventHandlers;
+			void InvokeEvent(const ControlEvents evt);
 	};
 
 	template<typename ControlType>
-	void BaseControl<ControlType>::Move(const UINT xPos, const UINT yPos)
-	{
-		if (MoveWindow(_wndHandle, xPos, yPos, _width, _height, true))
-		{
-			_xPos = xPos;
-			_yPos = yPos;
-		}
-	}
-
-	template<typename ControlType>
-	void BaseControl<ControlType>::GetDimensions(Dimensions& dimensions)
-	{
-		dimensions.xPos = _xPos;
-		dimensions.yPos = _yPos;
-		dimensions.width = _width;
-		dimensions.height = _height;
-	}
-
-	template<typename ControlType>
 	BaseControl<ControlType>::BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent)
-		: _controlId(id), _state(state), _width(width), _height(height), _xPos(xPos), _yPos(yPos), _wndHandle(wndHandle), _parent(parent) {}
+		: _controlId(id), 
+		_state(state), 
+		_width(width), 
+		_height(height), 
+		_xPos(xPos), 
+		_yPos(yPos), 
+		_wndHandle(wndHandle), 
+		_parent(parent), 
+		_isVisible(false) {}
 
 	template<typename ControlType>
 	BaseControl<ControlType>::~BaseControl()
@@ -132,22 +129,54 @@ namespace Onyx32::Gui
 	}
 
 	template<typename ControlType>
-	int BaseControl<ControlType>::GetStyles()
+	void BaseControl<ControlType>::InvokeEvent(const ControlEvents evt)
 	{
-		return BaseControl<ControlType>::Styles;
+		if (_state == ControlState::Initialized && _eventHandlers.count(evt))
+			_eventHandlers[evt](evt, *this);
 	}
 
 	template<typename ControlType>
-	const std::wstring& BaseControl<ControlType>::GetClass()
+	void BaseControl<ControlType>::SetEvent(ControlEvents evt, OnControlEvent&& evtHandler)
 	{
-		return BaseControl<ControlType>::Class;
+		_eventHandlers[evt] = std::move(evtHandler);
 	}
 
 	template<typename ControlType>
-	HWND BaseControl<ControlType>::GetHwnd()
+	void BaseControl<ControlType>::Move(const UINT xPos, const UINT yPos)
 	{
-		return _wndHandle;
+		if (MoveWindow(_wndHandle, xPos, yPos, _width, _height, true))
+		{
+			_xPos = xPos;
+			_yPos = yPos;
+		}
 	}
+
+	template<typename ControlType>
+	void BaseControl<ControlType>::GetDimensions(Dimensions& dimensions) const
+	{
+		dimensions.xPos = _xPos;
+		dimensions.yPos = _yPos;
+		dimensions.width = _width;
+		dimensions.height = _height;
+	}
+
+	template<typename ControlType>
+	bool BaseControl<ControlType>::IsVisible() const { return _isVisible; }
+
+	template<typename ControlType>
+	int BaseControl<ControlType>::GetStyles() const { return BaseControl<ControlType>::Styles; }
+
+	template<typename ControlType>
+	const std::wstring& BaseControl<ControlType>::GetClass() const { return BaseControl<ControlType>::Class; }
+
+	template<typename ControlType>
+	HWND BaseControl<ControlType>::GetHwnd() const { return _wndHandle; }
+
+	template<typename ControlType>
+	UINT BaseControl<ControlType>::GetId() const { return _controlId; }
+
+	template<typename ControlType>
+	ControlState BaseControl<ControlType>::GetState() const { return _state; }
 
 	template<typename ControlType>
 	void BaseControl<ControlType>::SetParent(IWindow* parent)
@@ -156,15 +185,13 @@ namespace Onyx32::Gui
 	}
 
 	template<typename ControlType>
-	UINT BaseControl<ControlType>::GetId()
+	void BaseControl<ControlType>::SetVisibility(const bool isVisible)
 	{
-		return _controlId;
-	}
-
-	template<typename ControlType>
-	ControlState BaseControl<ControlType>::GetState()
-	{
-		return _state;
+		if (_state == ControlState::Initialized)
+		{
+			int value = isVisible ? SW_SHOW : SW_HIDE;
+			ShowWindow(_wndHandle, value);
+		}
 	}
 
 	template<typename ControlType>
@@ -188,6 +215,19 @@ namespace Onyx32::Gui
 	template<typename ControlType>
 	LRESULT BaseControl<ControlType>::Process(UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		return DefSubclassProc(_wndHandle, message, wParam, lParam);
+		switch (message)
+		{
+			// Sent to a window when the window is about to be hidden or shown.
+			// https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-showwindow
+			case WM_SHOWWINDOW:
+			{
+				_isVisible = wParam;
+				InvokeEvent(ControlEvents::OnVisibilityChanged);
+				return 0;
+			}
+
+			default:
+				return DefSubclassProc(_wndHandle, message, wParam, lParam);
+		}
 	}
 }

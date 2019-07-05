@@ -14,7 +14,9 @@ using Onyx32::Gui::IDateTime;
 using Onyx32::Gui::Onyx32Lib;
 using Onyx32::Gui::IApplication;
 using Onyx32::Gui::WindowEvents;
+using Onyx32::Gui::ControlEvents;
 using Onyx32::Gui::WindowDisplayState;
+using Onyx32::Gui::IControl;
 
 // https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
 
@@ -32,7 +34,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	wnd->Initialize();
 	wnd2->Initialize();
 	
-
 	// Ownership of controls is done by the parent window, so do not use shared_ptr
 	IButton* button = factory->CreateButton(100, L"Button", 100, 100, 10, 10);
 	ITextInput* input = factory->CreateTextInput(101, L"", 350, 50, 25, 125);
@@ -44,6 +45,10 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		[](IButton& button) -> void { button.Resize(75, 75); });
 	button->SetOnDoubleClick(
 		[wnd](IButton& button) -> void { wnd->SetDisplayState(WindowDisplayState::Minimized); });
+	button->SetEvent(
+		ControlEvents::OnVisibilityChanged,
+		[](ControlEvents evt, IControl& control) -> void { OutputDebugStringA("\nA button's visibility was changed"); }
+	);
 
 	IButton* changeButton = factory->CreateButton(100, L"Show/Hide", 100, 100, 10, 10);
 	wnd2->SetWindowEvent(
@@ -51,7 +56,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		[](WindowEvents evt, IWindow& window) -> void { window.SetVisibility(false); });
 	wnd2->AddControl(changeButton);
 	changeButton->SetOnClick(
-		[wnd](IButton& button) -> void { wnd->SetVisibility(!wnd->IsVisible()); });
+		[button](IButton& internalButton) -> void { button->SetVisibility(!button->IsVisible()); });
 
 	wnd->SetWindowEvent(
 		WindowEvents::OnActivateChange, 

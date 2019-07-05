@@ -73,10 +73,15 @@ namespace Onyx32::Gui
 				this,
 				Static::DefCtrlProc
 			);
-			_wndHandle = Win32Window::CreateChildWindow(args);
-			_state = _wndHandle 
-				? ControlState::Initialized 
-				: ControlState::Error;
+			if (_wndHandle = Win32Window::CreateChildWindow(args))
+			{
+				_state = ControlState::Initialized;
+				_isVisible = true;
+			}
+			else
+			{
+				_state = ControlState::Error;
+			}
 		}
 	}
 
@@ -98,15 +103,13 @@ namespace Onyx32::Gui
 					break;
 
 					default:
-						return DefSubclassProc(_wndHandle, message, wParam, lParam);
+						return BaseControl<IButton>::Process(message, wParam, lParam);
 				}
 				return 0;
 			}
 				
 			default:
-				return DefSubclassProc(_wndHandle, message, wParam, lParam);
+				return BaseControl<IButton>::Process(message, wParam, lParam);
 		}
-
-		return DefSubclassProc(_wndHandle, message, wParam, lParam);
 	}
 }

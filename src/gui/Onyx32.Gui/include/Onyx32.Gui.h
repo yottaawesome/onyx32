@@ -39,6 +39,11 @@ namespace Onyx32::Gui
 		OnEnabledChange
 	};
 
+	enum struct ONYXWINDOWING_API ControlEvents
+	{
+		OnVisibilityChanged
+	};
+
 	enum struct ONYXWINDOWING_API WindowState
 	{
 		Uninitialized = 1,
@@ -81,6 +86,7 @@ namespace Onyx32::Gui
 		IDateTime& control, 
 		SYSTEMTIME& dateTime)> OnDateTimeChange;
 	typedef std::function<void(WindowEvents eventType, IWindow& window)> OnWindowEvent;
+	typedef std::function<void(ControlEvents eventType, IControl& control)> OnControlEvent;
 	typedef std::function<bool(unsigned long long int counter)> IdleCallback;
 
 	class ONYXWINDOWING_API IMenu
@@ -103,17 +109,21 @@ namespace Onyx32::Gui
 		public:
 			virtual ~IControl() = 0;
 
-			virtual HWND GetHwnd() = 0;
-			virtual void GetDimensions(Dimensions& dimensions) = 0;
-			virtual UINT GetId() = 0;
-			virtual const std::wstring& GetClass() = 0;
-			virtual ControlState GetState() = 0;
-			virtual int GetStyles() = 0;
+			virtual HWND GetHwnd() const = 0;
+			virtual void GetDimensions(Dimensions& dimensions) const = 0;
+			virtual UINT GetId() const = 0;
+			virtual const std::wstring& GetClass() const = 0;
+			virtual ControlState GetState() const = 0;
+			virtual int GetStyles() const = 0;
+			virtual bool IsVisible() const = 0;
+
+			virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) = 0;
+			virtual void Resize(const UINT width, const UINT height) = 0;
+			virtual void Move(const UINT xPos, const UINT yPos) = 0;
+			virtual void SetVisibility(const bool isVisible) = 0;
 
 			virtual void Initialize(IWindow* window) = 0;
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
-			virtual void Resize(const UINT width, const UINT height) = 0;
-			virtual void Move(const UINT xPos, const UINT yPos) = 0;
 	};
 
 	class ONYXWINDOWING_API IButton : public IControl

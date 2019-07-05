@@ -45,11 +45,17 @@ namespace Onyx32::Gui
 				icex.dwICC = ICC_DATE_CLASSES;
 
 				if (InitCommonControlsEx(&icex))
+				{
 					initCommonControls = false;
+				}
+				else
+				{
+					_state = ControlState::Error;
+					return;
+				}
 			}
 
 			_parent = parent;
-
 			Win32ChildWindowCreationArgs args(
 				0,
 				DateTime::Class,
@@ -64,10 +70,16 @@ namespace Onyx32::Gui
 				this,
 				Static::DefCtrlProc
 			);
-			_wndHandle = Win32Window::CreateChildWindow(args);
-			_state = _wndHandle
-				? ControlState::Initialized
-				: ControlState::Error;
+
+			if (_wndHandle = Win32Window::CreateChildWindow(args))
+			{
+				_state = ControlState::Initialized;
+				_isVisible = true;
+			}
+			else
+			{
+				_state = ControlState::Error;
+			}
 		}
 	}
 
@@ -110,11 +122,11 @@ namespace Onyx32::Gui
 					}
 				}
 
-				return DefSubclassProc(_wndHandle, message, wParam, lParam);
+				return BaseControl<IDateTime>::Process(message, wParam, lParam);
 			}
 
 			default:
-				return DefSubclassProc(_wndHandle, message, wParam, lParam);
+				return BaseControl<IDateTime>::Process(message, wParam, lParam);
 		}
 	}
 }
