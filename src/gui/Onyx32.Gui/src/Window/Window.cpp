@@ -1,7 +1,7 @@
 #include "../h/stdafx.h"
 #include "../../include/Onyx32.Gui.h"
 #include "Window.h"
-#include "../Button/Button.h"
+#include "../Controls/Button/Button.h"
 #include "../WindowClassManager/WindowClassManager.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
