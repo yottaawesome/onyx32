@@ -45,8 +45,6 @@ namespace Onyx32::Gui
 	{
 		if (_state == ControlState::Uninitialized)
 		{
-			_parent = parent;
-
 			Win32ChildWindowCreationArgs args(
 				0,
 				Button::Class,
@@ -56,12 +54,12 @@ namespace Onyx32::Gui
 				_yPos,
 				_width,
 				_height,
-				_parent->GetHwnd(),
+				parent->GetHwnd(),
 				(HMENU)_controlId,
 				this,
 				Static::DefCtrlProc
 			);
-			if (_wndHandle = Win32Window::CreateChildWindow(args))
+			if (_wndHandle = CreateChildWindow(args))
 			{
 				_state = ControlState::Initialized;
 				_isVisible = true;

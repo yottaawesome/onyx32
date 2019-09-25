@@ -156,7 +156,7 @@ namespace Onyx32::Gui
 				this,
 				_windowClass.WndClass
 			);
-			_wndHandle = Win32Window::CreateParentWindow(args);
+			_wndHandle = CreateParentWindow(args);
 			if (_wndHandle)
 			{
 				// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx

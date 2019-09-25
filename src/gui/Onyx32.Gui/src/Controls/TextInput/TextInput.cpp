@@ -28,7 +28,6 @@ namespace Onyx32::Gui
 	{
 		if (_state == ControlState::Uninitialized)
 		{
-			_parent = window;
 			Win32ChildWindowCreationArgs args(
 				0,
 				TextInput::Class,
@@ -43,7 +42,7 @@ namespace Onyx32::Gui
 				this, 
 				Static::DefCtrlProc
 			);
-			_wndHandle = Win32Window::CreateChildWindow(args);
+			_wndHandle = CreateChildWindow(args);
 			_state = _wndHandle
 				? ControlState::Initialized
 				: ControlState::Error;

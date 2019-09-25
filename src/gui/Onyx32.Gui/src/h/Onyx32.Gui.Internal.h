@@ -84,7 +84,6 @@ namespace Onyx32::Gui
 
 			virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) override;
 			virtual void SetVisibility(const bool isVisible) override;
-			virtual void SetParent(IWindow* parent);
 			virtual void Resize(const UINT width, const UINT height) override;
 			virtual void Move(const UINT xPos, const UINT yPos) override;
 
@@ -92,7 +91,6 @@ namespace Onyx32::Gui
 
 		protected:
 			HWND _wndHandle;
-			IWindow* _parent;
 			unsigned int const _controlId;
 			UINT _width;
 			UINT _height;
@@ -116,8 +114,7 @@ namespace Onyx32::Gui
 		_height(height), 
 		_xPos(xPos), 
 		_yPos(yPos), 
-		_wndHandle(wndHandle), 
-		_parent(parent), 
+		_wndHandle(wndHandle),
 		_isVisible(false),
 		_isEnabled(false),
 		_hasFocus(false)
@@ -182,12 +179,6 @@ namespace Onyx32::Gui
 
 	template<typename ControlType>
 	ControlState BaseControl<ControlType>::GetState() const { return _state; }
-
-	template<typename ControlType>
-	void BaseControl<ControlType>::SetParent(IWindow* parent)
-	{
-		_parent = parent;
-	}
 
 	template<typename ControlType>
 	void BaseControl<ControlType>::SetVisibility(const bool isVisible)
