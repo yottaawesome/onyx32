@@ -36,7 +36,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	wnd2->Initialize();
 	
 	// Ownership of controls is done by the parent window, so do not use shared_ptr
-	IButton* button = factory->CreateButton(100, L"Button", 100, 100, 10, 10);
+	IButton* button = factory->CreateButton(wnd.get(), 100, L"Button", 100, 100, 10, 10);
 	ITextInput* input = factory->CreateTextInput(101, L"", 350, 50, 25, 125);
 	IDateTime* dateTime = factory->CreateDateTime(102, 220, 20, 120, 100);
 	wnd->AddControl(button);
@@ -54,7 +54,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		[](ControlEvents evt, IControl& control) -> void { OutputDebugStringA("\nA button's visibility was changed"); }
 	);
 
-	IButton* changeButton = factory->CreateButton(100, L"Show/Hide", 100, 100, 10, 10);
+	IButton* changeButton = factory->CreateButton(wnd2.get(), 100, L"Show/Hide", 100, 100, 10, 10);
 	wnd2->SetEvent(
 		WindowEvents::OnClose,
 		[](WindowEvents evt, IWindow& window) -> void { window.SetVisibility(false); });

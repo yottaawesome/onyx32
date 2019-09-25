@@ -208,7 +208,7 @@ namespace Onyx32::Gui
 			[[nodiscard]] virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, UINT width = 0, UINT height = 0) = 0;
 			[[nodiscard]] virtual IDateTime* CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 			[[nodiscard]] virtual ITextInput* CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			[[nodiscard]] virtual IButton* CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			[[nodiscard]] virtual IButton* CreateButton(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
 			[[nodiscard]] virtual IApplication* GetApplication() = 0;
 	};
 

@@ -43,8 +43,8 @@ namespace Onyx32::Gui
 		return new DateTime(width, height, xPos, yPos, controlId);
 	}
 
-	IButton* Factory::CreateButton(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	IButton* Factory::CreateButton(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		return new Button(text, width, height, xPos, yPos, controlId);
+		return Button::Create(parent, controlId, text, width, height, xPos, yPos);
 	}
 }

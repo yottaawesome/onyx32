@@ -13,6 +13,44 @@ namespace Onyx32::Gui
 	const std::wstring Button::Class = L"BUTTON";
 	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON | BS_NOTIFY;
 
+	IButton* Button::Create(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	{
+		auto button = new Button(text, width, height, xPos, yPos, controlId);
+		Win32ChildWindowCreationArgs args(
+			0,
+			Button::Class,
+			text,
+			Button::Styles,
+			xPos,
+			yPos,
+			width,
+			height,
+			parent->GetHwnd(),
+			(HMENU)controlId,
+			button,
+			Static::DefCtrlProc
+		);
+		HWND _wndHandle = nullptr;
+		if (_wndHandle = CreateChildWindow(args))
+		{
+			button->SetHwnd(_wndHandle);
+		}
+		else
+		{
+			delete button;
+			return nullptr;
+		}
+		return button;
+	}
+
+	void Button::SetHwnd(HWND hWnd) 
+	{
+		this->_wndHandle = hWnd;
+		_state = ControlState::Initialized;
+		_isVisible = true;
+	}
+
+
 	Button::Button(
 		std::wstring_view text,
 		const UINT width,
@@ -43,32 +81,6 @@ namespace Onyx32::Gui
 
 	void Button::Initialize(IWindow* parent)
 	{
-		if (_state == ControlState::Uninitialized)
-		{
-			Win32ChildWindowCreationArgs args(
-				0,
-				Button::Class,
-				_text,
-				Button::Styles,
-				_xPos,
-				_yPos,
-				_width,
-				_height,
-				parent->GetHwnd(),
-				(HMENU)_controlId,
-				this,
-				Static::DefCtrlProc
-			);
-			if (_wndHandle = CreateChildWindow(args))
-			{
-				_state = ControlState::Initialized;
-				_isVisible = true;
-			}
-			else
-			{
-				_state = ControlState::Error;
-			}
-		}
 	}
 
 	void Button::SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler)

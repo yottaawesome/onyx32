@@ -24,9 +24,12 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
 			virtual void SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler) override;
 
+			static IButton* Create(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos);
+
 		protected:
 			std::wstring _text;
 			std::unordered_map<ButtonEvents, OnButtonEvent> _buttonEventHandlers;
 			virtual void InvokeEvent(const ButtonEvents evt);
+			virtual void SetHwnd(HWND hWnd);
 	};
 }
