@@ -32,6 +32,5 @@ namespace Onyx32::Gui
 			std::wstring _text;
 			std::unordered_map<ButtonEvents, OnButtonEvent> _buttonEventHandlers;
 			virtual void InvokeEvent(const ButtonEvents evt);
-			virtual void SetHwnd(HWND hWnd);
 	};
 }

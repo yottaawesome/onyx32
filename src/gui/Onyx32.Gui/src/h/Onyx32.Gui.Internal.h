@@ -104,6 +104,7 @@ namespace Onyx32::Gui
 			static const int Styles;
 			std::unordered_map<ControlEvents, OnControlEvent> _eventHandlers;
 			virtual void InvokeEvent(const ControlEvents evt);
+			virtual void SetHwnd(HWND hWnd);
 	};
 
 	template<typename ControlType>
@@ -119,6 +120,14 @@ namespace Onyx32::Gui
 		_isEnabled(false),
 		_hasFocus(false)
 	{}
+
+	template<typename ControlType>
+	void BaseControl<ControlType>::SetHwnd(HWND hWnd)
+	{
+		this->_wndHandle = hWnd;
+		_state = ControlState::Initialized;
+		_isVisible = true;
+	}
 
 	template<typename ControlType>
 	BaseControl<ControlType>::~BaseControl()

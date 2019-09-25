@@ -33,9 +33,11 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
-	ITextInput* Factory::CreateTextInput(UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	ITextInput* Factory::CreateTextInput(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		return new TextInput(text, width, height, xPos, yPos, controlId);
+		auto control = TextInput::Create(parent, controlId, text, width, height, xPos, yPos);
+		parent->AddControl(control);
+		return control;
 	}
 
 	IDateTime* Factory::CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos)
@@ -45,6 +47,8 @@ namespace Onyx32::Gui
 
 	IButton* Factory::CreateButton(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		return Button::Create(parent, controlId, text, width, height, xPos, yPos);
+		auto control = Button::Create(parent, controlId, text, width, height, xPos, yPos);
+		parent->AddControl(control);
+		return control;
 	}
 }

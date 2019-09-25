@@ -15,7 +15,7 @@ namespace Onyx32::Gui
 
 	IButton* Button::Create(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		auto button = new Button(text, width, height, xPos, yPos, controlId);
+		auto control = new Button(text, width, height, xPos, yPos, controlId);
 		Win32ChildWindowCreationArgs args(
 			0,
 			Button::Class,
@@ -27,27 +27,18 @@ namespace Onyx32::Gui
 			height,
 			parent->GetHwnd(),
 			(HMENU)controlId,
-			button,
+			control,
 			Static::DefCtrlProc
 		);
-		HWND _wndHandle = nullptr;
-		if (_wndHandle = CreateChildWindow(args))
+		if (control->_wndHandle = CreateChildWindow(args))
 		{
-			button->SetHwnd(_wndHandle);
+			control->_state = ControlState::Initialized;
+			control->_isVisible = true;
+			return control;
 		}
-		else
-		{
-			delete button;
-			return nullptr;
-		}
-		return button;
-	}
 
-	void Button::SetHwnd(HWND hWnd) 
-	{
-		this->_wndHandle = hWnd;
-		_state = ControlState::Initialized;
-		_isVisible = true;
+		delete control;
+		return nullptr;
 	}
 
 	Button::Button(

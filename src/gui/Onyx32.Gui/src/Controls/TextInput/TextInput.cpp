@@ -12,6 +12,35 @@ namespace Onyx32::Gui
 	const std::wstring TextInput::Class = L"EDIT";
 	const int TextInput::Styles = WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL;
 
+	ITextInput* TextInput::Create(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	{
+		auto control = new TextInput(text, width, height, xPos, yPos, controlId);
+		Win32ChildWindowCreationArgs args(
+			0,
+			TextInput::Class,
+			text,
+			TextInput::Styles,
+			xPos,
+			yPos,
+			width,
+			height,
+			parent->GetHwnd(),
+			(HMENU)controlId,
+			control,
+			Static::DefCtrlProc
+		);
+		;
+		if (control->_wndHandle = CreateChildWindow(args))
+		{
+			control->_state = ControlState::Initialized;
+			control->_isVisible = true;
+			return control;
+		}
+
+		delete control;
+		return nullptr;
+	}
+
 	TextInput::TextInput(
 		std::wstring_view text,
 		const UINT width,
@@ -26,27 +55,6 @@ namespace Onyx32::Gui
 
 	void TextInput::Initialize(IWindow* window)
 	{
-		if (_state == ControlState::Uninitialized)
-		{
-			Win32ChildWindowCreationArgs args(
-				0,
-				TextInput::Class,
-				_text, 
-				TextInput::Styles, 
-				_xPos, 
-				_yPos, 
-				_width, 
-				_height, 
-				window->GetHwnd(), 
-				(HMENU)_controlId, 
-				this, 
-				Static::DefCtrlProc
-			);
-			_wndHandle = CreateChildWindow(args);
-			_state = _wndHandle
-				? ControlState::Initialized
-				: ControlState::Error;
-		}
 	}
 
 	const wstring TextInput::GetText()
