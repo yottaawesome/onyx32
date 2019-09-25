@@ -8,13 +8,7 @@ namespace Onyx32::Gui
 	class Button : public BaseControl<IButton>
 	{
 		public:
-			Button(
-				std::wstring_view text = L"Default",
-				const UINT width = 100,
-				const UINT height = 100,
-				const UINT xPos = 100,
-				const UINT yPos = 100,
-				const unsigned int controlId = 0);
+			Button() = delete;
 			virtual ~Button();
 
 			virtual const std::wstring& GetText() const override;
@@ -27,6 +21,14 @@ namespace Onyx32::Gui
 			static IButton* Create(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos);
 
 		protected:
+			Button(
+				std::wstring_view text = L"Default",
+				const UINT width = 100,
+				const UINT height = 100,
+				const UINT xPos = 100,
+				const UINT yPos = 100,
+				const unsigned int controlId = 0);
+
 			std::wstring _text;
 			std::unordered_map<ButtonEvents, OnButtonEvent> _buttonEventHandlers;
 			virtual void InvokeEvent(const ButtonEvents evt);

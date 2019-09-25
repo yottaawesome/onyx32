@@ -50,7 +50,6 @@ namespace Onyx32::Gui
 		_isVisible = true;
 	}
 
-
 	Button::Button(
 		std::wstring_view text,
 		const UINT width,
