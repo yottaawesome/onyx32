@@ -68,6 +68,8 @@ The project is undergoing refactoring and I'm slowly adding more features. Featu
 * DirectX support.
 * And more!
 
+Obviously, this is a bit ambitious (remember I also have a full-time job!), so it will take a while for me to piece everything together.
+
 ## Considerations
 
 Note that Win32 imposes restrictions on threads sharing and manipulating windows. Whilst it's possible for threads to [join their thread input state](https://docs.microsoft.com/en-us/windows/win32/procthread/creating-windows-in-threads), certain operations, [such as destroying windows](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow#remarks), can only be performed by the threads that created said windows.
