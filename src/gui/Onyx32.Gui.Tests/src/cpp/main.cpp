@@ -38,9 +38,8 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	// Ownership of controls is done by the parent window, so do not use shared_ptr
 	IButton* button = factory->CreateButton(wnd.get(), 100, L"Button", 100, 100, 10, 10);
 	ITextInput* input = factory->CreateTextInput(wnd.get(), 101, L"", 350, 50, 25, 125);
-	IDateTime* dateTime = factory->CreateDateTime(102, 220, 20, 120, 100);
+	IDateTime* dateTime = factory->CreateDateTime(wnd.get(), 102, 220, 20, 120, 100);
 
-	wnd->AddControl(dateTime);
 	button->SetEvent(
 		ButtonEvents::OnClick,
 		[](ButtonEvents evt, IButton& button) -> void { button.Resize(75, 75); });

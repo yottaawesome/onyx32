@@ -15,6 +15,48 @@ namespace Onyx32::Gui
 	const std::wstring DateTime::Class = DATETIMEPICK_CLASS;
 	const int DateTime::Styles = WS_BORDER | WS_CHILD | WS_VISIBLE | DTS_SHOWNONE;
 
+	IDateTime* DateTime::Create(IWindow* parent, UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos)
+	{
+		auto control = new DateTime(width, height, xPos, yPos, controlId);
+		static bool initCommonControls = true;
+		if (initCommonControls)
+		{
+			INITCOMMONCONTROLSEX icex;
+
+			icex.dwSize = sizeof(icex);
+			icex.dwICC = ICC_DATE_CLASSES;
+
+			if (!InitCommonControlsEx(&icex))
+				return nullptr;
+			initCommonControls = false;
+		}
+
+		Win32ChildWindowCreationArgs args(
+			0,
+			DateTime::Class,
+			L"DateTime",
+			DateTime::Styles,
+			xPos,
+			yPos,
+			width,
+			height,
+			parent->GetHwnd(),
+			(HMENU)controlId,
+			control,
+			Static::DefCtrlProc
+		);
+
+		if (control->_wndHandle = CreateChildWindow(args))
+		{
+			control->_state = ControlState::Initialized;
+			control->_isVisible = true;
+			return control;
+		}
+		
+		delete control;
+		return nullptr;
+	}
+
 	DateTime::DateTime(
 		const UINT width,
 		const UINT height,
@@ -34,52 +76,6 @@ namespace Onyx32::Gui
 
 	void DateTime::Initialize(IWindow* parent)
 	{
-		if (_state == ControlState::Uninitialized)
-		{
-			static bool initCommonControls = true;
-			if (initCommonControls)
-			{
-				INITCOMMONCONTROLSEX icex;
-
-				icex.dwSize = sizeof(icex);
-				icex.dwICC = ICC_DATE_CLASSES;
-
-				if (InitCommonControlsEx(&icex))
-				{
-					initCommonControls = false;
-				}
-				else
-				{
-					_state = ControlState::Error;
-					return;
-				}
-			}
-
-			Win32ChildWindowCreationArgs args(
-				0,
-				DateTime::Class,
-				L"DateTime",
-				DateTime::Styles,
-				_xPos,
-				_yPos,
-				_width,
-				_height,
-				parent->GetHwnd(),
-				(HMENU)_controlId,
-				this,
-				Static::DefCtrlProc
-			);
-
-			if (_wndHandle = CreateChildWindow(args))
-			{
-				_state = ControlState::Initialized;
-				_isVisible = true;
-			}
-			else
-			{
-				_state = ControlState::Error;
-			}
-		}
 	}
 
 	void DateTime::GetDateTime(SYSTEMTIME& dateTime)

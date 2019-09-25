@@ -40,9 +40,11 @@ namespace Onyx32::Gui
 		return control;
 	}
 
-	IDateTime* Factory::CreateDateTime(UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos)
+	IDateTime* Factory::CreateDateTime(IWindow* parent, UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos)
 	{
-		return new DateTime(width, height, xPos, yPos, controlId);
+		auto control = DateTime::Create(parent, controlId, width, height, xPos, yPos);
+		parent->AddControl(control);
+		return control;
 	}
 
 	IButton* Factory::CreateButton(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
