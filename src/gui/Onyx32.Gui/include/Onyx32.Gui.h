@@ -137,7 +137,7 @@ namespace Onyx32::Gui::Controls
 		virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
 		virtual void SetVisibility(const bool isVisible) = 0;
 
-		virtual void Initialize(IWindow* window) = 0;
+		virtual void Initialize() = 0;
 		virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) = 0;
 	};
 

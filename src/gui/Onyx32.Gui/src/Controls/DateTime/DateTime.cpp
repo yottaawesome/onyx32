@@ -74,7 +74,7 @@ namespace Onyx32::Gui::Controls
 		_onChange = onChange;
 	}
 
-	void DateTime::Initialize(IWindow* parent)
+	void DateTime::Initialize()
 	{
 	}
 

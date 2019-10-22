@@ -193,7 +193,7 @@ namespace Onyx32::Gui
 	{
 		if (_windowState == WindowState::Initialized)
 		{
-			control->Initialize(this);
+			control->Initialize();
 			_children[control] = std::shared_ptr<Onyx32::Gui::Controls::IControl>(control);
 		}
 	}

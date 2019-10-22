@@ -69,7 +69,7 @@ namespace Onyx32::Gui::Controls
 			_text = str;
 	}
 
-	void Button::Initialize(IWindow* parent)
+	void Button::Initialize()
 	{
 	}
 

@@ -11,7 +11,7 @@ namespace Onyx32::Gui::Controls
 			TextInput() = delete;
 			virtual ~TextInput();
 
-			virtual void Initialize(IWindow* window) override;
+			virtual void Initialize() override;
 			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 			virtual const std::wstring GetText() override;
 			virtual void SetText(std::wstring_view str) override;

@@ -53,7 +53,7 @@ namespace Onyx32::Gui::Controls
 
 	TextInput::~TextInput() { }
 
-	void TextInput::Initialize(IWindow* window)
+	void TextInput::Initialize()
 	{
 	}
 

@@ -14,7 +14,7 @@ namespace Onyx32::Gui::Controls
 			virtual const std::wstring& GetText() const override;
 
 			virtual void SetText(std::wstring_view str) override;
-			virtual void Initialize(IWindow* parent) override;
+			virtual void Initialize() override;
 			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 			virtual void SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler) override;
 
