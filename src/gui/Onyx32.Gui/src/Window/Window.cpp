@@ -15,7 +15,7 @@ namespace Onyx32::Gui
 {
 	const int DefaultWindowStyles = WS_OVERLAPPEDWINDOW;
 
-	Window::Window(const WindowClass& wndClass, wstring_view title, const int customStyle, const UINT width, const UINT height, const UINT xPos, const UINT yPos)
+	Window::Window(const WindowClass& wndClass, wstring_view title, const int customStyle, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
 		: _width(width),
 		_height(height),
 		_xPos(xPos),
@@ -33,7 +33,7 @@ namespace Onyx32::Gui
 		_isEnabled(false)
 	{ }
 
-	Window::Window(const WindowClass& wndClass, wstring_view title, const UINT width, const UINT height, const UINT xPos, const UINT yPos)
+	Window::Window(const WindowClass& wndClass, wstring_view title, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
 		: _width(width), 
 		_height(height),
 		_xPos(xPos),
@@ -90,7 +90,7 @@ namespace Onyx32::Gui
 			_title = title;
 	}
 
-	void Window::Move(const UINT xPos, const UINT yPos)
+	void Window::Move(const unsigned int xPos, const unsigned int yPos)
 	{
 		if (_windowState == WindowState::Initialized && MoveWindow(_wndHandle, xPos, yPos, _width, _height, true))
 		{
@@ -173,7 +173,7 @@ namespace Onyx32::Gui
 		}
 	}
 
-	void Window::Resize(const UINT width, const UINT height)
+	void Window::Resize(const unsigned int width, const unsigned int height)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-movewindow
 		// See also: https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-setwindowpos
@@ -215,7 +215,7 @@ namespace Onyx32::Gui
 			SetFocus(_wndHandle);
 	}
 
-	LRESULT Window::Process(UINT message, WPARAM wParam, LPARAM lParam)
+	LRESULT Window::Process(unsigned int message, WPARAM wParam, LPARAM lParam)
 	{
 		int wmId, wmEvent;
 		PAINTSTRUCT ps;

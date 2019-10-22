@@ -73,10 +73,10 @@ namespace Onyx32::Gui
 
 	struct ONYXWINDOWING_API Dimensions
 	{
-		UINT xPos;
-		UINT yPos;
-		UINT width;
-		UINT height;
+		unsigned int xPos;
+		unsigned int yPos;
+		unsigned int width;
+		unsigned int height;
 	};
 	
 	struct ONYXWINDOWING_API WindowClass
@@ -114,19 +114,19 @@ namespace Onyx32::Gui
 
 			virtual HWND GetHwnd() const = 0;
 			virtual void GetDimensions(Dimensions& dimensions) const = 0;
-			virtual UINT GetId() const = 0;
+			virtual unsigned int GetId() const = 0;
 			virtual const std::wstring& GetClass() const = 0;
 			virtual ControlState GetState() const = 0;
 			virtual int GetStyles() const = 0;
 			virtual bool IsVisible() const = 0;
 
 			virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) = 0;
-			virtual void Resize(const UINT width, const UINT height) = 0;
-			virtual void Move(const UINT xPos, const UINT yPos) = 0;
+			virtual void Resize(const unsigned int width, const unsigned int height) = 0;
+			virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
 			virtual void SetVisibility(const bool isVisible) = 0;
 
 			virtual void Initialize(IWindow* window) = 0;
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
+			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) = 0;
 	};
 
 	enum struct ONYXWINDOWING_API ButtonEvents
@@ -192,23 +192,23 @@ namespace Onyx32::Gui
 			/// </summary>
 			/// <param name="control">The Control to destroy. Cannot be null.</param>
 			virtual void DestroyControl([[notnull]] IControl* const control) = 0;
-			virtual void Move(const UINT xPos, const UINT yPos) = 0;
-			virtual void Resize(const UINT width, const UINT height) = 0;
+			virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
+			virtual void Resize(const unsigned int width, const unsigned int height) = 0;
 			virtual void RequestFocus() = 0;
 
 			virtual void Initialize() = 0;
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) = 0;
+			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) = 0;
 	};
 
 	class ONYXWINDOWING_API IFactory
 	{
 		public:
 			virtual ~IFactory() = 0;
-			[[nodiscard]] virtual IWindow* CreateDefaultWindow(std::wstring_view title, UINT width = 0, UINT height = 0) = 0;
-			[[nodiscard]] virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, UINT width = 0, UINT height = 0) = 0;
-			[[nodiscard]] virtual IDateTime* CreateDateTime(IWindow* parent, UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			[[nodiscard]] virtual ITextInput* CreateTextInput(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
-			[[nodiscard]] virtual IButton* CreateButton(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos) = 0;
+			[[nodiscard]] virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
+			[[nodiscard]] virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, unsigned int width = 0, unsigned int height = 0) = 0;
+			[[nodiscard]] virtual IDateTime* CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
+			[[nodiscard]] virtual ITextInput* CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
+			[[nodiscard]] virtual IButton* CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual IApplication* GetApplication() = 0;
 	};
 

@@ -71,11 +71,11 @@ namespace Onyx32::Gui
 	class BaseControl : public ControlType
 	{
 		public:
-			BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent);
+			BaseControl(int id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent);
 			virtual ~BaseControl();
 
 			virtual HWND GetHwnd() const override;
-			virtual UINT GetId() const override;
+			virtual unsigned int GetId() const override;
 			virtual ControlState GetState() const override;
 			virtual int GetStyles() const override;
 			virtual const std::wstring& GetClass() const override;
@@ -84,18 +84,18 @@ namespace Onyx32::Gui
 
 			virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) override;
 			virtual void SetVisibility(const bool isVisible) override;
-			virtual void Resize(const UINT width, const UINT height) override;
-			virtual void Move(const UINT xPos, const UINT yPos) override;
+			virtual void Resize(const unsigned int width, const unsigned int height) override;
+			virtual void Move(const unsigned int xPos, const unsigned int yPos) override;
 
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 
 		protected:
 			HWND _wndHandle;
 			unsigned int const _controlId;
-			UINT _width;
-			UINT _height;
-			UINT _xPos;
-			UINT _yPos;
+			unsigned int _width;
+			unsigned int _height;
+			unsigned int _xPos;
+			unsigned int _yPos;
 			bool _isVisible;
 			bool _isEnabled;
 			bool _hasFocus;
@@ -108,7 +108,7 @@ namespace Onyx32::Gui
 	};
 
 	template<typename ControlType>
-	BaseControl<ControlType>::BaseControl(int id, ControlState state, UINT width, UINT height, UINT xPos, UINT yPos, HWND wndHandle, IWindow* parent)
+	BaseControl<ControlType>::BaseControl(int id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent)
 		: _controlId(id), 
 		_state(state), 
 		_width(width), 
@@ -153,7 +153,7 @@ namespace Onyx32::Gui
 	}
 
 	template<typename ControlType>
-	void BaseControl<ControlType>::Move(const UINT xPos, const UINT yPos)
+	void BaseControl<ControlType>::Move(const unsigned int xPos, const unsigned int yPos)
 	{
 		if (MoveWindow(_wndHandle, xPos, yPos, _width, _height, true))
 		{
@@ -184,7 +184,7 @@ namespace Onyx32::Gui
 	HWND BaseControl<ControlType>::GetHwnd() const { return _wndHandle; }
 
 	template<typename ControlType>
-	UINT BaseControl<ControlType>::GetId() const { return _controlId; }
+	unsigned int BaseControl<ControlType>::GetId() const { return _controlId; }
 
 	template<typename ControlType>
 	ControlState BaseControl<ControlType>::GetState() const { return _state; }
@@ -200,7 +200,7 @@ namespace Onyx32::Gui
 	}
 
 	template<typename ControlType>
-	void BaseControl<ControlType>::Resize(const UINT width, const UINT height)
+	void BaseControl<ControlType>::Resize(const unsigned int width, const unsigned int height)
 	{
 		if (_state != ControlState::Initialized)
 			return;
@@ -218,7 +218,7 @@ namespace Onyx32::Gui
 	// at this class' level (see the destructor), Process() must be defined here as the subclass 
 	// C++ object where Process is normally overridden has already been destructed.
 	template<typename ControlType>
-	LRESULT BaseControl<ControlType>::Process(UINT message, WPARAM wParam, LPARAM lParam)
+	LRESULT BaseControl<ControlType>::Process(unsigned int message, WPARAM wParam, LPARAM lParam)
 	{
 		switch (message)
 		{

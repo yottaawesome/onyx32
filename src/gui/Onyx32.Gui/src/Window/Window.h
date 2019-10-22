@@ -18,18 +18,18 @@ namespace Onyx32::Gui
 			Window(
 				const WindowClass& wcex,
 				std::wstring_view title,
-				const UINT width = CW_USEDEFAULT,
-				const UINT height = CW_USEDEFAULT,
-				const UINT xPos = CW_USEDEFAULT,
-				const UINT yPos = CW_USEDEFAULT);
+				const unsigned int width = CW_USEDEFAULT,
+				const unsigned int height = CW_USEDEFAULT,
+				const unsigned int xPos = CW_USEDEFAULT,
+				const unsigned int yPos = CW_USEDEFAULT);
 			Window(
 				const WindowClass& wcex, 
 				std::wstring_view title,
 				const int customStyle,
-				const UINT width = CW_USEDEFAULT,
-				const UINT height = CW_USEDEFAULT,
-				const UINT xPos = CW_USEDEFAULT,
-				const UINT yPos = CW_USEDEFAULT);
+				const unsigned int width = CW_USEDEFAULT,
+				const unsigned int height = CW_USEDEFAULT,
+				const unsigned int xPos = CW_USEDEFAULT,
+				const unsigned int yPos = CW_USEDEFAULT);
 			virtual ~Window();
 
 			virtual HWND GetHwnd() const override;
@@ -50,12 +50,12 @@ namespace Onyx32::Gui
 			virtual void SetEnabled(const bool isEnabled);
 
 			virtual void Initialize() override;
-			virtual LRESULT Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 
-			virtual void Resize(const UINT width, const UINT height) override;
+			virtual void Resize(const unsigned int width, const unsigned int height) override;
 			virtual void AddControl(IControl* const control) override;
 			virtual void DestroyControl(IControl* const control) override;
-			virtual void Move(const UINT xPos, const UINT yPos) override;
+			virtual void Move(const unsigned int xPos, const unsigned int yPos) override;
 			virtual void RequestFocus() override;
 
 		protected:
@@ -67,10 +67,10 @@ namespace Onyx32::Gui
 			WindowState _windowState;
 			HWND _wndHandle;
 			std::wstring _title = L"Default";
-			UINT _width;
-			UINT _height;
-			UINT _xPos;
-			UINT _yPos;
+			unsigned int _width;
+			unsigned int _height;
+			unsigned int _xPos;
+			unsigned int _yPos;
 			bool _isVisible;
 			bool _isBeingResized;
 			bool _hasFocus;

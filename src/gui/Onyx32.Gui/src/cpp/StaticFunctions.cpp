@@ -5,7 +5,7 @@
 
 using namespace Onyx32::Gui;
 
-LRESULT CALLBACK Static::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK Static::WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam)
 {
 	IWindow* pThis = nullptr;
 
@@ -38,7 +38,7 @@ LRESULT CALLBACK Static::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	return pThis ? pThis->Process(message, wParam, lParam) : DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-LRESULT CALLBACK Static::DefCtrlProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
+LRESULT CALLBACK Static::DefCtrlProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
 {
 	IControl* btn = (IControl*)dwRefData;
 

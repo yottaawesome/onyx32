@@ -13,7 +13,7 @@ namespace Onyx32::Gui
 	const std::wstring Button::Class = L"BUTTON";
 	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON | BS_NOTIFY;
 
-	IButton* Button::Create(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	IButton* Button::Create(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = new Button(text, width, height, xPos, yPos, controlId);
 		Win32ChildWindowCreationArgs args(
@@ -43,10 +43,10 @@ namespace Onyx32::Gui
 
 	Button::Button(
 		std::wstring_view text,
-		const UINT width,
-		const UINT height,
-		const UINT xPos,
-		const UINT yPos,
+		const unsigned int width,
+		const unsigned int height,
+		const unsigned int xPos,
+		const unsigned int yPos,
 		const unsigned int controlId)
 		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
 			_text(text)
@@ -84,7 +84,7 @@ namespace Onyx32::Gui
 			_buttonEventHandlers[evt](evt, *this);
 	}
 
-	LRESULT Button::Process(UINT message, WPARAM wParam, LPARAM lParam)
+	LRESULT Button::Process(unsigned int message, WPARAM wParam, LPARAM lParam)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/Controls/button-messages
 		switch (message)

@@ -17,7 +17,7 @@ namespace Onyx32::Gui
 		return new Application();
 	}
 
-	IWindow* Factory::CreateDefaultWindow(std::wstring_view title, UINT width, UINT height)
+	IWindow* Factory::CreateDefaultWindow(std::wstring_view title, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
 			return new Window(WindowClassManager::GetDefaultWindowClass(), title, width, height);
@@ -25,7 +25,7 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
-	IWindow* Factory::CreateStyledWindow(std::wstring_view title, const int styles, UINT width, UINT height)
+	IWindow* Factory::CreateStyledWindow(std::wstring_view title, const int styles, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
 			return new Window(WindowClassManager::GetDefaultWindowClass(), title, styles, width, height);
@@ -33,21 +33,21 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
-	ITextInput* Factory::CreateTextInput(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	ITextInput* Factory::CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = TextInput::Create(parent, controlId, text, width, height, xPos, yPos);
 		parent->AddControl(control);
 		return control;
 	}
 
-	IDateTime* Factory::CreateDateTime(IWindow* parent, UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos)
+	IDateTime* Factory::CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = DateTime::Create(parent, controlId, width, height, xPos, yPos);
 		parent->AddControl(control);
 		return control;
 	}
 
-	IButton* Factory::CreateButton(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	IButton* Factory::CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = Button::Create(parent, controlId, text, width, height, xPos, yPos);
 		parent->AddControl(control);

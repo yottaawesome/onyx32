@@ -12,7 +12,7 @@ namespace Onyx32::Gui
 	const std::wstring TextInput::Class = L"EDIT";
 	const int TextInput::Styles = WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL;
 
-	ITextInput* TextInput::Create(IWindow* parent, UINT controlId, std::wstring_view text, UINT width, UINT height, UINT xPos, UINT yPos)
+	ITextInput* TextInput::Create(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = new TextInput(text, width, height, xPos, yPos, controlId);
 		Win32ChildWindowCreationArgs args(
@@ -73,7 +73,7 @@ namespace Onyx32::Gui
 		SetWindowText(_wndHandle, _text.c_str());
 	}
 
-	LRESULT TextInput::Process(UINT message, WPARAM wParam, LPARAM lParam)
+	LRESULT TextInput::Process(unsigned int message, WPARAM wParam, LPARAM lParam)
 	{
 		switch (message)
 		{

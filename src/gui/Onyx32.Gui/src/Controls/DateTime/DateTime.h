@@ -7,19 +7,19 @@ namespace Onyx32::Gui
 	{
 		public:
 			DateTime(
-				const UINT width,
-				const UINT height,
-				const UINT xPos,
-				const UINT yPos,
+				const unsigned int width,
+				const unsigned int height,
+				const unsigned int xPos,
+				const unsigned int yPos,
 				const unsigned int controlId);
 			virtual ~DateTime();
 
 			virtual void Initialize(IWindow* parent) override;
 			virtual void GetDateTime(SYSTEMTIME& dateTime) override;
 			virtual void SetOnChange(OnDateTimeChange& onChange) override;
-			LRESULT DateTime::Process(UINT message, WPARAM wParam, LPARAM lParam) override;
+			LRESULT DateTime::Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 
-			static IDateTime* Create(IWindow* parent, UINT controlId, UINT width, UINT height, UINT xPos, UINT yPos);
+			static IDateTime* Create(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos);
 		
 		protected:
 			OnDateTimeChange& _onChange;
