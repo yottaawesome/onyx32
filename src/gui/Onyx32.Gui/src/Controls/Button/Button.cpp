@@ -6,7 +6,7 @@
 
 using std::wstring;
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Controls
 {
 	OnClick DefaultClickHandler = [](IButton& button) -> void {};
 

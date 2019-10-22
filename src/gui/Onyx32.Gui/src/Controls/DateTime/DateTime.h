@@ -1,7 +1,7 @@
 #pragma once
 #include "../../h/Onyx32.Gui.Internal.h"
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Controls
 {
 	class DateTime : public BaseControl<IDateTime>
 	{

@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Controls
 {
 	class Button : public BaseControl<IButton>
 	{

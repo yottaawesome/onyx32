@@ -33,23 +33,23 @@ namespace Onyx32::Gui
 		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
 	}
 
-	ITextInput* Factory::CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
+	Onyx32::Gui::Controls::ITextInput* Factory::CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
-		auto control = TextInput::Create(parent, controlId, text, width, height, xPos, yPos);
+		auto control = Onyx32::Gui::Controls::TextInput::Create(parent, controlId, text, width, height, xPos, yPos);
 		parent->AddControl(control);
 		return control;
 	}
 
-	IDateTime* Factory::CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
+	Onyx32::Gui::Controls::IDateTime* Factory::CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
-		auto control = DateTime::Create(parent, controlId, width, height, xPos, yPos);
+		auto control = Onyx32::Gui::Controls::DateTime::Create(parent, controlId, width, height, xPos, yPos);
 		parent->AddControl(control);
 		return control;
 	}
 
-	IButton* Factory::CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
+	Onyx32::Gui::Controls::IButton* Factory::CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
-		auto control = Button::Create(parent, controlId, text, width, height, xPos, yPos);
+		auto control = Onyx32::Gui::Controls::Button::Create(parent, controlId, text, width, height, xPos, yPos);
 		parent->AddControl(control);
 		return control;
 	}

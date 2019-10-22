@@ -3,7 +3,7 @@
 #include "../../Win32/Win32Window.h"
 #include "DateTime.h"
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Controls
 {
 	OnDateTimeChange DateTime::DefaultDateTimeChangeHandler = 
 		[](IDateTime& control, SYSTEMTIME& dt) -> void {};
@@ -12,7 +12,7 @@ namespace Onyx32::Gui
 	//https://docs.microsoft.com/en-us/windows/desktop/Controls/date-and-time-picker-controls
 	//https://docs.microsoft.com/en-us/windows/desktop/Controls/date-and-time-picker-control-styles
 	//https://docs.microsoft.com/en-us/windows/desktop/Controls/create-a-date-and-time-picker-control
-	const std::wstring DateTime::Class = DATETIMEPICK_CLASS;
+	const std::wstring Onyx32::Gui::Controls::DateTime::Class = DATETIMEPICK_CLASS;
 	const int DateTime::Styles = WS_BORDER | WS_CHILD | WS_VISIBLE | DTS_SHOWNONE;
 
 	IDateTime* DateTime::Create(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)

@@ -53,8 +53,8 @@ namespace Onyx32::Gui
 			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 
 			virtual void Resize(const unsigned int width, const unsigned int height) override;
-			virtual void AddControl(IControl* const control) override;
-			virtual void DestroyControl(IControl* const control) override;
+			virtual void AddControl(Onyx32::Gui::Controls::IControl* const control) override;
+			virtual void DestroyControl(Onyx32::Gui::Controls::IControl* const control) override;
 			virtual void Move(const unsigned int xPos, const unsigned int yPos) override;
 			virtual void RequestFocus() override;
 
@@ -75,7 +75,7 @@ namespace Onyx32::Gui
 			bool _isBeingResized;
 			bool _hasFocus;
 			bool _isEnabled;
-			std::unordered_map<IControl*, std::shared_ptr<IControl>> _children;
+			std::unordered_map<Onyx32::Gui::Controls::IControl*, std::shared_ptr<Onyx32::Gui::Controls::IControl>> _children;
 			const int _styles;
 			std::unordered_map<WindowEvents, OnWindowEvent> _eventHandlers;
 			bool _isActive;

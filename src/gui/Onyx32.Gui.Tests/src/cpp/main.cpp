@@ -8,19 +8,18 @@ using std::wstring;
 using std::function;
 using Onyx32::Gui::IWindow;
 using Onyx32::Gui::IFactory;
-using Onyx32::Gui::ITextInput;
-using Onyx32::Gui::IButton;
-using Onyx32::Gui::IDateTime;
+using Onyx32::Gui::Controls::ITextInput;
+using Onyx32::Gui::Controls::IButton;
+using Onyx32::Gui::Controls::IDateTime;
 using Onyx32::Gui::Onyx32Lib;
 using Onyx32::Gui::IApplication;
 using Onyx32::Gui::WindowEvents;
 using Onyx32::Gui::ControlEvents;
-using Onyx32::Gui::ButtonEvents;
+using Onyx32::Gui::Controls::ButtonEvents;
 using Onyx32::Gui::WindowDisplayState;
-using Onyx32::Gui::IControl;
+using Onyx32::Gui::Controls::IControl;
 
 // https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
-
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);

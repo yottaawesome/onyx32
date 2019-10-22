@@ -6,7 +6,7 @@
 
 namespace Onyx32::Gui
 {
-	HWND CreateChildWindow(const Win32ChildWindowCreationArgs& args)
+	HWND CreateChildWindow(const Onyx32::Gui::Controls::Win32ChildWindowCreationArgs& args)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
@@ -55,7 +55,7 @@ namespace Onyx32::Gui
 		return hWnd;
 	}
 
-	void Resize(Button* button, const unsigned int width, const unsigned int height)
+	void Resize(Onyx32::Gui::Controls::Button* button, const unsigned int width, const unsigned int height)
 	{
 		MoveWindow(
 			button->GetHwnd(),

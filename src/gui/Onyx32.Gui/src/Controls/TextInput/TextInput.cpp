@@ -7,7 +7,7 @@
 using std::wstring;
 using std::wstring_view;
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Controls
 {
 	const std::wstring TextInput::Class = L"EDIT";
 	const int TextInput::Styles = WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL;

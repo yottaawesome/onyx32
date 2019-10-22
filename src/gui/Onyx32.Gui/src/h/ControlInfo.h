@@ -1,7 +1,7 @@
 #pragma once
 #include "../../include/Onyx32.Gui.h"
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Controls
 {
 	class ControlInfo
 	{

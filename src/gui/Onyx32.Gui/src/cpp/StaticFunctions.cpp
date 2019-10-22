@@ -40,7 +40,7 @@ LRESULT CALLBACK Static::WndProc(HWND hWnd, unsigned int message, WPARAM wParam,
 
 LRESULT CALLBACK Static::DefCtrlProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
 {
-	IControl* btn = (IControl*)dwRefData;
+	Onyx32::Gui::Controls::IControl* btn = (Onyx32::Gui::Controls::IControl*)dwRefData;
 
 	if (btn)
 		return btn->Process(message, wParam, lParam);

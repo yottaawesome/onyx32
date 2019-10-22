@@ -3,7 +3,7 @@
 #include "../../Window/Window.h"
 #include <string>
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Controls
 {
 	class TextInput : public BaseControl<ITextInput>
 	{

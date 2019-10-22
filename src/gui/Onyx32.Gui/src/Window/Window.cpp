@@ -67,6 +67,7 @@ namespace Onyx32::Gui
 	bool Window::HasFocus() const { return _hasFocus; }
 	bool Window::IsVisible() const { return _isVisible; }
 	bool Window::IsEnabled() const { return _isEnabled; }
+
 	void Window::GetDimensions(Dimensions& dimensions) const
 	{
 		dimensions.xPos = _xPos;
@@ -188,16 +189,16 @@ namespace Onyx32::Gui
 		}
 	}
 
-	void Window::AddControl(IControl* const control)
+	void Window::AddControl(Onyx32::Gui::Controls::IControl* const control)
 	{
 		if (_windowState == WindowState::Initialized)
 		{
 			control->Initialize(this);
-			_children[control] = std::shared_ptr<IControl>(control);
+			_children[control] = std::shared_ptr<Onyx32::Gui::Controls::IControl>(control);
 		}
 	}
 
-	void Window::DestroyControl(IControl* const control)
+	void Window::DestroyControl(Onyx32::Gui::Controls::IControl* const control)
 	{
 		if (_windowState == WindowState::Initialized && _children.count(control))
 			_children.erase(control);

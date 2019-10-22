@@ -30,7 +30,7 @@ namespace Onyx32::Gui
 		WndClass(wndClass)
 	{ }
 
-	Win32ChildWindowCreationArgs::Win32ChildWindowCreationArgs(
+	Onyx32::Gui::Controls::Win32ChildWindowCreationArgs::Win32ChildWindowCreationArgs(
 		const DWORD extendedStyles,
 		std::wstring_view className,
 		std::wstring_view windowName,
