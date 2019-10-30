@@ -2,7 +2,7 @@
 #include "../../include/Onyx32.Gui.h"
 #include "Window.h"
 #include "../Controls/Button/Button.h"
-#include "../WindowClassManager/WindowClassManager.h"
+#include "../Win32/WindowClassManager.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
 #include "../Win32/Win32Window.h"

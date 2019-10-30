@@ -178,9 +178,8 @@
     <ClInclude Include="src\h\stdafx.h" />
     <ClInclude Include="src\h\targetver.h" />
     <ClInclude Include="src\Win32\Win32Window.h" />
-    <ClInclude Include="src\Win32\Win32CreationArgs.h" />
     <ClInclude Include="src\Window\Window.h" />
-    <ClInclude Include="src\WindowClassManager\WindowClassManager.h" />
+    <ClInclude Include="src\Win32\WindowClassManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Controls\Button\Button.cpp" />
@@ -204,7 +203,7 @@
     <ClCompile Include="src\Controls\TextInput\TextInput.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
-    <ClCompile Include="src\cpp\StaticFunctions.cpp" />
+    <ClCompile Include="src\Win32\StaticFunctions.cpp" />
     <ClCompile Include="src\cpp\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -213,7 +212,7 @@
     </ClCompile>
     <ClCompile Include="src\Win32\Win32Window.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
-    <ClCompile Include="src\WindowClassManager\WindowClassManager.cpp" />
+    <ClCompile Include="src\Win32\WindowClassManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Onyx32.Gui.rc" />

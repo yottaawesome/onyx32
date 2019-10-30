@@ -1,6 +1,6 @@
 #pragma once
 #include "../h/stdafx.h"
-#include "Win32CreationArgs.h"
+#include "../h/Onyx32.Gui.internal.h"
 
 namespace Onyx32::Gui
 {
