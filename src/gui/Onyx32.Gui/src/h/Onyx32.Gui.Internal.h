@@ -74,11 +74,11 @@ namespace Onyx32::Gui::Controls
 	class BaseControl : public ControlType
 	{
 		public:
-			BaseControl(int id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent);
+			BaseControl(uint64_t id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent);
 			virtual ~BaseControl();
 
 			virtual HWND GetHwnd() const override;
-			virtual unsigned int GetId() const override;
+			virtual uint64_t GetId() const override;
 			virtual ControlState GetState() const override;
 			virtual int GetStyles() const override;
 			virtual const std::wstring& GetClass() const override;
@@ -94,7 +94,7 @@ namespace Onyx32::Gui::Controls
 
 		protected:
 			HWND _wndHandle;
-			unsigned int const _controlId;
+			uint64_t const _controlId;
 			unsigned int _width;
 			unsigned int _height;
 			unsigned int _xPos;
@@ -111,7 +111,7 @@ namespace Onyx32::Gui::Controls
 	};
 
 	template<typename ControlType>
-	BaseControl<ControlType>::BaseControl(int id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent)
+	BaseControl<ControlType>::BaseControl(uint64_t id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent)
 		: _controlId(id), 
 		_state(state), 
 		_width(width), 
@@ -187,7 +187,7 @@ namespace Onyx32::Gui::Controls
 	HWND BaseControl<ControlType>::GetHwnd() const { return _wndHandle; }
 
 	template<typename ControlType>
-	unsigned int BaseControl<ControlType>::GetId() const { return _controlId; }
+	uint64_t BaseControl<ControlType>::GetId() const { return _controlId; }
 
 	template<typename ControlType>
 	ControlState BaseControl<ControlType>::GetState() const { return _state; }

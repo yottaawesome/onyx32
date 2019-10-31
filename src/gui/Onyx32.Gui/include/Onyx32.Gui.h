@@ -126,7 +126,7 @@ namespace Onyx32::Gui::Controls
 
 		virtual HWND GetHwnd() const = 0;
 		virtual void GetDimensions(Dimensions& dimensions) const = 0;
-		virtual unsigned int GetId() const = 0;
+		virtual uint64_t GetId() const = 0;
 		virtual const std::wstring& GetClass() const = 0;
 		virtual ControlState GetState() const = 0;
 		virtual int GetStyles() const = 0;

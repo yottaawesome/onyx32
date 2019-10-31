@@ -13,7 +13,7 @@ namespace Onyx32::Gui::Controls
 	const std::wstring Button::Class = L"BUTTON";
 	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON | BS_NOTIFY;
 
-	IButton* Button::Create(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
+	IButton* Button::Create(IWindow* parent, uint64_t controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = new Button(text, width, height, xPos, yPos, controlId);
 		Win32ChildWindowCreationArgs args(
@@ -47,7 +47,7 @@ namespace Onyx32::Gui::Controls
 		const unsigned int height,
 		const unsigned int xPos,
 		const unsigned int yPos,
-		const unsigned int controlId)
+		const uint64_t controlId)
 		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
 			_text(text)
 	{

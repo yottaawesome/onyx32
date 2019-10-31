@@ -16,7 +16,7 @@ namespace Onyx32::Gui::Controls
 			virtual const std::wstring GetText() override;
 			virtual void SetText(std::wstring_view str) override;
 
-			static ITextInput* Create(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos);
+			static ITextInput* Create(IWindow* parent, uint64_t controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos);
 
 		protected:
 			TextInput(
@@ -25,7 +25,7 @@ namespace Onyx32::Gui::Controls
 				const unsigned int height = 100,
 				const unsigned int xPos = 100,
 				const unsigned int yPos = 100,
-				const unsigned int controlId = 0);
+				const uint64_t controlId = 0);
 
 			std::wstring _text;
 	};

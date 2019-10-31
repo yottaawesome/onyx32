@@ -15,7 +15,7 @@ namespace Onyx32::Gui::Controls
 	const std::wstring Onyx32::Gui::Controls::DateTime::Class = DATETIMEPICK_CLASS;
 	const int DateTime::Styles = WS_BORDER | WS_CHILD | WS_VISIBLE | DTS_SHOWNONE;
 
-	IDateTime* DateTime::Create(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
+	IDateTime* DateTime::Create(IWindow* parent, uint64_t controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = new DateTime(width, height, xPos, yPos, controlId);
 		static bool initCommonControls = true;
@@ -62,7 +62,7 @@ namespace Onyx32::Gui::Controls
 		const unsigned int height,
 		const unsigned int xPos,
 		const unsigned int yPos,
-		const unsigned int controlId)
+		const uint64_t controlId)
 			: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr),
 			_onChange(DateTime::DefaultDateTimeChangeHandler)
 	{ }
