@@ -1,7 +1,7 @@
 #include "../../h/stdafx.h"
 #include "Button.h"
 #include "../../Win32/Win32Window.h"
-#include "../../h/StaticFunctions.h"
+#include "../../h/Win32Callbacks.h"
 #include <Commctrl.h>
 
 using std::wstring;

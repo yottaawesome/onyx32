@@ -21,9 +21,6 @@
     <ClInclude Include="src\h\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\h\StaticFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\h\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,6 +66,9 @@
     <ClInclude Include="src\Win32\WindowClassManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\h\Win32Callbacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cpp\dllmain.cpp">
@@ -104,10 +104,10 @@
     <ClCompile Include="src\Controls\TextInput\TextInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Win32\StaticFunctions.cpp">
+    <ClCompile Include="src\Win32\WindowClassManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Win32\WindowClassManager.cpp">
+    <ClCompile Include="src\Win32\Win32Callbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

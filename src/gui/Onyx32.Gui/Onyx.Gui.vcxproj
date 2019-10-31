@@ -174,7 +174,7 @@
     <ClInclude Include="src\h\Onyx32.Gui.Internal.h" />
     <ClInclude Include="src\Controls\TextInput\TextInput.h" />
     <ClInclude Include="src\h\Resource.h" />
-    <ClInclude Include="src\h\StaticFunctions.h" />
+    <ClInclude Include="src\h\Win32Callbacks.h" />
     <ClInclude Include="src\h\stdafx.h" />
     <ClInclude Include="src\h\targetver.h" />
     <ClInclude Include="src\Win32\Win32Window.h" />
@@ -203,7 +203,7 @@
     <ClCompile Include="src\Controls\TextInput\TextInput.cpp" />
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
-    <ClCompile Include="src\Win32\StaticFunctions.cpp" />
+    <ClCompile Include="src\Win32\Win32Callbacks.cpp" />
     <ClCompile Include="src\cpp\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

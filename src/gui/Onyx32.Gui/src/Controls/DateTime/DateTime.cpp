@@ -1,5 +1,5 @@
 #include "../../h/stdafx.h"
-#include "../../h/StaticFunctions.h"
+#include "../../h/Win32Callbacks.h"
 #include "../../Win32/Win32Window.h"
 #include "DateTime.h"
 

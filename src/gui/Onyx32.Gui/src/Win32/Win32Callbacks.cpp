@@ -1,7 +1,5 @@
-#include "../h/StaticFunctions.h"
-#include "../h/Onyx32.Gui.internal.h"
+#include "../h/Win32Callbacks.h"
 #include "../Window/Window.h"
-#include  <Commctrl.h>
 
 namespace Onyx32::Gui
 {
