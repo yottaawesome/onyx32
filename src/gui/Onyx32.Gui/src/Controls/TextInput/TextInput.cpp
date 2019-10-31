@@ -43,10 +43,10 @@ namespace Onyx32::Gui::Controls
 
 	TextInput::TextInput(
 		std::wstring_view text,
-		const UINT width,
-		const UINT height,
-		const UINT xPos,
-		const UINT yPos,
+		const unsigned int width,
+		const unsigned int height,
+		const unsigned int xPos,
+		const unsigned int yPos,
 		const uint64_t controlId)
 		: BaseControl(controlId, ControlState::Uninitialized, width, height, xPos, yPos, nullptr, nullptr), _text(text)
 	{ }
