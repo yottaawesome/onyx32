@@ -1,14 +1,14 @@
 #include "../h/stdafx.h"
-#include "WindowClassManager.h"
+#include "WindowClass.h"
 #include "../h/Win32Callbacks.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
 
 namespace Onyx32::Gui
 {
-	WindowClass WindowClassManager::DefaultWindowClass = WindowClass();
+	WindowClass DefaultWindowClass = WindowClass();
 
-	WindowClass WindowClassManager::GetDefaultWindowClass()
+	WindowClass GetDefaultWindowClass()
 	{
 		static bool created = false;
 		if (!created)

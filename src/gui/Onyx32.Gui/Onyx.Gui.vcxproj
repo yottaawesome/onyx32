@@ -179,7 +179,7 @@
     <ClInclude Include="src\h\targetver.h" />
     <ClInclude Include="src\Win32\Win32Window.h" />
     <ClInclude Include="src\Window\Window.h" />
-    <ClInclude Include="src\Win32\WindowClassManager.h" />
+    <ClInclude Include="src\Win32\WindowClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Controls\Button\Button.cpp" />
@@ -212,7 +212,7 @@
     </ClCompile>
     <ClCompile Include="src\Win32\Win32Window.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
-    <ClCompile Include="src\Win32\WindowClassManager.cpp" />
+    <ClCompile Include="src\Win32\WindowClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Onyx32.Gui.rc" />

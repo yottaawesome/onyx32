@@ -20,17 +20,17 @@ namespace Onyx32::Gui
 	IWindow* Factory::CreateDefaultWindow(std::wstring_view title, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
-			return new Window(WindowClassManager::GetDefaultWindowClass(), title, width, height);
+			return new Window(GetDefaultWindowClass(), title, width, height);
 
-		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
+		return new Window(GetDefaultWindowClass(), title);
 	}
 
 	IWindow* Factory::CreateStyledWindow(std::wstring_view title, const int styles, unsigned int width, unsigned int height)
 	{
 		if (width > 0 && height > 0)
-			return new Window(WindowClassManager::GetDefaultWindowClass(), title, styles, width, height);
+			return new Window(GetDefaultWindowClass(), title, styles, width, height);
 
-		return new Window(WindowClassManager::GetDefaultWindowClass(), title);
+		return new Window(GetDefaultWindowClass(), title);
 	}
 
 	Onyx32::Gui::Controls::ITextInput* Factory::CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
