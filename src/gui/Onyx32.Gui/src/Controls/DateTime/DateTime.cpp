@@ -43,7 +43,7 @@ namespace Onyx32::Gui::Controls
 			parent->GetHwnd(),
 			(HMENU)controlId,
 			control,
-			Static::DefCtrlProc
+			DefCtrlProc
 		);
 
 		if (control->_wndHandle = CreateChildWindow(args))
