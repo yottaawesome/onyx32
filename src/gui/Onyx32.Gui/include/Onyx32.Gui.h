@@ -220,7 +220,6 @@ namespace Onyx32::Gui
 			[[nodiscard]] virtual IApplication* GetApplication() = 0;
 	};
 
-	#define GETMAINFACTFUNC_NAME GetMainFactory
 	typedef IFactory* (*getMainFactory)();
-	extern "C" ONYXWINDOWING_API [[nodiscard]] IFactory* GETMAINFACTFUNC_NAME();
+	extern "C" ONYXWINDOWING_API [[nodiscard]] IFactory* GetMainFactory();
 }

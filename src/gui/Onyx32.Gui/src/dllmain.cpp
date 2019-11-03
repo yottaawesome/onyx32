@@ -1,10 +1,8 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 #include "dllmain.h"
-#include "h/Onyx32.Gui.internal.h"
+#include "shared/Onyx32.Gui.internal.h"
 #include "Factory/Factory.h"
-
-using namespace Onyx32::Gui;
 
 namespace Onyx32::Gui
 {
@@ -26,7 +24,7 @@ namespace Onyx32::Gui
 	inline IFactory::~IFactory() { }
 	inline IApplication::~IApplication() { }
 	inline IMenu::~IMenu() { }
-	IFactory* GETMAINFACTFUNC_NAME()
+	IFactory* GetMainFactory()
 	{
 		return new Factory();
 	}
@@ -46,7 +44,7 @@ bool APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	{
 		case DLL_PROCESS_ATTACH:
 			OutputDebugString(L"DLL_PROCESS_ATTACH");
-			Dll::SetModule(hModule);
+			Onyx32::Gui::Dll::SetModule(hModule);
 		case DLL_THREAD_ATTACH:
 		case DLL_THREAD_DETACH:
 		case DLL_PROCESS_DETACH:

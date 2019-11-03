@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../h/Onyx32.Gui.internal.h"
+#include "../shared/Onyx32.Gui.internal.h"
 #include "../Win32/index.h"
 #include <vector>
 #include <unordered_map>

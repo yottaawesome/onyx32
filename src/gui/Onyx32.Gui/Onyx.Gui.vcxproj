@@ -170,9 +170,9 @@
     <ClInclude Include="src\Controls\DateTime\DateTime.h" />
     <ClInclude Include="src\Factory\Factory.h" />
     <ClInclude Include="src\dllmain.h" />
-    <ClInclude Include="src\h\Onyx32.Gui.Internal.h" />
+    <ClInclude Include="src\shared\Onyx32.Gui.Internal.h" />
     <ClInclude Include="src\Controls\TextInput\TextInput.h" />
-    <ClInclude Include="src\h\Resource.h" />
+    <ClInclude Include="src\Resource.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
     <ClInclude Include="src\Win32\index.h" />

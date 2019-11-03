@@ -3,7 +3,7 @@
 #include "Window.h"
 #include "../Controls/Button/Button.h"
 #include "../Win32/index.h"
-#include "../h/Resource.h"
+#include "../Resource.h"
 #include "../dllmain.h"
 #include <map>
 
