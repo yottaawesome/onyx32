@@ -30,16 +30,10 @@
     <ClInclude Include="src\h\dllmain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\h\ControlInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\h\Onyx32.Gui.Internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Window\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Win32\Win32Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -63,10 +57,10 @@
     <ClInclude Include="src\Controls\TextInput\TextInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\h\Win32Callbacks.h">
+    <ClInclude Include="src\Win32\index.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Win32\WindowClass.h">
+    <ClInclude Include="src\Win32\index.internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

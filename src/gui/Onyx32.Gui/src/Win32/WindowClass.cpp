@@ -1,6 +1,6 @@
 #include "../h/stdafx.h"
-#include "WindowClass.h"
-#include "../h/Win32Callbacks.h"
+#include "index.internal.h"
+#include "../Win32/index.h"
 #include "../h/Resource.h"
 #include "../h/dllmain.h"
 

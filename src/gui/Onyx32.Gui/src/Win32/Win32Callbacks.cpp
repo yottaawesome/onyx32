@@ -1,4 +1,4 @@
-#include "../h/Win32Callbacks.h"
+#include "../Win32/index.h"
 #include "../Window/Window.h"
 
 namespace Onyx32::Gui
@@ -38,10 +38,10 @@ namespace Onyx32::Gui
 
 	LRESULT CALLBACK DefCtrlProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
 	{
-		Onyx32::Gui::Controls::IControl* btn = (Onyx32::Gui::Controls::IControl*)dwRefData;
+		Onyx32::Gui::Controls::IControl* ctrl = (Onyx32::Gui::Controls::IControl*)dwRefData;
 
-		if (btn)
-			return btn->Process(message, wParam, lParam);
+		if (ctrl)
+			return ctrl->Process(message, wParam, lParam);
 
 		return DefSubclassProc(hWnd, message, wParam, lParam);
 	}

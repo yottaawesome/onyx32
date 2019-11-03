@@ -1,9 +1,8 @@
 #pragma once
 #include <string>
 #include "../h/Onyx32.Gui.internal.h"
-#include "../Win32/WindowClass.h"
+#include "../Win32/index.h"
 #include <vector>
-#include "../h/ControlInfo.h"
 #include <unordered_map>
 
 namespace Onyx32::Gui

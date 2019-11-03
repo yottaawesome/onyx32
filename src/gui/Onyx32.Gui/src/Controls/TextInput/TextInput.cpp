@@ -1,7 +1,6 @@
 #include "../../h/stdafx.h"
 #include "TextInput.h"
-#include "../..//Win32/Win32Window.h"
-#include "../../h/Win32Callbacks.h"
+#include "../..//Win32/index.h"
 #include  <Commctrl.h>
 
 using std::wstring;
