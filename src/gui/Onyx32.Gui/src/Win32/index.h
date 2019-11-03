@@ -74,19 +74,23 @@ namespace Onyx32::Gui
 			const SUBCLASSPROC SubclassProc;
 	};
 
-	struct WindowClass
-	{
-		WNDCLASSEX WndClass;
-	};
-
 	HWND CreateParentWindow(const Win32ParentWindowCreationArgs& args);
+
 	HWND CreateChildWindow(const Win32ChildWindowCreationArgs& args);
+
 	LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam);
+
 	LRESULT CALLBACK DefCtrlProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
+	
 	// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getclassinfoexa
 	enum WindowClassTypes
 	{
 		DEFAULT
+	};
+
+	struct WindowClass
+	{
+		WNDCLASSEX WndClass;
 	};
 
 	WindowClass GetDefaultWindowClass();
