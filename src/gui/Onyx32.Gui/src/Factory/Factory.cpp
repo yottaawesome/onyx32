@@ -2,9 +2,7 @@
 #include "Factory.h"
 #include "../Application/Application.h"
 #include "../Window/Window.h"
-#include "../Controls/Button/Button.h"
-#include "../Controls/DateTime/DateTime.h"
-#include "../Controls/TextInput/TextInput.h"
+#include "../Controls/index.h"
 
 namespace Onyx32::Gui
 {

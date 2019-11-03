@@ -1,5 +1,5 @@
 #pragma once
-#include "../../shared/Onyx32.Gui.internal.h"
+#include "../BaseControl.h"
 #include "../../Window/Window.h"
 #include <string>
 

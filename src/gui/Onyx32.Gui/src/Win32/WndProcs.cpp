@@ -1,5 +1,5 @@
 #include "../stdafx.h"
-#include "../Win32/index.h"
+#include "index.internal.h"
 
 namespace Onyx32::Gui
 {

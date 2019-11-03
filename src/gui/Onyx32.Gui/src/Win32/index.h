@@ -55,8 +55,7 @@ namespace Onyx32::Gui
 				const int height,
 				const HWND parent,
 				const HMENU menuOrId,
-				const IMessageable* control,
-				const SUBCLASSPROC subclassProc
+				const IMessageable* control
 			);
 
 			const DWORD ExtendedStyles;
@@ -75,10 +74,6 @@ namespace Onyx32::Gui
 
 	HWND CreateWin32Window(const ParentWindowDescriptor& args);
 	HWND CreateWin32Window(const ChildWindowDescriptor& args);
-
-	LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam);
-
-	LRESULT CALLBACK DefCtrlProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
 	
 	// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getclassinfoexa
 	enum WindowClassTypes

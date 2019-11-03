@@ -1,7 +1,7 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 #include "dllmain.h"
-#include "shared/Onyx32.Gui.internal.h"
+#include "../include/Onyx32.Gui.h"
 #include "Factory/Factory.h"
 
 namespace Onyx32::Gui

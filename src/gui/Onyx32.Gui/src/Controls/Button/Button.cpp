@@ -26,8 +26,7 @@ namespace Onyx32::Gui::Controls
 			height,
 			parent->GetHwnd(),
 			(HMENU)controlId,
-			control,
-			DefCtrlProc
+			control
 		);
 		if (control->_wndHandle = CreateWin32Window(args))
 		{

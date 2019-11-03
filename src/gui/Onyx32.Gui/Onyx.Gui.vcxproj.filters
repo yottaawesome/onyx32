@@ -60,7 +60,10 @@
     <ClInclude Include="src\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\shared\Onyx32.Gui.Internal.h">
+    <ClInclude Include="src\Controls\BaseControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controls\index.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

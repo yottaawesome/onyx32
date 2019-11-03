@@ -1,5 +1,5 @@
 #pragma once
-#include "../shared/Onyx32.Gui.Internal.h"
+#include "../../include/Onyx32.Gui.h"
 
 namespace Onyx32::Gui
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include "../stdafx.h"
-#include "index.h"
+#include "index.internal.h"
 
 namespace Onyx32::Gui
 {
@@ -41,8 +41,7 @@ namespace Onyx32::Gui
 		const int height,
 		const HWND parent,
 		const HMENU menuOrId,
-		const IMessageable* control,
-		const SUBCLASSPROC subclassProc
+		const IMessageable* control
 	)
 		: ExtendedStyles(extendedStyles),
 		ClassName(className),
@@ -55,6 +54,6 @@ namespace Onyx32::Gui
 		Parent(parent),
 		MenuOrId(menuOrId),
 		Control(control),
-		SubclassProc(subclassProc)
+		SubclassProc(DefCtrlProc)
 	{ }
 }
