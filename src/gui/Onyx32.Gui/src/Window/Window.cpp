@@ -1,10 +1,10 @@
-#include "../h/stdafx.h"
+#include "../stdafx.h"
 #include "../../include/Onyx32.Gui.h"
 #include "Window.h"
 #include "../Controls/Button/Button.h"
 #include "../Win32/index.h"
 #include "../h/Resource.h"
-#include "../h/dllmain.h"
+#include "../dllmain.h"
 #include <map>
 
 using std::wstring;

@@ -1,4 +1,4 @@
-#include "../../h/stdafx.h"
+#include "../../stdafx.h"
 #include "../../Win32/index.h"
 #include "DateTime.h"
 

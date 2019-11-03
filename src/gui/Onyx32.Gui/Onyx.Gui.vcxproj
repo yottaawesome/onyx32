@@ -169,19 +169,19 @@
     <ClInclude Include="src\Controls\Button\Button.h" />
     <ClInclude Include="src\Controls\DateTime\DateTime.h" />
     <ClInclude Include="src\Factory\Factory.h" />
-    <ClInclude Include="src\h\dllmain.h" />
+    <ClInclude Include="src\dllmain.h" />
     <ClInclude Include="src\h\Onyx32.Gui.Internal.h" />
     <ClInclude Include="src\Controls\TextInput\TextInput.h" />
     <ClInclude Include="src\h\Resource.h" />
-    <ClInclude Include="src\h\stdafx.h" />
-    <ClInclude Include="src\h\targetver.h" />
+    <ClInclude Include="src\stdafx.h" />
+    <ClInclude Include="src\targetver.h" />
     <ClInclude Include="src\Win32\index.h" />
     <ClInclude Include="src\Win32\index.internal.h" />
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Controls\Button\Button.cpp" />
-    <ClCompile Include="src\cpp\dllmain.cpp">
+    <ClCompile Include="src\dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -202,7 +202,7 @@
     <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Win32\Win32Callbacks.cpp" />
-    <ClCompile Include="src\cpp\stdafx.cpp">
+    <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

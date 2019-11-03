@@ -1,4 +1,4 @@
-#include "../h/stdafx.h"
+#include "../stdafx.h"
 #include "../h/Onyx32.Gui.internal.h"
 #include "../Window/Window.h"
 #include "../Factory/Factory.h"

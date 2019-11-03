@@ -1,4 +1,4 @@
-#include "../h/stdafx.h"
+#include "../stdafx.h"
 #include "Factory.h"
 #include "../Application/Application.h"
 #include "../Window/Window.h"

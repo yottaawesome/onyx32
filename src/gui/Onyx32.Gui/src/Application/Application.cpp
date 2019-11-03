@@ -1,4 +1,4 @@
-#include "../h/stdafx.h"
+#include "../stdafx.h"
 #include "Application.h"
 
 namespace Onyx32::Gui

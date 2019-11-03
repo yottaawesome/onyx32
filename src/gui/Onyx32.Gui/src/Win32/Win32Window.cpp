@@ -1,6 +1,6 @@
-#include "../h/stdafx.h"
+#include "../stdafx.h"
 #include "index.internal.h"
-#include "../h/dllmain.h"
+#include "../dllmain.h"
 #include "../Win32/index.h"
 
 namespace Onyx32::Gui
