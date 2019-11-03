@@ -1,6 +1,5 @@
 #include "../stdafx.h"
 #include "index.internal.h"
-#include "../Win32/index.h"
 #include "../h/Resource.h"
 #include "../dllmain.h"
 

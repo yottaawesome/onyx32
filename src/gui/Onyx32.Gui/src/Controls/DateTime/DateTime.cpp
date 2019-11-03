@@ -30,7 +30,7 @@ namespace Onyx32::Gui::Controls
 			initCommonControls = false;
 		}
 
-		Win32ChildWindowCreationArgs args(
+		ChildWindowDescriptor args(
 			0,
 			DateTime::Class,
 			L"DateTime",
@@ -45,7 +45,7 @@ namespace Onyx32::Gui::Controls
 			DefCtrlProc
 		);
 
-		if (control->_wndHandle = CreateChildWindow(args))
+		if (control->_wndHandle = CreateWin32Window(args))
 		{
 			control->_state = ControlState::Initialized;
 			control->_isVisible = true;

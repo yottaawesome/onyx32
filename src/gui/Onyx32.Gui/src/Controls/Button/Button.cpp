@@ -15,7 +15,7 @@ namespace Onyx32::Gui::Controls
 	IButton* Button::Create(IWindow* parent, uint64_t controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = new Button(text, width, height, xPos, yPos, controlId);
-		Win32ChildWindowCreationArgs args(
+		ChildWindowDescriptor args(
 			0,
 			Button::Class,
 			text,
@@ -29,7 +29,7 @@ namespace Onyx32::Gui::Controls
 			control,
 			DefCtrlProc
 		);
-		if (control->_wndHandle = CreateChildWindow(args))
+		if (control->_wndHandle = CreateWin32Window(args))
 		{
 			control->_state = ControlState::Initialized;
 			control->_isVisible = true;

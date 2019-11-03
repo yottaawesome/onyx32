@@ -5,7 +5,30 @@
 
 namespace Onyx32::Gui
 {
-	HWND CreateChildWindow(const Win32ChildWindowCreationArgs& args)
+	HWND CreateWin32Window(const ParentWindowDescriptor& args)
+	{
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
+		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
+		HWND hWnd = CreateWindowEx
+		(
+			args.ExtendedStyles,
+			args.WndClass.lpszClassName, // class name
+			args.WindowName.c_str(), // window title
+			args.Styles, // window styles
+			args.X, // initial horizontal x position
+			args.Y,  // initial horizontal y position
+			args.Width,  // window width
+			args.Height, // window height
+			args.ParentOrOwner, // parent HWND
+			args.Menu, // HWND menu/child
+			Dll::GetModule(),//hInstance, // instance of the module
+			(LPVOID)args.Window // additional data
+		);
+
+		return hWnd;
+	}
+
+	HWND CreateWin32Window(const ChildWindowDescriptor& args)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
@@ -27,29 +50,6 @@ namespace Onyx32::Gui
 		
 		// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
 		SetWindowSubclass(hWnd, args.SubclassProc, 0, (DWORD_PTR)args.Control);
-
-		return hWnd;
-	}
-
-	HWND CreateParentWindow(const Win32ParentWindowCreationArgs& args)
-	{
-		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
-		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
-		HWND hWnd = CreateWindowEx
-		(
-			args.ExtendedStyles,
-			args.WndClass.lpszClassName, // class name
-			args.WindowName.c_str(), // window title
-			args.Styles, // window styles
-			args.X, // initial horizontal x position
-			args.Y,  // initial horizontal y position
-			args.Width,  // window width
-			args.Height, // window height
-			args.ParentOrOwner, // parent HWND
-			args.Menu, // HWND menu/child
-			Dll::GetModule(),//hInstance, // instance of the module
-			(LPVOID)args.Window // additional data
-		);
 
 		return hWnd;
 	}

@@ -146,7 +146,7 @@ namespace Onyx32::Gui
 	{
 		if (_windowState == WindowState::Uninitialized)
 		{
-			Win32ParentWindowCreationArgs args(
+			ParentWindowDescriptor args(
 				0,
 				_title,
 				_styles,
@@ -159,7 +159,7 @@ namespace Onyx32::Gui
 				this,
 				_windowClass.WndClass
 			);
-			_wndHandle = CreateParentWindow(args);
+			_wndHandle = CreateWin32Window(args);
 			if (_wndHandle)
 			{
 				// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx

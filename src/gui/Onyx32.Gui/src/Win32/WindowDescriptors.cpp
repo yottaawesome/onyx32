@@ -4,7 +4,7 @@
 
 namespace Onyx32::Gui
 {
-	Win32ParentWindowCreationArgs::Win32ParentWindowCreationArgs(
+	ParentWindowDescriptor::ParentWindowDescriptor(
 		const DWORD extendedStyles,
 		std::wstring_view windowName,
 		const DWORD styles,
@@ -14,7 +14,7 @@ namespace Onyx32::Gui
 		const int height,
 		const HWND parentOrOwner,
 		const HMENU menu,
-		IMessageable* window,
+		const IMessageable* window,
 		const WNDCLASSEX& wndClass
 	)
 		: ExtendedStyles(extendedStyles),
@@ -30,7 +30,7 @@ namespace Onyx32::Gui
 		WndClass(wndClass)
 	{ }
 
-	Win32ChildWindowCreationArgs::Win32ChildWindowCreationArgs(
+	ChildWindowDescriptor::ChildWindowDescriptor(
 		const DWORD extendedStyles,
 		std::wstring_view className,
 		std::wstring_view windowName,

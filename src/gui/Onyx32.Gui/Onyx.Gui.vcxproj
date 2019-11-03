@@ -197,18 +197,17 @@
     </ClCompile>
     <ClCompile Include="src\Factory\Factory.cpp" />
     <ClCompile Include="src\Controls\DateTime\DateTime.cpp" />
-    <ClCompile Include="src\Win32\Win32CreationArgs.cpp" />
+    <ClCompile Include="src\Win32\WindowDescriptors.cpp" />
     <ClCompile Include="src\Controls\TextInput\TextInput.cpp" />
-    <ClCompile Include="src\cpp\Onyx32.Gui.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
-    <ClCompile Include="src\Win32\Win32Callbacks.cpp" />
+    <ClCompile Include="src\Win32\WndProcs.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Win32\Win32Window.cpp" />
+    <ClCompile Include="src\Win32\CreateWin32Window.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
     <ClCompile Include="src\Win32\WindowClass.cpp" />
   </ItemGroup>

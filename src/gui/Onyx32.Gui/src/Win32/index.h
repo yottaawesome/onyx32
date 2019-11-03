@@ -11,10 +11,10 @@ namespace Onyx32::Gui
 			virtual ~IMessageable();
 	};
 
-	class Win32ParentWindowCreationArgs
+	class ParentWindowDescriptor
 	{
 		public:
-			Win32ParentWindowCreationArgs(
+			ParentWindowDescriptor(
 				const DWORD extendedStyles,
 				std::wstring_view windowName,
 				const DWORD styles,
@@ -24,7 +24,7 @@ namespace Onyx32::Gui
 				const int height,
 				const HWND parentOrOwner,
 				const HMENU menu,
-				IMessageable* window,
+				const IMessageable* window,
 				const WNDCLASSEX& wndClass
 			);
 
@@ -37,14 +37,14 @@ namespace Onyx32::Gui
 			const int Height;
 			const HWND ParentOrOwner;
 			const HMENU Menu;
-			IMessageable* Window;
+			const IMessageable* Window;
 			const WNDCLASSEX& WndClass;
 	};
 
-	class Win32ChildWindowCreationArgs
+	class ChildWindowDescriptor
 	{
 		public:
-			Win32ChildWindowCreationArgs(
+			ChildWindowDescriptor(
 				const DWORD extendedStyles,
 				std::wstring_view className,
 				std::wstring_view windowName,
@@ -73,9 +73,8 @@ namespace Onyx32::Gui
 			const SUBCLASSPROC SubclassProc;
 	};
 
-	HWND CreateParentWindow(const Win32ParentWindowCreationArgs& args);
-
-	HWND CreateChildWindow(const Win32ChildWindowCreationArgs& args);
+	HWND CreateWin32Window(const ParentWindowDescriptor& args);
+	HWND CreateWin32Window(const ChildWindowDescriptor& args);
 
 	LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam);
 
