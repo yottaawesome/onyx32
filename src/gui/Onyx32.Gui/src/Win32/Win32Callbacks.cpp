@@ -1,3 +1,4 @@
+#include "../h/stdafx.h"
 #include "../Win32/index.h"
 
 namespace Onyx32::Gui

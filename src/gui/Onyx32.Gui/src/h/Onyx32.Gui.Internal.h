@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "../../include/Onyx32.Gui.h"
 #include "../Win32/index.h"
 #include <unordered_map>

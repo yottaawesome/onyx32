@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 namespace Onyx32::Gui
 {
