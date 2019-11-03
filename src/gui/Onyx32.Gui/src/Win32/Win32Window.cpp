@@ -2,11 +2,10 @@
 #include "index.internal.h"
 #include "../h/dllmain.h"
 #include "../Win32/index.h"
-#include  <Commctrl.h>
 
 namespace Onyx32::Gui
 {
-	HWND CreateChildWindow(const Onyx32::Gui::Controls::Win32ChildWindowCreationArgs& args)
+	HWND CreateChildWindow(const Win32ChildWindowCreationArgs& args)
 	{
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowexw
 		// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-createwindowa
@@ -53,17 +52,5 @@ namespace Onyx32::Gui
 		);
 
 		return hWnd;
-	}
-
-	void Resize(Onyx32::Gui::Controls::Button* button, const unsigned int width, const unsigned int height)
-	{
-		MoveWindow(
-			button->GetHwnd(),
-			0,
-			0,
-			width,
-			height,
-			true
-		);
 	}
 }

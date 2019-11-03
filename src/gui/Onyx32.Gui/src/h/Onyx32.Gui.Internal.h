@@ -1,77 +1,13 @@
 #pragma once
 #include "stdafx.h"
 #include "../../include/Onyx32.Gui.h"
+#include "../Win32/index.h"
 #include <unordered_map>
-
-namespace Onyx32::Gui
-{
-	class Win32ParentWindowCreationArgs
-	{
-	public:
-		Win32ParentWindowCreationArgs(
-			const DWORD extendedStyles,
-			std::wstring_view windowName,
-			const DWORD styles,
-			const int x,
-			const int y,
-			const int width,
-			const int height,
-			const HWND parentOrOwner,
-			const HMENU menu,
-			const IWindow* window,
-			const WNDCLASSEX& wndClass
-		);
-
-		const DWORD ExtendedStyles;
-		const std::wstring WindowName;
-		const DWORD Styles;
-		const int X;
-		const int Y;
-		const int Width;
-		const int Height;
-		const HWND ParentOrOwner;
-		const HMENU Menu;
-		const IWindow* Window;
-		const WNDCLASSEX& WndClass;
-	};
-}
 
 namespace Onyx32::Gui::Controls
 {
-	class Win32ChildWindowCreationArgs
-	{
-		public:
-			Win32ChildWindowCreationArgs(
-				const DWORD extendedStyles,
-				std::wstring_view className,
-				std::wstring_view windowName,
-				const DWORD styles,
-				const int x,
-				const int y,
-				const int width,
-				const int height,
-				const HWND parent,
-				const HMENU menuOrId,
-				const IControl* control,
-				const SUBCLASSPROC subclassProc
-			);
-
-			const DWORD ExtendedStyles;
-			const std::wstring ClassName;
-			const std::wstring WindowName;
-			const DWORD Styles;
-			const int X;
-			const int Y;
-			const int Width;
-			const int Height;
-			const HWND Parent;
-			const HMENU MenuOrId;
-			const IControl* Control;
-			const SUBCLASSPROC SubclassProc;
-	};
-
 	template<typename ControlType>
-	class BaseControl : public ControlType
+	class BaseControl : public ControlType, public IMessageable
 	{
 		public:
 			BaseControl(uint64_t id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent);
@@ -107,7 +43,7 @@ namespace Onyx32::Gui::Controls
 			static const int Styles;
 			std::unordered_map<ControlEvents, OnControlEvent> _eventHandlers;
 			virtual void InvokeEvent(const ControlEvents evt);
-			virtual void SetHwnd(HWND hWnd);
+			virtual void SetHwnd(HWND hWnd) override;
 	};
 
 	template<typename ControlType>

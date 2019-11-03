@@ -1,6 +1,6 @@
 #pragma once
 #include "../h/stdafx.h"
-#include "../h/Onyx32.Gui.internal.h"
+#include "index.h"
 
 namespace Onyx32::Gui
 {
@@ -14,7 +14,7 @@ namespace Onyx32::Gui
 		const int height,
 		const HWND parentOrOwner,
 		const HMENU menu,
-		const IWindow* window,
+		IMessageable* window,
 		const WNDCLASSEX& wndClass
 	)
 		: ExtendedStyles(extendedStyles),
@@ -30,7 +30,7 @@ namespace Onyx32::Gui
 		WndClass(wndClass)
 	{ }
 
-	Onyx32::Gui::Controls::Win32ChildWindowCreationArgs::Win32ChildWindowCreationArgs(
+	Win32ChildWindowCreationArgs::Win32ChildWindowCreationArgs(
 		const DWORD extendedStyles,
 		std::wstring_view className,
 		std::wstring_view windowName,
@@ -41,7 +41,7 @@ namespace Onyx32::Gui
 		const int height,
 		const HWND parent,
 		const HMENU menuOrId,
-		const IControl* control,
+		const IMessageable* control,
 		const SUBCLASSPROC subclassProc
 	)
 		: ExtendedStyles(extendedStyles),

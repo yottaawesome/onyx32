@@ -11,7 +11,7 @@ namespace Onyx32::Gui
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/about-window-classes
 	// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/using-windows
-	class Window : public IWindow
+	class Window : public IWindow, public IMessageable
 	{
 		public:
 			Window(
@@ -41,7 +41,7 @@ namespace Onyx32::Gui
 			virtual bool IsVisible() const override;
 			virtual bool IsEnabled() const override;
 
-			virtual void SetHwnd(HWND hWnd);
+			virtual void SetHwnd(HWND hWnd) override;
 			virtual void SetTitle(std::wstring_view title) override;
 			virtual void SetVisibility(const bool isVisible) override;
 			virtual void SetDisplayState(const WindowDisplayState state) override;

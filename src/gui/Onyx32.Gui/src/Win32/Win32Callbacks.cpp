@@ -1,16 +1,15 @@
 #include "../Win32/index.h"
-#include "../Window/Window.h"
 
 namespace Onyx32::Gui
 {
 	LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam)
 	{
-		IWindow* pThis = nullptr;
+		IMessageable* pThis = nullptr;
 
 		if (message == WM_NCCREATE)
 		{
 			CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
-			Window* pThis = (Window*)pCreate->lpCreateParams;
+			IMessageable* pThis = static_cast<IMessageable*>(pCreate->lpCreateParams);
 			SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
 			pThis->SetHwnd(hWnd);
 		}
@@ -30,7 +29,7 @@ namespace Onyx32::Gui
 		}
 		else
 		{
-			pThis = (IWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+			pThis = (IMessageable*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 		}
 
 		return pThis ? pThis->Process(message, wParam, lParam) : DefWindowProc(hWnd, message, wParam, lParam);
@@ -38,11 +37,13 @@ namespace Onyx32::Gui
 
 	LRESULT CALLBACK DefCtrlProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
 	{
-		Onyx32::Gui::Controls::IControl* ctrl = (Onyx32::Gui::Controls::IControl*)dwRefData;
+		IMessageable* ctrl = (IMessageable*)dwRefData;
 
 		if (ctrl)
 			return ctrl->Process(message, wParam, lParam);
 
 		return DefSubclassProc(hWnd, message, wParam, lParam);
 	}
+
+	IMessageable::~IMessageable() {}
 }

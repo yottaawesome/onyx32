@@ -60,7 +60,10 @@ namespace Onyx32::Gui
 
 	const std::wstring& Window::GetTitle() const { return _title; }
 	int Window::GetStyles() const { return _styles; }
-	HWND Window::GetHwnd() const { return _wndHandle; }
+	HWND Window::GetHwnd() const
+	{ 
+		return _wndHandle; 
+	}
 	WindowDisplayState Window::GetDisplayState() const { return _displayState; }
 	bool Window::IsActive() const { return _isActive; }
 	bool Window::HasFocus() const { return _hasFocus; }

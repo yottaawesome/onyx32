@@ -87,31 +87,26 @@ namespace Onyx32::Gui
 		unsigned int height;
 	};
 
-	struct ONYXWINDOWING_API WindowClass
-	{
-		WNDCLASSEX WndClass;
-	};
-
 	// Event signatures
 	typedef std::function<void(Onyx32::Gui::Controls::IButton & button)> OnClick;
 	typedef std::function<void(
-		Onyx32::Gui::Controls::IDateTime & control,
+		Onyx32::Gui::Controls::IDateTime& control,
 		SYSTEMTIME & dateTime)> OnDateTimeChange;
 	typedef std::function<bool(unsigned long long int counter)> IdleCallback;
 
 	class ONYXWINDOWING_API IMenu
 	{
-	public:
-		virtual ~IMenu() = 0;
+		public:
+			virtual ~IMenu() = 0;
 	};
 
 	class ONYXWINDOWING_API IApplication
 	{
-	public:
-		virtual ~IApplication() = 0;
-		virtual int MainLoop() = 0;
-		virtual int MainLoop(IdleCallback callback) = 0;
-		virtual void SetAccelerators(HACCEL accelerators) = 0;
+		public:
+			virtual ~IApplication() = 0;
+			virtual int MainLoop() = 0;
+			virtual int MainLoop(IdleCallback callback) = 0;
+			virtual void SetAccelerators(HACCEL accelerators) = 0;
 	};
 
 }
@@ -121,24 +116,23 @@ namespace Onyx32::Gui::Controls
 	typedef std::function<void(ControlEvents eventType, IControl & control)> OnControlEvent;
 	class ONYXWINDOWING_API IControl
 	{
-	public:
-		virtual ~IControl() = 0;
+		public:
+			virtual ~IControl() = 0;
 
-		virtual HWND GetHwnd() const = 0;
-		virtual void GetDimensions(Dimensions& dimensions) const = 0;
-		virtual uint64_t GetId() const = 0;
-		virtual const std::wstring& GetClass() const = 0;
-		virtual ControlState GetState() const = 0;
-		virtual int GetStyles() const = 0;
-		virtual bool IsVisible() const = 0;
+			virtual HWND GetHwnd() const = 0;
+			virtual void GetDimensions(Dimensions& dimensions) const = 0;
+			virtual uint64_t GetId() const = 0;
+			virtual const std::wstring& GetClass() const = 0;
+			virtual ControlState GetState() const = 0;
+			virtual int GetStyles() const = 0;
+			virtual bool IsVisible() const = 0;
 
-		virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) = 0;
-		virtual void Resize(const unsigned int width, const unsigned int height) = 0;
-		virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
-		virtual void SetVisibility(const bool isVisible) = 0;
+			virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) = 0;
+			virtual void Resize(const unsigned int width, const unsigned int height) = 0;
+			virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
+			virtual void SetVisibility(const bool isVisible) = 0;
 
-		virtual void Initialize() = 0;
-		virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) = 0;
+			virtual void Initialize() = 0;
 	};
 
 	enum struct ONYXWINDOWING_API ButtonEvents
@@ -149,28 +143,28 @@ namespace Onyx32::Gui::Controls
 	typedef std::function<void(ButtonEvents eventType, IButton & button)> OnButtonEvent;
 	class ONYXWINDOWING_API IButton : public IControl
 	{
-	public:
-		virtual ~IButton() = 0;
-		virtual const std::wstring& GetText() const = 0;
-		using IControl::SetEvent;
-		virtual void SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler) = 0;
-		virtual void SetText(std::wstring_view str) = 0;
+		public:
+			virtual ~IButton() = 0;
+			virtual const std::wstring& GetText() const = 0;
+			using IControl::SetEvent;
+			virtual void SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler) = 0;
+			virtual void SetText(std::wstring_view str) = 0;
 	};
 
 	class ONYXWINDOWING_API IDateTime : public IControl
 	{
-	public:
-		virtual ~IDateTime() = 0;
-		virtual void GetDateTime(SYSTEMTIME& dateTime) = 0;
-		virtual void SetOnChange(OnDateTimeChange& onChange) = 0;
+		public:
+			virtual ~IDateTime() = 0;
+			virtual void GetDateTime(SYSTEMTIME& dateTime) = 0;
+			virtual void SetOnChange(OnDateTimeChange& onChange) = 0;
 	};
 
 	class ONYXWINDOWING_API ITextInput : public IControl
 	{
-	public:
-		virtual ~ITextInput() = 0;
-		virtual const std::wstring GetText() = 0;
-		virtual void SetText(std::wstring_view str) = 0;
+		public:
+			virtual ~ITextInput() = 0;
+			virtual const std::wstring GetText() = 0;
+			virtual void SetText(std::wstring_view str) = 0;
 	};
 }
 
@@ -212,7 +206,6 @@ namespace Onyx32::Gui
 			virtual void RequestFocus() = 0;
 
 			virtual void Initialize() = 0;
-			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) = 0;
 	};
 
 	class ONYXWINDOWING_API IFactory
