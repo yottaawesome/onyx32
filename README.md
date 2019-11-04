@@ -58,6 +58,8 @@ int retVal = app->MainLoop();
 return retVal;
 ```
 
+Note that the above API will be changing in the near future.
+
 ## Future features
 
 The project is undergoing refactoring and I'm slowly adding more features. Features I intend to add support:
