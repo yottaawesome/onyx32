@@ -21,7 +21,7 @@ Development is best done in Visual Studio 2019 Community Edition. Onyx32 targets
 Check `Onyx32.Gui.Tests project` for an example. Essentially, in your project in which you want to use Onyx32.Gui.dll, do the following:
 
 1. Include `Onyx32.Gui.h` and `Onyx32.Gui.Lib.h` (or just the latter, since it includes the former) located in the `Onyx32.Gui/include/` directory.
-2. Create an instance of `Onyx32Lib`. This class will automatically load the DLL and unload it on its destruction, so it should remain active for the entire scope of your use of `Onyx32` (which will probably be your entire application lifetime).
+2. Create an instance of `Onyx32Lib`. This class will automatically load the DLL and unload it on its destruction, so this instance should remain active for the entire scope of your use of `Onyx32` (which will probably be your entire application lifetime).
 3. Create the main factory via `Onyx32Lib::GetMainFactory()`.
 4. Use the factory to create windows and controls.
 5. Add controls to windows.
