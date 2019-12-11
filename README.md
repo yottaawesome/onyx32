@@ -14,7 +14,7 @@ It goes without saying that this project is purely for my own fun and education;
 
 ## Using the library
 
-Development is best done in Visual Studio 2019 Community Edition. Onyx32 targets the latest Windows SDK, so you will need the "Desktop development with C++" workload installed for your Visual Studio. Simply clone this repo and open it in Visual Studio -- you should be able to build immediately.
+Development is best done in Visual Studio 2019 Community Edition. Onyx32 targets the latest Windows SDK, so you will need the "Desktop development with C++" workload installed for your Visual Studio. Cross-platform development makes little sense for this project, so you'll need a recent version of Windows. Simply clone this repo and open it in Visual Studio -- you should be able to build immediately if you have met the prerequisites.
 
 ### Using Onyx32.Gui.dll
 
