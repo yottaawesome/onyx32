@@ -4,15 +4,17 @@
 
 Onyx32 is an experimental Win32 framework written in C++ that is currently in development. It's intended to take advantage of newer C++ features and provide a pleasant interface in lieu of the ugly Win32 C calls. The project initially started as a means for me to learn newer C++ features while also exploring the Win32 API.
 
-It goes without saying that this project is purely for fun and education. Building and maintaining frameworks takes serious work; if you need a GUI framework for production Win32 work, consider [wxWidgets](https://www.wxwidgets.org/).
-
 ## Status
 
 _In development._ The framework is continually being improved and refactored with time, so the API may not be stable.
 
+## Caveats
+
+It goes without saying that this project is purely for my own fun and education; it's not meant for production-level work. Win32 also has a huge surface area for an API, so Onyx32 is woefully incomplete in terms of features. Remember that building and maintaining quality frameworks takes serious work; if you need a GUI framework for production Win32 work, consider [wxWidgets](https://www.wxwidgets.org/).
+
 ## Using the library
 
-Development is best done in Visual Studio 2019. Onyx32 targets the latest Windows SDK. Simply clone this repo and open it in Visual Studio -- you should be able to build immediately.
+Development is best done in Visual Studio 2019 Community Edition. Onyx32 targets the latest Windows SDK, so you will need the "Desktop development with C++" workload installed for your Visual Studio. Simply clone this repo and open it in Visual Studio -- you should be able to build immediately.
 
 ### Using Onyx32.Gui.dll
 
@@ -28,7 +30,7 @@ Check `Onyx32.Gui.Tests project` for an example. Essentially, in your project in
 8. Enter the message pump loop `IApplication::MainLoop()`.
 9. Bob's your uncle.
 
-Really simple example below.
+Really simple example below. Note that the API demonstrated below will be changing in the near future to a more [fluid style](https://en.wikipedia.org/wiki/Fluent_interface).
 
 ```C++
 // Update this as per your folder set up
@@ -58,8 +60,6 @@ int retVal = app->MainLoop();
 return retVal;
 ```
 
-Note that the above API will be changing in the near future.
-
 ## Future features
 
 The project is undergoing refactoring and I'm slowly adding more features. Features I intend to add support:
@@ -70,6 +70,7 @@ The project is undergoing refactoring and I'm slowly adding more features. Featu
 * Networking.
 * Drawing.
 * DirectX support.
+* In future, I may also update the project to move away from VS Community and use VS Code instead.
 * And more!
 
 Obviously, this is a bit ambitious (remember I also have a full-time job!), so it will take a while for me to piece everything together.
