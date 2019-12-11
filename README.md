@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Onyx32 is an experimental Win32 framework written in C++ that is currently in development. It's intended to take advantage of newer C++ features and provide a pleasant interface in lieu of the ugly Win32 C calls. The project initially started many years ago as a means for me to learn newer C++ features while also exploring the Win32 API, and has been rewritten and re-imagined multiple times since then. Onyx32 is the latest incarnation of this effort.
+Onyx32 is an experimental Win32 framework written in C++ that is currently in development. It's intended to take advantage of newer C++ features and provide a pleasant interface in lieu of the ugly Win32 C calls. This project has roots in older projects of mine started many years ago as a means for me to learn newer C++ features while also exploring the Win32 API. Onyx32 is the latest incarnation of this effort.
 
 ## Status
 
