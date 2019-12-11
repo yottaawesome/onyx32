@@ -10,7 +10,7 @@ _In development._ The framework is continually being improved and refactored wit
 
 ## Caveats
 
-It goes without saying that this project is purely for my own fun and education; it's not meant for production-level work. Win32 also has a huge surface area for an API, so Onyx32 is woefully incomplete in terms of features. Remember that building and maintaining quality frameworks takes serious work; if you need a GUI framework for production Win32 work, consider [wxWidgets](https://www.wxwidgets.org/).
+It goes without saying that this project is purely for my own fun and education; it's not meant for production-level work. Win32 also has a huge surface area for an API, and time is a limited resource for me, so Onyx32 is woefully incomplete in terms of features. Remember that building and maintaining quality frameworks takes serious work; if you need a GUI framework for production Win32 work, consider [wxWidgets](https://www.wxwidgets.org/).
 
 ## Using the library
 
