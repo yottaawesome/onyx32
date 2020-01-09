@@ -1,6 +1,6 @@
 #include "../../stdafx.h"
-#include "TextInput.h"
-#include "../..//Win32/index.h"
+#include "TextInput.hpp"
+#include "../..//Win32/index.hpp"
 #include  <Commctrl.h>
 
 using std::wstring;

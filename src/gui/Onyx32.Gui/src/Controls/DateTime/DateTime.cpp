@@ -1,6 +1,6 @@
 #include "../../stdafx.h"
-#include "../../Win32/index.h"
-#include "DateTime.h"
+#include "../../Win32/index.hpp"
+#include "DateTime.hpp"
 
 namespace Onyx32::Gui::Controls
 {

@@ -1,7 +1,7 @@
 #include "../h/stdafx.h"
 #include "../h/Onyx32.h"
-#include "../../../Onyx32.Gui/include/Onyx32.Gui.h"
-#include "../../../Onyx32.Gui/include/Onyx32.Gui.Lib.h"
+#include "../../../Onyx32.Gui/include/Onyx32.Gui.hpp"
+#include "../../../Onyx32.Gui/include/Onyx32.Gui.Lib.hpp"
 #include <functional>
 
 using std::wstring;

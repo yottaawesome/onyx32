@@ -1,6 +1,6 @@
 #include "../../stdafx.h"
-#include "Button.h"
-#include "../../Win32/index.h"
+#include "Button.hpp"
+#include "../../Win32/index.hpp"
 #include <Commctrl.h>
 
 using std::wstring;

@@ -1,8 +1,8 @@
 #include "../stdafx.h"
-#include "Factory.h"
-#include "../Application/Application.h"
-#include "../Window/Window.h"
-#include "../Controls/index.h"
+#include "Factory.hpp"
+#include "../Application/Application.hpp"
+#include "../Window/Window.hpp"
+#include "../Controls/index.hpp"
 
 namespace Onyx32::Gui
 {

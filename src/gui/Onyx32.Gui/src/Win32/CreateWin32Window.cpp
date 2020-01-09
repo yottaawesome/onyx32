@@ -1,7 +1,7 @@
 #include "../stdafx.h"
-#include "index.internal.h"
-#include "../dllmain.h"
-#include "../Win32/index.h"
+#include "index.internal.hpp"
+#include "../dllmain.hpp"
+#include "../Win32/index.hpp"
 
 namespace Onyx32::Gui
 {
