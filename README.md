@@ -78,3 +78,5 @@ Obviously, this is a bit ambitious (remember I also have a full-time job!), so i
 ## Considerations
 
 Note that Win32 imposes restrictions on threads sharing and manipulating windows. Whilst it's possible for threads to [join their thread input state](https://docs.microsoft.com/en-us/windows/win32/procthread/creating-windows-in-threads), certain operations, [such as destroying windows](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow#remarks), can only be performed by the threads that created said windows.
+
+Currently, the Onyx DLL allocates memory, which the client code must `delete`. This is not safe across clients and DLL that are compiled with different versions of the runtime. I do plan to refactor the code to make use of either a fixed allocation function such as `LocalAlloc()` or a wrapper allocation function exported from the DLL.
