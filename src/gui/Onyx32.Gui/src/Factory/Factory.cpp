@@ -1,6 +1,6 @@
 #include "../stdafx.h"
 #include "Factory.hpp"
-#include "../Application/Application.hpp"
+#include "../MainLoop/MainLoop.hpp"
 #include "../Window/Window.hpp"
 #include "../Controls/index.hpp"
 
@@ -10,9 +10,9 @@ namespace Onyx32::Gui
 
 	Factory::~Factory() { }
 
-	IApplication* Factory::GetApplication()
+	IMainLoop* Factory::CreateMainLoop()
 	{
-		return new Application();
+		return new MainLoop();
 	}
 
 	IWindow* Factory::CreateDefaultWindow(std::wstring_view title, unsigned int width, unsigned int height)

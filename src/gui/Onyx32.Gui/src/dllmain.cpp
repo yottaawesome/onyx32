@@ -22,7 +22,7 @@ namespace Onyx32::Gui
 	//https://stackoverflow.com/questions/2691611/destructors-for-c-interface-like-classes
 	inline IWindow::~IWindow() { }
 	inline IFactory::~IFactory() { }
-	inline IApplication::~IApplication() { }
+	inline IMainLoop::~IMainLoop() { }
 	inline IMenu::~IMenu() { }
 	IFactory* GetMainFactory()
 	{

@@ -12,7 +12,7 @@ using Onyx32::Gui::Controls::ITextInput;
 using Onyx32::Gui::Controls::IButton;
 using Onyx32::Gui::Controls::IDateTime;
 using Onyx32::Gui::Onyx32Lib;
-using Onyx32::Gui::IApplication;
+using Onyx32::Gui::IMainLoop;
 using Onyx32::Gui::WindowEvents;
 using Onyx32::Gui::ControlEvents;
 using Onyx32::Gui::Controls::ButtonEvents;
@@ -20,7 +20,7 @@ using Onyx32::Gui::WindowDisplayState;
 using Onyx32::Gui::Controls::IControl;
 
 // https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
-int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -29,7 +29,8 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	std::shared_ptr<IFactory> factory(lib.GetMainFactory());
 	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500));
 	std::shared_ptr<IWindow> wnd2(factory->CreateStyledWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500));
-	std::shared_ptr<IApplication> app(factory->GetApplication());
+	
+	std::shared_ptr<IMainLoop> appLoop(factory->CreateMainLoop());
 
 	wnd->Initialize();
 	wnd2->Initialize();
@@ -48,7 +49,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 
 	button->SetEvent(
 		ControlEvents::OnVisibilityChanged,
-		[](ControlEvents evt, IControl& control) -> void { OutputDebugStringA("\nA button's visibility was changed"); }
+		[](ControlEvents evt, IControl& control) -> void { OutputDebugString(L"\nA button's visibility was changed"); }
 	);
 
 	IButton* changeButton = factory->CreateButton(wnd2.get(), 100, L"Show/Hide", 100, 100, 10, 10);
@@ -63,35 +64,33 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		WindowEvents::OnActivateChange, 
 		[](WindowEvents evt, IWindow& window) -> void
 		{ 
-			if(window.IsActive())
-				OutputDebugStringA("\nWindow activated"); 
-			else
-				OutputDebugStringA("\nWindow deactivated");
+			OutputDebugString(window.IsActive() ? L"\nWindow activated" : L"\nWindow deactivated");
 		});
 	wnd->SetEvent(
 		WindowEvents::OnResized,
-		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nWindow resized"); });
+		[](WindowEvents evt, IWindow& window) -> void { OutputDebugString(L"\nWindow resized"); });
 	wnd->SetEvent(
 		WindowEvents::OnClose,
 		[](WindowEvents evt, IWindow& window) -> void { PostQuitMessage(0); });
 	wnd->SetEvent(
 		WindowEvents::OnVisibilityChanged,
-		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nWindow visibility changed"); });
+		[](WindowEvents evt, IWindow& window) -> void { OutputDebugString(L"\nWindow visibility changed"); });
 	wnd->SetEvent(
 		WindowEvents::OnDisplayStateChanged,
-		[](WindowEvents evt, IWindow& window) -> void { OutputDebugStringA("\nDisplay state changed"); });
+		[](WindowEvents evt, IWindow& window) -> void { OutputDebugString(L"\nDisplay state changed"); });
 
-	Onyx32::Gui::OnDateTimeChange changeHandler = [&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
-	{
-		char box[150];
-		sprintf_s(box, 150, "%u/%u/%u", dt.wDay, dt.wMonth, dt.wYear);
-		MessageBoxA(nullptr, box, "Changed!", MB_OK);
-	};
+	Onyx32::Gui::OnDateTimeChange changeHandler = 
+		[&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
+		{
+			char box[150];
+			sprintf_s(box, 150, "%u/%u/%u", dt.wDay, dt.wMonth, dt.wYear);
+			MessageBoxA(nullptr, box, "Changed!", MB_OK);
+		};
 	dateTime->SetOnChange(changeHandler);
 
 	input->SetText(L"Test input");
 	
-	int retVal = app->MainLoop();
+	int retVal = appLoop->Enter();
 
 	return retVal;
 }

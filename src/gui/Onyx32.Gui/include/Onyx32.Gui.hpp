@@ -100,12 +100,12 @@ namespace Onyx32::Gui
 			virtual ~IMenu() = 0;
 	};
 
-	class ONYXWINDOWING_API IApplication
+	class ONYXWINDOWING_API IMainLoop
 	{
 		public:
-			virtual ~IApplication() = 0;
-			virtual int MainLoop() = 0;
-			virtual int MainLoop(IdleCallback callback) = 0;
+			virtual ~IMainLoop() = 0;
+			virtual int Enter() = 0;
+			virtual int Enter(IdleCallback callback) = 0;
 			virtual void SetAccelerators(HACCEL accelerators) = 0;
 	};
 
@@ -217,7 +217,7 @@ namespace Onyx32::Gui
 			[[nodiscard]] virtual Onyx32::Gui::Controls::IDateTime* CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::ITextInput* CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::IButton* CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
-			[[nodiscard]] virtual IApplication* GetApplication() = 0;
+			[[nodiscard]] virtual IMainLoop* CreateMainLoop() = 0;
 	};
 
 	typedef IFactory* (*getMainFactory)();

@@ -8,7 +8,7 @@ namespace Onyx32::Gui
 		public:
 			Factory();
 			virtual ~Factory();
-			virtual IApplication* GetApplication() override;
+			virtual IMainLoop* CreateMainLoop() override;
 			virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) override;
 			virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, unsigned int width = 0, unsigned int height = 0) override;
 			virtual Controls::IDateTime* CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) override;
