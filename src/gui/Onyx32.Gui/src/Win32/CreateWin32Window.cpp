@@ -21,7 +21,7 @@ namespace Onyx32::Gui
 			args.Height, // window height
 			args.ParentOrOwner, // parent HWND
 			args.Menu, // HWND menu/child
-			Dll::GetModule(),//hInstance, // instance of the module
+			DLL::GetModule(),//hInstance, // instance of the module
 			(LPVOID)args.Window // additional data
 		);
 
@@ -44,7 +44,7 @@ namespace Onyx32::Gui
 			args.Height,        // Button height
 			args.Parent,     // Parent window
 			args.MenuOrId,       // Menu or control id
-			Dll::GetModule(),// can also use (HINSTANCE)GetWindowLongPtr(args.Parent, GWLP_HINSTANCE),
+			DLL::GetModule(),// can also use (HINSTANCE)GetWindowLongPtr(args.Parent, GWLP_HINSTANCE),
 			(LPVOID)args.Control
 		);
 		

@@ -16,7 +16,7 @@ namespace Onyx32::Gui
 			virtual IFactory* GetMainFactory();
 
 		protected:
-			getMainFactory factFunc;
+			Onyx32::Gui::MainFactory factFunc;
 			const std::wstring path;
 			HMODULE libraryHandle;
 			virtual void* Resolve(std::string_view path);
@@ -28,7 +28,7 @@ namespace Onyx32::Gui
 		libraryHandle = LoadLibrary(path.c_str());
 		if (libraryHandle == nullptr)
 			throw std::runtime_error("Failed to load library");
-		factFunc = (getMainFactory) this->Resolve("GetMainFactory");
+		factFunc = (Onyx32::Gui::MainFactory) this->Resolve("GetMainFactory");
 		if (factFunc == nullptr)
 			throw std::runtime_error("Failed to load main factory function");
 	}

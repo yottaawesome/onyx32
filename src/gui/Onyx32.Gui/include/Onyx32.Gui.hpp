@@ -220,6 +220,7 @@ namespace Onyx32::Gui
 			[[nodiscard]] virtual IMainLoop* CreateMainLoop() = 0;
 	};
 
-	typedef IFactory* (*getMainFactory)();
+	typedef IFactory* (*MainFactory)();
+	extern "C" ONYXWINDOWING_API void SetHeap(HANDLE heap);
 	extern "C" ONYXWINDOWING_API [[nodiscard]] IFactory* GetMainFactory();
 }

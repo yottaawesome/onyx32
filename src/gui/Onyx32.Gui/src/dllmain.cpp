@@ -6,16 +6,37 @@
 
 namespace Onyx32::Gui
 {
-	HMODULE Dll::module = nullptr;
+	HMODULE DLL::module = nullptr;
+	HANDLE DLL::heapHandle = nullptr;
 	
-	void Dll::SetModule(HMODULE dllModule)
+	void DLL::SetModule(HMODULE dllModule)
 	{
-		Dll::module = dllModule;
+		DLL::module = dllModule;
 	}
 
-	HMODULE Dll::GetModule()
+	HMODULE DLL::GetModule()
 	{
-		return Dll::module;
+		return DLL::module;
+	}
+
+	void DLL::SetHeap(HANDLE heap)
+	{
+		heapHandle = heap;
+	}
+
+	HANDLE DLL::GetHeap()
+	{
+		return heapHandle;
+	}
+
+	IFactory* GetMainFactory()
+	{
+		return new Factory();
+	}
+
+	void SetHeap(HANDLE heap)
+	{
+		DLL::SetHeap(heap);
 	}
 
 	//https://stackoverflow.com/questions/3628529/should-c-interfaces-have-a-virtual-destructor
@@ -24,10 +45,6 @@ namespace Onyx32::Gui
 	inline IFactory::~IFactory() { }
 	inline IMainLoop::~IMainLoop() { }
 	inline IMenu::~IMenu() { }
-	IFactory* GetMainFactory()
-	{
-		return new Factory();
-	}
 }
 
 namespace Onyx32::Gui::Controls
@@ -44,7 +61,7 @@ bool APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	{
 		case DLL_PROCESS_ATTACH:
 			OutputDebugString(L"DLL_PROCESS_ATTACH");
-			Onyx32::Gui::Dll::SetModule(hModule);
+			Onyx32::Gui::DLL::SetModule(hModule);
 		case DLL_THREAD_ATTACH:
 		case DLL_THREAD_DETACH:
 		case DLL_PROCESS_DETACH:

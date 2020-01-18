@@ -74,8 +74,12 @@ namespace Onyx32::Gui
 	{
 		dimensions.xPos = _xPos;
 		dimensions.yPos = _yPos;
-		dimensions.width = _width;
-		dimensions.height = _height;
+		RECT rect;
+		if (GetWindowRect(this->GetHwnd(), &rect))
+		{
+			dimensions.width = _width;
+			dimensions.height = _height;
+		}
 	}
 
 	void Window::SetEnabled(const bool isEnabled)
