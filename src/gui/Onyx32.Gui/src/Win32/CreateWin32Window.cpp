@@ -3,7 +3,7 @@
 #include "../dllmain.hpp"
 #include "../Win32/index.hpp"
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Win32
 {
 	HWND CreateWin32Window(const ParentWindowDescriptor& args)
 	{
@@ -22,7 +22,7 @@ namespace Onyx32::Gui
 			args.ParentOrOwner, // parent HWND
 			args.Menu, // HWND menu/child
 			DLL::GetModule(),//hInstance, // instance of the module
-			(LPVOID)args.Window // additional data
+			(void*)args.Window // additional data
 		);
 
 		return hWnd;

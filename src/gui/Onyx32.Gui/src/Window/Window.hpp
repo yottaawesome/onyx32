@@ -11,18 +11,18 @@ namespace Onyx32::Gui
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/about-window-classes
 	// https://docs.microsoft.com/en-us/windows/desktop/api/commctrl/nf-commctrl-setwindowsubclass
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/using-windows
-	class Window : public IWindow, public IMessageable
+	class Window : public IWindow, public Onyx32::Gui::Win32::IMessageable
 	{
 		public:
 			Window(
-				const WindowClass& wcex,
+				const Onyx32::Gui::Win32::WindowClass& wcex,
 				std::wstring_view title,
 				const unsigned int width = CW_USEDEFAULT,
 				const unsigned int height = CW_USEDEFAULT,
 				const unsigned int xPos = CW_USEDEFAULT,
 				const unsigned int yPos = CW_USEDEFAULT);
 			Window(
-				const WindowClass& wcex, 
+				const Onyx32::Gui::Win32::WindowClass& wcex,
 				std::wstring_view title,
 				const int customStyle,
 				const unsigned int width = CW_USEDEFAULT,
@@ -56,11 +56,12 @@ namespace Onyx32::Gui
 			virtual void DestroyControl(Onyx32::Gui::Controls::IControl* const control) override;
 			virtual void Move(const unsigned int xPos, const unsigned int yPos) override;
 			virtual void RequestFocus() override;
+			virtual void Destroy();
 
 		protected:
 			virtual void InvokeEvent(const WindowEvents evt);
 
-			const WindowClass _windowClass;
+			const Onyx32::Gui::Win32::WindowClass _windowClass;
 			WindowDisplayState _displayState;
 
 			WindowState _windowState;

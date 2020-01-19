@@ -6,7 +6,7 @@
 namespace Onyx32::Gui::Controls
 {
 	template<typename ControlType>
-	class BaseControl : public ControlType, public IMessageable
+	class BaseControl : public ControlType, public Onyx32::Gui::Win32::IMessageable
 	{
 		public:
 			BaseControl(uint64_t id, ControlState state, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos, HWND wndHandle, IWindow* parent);
@@ -24,6 +24,7 @@ namespace Onyx32::Gui::Controls
 			virtual void SetVisibility(const bool isVisible) override;
 			virtual void Resize(const unsigned int width, const unsigned int height) override;
 			virtual void Move(const unsigned int xPos, const unsigned int yPos) override;
+			virtual void Destroy();
 
 			virtual LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 
@@ -82,6 +83,12 @@ namespace Onyx32::Gui::Controls
 	{
 		if (_state == ControlState::Initialized && _eventHandlers.count(evt))
 			_eventHandlers[evt](evt, *this);
+	}
+
+	template<typename ControlType>
+	void BaseControl<ControlType>::Destroy()
+	{
+		delete this;
 	}
 
 	template<typename ControlType>

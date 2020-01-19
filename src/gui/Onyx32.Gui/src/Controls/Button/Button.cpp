@@ -15,7 +15,7 @@ namespace Onyx32::Gui::Controls
 	IButton* Button::Create(IWindow* parent, uint64_t controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = new Button(text, width, height, xPos, yPos, controlId);
-		ChildWindowDescriptor args(
+		Onyx32::Gui::Win32::ChildWindowDescriptor args(
 			0,
 			Button::Class,
 			text,

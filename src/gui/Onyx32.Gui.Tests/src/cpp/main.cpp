@@ -27,8 +27,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	
 	Onyx32Lib lib;
 	std::shared_ptr<IFactory> factory(lib.GetMainFactory());
-	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500));
-	std::shared_ptr<IWindow> wnd2(factory->CreateStyledWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500));
+	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500), [](IWindow* wnd) -> void { wnd->Destroy(); });
+	std::shared_ptr<IWindow> wnd2(factory->CreateStyledWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500), [](IWindow* wnd) -> void { wnd->Destroy(); });
 	
 	std::shared_ptr<IMainLoop> appLoop(factory->CreateMainLoop());
 

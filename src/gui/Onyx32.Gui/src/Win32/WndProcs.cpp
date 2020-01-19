@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "index.internal.hpp"
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Win32
 {
 	LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam)
 	{

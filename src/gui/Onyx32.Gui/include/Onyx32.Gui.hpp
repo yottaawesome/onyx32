@@ -117,7 +117,6 @@ namespace Onyx32::Gui::Controls
 	class ONYXWINDOWING_API IControl
 	{
 		public:
-			virtual ~IControl() = 0;
 
 			virtual HWND GetHwnd() const = 0;
 			virtual void GetDimensions(Dimensions& dimensions) const = 0;
@@ -131,8 +130,12 @@ namespace Onyx32::Gui::Controls
 			virtual void Resize(const unsigned int width, const unsigned int height) = 0;
 			virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
 			virtual void SetVisibility(const bool isVisible) = 0;
-
 			virtual void Initialize() = 0;
+			virtual void Destroy() = 0;
+
+		protected:
+			virtual ~IControl() = 0;
+
 	};
 
 	enum struct ONYXWINDOWING_API ButtonEvents
@@ -174,7 +177,6 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IWindow
 	{
 		public: 
-			virtual ~IWindow() = 0;
 			virtual HWND GetHwnd() const = 0;
 			virtual const std::wstring& GetTitle() const = 0;
 			virtual void GetDimensions(Dimensions& dimensions) const = 0;
@@ -206,6 +208,9 @@ namespace Onyx32::Gui
 			virtual void RequestFocus() = 0;
 
 			virtual void Initialize() = 0;
+			virtual void Destroy() = 0;
+		protected:
+			virtual ~IWindow() = 0;
 	};
 
 	class ONYXWINDOWING_API IFactory

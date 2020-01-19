@@ -14,7 +14,7 @@ namespace Onyx32::Gui::Controls
 	ITextInput* TextInput::Create(IWindow* parent, uint64_t controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos)
 	{
 		auto control = new TextInput(text, width, height, xPos, yPos, controlId);
-		ChildWindowDescriptor args(
+		Onyx32::Gui::Win32::ChildWindowDescriptor args(
 			0,
 			TextInput::Class,
 			text,
@@ -28,7 +28,7 @@ namespace Onyx32::Gui::Controls
 			control
 		);
 		;
-		if (control->_wndHandle = CreateWin32Window(args))
+		if (control->_wndHandle = Onyx32::Gui::Win32::CreateWin32Window(args))
 		{
 			control->_state = ControlState::Initialized;
 			control->_isVisible = true;

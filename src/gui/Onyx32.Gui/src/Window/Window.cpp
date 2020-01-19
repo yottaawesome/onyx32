@@ -14,7 +14,7 @@ namespace Onyx32::Gui
 {
 	const int DefaultWindowStyles = WS_OVERLAPPEDWINDOW;
 
-	Window::Window(const WindowClass& wndClass, wstring_view title, const int customStyle, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
+	Window::Window(const Onyx32::Gui::Win32::WindowClass& wndClass, wstring_view title, const int customStyle, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
 		: _width(width),
 		_height(height),
 		_xPos(xPos),
@@ -32,7 +32,7 @@ namespace Onyx32::Gui
 		_isEnabled(false)
 	{ }
 
-	Window::Window(const WindowClass& wndClass, wstring_view title, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
+	Window::Window(const Onyx32::Gui::Win32::WindowClass& wndClass, wstring_view title, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
 		: _width(width), 
 		_height(height),
 		_xPos(xPos),
@@ -150,7 +150,7 @@ namespace Onyx32::Gui
 	{
 		if (_windowState == WindowState::Uninitialized)
 		{
-			ParentWindowDescriptor args(
+			Onyx32::Gui::Win32::ParentWindowDescriptor args(
 				0,
 				_title,
 				_styles,
@@ -163,7 +163,7 @@ namespace Onyx32::Gui
 				this,
 				_windowClass.WndClass
 			);
-			_wndHandle = CreateWin32Window(args);
+			_wndHandle = Onyx32::Gui::Win32::CreateWin32Window(args);
 			if (_wndHandle)
 			{
 				// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx
@@ -200,7 +200,7 @@ namespace Onyx32::Gui
 		if (_windowState == WindowState::Initialized)
 		{
 			control->Initialize();
-			_children[control] = std::shared_ptr<Onyx32::Gui::Controls::IControl>(control);
+			_children[control] = std::shared_ptr<Onyx32::Gui::Controls::IControl>(control, [](Onyx32::Gui::Controls::IControl* ctl) -> void { ctl->Destroy(); });
 		}
 	}
 
@@ -220,6 +220,11 @@ namespace Onyx32::Gui
 	{
 		if(_windowState == WindowState::Initialized)
 			SetFocus(_wndHandle);
+	}
+
+	void Window::Destroy()
+	{
+		delete this;
 	}
 
 	LRESULT Window::Process(unsigned int message, WPARAM wParam, LPARAM lParam)

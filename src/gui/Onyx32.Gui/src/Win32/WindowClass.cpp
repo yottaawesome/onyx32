@@ -3,7 +3,7 @@
 #include "../Resource.h"
 #include "../dllmain.hpp"
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Win32
 {
 	WindowClass DefaultWindowClass = WindowClass();
 

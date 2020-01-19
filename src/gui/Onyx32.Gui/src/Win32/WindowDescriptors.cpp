@@ -2,7 +2,7 @@
 #include "../stdafx.h"
 #include "index.internal.hpp"
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Win32
 {
 	ParentWindowDescriptor::ParentWindowDescriptor(
 		const DWORD extendedStyles,

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Win32
 {
 	class IMessageable
 	{
