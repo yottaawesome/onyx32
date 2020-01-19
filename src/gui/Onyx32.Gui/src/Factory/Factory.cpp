@@ -51,4 +51,9 @@ namespace Onyx32::Gui
 		parent->AddControl(control);
 		return control;
 	}
+
+	void Factory::Destroy()
+	{
+		delete this;
+	}
 }

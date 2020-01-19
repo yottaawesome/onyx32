@@ -8,6 +8,11 @@ namespace Onyx32::Gui
 	MainLoop::MainLoop(HACCEL accelerators) : _accelerators(accelerators) { }
 
 	MainLoop::~MainLoop() { }
+	
+	void MainLoop::Destroy()
+	{
+		delete this;
+	}
 
 	void MainLoop::SetAccelerators(HACCEL accelerators)
 	{

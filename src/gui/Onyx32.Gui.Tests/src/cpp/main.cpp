@@ -19,6 +19,9 @@ using Onyx32::Gui::Controls::ButtonEvents;
 using Onyx32::Gui::WindowDisplayState;
 using Onyx32::Gui::Controls::IControl;
 
+template<typename T>
+auto ReleaseOnyxObject = [](T* t) -> void { t->Destroy(); };
+
 // https://docs.microsoft.com/en-us/windows/desktop/learnwin32/learn-to-program-for-windows--sample-code
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
@@ -26,11 +29,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     UNREFERENCED_PARAMETER(lpCmdLine);
 	
 	Onyx32Lib lib;
-	std::shared_ptr<IFactory> factory(lib.GetMainFactory());
-	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500), [](IWindow* wnd) -> void { wnd->Destroy(); });
-	std::shared_ptr<IWindow> wnd2(factory->CreateStyledWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500), [](IWindow* wnd) -> void { wnd->Destroy(); });
-	
-	std::shared_ptr<IMainLoop> appLoop(factory->CreateMainLoop());
+	std::shared_ptr<IFactory> factory(lib.GetMainFactory(), ReleaseOnyxObject<IFactory>);
+	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500), ReleaseOnyxObject<IWindow>);
+	std::shared_ptr<IWindow> wnd2(factory->CreateStyledWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500), ReleaseOnyxObject<IWindow>);
+	std::shared_ptr<IMainLoop> appLoop(factory->CreateMainLoop(), ReleaseOnyxObject<IMainLoop>);
 
 	wnd->Initialize();
 	wnd2->Initialize();

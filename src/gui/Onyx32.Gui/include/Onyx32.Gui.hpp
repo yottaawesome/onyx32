@@ -103,10 +103,12 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IMainLoop
 	{
 		public:
-			virtual ~IMainLoop() = 0;
 			virtual int Enter() = 0;
 			virtual int Enter(IdleCallback callback) = 0;
 			virtual void SetAccelerators(HACCEL accelerators) = 0;
+			virtual void Destroy() = 0;
+		protected:
+			virtual ~IMainLoop() = 0;
 	};
 
 }
@@ -216,13 +218,16 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IFactory
 	{
 		public:
-			virtual ~IFactory() = 0;
 			[[nodiscard]] virtual IWindow* CreateDefaultWindow(std::wstring_view title, unsigned int width = 0, unsigned int height = 0) = 0;
 			[[nodiscard]] virtual IWindow* CreateStyledWindow(std::wstring_view title, const int styles, unsigned int width = 0, unsigned int height = 0) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::IDateTime* CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::ITextInput* CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::IButton* CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual IMainLoop* CreateMainLoop() = 0;
+			virtual void Destroy() = 0;
+
+		protected:
+			virtual ~IFactory() = 0;
 	};
 
 	typedef IFactory* (*MainFactory)();

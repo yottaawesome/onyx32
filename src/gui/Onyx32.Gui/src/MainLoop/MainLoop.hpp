@@ -13,6 +13,7 @@ namespace Onyx32::Gui
 			virtual int Enter() override;
 			virtual int Enter(IdleCallback callback) override;
 			virtual void SetAccelerators(HACCEL accelerators) override;
+			virtual void Destroy();
 
 		private:
 			HACCEL _accelerators;
