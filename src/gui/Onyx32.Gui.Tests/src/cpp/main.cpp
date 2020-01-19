@@ -30,8 +30,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	
 	Onyx32Lib lib;
 	std::shared_ptr<IFactory> factory(lib.GetMainFactory(), ReleaseOnyxObject<IFactory>);
-	std::shared_ptr<IWindow> wnd(factory->CreateDefaultWindow(L"This is a test", 500, 500), ReleaseOnyxObject<IWindow>);
-	std::shared_ptr<IWindow> wnd2(factory->CreateStyledWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500), ReleaseOnyxObject<IWindow>);
+	std::shared_ptr<IWindow> wnd(factory->CreateOnyxWindow(L"This is a test", 0, 500, 500), ReleaseOnyxObject<IWindow>);
+	std::shared_ptr<IWindow> wnd2(factory->CreateOnyxWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500), ReleaseOnyxObject<IWindow>);
 	std::shared_ptr<IMainLoop> appLoop(factory->CreateMainLoop(), ReleaseOnyxObject<IMainLoop>);
 
 	wnd->Initialize();
@@ -48,7 +48,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	button->SetEvent(
 		ButtonEvents::OnDoubleClick,
 		[wnd](ButtonEvents evt, IButton& button) -> void { wnd->SetDisplayState(WindowDisplayState::Minimized); });
-
 	button->SetEvent(
 		ControlEvents::OnVisibilityChanged,
 		[](ControlEvents evt, IControl& control) -> void { OutputDebugString(L"\nA button's visibility was changed"); }
@@ -60,7 +59,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 		[](WindowEvents evt, IWindow& window) -> void { window.SetVisibility(false); });
 	changeButton->SetEvent(
 		ButtonEvents::OnClick,
-		[button](ButtonEvents evt, IButton& internalButton) -> void { button->SetVisibility(!button->IsVisible()); });
+		[=](ButtonEvents evt, IButton& internalButton) -> void { button->SetVisibility(!button->IsVisible()); });
 
 	wnd->SetEvent(
 		WindowEvents::OnActivateChange, 

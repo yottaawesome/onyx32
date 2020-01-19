@@ -5,7 +5,7 @@
 #include <vector>
 #include <unordered_map>
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Window
 {
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/windows
 	// https://docs.microsoft.com/en-us/windows/desktop/winmsg/about-window-classes
@@ -15,14 +15,12 @@ namespace Onyx32::Gui
 	{
 		public:
 			Window(
-				const Onyx32::Gui::Win32::WindowClass& wcex,
 				std::wstring_view title,
 				const unsigned int width = CW_USEDEFAULT,
 				const unsigned int height = CW_USEDEFAULT,
 				const unsigned int xPos = CW_USEDEFAULT,
 				const unsigned int yPos = CW_USEDEFAULT);
 			Window(
-				const Onyx32::Gui::Win32::WindowClass& wcex,
 				std::wstring_view title,
 				const int customStyle,
 				const unsigned int width = CW_USEDEFAULT,
@@ -61,7 +59,6 @@ namespace Onyx32::Gui
 		protected:
 			virtual void InvokeEvent(const WindowEvents evt);
 
-			const Onyx32::Gui::Win32::WindowClass _windowClass;
 			WindowDisplayState _displayState;
 
 			WindowState _windowState;
@@ -80,4 +77,13 @@ namespace Onyx32::Gui
 			std::unordered_map<WindowEvents, OnWindowEvent> _eventHandlers;
 			bool _isActive;
 	};
+
+	IWindow* CreateOnyxWindow(
+		const Onyx32::Gui::Win32::WindowClass& wndClass,
+		const std::wstring_view title,
+		const int customStyle,
+		const unsigned int width,
+		const unsigned int height,
+		const unsigned int xPos,
+		const unsigned int yPos);
 }

@@ -10,17 +10,46 @@
 using std::wstring;
 using std::wstring_view;
 
-namespace Onyx32::Gui
+namespace Onyx32::Gui::Window
 {
 	const int DefaultWindowStyles = WS_OVERLAPPEDWINDOW;
 
-	Window::Window(const Onyx32::Gui::Win32::WindowClass& wndClass, wstring_view title, const int customStyle, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
+	IWindow* CreateOnyxWindow(
+		const Onyx32::Gui::Win32::WindowClass& wndClass,
+		const std::wstring_view title,
+		const int customStyle,
+		const unsigned int width,
+		const unsigned int height,
+		const unsigned int xPos,
+		const unsigned int yPos)
+	{
+		Window* window = new Window(title, width, height, xPos, yPos);
+		Onyx32::Gui::Win32::ParentWindowDescriptor args(
+			0,
+			title,
+			customStyle == 0 ? DefaultWindowStyles : customStyle,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			width,
+			height,
+			nullptr,
+			nullptr,
+			window,
+			wndClass.WndClass
+		);
+		if (HWND _wndHandle = Onyx32::Gui::Win32::CreateWin32Window(args))
+			return window;
+
+		window->Destroy();
+		return nullptr;
+	}
+
+	Window::Window(wstring_view title, const int customStyle, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
 		: _width(width),
 		_height(height),
 		_xPos(xPos),
 		_yPos(yPos),
 		_title(title),
-		_windowClass(wndClass),
 		_wndHandle(nullptr),
 		_styles(customStyle),
 		_displayState(WindowDisplayState::Restored),
@@ -32,13 +61,12 @@ namespace Onyx32::Gui
 		_isEnabled(false)
 	{ }
 
-	Window::Window(const Onyx32::Gui::Win32::WindowClass& wndClass, wstring_view title, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
+	Window::Window(wstring_view title, const unsigned int width, const unsigned int height, const unsigned int xPos, const unsigned int yPos)
 		: _width(width), 
 		_height(height),
 		_xPos(xPos),
 		_yPos(yPos),
 		_title(title),
-		_windowClass(wndClass),
 		_wndHandle(nullptr),
 		_styles(DefaultWindowStyles),
 		_displayState(WindowDisplayState::Restored),
@@ -150,20 +178,6 @@ namespace Onyx32::Gui
 	{
 		if (_windowState == WindowState::Uninitialized)
 		{
-			Onyx32::Gui::Win32::ParentWindowDescriptor args(
-				0,
-				_title,
-				_styles,
-				CW_USEDEFAULT,
-				CW_USEDEFAULT,
-				_width,
-				_height,
-				nullptr,
-				nullptr,
-				this,
-				_windowClass.WndClass
-			);
-			_wndHandle = Onyx32::Gui::Win32::CreateWin32Window(args);
 			if (_wndHandle)
 			{
 				// See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548%28v=vs.85%29.aspx
