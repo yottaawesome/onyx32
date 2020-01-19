@@ -38,26 +38,33 @@ Really simple example below. Note that the API demonstrated below will be changi
 
 using Onyx32::Gui::IWindow;
 using Onyx32::Gui::IFactory;
-using Onyx32::Gui::IApplication;
+using Onyx32::Gui::IMainLoop;
 
-// Load the library -- this example assumes the DLL exists in the same directory as your executable
-Onyx32::Gui::Onyx32Lib lib;
-// Get factory
-std::shared_ptr<IFactory> factory(lib.GetMainFactory());
-// Create a default top-level window
-std::shared_ptr<IWindow> window(factory->CreateDefaultWindow(L"This is a test", 500, 500));
-// Create an application
-std::shared_ptr<IApplication> app(factory->GetApplication());
-// Initialize main window
-window->Initialize();
-// If the user closes the Window, exit the main loop
-window->SetWindowEvent(
-    WindowEvents::OnClose,
-    [](WindowEvents evt, IWindow& window) -> void { PostQuitMessage(0); });
-// Enter the main lopp
-int retVal = app->MainLoop();
-// End -- lib will automatically unload the DLL when it goes out of scope
-return retVal;
+// Declare a memory cleanup function
+template<typename T>
+auto ReleaseOnyxObject = [](T* t) -> void { t->Destroy(); };
+
+int main()
+{
+    // Load the library -- this example assumes the DLL exists in the same directory as your executable
+    Onyx32::Gui::Onyx32Lib lib;
+    // Get factory
+    std::shared_ptr<IFactory> factory(lib.GetMainFactory(), ReleaseOnyxObject<IFactory>);
+    // Create a default top-level window
+    std::shared_ptr<IWindow> window(factory->CreateDefaultWindow(L"This is a test", 500, 500), ReleaseOnyxObject<IWindow>);
+    // Create the message loop
+    std::shared_ptr<IMainLoop> app(factory->CreateMainLoop(), ReleaseOnyxObject<IMainLoop>);
+    // Initialize main window
+    window->Initialize();
+    // If the user closes the Window, exit the main loop
+    window->SetWindowEvent(
+        WindowEvents::OnClose,
+        [](WindowEvents evt, IWindow& window) -> void { PostQuitMessage(0); });
+    // Enter the main loop
+    int retVal = app->Enter();
+    // End -- lib will automatically unload the DLL when it goes out of scope
+    return retVal;
+}
 ```
 
 ## Future features
