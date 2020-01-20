@@ -30,8 +30,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	
 	Onyx32Lib lib;
 	std::shared_ptr<IFactory> factory(lib.GetMainFactory(), ReleaseOnyxObject<IFactory>);
-	std::shared_ptr<IWindow> wnd(factory->CreateOnyxWindow(L"This is a test", 0, 500, 500), ReleaseOnyxObject<IWindow>);
-	std::shared_ptr<IWindow> wnd2(factory->CreateOnyxWindow(L"This is a second window", WS_CAPTION | WS_POPUPWINDOW, 500, 500), ReleaseOnyxObject<IWindow>);
+	std::shared_ptr<IWindow> wnd(
+		factory->CreateOnyxWindow(
+			L"This is a test",
+			0,
+			500,
+			500,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT),
+		ReleaseOnyxObject<IWindow>
+	);
+	std::shared_ptr<IWindow> wnd2(
+		factory->CreateOnyxWindow(
+			L"This is a second window",
+			WS_CAPTION | WS_POPUPWINDOW,
+			500,
+			500,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT
+		),
+		ReleaseOnyxObject<IWindow>
+	);
 	std::shared_ptr<IMainLoop> appLoop(factory->CreateMainLoop(), ReleaseOnyxObject<IMainLoop>);
 
 	wnd->Initialize();

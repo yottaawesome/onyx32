@@ -218,7 +218,7 @@ namespace Onyx32::Gui
 	class ONYXWINDOWING_API IFactory
 	{
 		public:
-			[[nodiscard]] virtual IWindow* CreateOnyxWindow(std::wstring_view title, const int styles, unsigned int width = 0, unsigned int height = 0) = 0;
+			[[nodiscard]] virtual IWindow* CreateOnyxWindow(std::wstring_view title, const int styles, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::IDateTime* CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::ITextInput* CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
 			[[nodiscard]] virtual Onyx32::Gui::Controls::IButton* CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
