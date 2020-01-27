@@ -39,6 +39,7 @@ Really simple example below. Note that the API demonstrated below will be changi
 using Onyx32::Gui::IWindow;
 using Onyx32::Gui::IFactory;
 using Onyx32::Gui::IMainLoop;
+using Onyx32::Gui::OnyxFree;
 
 // Declare a memory cleanup function
 template<typename T>
@@ -49,11 +50,11 @@ int main()
     // Load the library -- this example assumes the DLL exists in the same directory as your executable
     Onyx32::Gui::Onyx32Lib lib;
     // Get factory
-    std::shared_ptr<IFactory> factory(lib.GetMainFactory(), ReleaseOnyxObject<IFactory>);
+    std::shared_ptr<IFactory> factory(lib.GetMainFactory(), OnyxFree<IFactory>);
     // Create a default top-level window
-    std::shared_ptr<IWindow> window(factory->CreateDefaultWindow(L"This is a test", 500, 500), ReleaseOnyxObject<IWindow>);
+    std::shared_ptr<IWindow> window(factory->CreateDefaultWindow(L"This is a test", 500, 500), OnyxFree<IWindow>);
     // Create the message loop
-    std::shared_ptr<IMainLoop> app(factory->CreateMainLoop(), ReleaseOnyxObject<IMainLoop>);
+    std::shared_ptr<IMainLoop> app(factory->CreateMainLoop(), OnyxFree<IMainLoop>);
     // Initialize main window
     window->Initialize();
     // If the user closes the Window, exit the main loop

@@ -5,6 +5,9 @@
 
 namespace Onyx32::Gui
 {
+	template<typename T>
+	auto OnyxFree = [](T* t) -> void { t->Destroy(); };
+
 	class Onyx32Lib
 	{
 		public:
