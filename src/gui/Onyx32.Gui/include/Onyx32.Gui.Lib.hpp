@@ -8,6 +8,101 @@ namespace Onyx32::Gui
 	template<typename T>
 	auto OnyxFree = [](T* t) -> void { t->Destroy(); };
 
+	template<typename T>
+	std::shared_ptr<T> Make(T* ptr)
+	{
+		return std::shared_ptr<T>(ptr, OnyxFree<T>);
+	}
+
+	class FactoryProxy
+	{
+		public:
+			FactoryProxy(IFactory* factory)
+				: m_factory(factory)
+			{ }
+
+			virtual ~FactoryProxy()
+			{
+				m_factory->Destroy();
+				m_factory = nullptr;
+			}
+
+			[[nodiscard]]
+			virtual std::shared_ptr<Onyx32::Gui::IWindow> CreateOnyxWindow(
+				std::wstring_view title, 
+				const int styles, 
+				unsigned int width, 
+				unsigned int height, 
+				unsigned int xPos, 
+				unsigned int yPos
+			)
+			{
+				return std::shared_ptr<Onyx32::Gui::IWindow>(
+					m_factory->CreateOnyxWindow(
+						title,
+						styles,
+						width,
+						height,
+						xPos,
+						yPos),
+					Onyx32::Gui::OnyxFree<Onyx32::Gui::IWindow>
+				);
+			}
+			
+			[[nodiscard]]
+			virtual Onyx32::Gui::Controls::IDateTime* CreateDateTime
+			(
+				IWindow* parent, 
+				unsigned int controlId, 
+				unsigned int width, 
+				unsigned int height, 
+				unsigned int xPos, 
+				unsigned int yPos
+			)
+			{
+				return m_factory->CreateDateTime(parent, controlId, width, height, xPos, yPos);
+			}
+			
+			[[nodiscard]]
+			virtual Onyx32::Gui::Controls::ITextInput* CreateTextInput
+			(
+				IWindow* parent,
+				unsigned int controlId,
+				std::wstring_view text,
+				unsigned int width,
+				unsigned int height,
+				unsigned int xPos,
+				unsigned int yPos
+			)
+			{
+				return m_factory->CreateTextInput(parent, controlId, text, width, height, xPos, yPos);
+			}
+			
+			[[nodiscard]]
+			virtual Onyx32::Gui::Controls::IButton* CreateButton
+			(
+				IWindow* parent,
+				unsigned int controlId,
+				std::wstring_view text,
+				unsigned int width,
+				unsigned int height,
+				unsigned int xPos,
+				unsigned int yPos
+			)
+			{
+				return m_factory->CreateButton(parent, controlId, text, width, height, xPos, yPos);
+			}
+			
+			[[nodiscard]]
+			virtual std::shared_ptr<Onyx32::Gui::IMainLoop> CreateMainLoop()
+			{
+				return std::shared_ptr<Onyx32::Gui::IMainLoop>(m_factory->CreateMainLoop(), OnyxFree<Onyx32::Gui::IMainLoop>);
+			}
+
+		protected:
+			IFactory* m_factory;
+	};
+
 	class Onyx32Lib
 	{
 		public:

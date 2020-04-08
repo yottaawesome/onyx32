@@ -26,37 +26,36 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     UNREFERENCED_PARAMETER(lpCmdLine);
 	
 	Onyx32Lib lib;
-	std::shared_ptr<IFactory> factory(lib.GetMainFactory(), Onyx32::Gui::OnyxFree<IFactory>);
+	Onyx32::Gui::FactoryProxy factory(lib.GetMainFactory());
+	
 	std::shared_ptr<IWindow> wnd(
-		factory->CreateOnyxWindow(
+		factory.CreateOnyxWindow(
 			L"This is a test",
 			0,
 			500,
 			500,
 			CW_USEDEFAULT,
-			CW_USEDEFAULT),
-		Onyx32::Gui::OnyxFree<IWindow>
+			CW_USEDEFAULT)
 	);
 	std::shared_ptr<IWindow> wnd2(
-		factory->CreateOnyxWindow(
+		factory.CreateOnyxWindow(
 			L"This is a second window",
 			WS_CAPTION | WS_POPUPWINDOW,
 			500,
 			500,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT
-		),
-		Onyx32::Gui::OnyxFree<IWindow>
+		)
 	);
-	std::shared_ptr<IMainLoop> appLoop(factory->CreateMainLoop(), Onyx32::Gui::OnyxFree<IMainLoop>);
+	std::shared_ptr<IMainLoop> appLoop(factory.CreateMainLoop());
 
 	wnd->Initialize();
 	wnd2->Initialize();
 	
 	// Ownership of controls is done by the parent window, so do not use shared_ptr
-	IButton* button = factory->CreateButton(wnd.get(), 100, L"Button", 100, 100, 10, 10);
-	ITextInput* input = factory->CreateTextInput(wnd.get(), 101, L"", 350, 50, 25, 125);
-	IDateTime* dateTime = factory->CreateDateTime(wnd.get(), 102, 220, 20, 120, 100);
+	auto button = factory.CreateButton(wnd.get(), 100, L"Button", 100, 100, 10, 10);
+	auto input = factory.CreateTextInput(wnd.get(), 101, L"", 350, 50, 25, 125);
+	auto dateTime = factory.CreateDateTime(wnd.get(), 102, 220, 20, 120, 100);
 
 	button->SetEvent(
 		ButtonEvents::OnClick,
@@ -69,7 +68,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 		[](ControlEvents evt, IControl& control) -> void { OutputDebugString(L"\nA button's visibility was changed"); }
 	);
 
-	IButton* changeButton = factory->CreateButton(wnd2.get(), 100, L"Show/Hide", 100, 100, 10, 10);
+	auto changeButton = factory.CreateButton(wnd2.get(), 100, L"Show/Hide", 100, 100, 10, 10);
 	wnd2->SetEvent(
 		WindowEvents::OnClose,
 		[](WindowEvents evt, IWindow& window) -> void { window.SetVisibility(false); });
