@@ -73,11 +73,11 @@ namespace Onyx32::Gui::Controls
 
 	LRESULT TextInput::Process(unsigned int message, WPARAM wParam, LPARAM lParam)
 	{
-		switch (message)
-		{
-			default:
-				return DefSubclassProc(_wndHandle, message, wParam, lParam);
-		}
+		//switch (message)
+		//{
+		//	default:
+		//		return DefSubclassProc(_wndHandle, message, wParam, lParam);
+		//}
 
 		return DefSubclassProc(_wndHandle, message, wParam, lParam);
 	}
