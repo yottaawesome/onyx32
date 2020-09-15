@@ -20,7 +20,7 @@ namespace Onyx32::Gui::Controls
 			virtual void GetDimensions(Dimensions& dimensions) const override;
 			virtual bool IsVisible() const override;
 
-			virtual void SetEvent(ControlEvents evt, OnControlEvent&& evtHandler) override;
+			virtual void SetEvent(ControlEvents evt, IControl::OnControlEvent&& evtHandler) override;
 			virtual void SetVisibility(const bool isVisible) override;
 			virtual void Resize(const unsigned int width, const unsigned int height) override;
 			virtual void Move(const unsigned int xPos, const unsigned int yPos) override;
@@ -41,7 +41,7 @@ namespace Onyx32::Gui::Controls
 			ControlState _state;
 			static const std::wstring Class;
 			static const int Styles;
-			std::unordered_map<ControlEvents, OnControlEvent> _eventHandlers;
+			std::unordered_map<ControlEvents, IControl::OnControlEvent> _eventHandlers;
 			virtual void InvokeEvent(const ControlEvents evt);
 			virtual void SetHwnd(HWND hWnd) override;
 	};
@@ -92,7 +92,7 @@ namespace Onyx32::Gui::Controls
 	}
 
 	template<typename ControlType>
-	void BaseControl<ControlType>::SetEvent(ControlEvents evt, OnControlEvent&& evtHandler)
+	void BaseControl<ControlType>::SetEvent(ControlEvents evt, IControl::OnControlEvent&& evtHandler)
 	{
 		_eventHandlers[evt] = std::move(evtHandler);
 	}

@@ -10,24 +10,6 @@
 #include <string>
 #include <functional>
 
-namespace Onyx32::Gui 
-{
-	// Forward declarations
-	class ONYXWINDOWING_API IWindow;
-	class ONYXWINDOWING_API IFormBuilder;
-	class ONYXWINDOWING_API IFactory;
-	class ONYXWINDOWING_API IMenu;
-}
-
-namespace Onyx32::Gui::Controls
-{
-	// Forward declarations
-	class ONYXWINDOWING_API IControl;
-	class ONYXWINDOWING_API IDateTime;
-	class ONYXWINDOWING_API IButton;
-	class ONYXWINDOWING_API ITextInput;
-}
-
 namespace Onyx32::Gui
 {
 	enum struct ONYXWINDOWING_API WindowEvents
@@ -88,37 +70,29 @@ namespace Onyx32::Gui
 	};
 
 	// Event signatures
-	typedef std::function<void(Onyx32::Gui::Controls::IButton & button)> OnClick;
-	typedef std::function<void(
-		Onyx32::Gui::Controls::IDateTime& control,
-		SYSTEMTIME & dateTime)> OnDateTimeChange;
-	typedef std::function<bool(unsigned long long int counter)> IdleCallback;
+	typedef std::function<bool(size_t counter)> IdleCallback;
 
-	class ONYXWINDOWING_API IMenu
+	struct ONYXWINDOWING_API IMenu
 	{
-		public:
-			virtual ~IMenu() = 0;
+		virtual ~IMenu() = 0;
 	};
 
-	class ONYXWINDOWING_API IMainLoop
+	struct ONYXWINDOWING_API IMainLoop
 	{
-		public:
-			virtual int Enter() = 0;
-			virtual int Enter(IdleCallback callback) = 0;
-			virtual void SetAccelerators(HACCEL accelerators) = 0;
-			virtual void Destroy() = 0;
-		protected:
-			virtual ~IMainLoop() = 0;
+		virtual int Enter() = 0;
+		virtual int Enter(IdleCallback callback) = 0;
+		virtual void SetAccelerators(HACCEL accelerators) = 0;
+		virtual void Destroy() = 0;
+		virtual ~IMainLoop() = 0;
 	};
-
 }
 
 namespace Onyx32::Gui::Controls
 {
-	typedef std::function<void(ControlEvents eventType, IControl & control)> OnControlEvent;
 	class ONYXWINDOWING_API IControl
 	{
 		public:
+			typedef std::function<void(ControlEvents eventType, IControl& control)> OnControlEvent;
 
 			virtual HWND GetHwnd() const = 0;
 			virtual void GetDimensions(Dimensions& dimensions) const = 0;
@@ -145,88 +119,86 @@ namespace Onyx32::Gui::Controls
 		OnClick,
 		OnDoubleClick
 	};
-	typedef std::function<void(ButtonEvents eventType, IButton & button)> OnButtonEvent;
-	class ONYXWINDOWING_API IButton : public IControl
+
+	struct ONYXWINDOWING_API IButton : public IControl
 	{
-		public:
-			virtual ~IButton() = 0;
-			virtual const std::wstring& GetText() const = 0;
-			using IControl::SetEvent;
-			virtual void SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler) = 0;
-			virtual void SetText(std::wstring_view str) = 0;
+		typedef std::function<void(Onyx32::Gui::Controls::IButton& button)> OnClick;
+		typedef std::function<void(ButtonEvents eventType, IButton& button)> OnButtonEvent;
+		using IControl::SetEvent;
+
+		virtual ~IButton() = 0;
+		virtual const std::wstring& GetText() const = 0;
+		virtual void SetEvent(ButtonEvents evt, OnButtonEvent&& evtHandler) = 0;
+		virtual void SetText(std::wstring_view str) = 0;
 	};
 
-	class ONYXWINDOWING_API IDateTime : public IControl
+	struct ONYXWINDOWING_API IDateTime : public IControl
 	{
-		public:
-			virtual ~IDateTime() = 0;
-			virtual void GetDateTime(SYSTEMTIME& dateTime) = 0;
-			virtual void SetOnChange(OnDateTimeChange& onChange) = 0;
+		typedef std::function<void(
+			Onyx32::Gui::Controls::IDateTime& control,
+			SYSTEMTIME& dateTime)> OnDateTimeChange;
+		virtual ~IDateTime() = 0;
+		virtual void GetDateTime(SYSTEMTIME& dateTime) = 0;
+		virtual void SetOnChange(OnDateTimeChange& onChange) = 0;
 	};
 
-	class ONYXWINDOWING_API ITextInput : public IControl
+	struct ONYXWINDOWING_API ITextInput : public IControl
 	{
-		public:
-			virtual ~ITextInput() = 0;
-			virtual const std::wstring GetText() = 0;
-			virtual void SetText(std::wstring_view str) = 0;
+		virtual ~ITextInput() = 0;
+		virtual const std::wstring GetText() = 0;
+		virtual void SetText(std::wstring_view str) = 0;
 	};
 }
 
 namespace Onyx32::Gui
 {
-	typedef std::function<void(WindowEvents eventType, IWindow& window)> OnWindowEvent;
-	class ONYXWINDOWING_API IWindow
+	struct ONYXWINDOWING_API IWindow
 	{
-		public: 
-			virtual HWND GetHwnd() const = 0;
-			virtual const std::wstring& GetTitle() const = 0;
-			virtual void GetDimensions(Dimensions& dimensions) const = 0;
-			virtual int GetStyles() const = 0;
-			virtual WindowDisplayState GetDisplayState() const = 0;
-			virtual bool IsActive() const = 0;
-			virtual bool HasFocus() const = 0;
-			virtual bool IsVisible() const = 0;
-			virtual bool IsEnabled() const = 0;
+		typedef std::function<void(WindowEvents eventType, IWindow& window)> OnWindowEvent;
+		virtual HWND GetHwnd() const = 0;
+		virtual const std::wstring& GetTitle() const = 0;
+		virtual void GetDimensions(Dimensions& dimensions) const = 0;
+		virtual int GetStyles() const = 0;
+		virtual WindowDisplayState GetDisplayState() const = 0;
+		virtual bool IsActive() const = 0;
+		virtual bool HasFocus() const = 0;
+		virtual bool IsVisible() const = 0;
+		virtual bool IsEnabled() const = 0;
 
-			virtual void SetTitle(std::wstring_view title) = 0;
-			virtual void SetVisibility(const bool isVisible) = 0;
-			virtual void SetDisplayState(const WindowDisplayState state) = 0;
-			virtual void SetEvent(WindowEvents evt, OnWindowEvent&& evtHandler) = 0;
-			virtual void SetEnabled(const bool isEnabled) = 0;
+		virtual void SetTitle(std::wstring_view title) = 0;
+		virtual void SetVisibility(const bool isVisible) = 0;
+		virtual void SetDisplayState(const WindowDisplayState state) = 0;
+		virtual void SetEvent(WindowEvents evt, OnWindowEvent&& evtHandler) = 0;
+		virtual void SetEnabled(const bool isEnabled) = 0;
 
-			/// <summary>
-			/// Adds the Control to the Window. The Window assumes ownership of the Control's lifetime.
-			/// </summary>
-			/// <param name="control">The Control to add to the Window. Cannot be null.</param>
-			virtual void AddControl([[notnull]] Onyx32::Gui::Controls::IControl* const control) = 0;
-			/// <summary>
-			/// Destroys the Control and removes it from the Window. This function has no effect if the Control does not belong to the Window.
-			/// </summary>
-			/// <param name="control">The Control to destroy. Cannot be null.</param>
-			virtual void DestroyControl([[notnull]] Onyx32::Gui::Controls::IControl* const control) = 0;
-			virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
-			virtual void Resize(const unsigned int width, const unsigned int height) = 0;
-			virtual void RequestFocus() = 0;
+		/// <summary>
+		/// Adds the Control to the Window. The Window assumes ownership of the Control's lifetime.
+		/// </summary>
+		/// <param name="control">The Control to add to the Window. Cannot be null.</param>
+		virtual void AddControl([[notnull]] Onyx32::Gui::Controls::IControl* const control) = 0;
+		/// <summary>
+		/// Destroys the Control and removes it from the Window. This function has no effect if the Control does not belong to the Window.
+		/// </summary>
+		/// <param name="control">The Control to destroy. Cannot be null.</param>
+		virtual void DestroyControl([[notnull]] Onyx32::Gui::Controls::IControl* const control) = 0;
+		virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
+		virtual void Resize(const unsigned int width, const unsigned int height) = 0;
+		virtual void RequestFocus() = 0;
 
-			virtual void Initialize() = 0;
-			virtual void Destroy() = 0;
-		protected:
-			virtual ~IWindow() = 0;
+		virtual void Initialize() = 0;
+		virtual void Destroy() = 0;
+		virtual ~IWindow() = 0;
 	};
 
-	class ONYXWINDOWING_API IFactory
+	struct ONYXWINDOWING_API IFactory
 	{
-		public:
-			[[nodiscard]] virtual IWindow* CreateOnyxWindow(std::wstring_view title, const int styles, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
-			[[nodiscard]] virtual Onyx32::Gui::Controls::IDateTime* CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
-			[[nodiscard]] virtual Onyx32::Gui::Controls::ITextInput* CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
-			[[nodiscard]] virtual Onyx32::Gui::Controls::IButton* CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
-			[[nodiscard]] virtual IMainLoop* CreateMainLoop() = 0;
-			virtual void Destroy() = 0;
-
-		protected:
-			virtual ~IFactory() = 0;
+		[[nodiscard]] virtual IWindow* CreateOnyxWindow(std::wstring_view title, const int styles, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
+		[[nodiscard]] virtual Onyx32::Gui::Controls::IDateTime* CreateDateTime(IWindow* parent, unsigned int controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
+		[[nodiscard]] virtual Onyx32::Gui::Controls::ITextInput* CreateTextInput(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
+		[[nodiscard]] virtual Onyx32::Gui::Controls::IButton* CreateButton(IWindow* parent, unsigned int controlId, std::wstring_view text, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos) = 0;
+		[[nodiscard]] virtual IMainLoop* CreateMainLoop() = 0;
+		virtual void Destroy() = 0;
+		virtual ~IFactory() = 0;
 	};
 
 	typedef IFactory* (*MainFactory)();

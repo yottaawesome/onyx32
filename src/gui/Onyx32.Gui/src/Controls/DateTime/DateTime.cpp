@@ -4,7 +4,7 @@
 
 namespace Onyx32::Gui::Controls
 {
-	OnDateTimeChange DateTime::DefaultDateTimeChangeHandler = 
+	DateTime::OnDateTimeChange DateTime::DefaultDateTimeChangeHandler =
 		[](IDateTime& control, SYSTEMTIME& dt) -> void {};
 
 	//https://docs.microsoft.com/en-us/windows/desktop/Controls/date-and-time-picker-control-reference

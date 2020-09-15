@@ -7,7 +7,7 @@ using std::wstring;
 
 namespace Onyx32::Gui::Controls
 {
-	OnClick DefaultClickHandler = [](IButton& button) -> void {};
+	IButton::OnClick DefaultClickHandler = [](IButton& button) -> void {};
 
 	const std::wstring Button::Class = L"BUTTON";
 	const int Button::Styles = WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON | BS_NOTIFY;

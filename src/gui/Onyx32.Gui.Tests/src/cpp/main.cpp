@@ -95,7 +95,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 		WindowEvents::OnDisplayStateChanged,
 		[](WindowEvents evt, IWindow& window) -> void { OutputDebugString(L"\nDisplay state changed"); });
 
-	Onyx32::Gui::OnDateTimeChange changeHandler = 
+	IDateTime::OnDateTimeChange changeHandler = 
 		[&dateTime](IDateTime& control, SYSTEMTIME& dt) -> void
 		{
 			char box[150];
