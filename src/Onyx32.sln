@@ -3,32 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui", "gui\Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gui", "Gui", "{37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Networking", "Networking", "{6273AF5E-B78D-4E8A-8307-E3B0BB41D220}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drawing", "Drawing", "{4B4E27C5-9466-4916-A3F6-2759CFF26235}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Drawing", "drawing\Onyx32.Drawing\Onyx32.Drawing.vcxproj", "{27B63395-7CAC-4210-9D79-07017CE3F529}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utility", "Utility", "{51020569-F7DA-4741-B599-175F3623EEA1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui.Tests", "gui\Onyx32.Gui.Tests\Onyx32.Gui.Tests.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
-	ProjectSection(ProjectDependencies) = postProject
-		{558C2ADA-F073-451A-83C4-42173A23BCD6} = {558C2ADA-F073-451A-83C4-42173A23BCD6}
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Async", "Async", "{6D0FD3AD-9C56-46E5-A807-6370E31BEE8E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Drawing.Tests", "drawing\Onyx32.Drawing.Tests\Onyx32.Drawing.Tests.vcxproj", "{3A2301C3-50DA-48C9-853B-A385418F1DC2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{27B63395-7CAC-4210-9D79-07017CE3F529} = {27B63395-7CAC-4210-9D79-07017CE3F529}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Drawing", "Onyx32.Drawing\Onyx32.Drawing\Onyx32.Drawing.vcxproj", "{27B63395-7CAC-4210-9D79-07017CE3F529}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Networking", "networking\Onyx32.Networking\Onyx32.Networking.vcxproj", "{C14651FC-750E-4300-B8A9-2A76DAC7A54D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui", "Onyx32.Gui\Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Networking.Tests", "networking\Onyx32.Networking.Tests\Onyx32.Networking.Tests.vcxproj", "{6A63337C-17E8-42DC-B8D2-F05E2ED96941}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C14651FC-750E-4300-B8A9-2A76DAC7A54D} = {C14651FC-750E-4300-B8A9-2A76DAC7A54D}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui.Tests", "Onyx32.Gui\Onyx32.Gui.Tests\Onyx32.Gui.Tests.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Drawing.Tests", "Onyx32.Drawing\Onyx32.Drawing.Tests\Onyx32.Drawing.Tests.vcxproj", "{3A2301C3-50DA-48C9-853B-A385418F1DC2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Networking", "Onyx32.Networking\Onyx32.Networking\Onyx32.Networking.vcxproj", "{C14651FC-750E-4300-B8A9-2A76DAC7A54D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Networking.Tests", "Onyx32.Networking\Onyx32.Networking.Tests\Onyx32.Networking.Tests.vcxproj", "{6A63337C-17E8-42DC-B8D2-F05E2ED96941}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Async", "Onyx32.Async\Onyx32.Async.vcxproj", "{C790C631-DE4C-4211-8CE6-C2095F0E44A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,14 +35,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x64.ActiveCfg = Debug|x64
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x64.Build.0 = Debug|x64
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x86.ActiveCfg = Debug|Win32
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x86.Build.0 = Debug|Win32
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x64.ActiveCfg = Release|x64
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x64.Build.0 = Release|x64
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x86.ActiveCfg = Release|Win32
-		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x86.Build.0 = Release|Win32
 		{27B63395-7CAC-4210-9D79-07017CE3F529}.Debug|x64.ActiveCfg = Debug|x64
 		{27B63395-7CAC-4210-9D79-07017CE3F529}.Debug|x64.Build.0 = Debug|x64
 		{27B63395-7CAC-4210-9D79-07017CE3F529}.Debug|x86.ActiveCfg = Debug|Win32
@@ -54,6 +43,14 @@ Global
 		{27B63395-7CAC-4210-9D79-07017CE3F529}.Release|x64.Build.0 = Release|x64
 		{27B63395-7CAC-4210-9D79-07017CE3F529}.Release|x86.ActiveCfg = Release|Win32
 		{27B63395-7CAC-4210-9D79-07017CE3F529}.Release|x86.Build.0 = Release|Win32
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x64.ActiveCfg = Debug|x64
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x64.Build.0 = Debug|x64
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x86.ActiveCfg = Debug|Win32
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Debug|x86.Build.0 = Debug|Win32
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x64.ActiveCfg = Release|x64
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x64.Build.0 = Release|x64
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x86.ActiveCfg = Release|Win32
+		{558C2ADA-F073-451A-83C4-42173A23BCD6}.Release|x86.Build.0 = Release|Win32
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}.Debug|x64.ActiveCfg = Debug|x64
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}.Debug|x64.Build.0 = Debug|x64
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}.Debug|x86.ActiveCfg = Debug|Win32
@@ -86,17 +83,26 @@ Global
 		{6A63337C-17E8-42DC-B8D2-F05E2ED96941}.Release|x64.Build.0 = Release|x64
 		{6A63337C-17E8-42DC-B8D2-F05E2ED96941}.Release|x86.ActiveCfg = Release|Win32
 		{6A63337C-17E8-42DC-B8D2-F05E2ED96941}.Release|x86.Build.0 = Release|Win32
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Debug|x64.ActiveCfg = Debug|x64
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Debug|x64.Build.0 = Debug|x64
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Debug|x86.Build.0 = Debug|Win32
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Release|x64.ActiveCfg = Release|x64
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Release|x64.Build.0 = Release|x64
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Release|x86.ActiveCfg = Release|Win32
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{558C2ADA-F073-451A-83C4-42173A23BCD6} = {37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}
 		{27B63395-7CAC-4210-9D79-07017CE3F529} = {4B4E27C5-9466-4916-A3F6-2759CFF26235}
+		{558C2ADA-F073-451A-83C4-42173A23BCD6} = {37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12} = {37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}
 		{3A2301C3-50DA-48C9-853B-A385418F1DC2} = {4B4E27C5-9466-4916-A3F6-2759CFF26235}
 		{C14651FC-750E-4300-B8A9-2A76DAC7A54D} = {6273AF5E-B78D-4E8A-8307-E3B0BB41D220}
 		{6A63337C-17E8-42DC-B8D2-F05E2ED96941} = {6273AF5E-B78D-4E8A-8307-E3B0BB41D220}
+		{C790C631-DE4C-4211-8CE6-C2095F0E44A3} = {6D0FD3AD-9C56-46E5-A807-6370E31BEE8E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03A20EAF-7F9E-464F-8FE4-6CDCB6489165}
