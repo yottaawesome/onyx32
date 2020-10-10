@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{78122287-2bb6-4761-8cfc-a9f624f59be9}</ProjectGuid>
+    <RootNamespace>Headers</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Boring32\Async\Async.hpp" />
+    <ClInclude Include="Boring32\Async\CriticalSectionLock.hpp" />
+    <ClInclude Include="Boring32\Async\Event.hpp" />
+    <ClInclude Include="Boring32\Async\Job.hpp" />
+    <ClInclude Include="Boring32\Async\MemoryMappedFile.hpp" />
+    <ClInclude Include="Boring32\Async\MemoryMappedView.hpp" />
+    <ClInclude Include="Boring32\Async\Mutex.hpp" />
+    <ClInclude Include="Boring32\Async\OverlappedIo.hpp" />
+    <ClInclude Include="Boring32\Async\OverlappedOp.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\AnonymousPipe.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\BlockingNamedPipeClient.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\BlockingNamedPipeServer.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\NamedPipeClientBase.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\NamedPipeServerBase.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\OverlappedNamedPipeClient.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\OverlappedNamedPipeServer.hpp" />
+    <ClInclude Include="Boring32\Async\Pipes\Pipes.hpp" />
+    <ClInclude Include="Boring32\Async\Process.hpp" />
+    <ClInclude Include="Boring32\Async\ProcessInfo.hpp" />
+    <ClInclude Include="Boring32\Async\Semaphore.hpp" />
+    <ClInclude Include="Boring32\Async\SlimReadWriteLock.hpp" />
+    <ClInclude Include="Boring32\Async\SynchronizationBarrier.hpp" />
+    <ClInclude Include="Boring32\Async\Thread.hpp" />
+    <ClInclude Include="Boring32\Async\ThreadPool.hpp" />
+    <ClInclude Include="Boring32\Async\ThreadSafeVector.hpp" />
+    <ClInclude Include="Boring32\Async\ThreadStatus.hpp" />
+    <ClInclude Include="Boring32\Async\TimerQueue.hpp" />
+    <ClInclude Include="Boring32\Async\TimerQueueTimer.hpp" />
+    <ClInclude Include="Boring32\Async\TimerQueueTimerCallback.hpp" />
+    <ClInclude Include="Boring32\Async\WaitableTimer.hpp" />
+    <ClInclude Include="Boring32\Boring32.hpp" />
+    <ClInclude Include="Boring32\Compression\Compression.hpp" />
+    <ClInclude Include="Boring32\Compression\CompressionType.hpp" />
+    <ClInclude Include="Boring32\Compression\Compressor.hpp" />
+    <ClInclude Include="Boring32\Compression\Decompressor.hpp" />
+    <ClInclude Include="Boring32\Com\ComThreadScope.hpp" />
+    <ClInclude Include="Boring32\Error\ComError.hpp" />
+    <ClInclude Include="Boring32\Error\Error.hpp" />
+    <ClInclude Include="Boring32\Error\Win32Error.hpp" />
+    <ClInclude Include="Boring32\Guid\Guid.hpp" />
+    <ClInclude Include="Boring32\Library\Library.hpp" />
+    <ClInclude Include="Boring32\Raii\Raii.hpp" />
+    <ClInclude Include="Boring32\Raii\Sid.hpp" />
+    <ClInclude Include="Boring32\Raii\Win32Handle.hpp" />
+    <ClInclude Include="Boring32\Registry\Registry.hpp" />
+    <ClInclude Include="Boring32\Security\Crypto\Crypto.hpp" />
+    <ClInclude Include="Boring32\Security\PrivateNamespace.hpp" />
+    <ClInclude Include="Boring32\Security\Security.hpp" />
+    <ClInclude Include="Boring32\Strings\Strings.hpp" />
+    <ClInclude Include="Boring32\Time\Time.hpp" />
+    <ClInclude Include="Boring32\Util\Util.hpp" />
+    <ClInclude Include="Boring32\WinHttp\HttpRequestResult.hpp" />
+    <ClInclude Include="Boring32\WinHttp\HttpWebClient.hpp" />
+    <ClInclude Include="Boring32\WinHttp\ProxyInfo.hpp" />
+    <ClInclude Include="Boring32\WinHttp\WebSockets\WebSocket.hpp" />
+    <ClInclude Include="Boring32\WinHttp\WebSockets\WebSocketSettings.hpp" />
+    <ClInclude Include="Boring32\WinHttp\WebSockets\WebSocketStatus.hpp" />
+    <ClInclude Include="Boring32\WinHttp\WinHttp.hpp" />
+    <ClInclude Include="Boring32\WinHttp\WinHttpHandle.hpp" />
+    <ClInclude Include="Boring32\Wmi\Wmi.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

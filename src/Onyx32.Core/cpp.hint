@@ -1,0 +1,2 @@
+#define ONYX32CORE_API __declspec(dllexport)
+#define ONYX32CORE_API __declspec(dllimport)
