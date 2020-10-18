@@ -1,22 +1,28 @@
-// Onyx32.Core.cpp : Defines the exported functions for the DLL.
-//
-
 #include "pch.hpp"
 #include "framework.hpp"
+#include "headers/Boring32/Async/Semaphore.hpp"
 #include "Onyx32.Core.hpp"
 
-
-// This is an example of an exported variable
-ONYX32CORE_API int nOnyx32Core=0;
-
-// This is an example of an exported function.
-ONYX32CORE_API int fnOnyx32Core(void)
+namespace Onyx32::Core
 {
-    return 0;
-}
+	Onyx32::Core::Async::ISemaphore* CreateNamedOnyxSemaphore(
+		const std::wstring& name,
+		const bool isInheritable,
+		const long initialCount,
+		const long maxCount
+	) noexcept
+	{
+		return new Boring32::Async::Semaphore(name, isInheritable, initialCount, maxCount);
+	}
 
-// This is the constructor of a class that has been exported.
-COnyx32Core::COnyx32Core()
-{
-    return;
+	Onyx32::Core::Async::ISemaphore* CreateNamedOnyxSemaphoreWithSid(
+		std::wstring& name,
+		const bool isInheritable,
+		const long initialCount,
+		const long maxCount,
+		const DWORD desiredAccess
+	) noexcept
+	{
+		return new Boring32::Async::Semaphore(name, isInheritable, initialCount, maxCount, desiredAccess);
+	}
 }
