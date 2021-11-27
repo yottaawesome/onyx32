@@ -17,7 +17,7 @@ namespace Onyx32::Gui::Controls
 			virtual void Initialize() override;
 			virtual void GetDateTime(SYSTEMTIME& dateTime) override;
 			virtual void SetOnChange(OnDateTimeChange& onChange) override;
-			LRESULT DateTime::Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
+			LRESULT Process(unsigned int message, WPARAM wParam, LPARAM lParam) override;
 
 			static IDateTime* Create(IWindow* parent, uint64_t controlId, unsigned int width, unsigned int height, unsigned int xPos, unsigned int yPos);
 		

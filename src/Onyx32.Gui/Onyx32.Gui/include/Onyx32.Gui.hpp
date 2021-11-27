@@ -175,12 +175,12 @@ namespace Onyx32::Gui
 		/// Adds the Control to the Window. The Window assumes ownership of the Control's lifetime.
 		/// </summary>
 		/// <param name="control">The Control to add to the Window. Cannot be null.</param>
-		virtual void AddControl([[notnull]] Onyx32::Gui::Controls::IControl* const control) = 0;
+		virtual void AddControl(Onyx32::Gui::Controls::IControl* const control) = 0;
 		/// <summary>
 		/// Destroys the Control and removes it from the Window. This function has no effect if the Control does not belong to the Window.
 		/// </summary>
 		/// <param name="control">The Control to destroy. Cannot be null.</param>
-		virtual void DestroyControl([[notnull]] Onyx32::Gui::Controls::IControl* const control) = 0;
+		virtual void DestroyControl(Onyx32::Gui::Controls::IControl* const control) = 0;
 		virtual void Move(const unsigned int xPos, const unsigned int yPos) = 0;
 		virtual void Resize(const unsigned int width, const unsigned int height) = 0;
 		virtual void RequestFocus() = 0;
