@@ -121,7 +121,7 @@ namespace Onyx32::Gui
 	};
 
 	Onyx32Lib::Onyx32Lib()
-		: path(L"Onyx32.Gui.dll"), libraryHandle(nullptr), factFunc(nullptr)
+		: path(L"Onyx32.Gui.Legacy.dll"), libraryHandle(nullptr), factFunc(nullptr)
 	{
 		libraryHandle = LoadLibrary(path.c_str());
 		if (libraryHandle == nullptr)
