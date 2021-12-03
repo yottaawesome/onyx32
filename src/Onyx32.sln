@@ -1,21 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29001.49
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Gui", "2. Gui", "{37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GUI (legacy)", "GUI (legacy)", "{37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui", "Onyx32.Gui\Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui.Legacy", "Onyx32.Gui.Legacy\Onyx32.Gui\Onyx.Gui.vcxproj", "{558C2ADA-F073-451A-83C4-42173A23BCD6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui.Tests", "Onyx32.Gui\Onyx32.Gui.Tests\Onyx32.Gui.Tests.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Core", "1. Core", "{F83932BF-47D1-45AF-8B8F-5DC4147BE1D3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Core", "Onyx32.Core\Onyx32.Core.vcxproj", "{43244721-5CC4-48E5-9524-70DC5FBF62BC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Common", "0. Common", "{2C7BF188-362B-4852-B095-AFC5351490ED}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Core.Tests", "Onyx32.Core.Tests\Onyx32.Core.Tests.vcxproj", "{37809768-AE18-4DDB-8FA2-D918BF2E6211}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onyx32.Gui.Legacy.Tests", "Onyx32.Gui.Legacy\Onyx32.Gui.Tests\Onyx32.Gui.Tests.vcxproj", "{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,22 +33,6 @@ Global
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}.Release|x64.Build.0 = Release|x64
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}.Release|x86.ActiveCfg = Release|Win32
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12}.Release|x86.Build.0 = Release|Win32
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Debug|x64.ActiveCfg = Debug|x64
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Debug|x64.Build.0 = Debug|x64
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Debug|x86.ActiveCfg = Debug|Win32
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Debug|x86.Build.0 = Debug|Win32
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Release|x64.ActiveCfg = Release|x64
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Release|x64.Build.0 = Release|x64
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Release|x86.ActiveCfg = Release|Win32
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC}.Release|x86.Build.0 = Release|Win32
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Debug|x64.ActiveCfg = Debug|x64
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Debug|x64.Build.0 = Debug|x64
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Debug|x86.ActiveCfg = Debug|Win32
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Debug|x86.Build.0 = Debug|Win32
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Release|x64.ActiveCfg = Release|x64
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Release|x64.Build.0 = Release|x64
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Release|x86.ActiveCfg = Release|Win32
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,8 +40,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{558C2ADA-F073-451A-83C4-42173A23BCD6} = {37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}
 		{CAD1CE7C-D26A-49C3-8D32-54C87AEDDC12} = {37F8EB19-E832-4D58-9FFA-2C76A0EF06B9}
-		{43244721-5CC4-48E5-9524-70DC5FBF62BC} = {F83932BF-47D1-45AF-8B8F-5DC4147BE1D3}
-		{37809768-AE18-4DDB-8FA2-D918BF2E6211} = {F83932BF-47D1-45AF-8B8F-5DC4147BE1D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03A20EAF-7F9E-464F-8FE4-6CDCB6489165}
