@@ -2,8 +2,6 @@ module onyx32.gui;
 
 namespace Onyx32::GUI
 {
-	ICoreFactory::~ICoreFactory() {}
-	
 	class TestImplement : public ICoreFactory
 	{
 		public:
