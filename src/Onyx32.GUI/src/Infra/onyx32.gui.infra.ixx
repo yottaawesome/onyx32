@@ -4,7 +4,7 @@ module;
 
 export module onyx32.gui.infra;
 
-export namespace Onyx32::Gui::Infra
+export namespace Onyx32::GUI::Infra
 {
 	LRESULT CALLBACK WndProc(
 		HWND hWnd, 
@@ -20,4 +20,5 @@ export namespace Onyx32::Gui::Infra
 		UINT_PTR uIdSubclass, 
 		DWORD_PTR dwRefData
 	);
+	const WNDCLASSEX& GetDefaultWindowClass();
 }

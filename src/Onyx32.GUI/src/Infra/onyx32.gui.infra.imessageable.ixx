@@ -4,7 +4,7 @@ module;
 
 export module onyx32.gui.infra.imessageable;
 
-export namespace Onyx32::Gui::Infra
+export namespace Onyx32::GUI::Infra
 {
 	struct IMessageable
 	{
