@@ -6,6 +6,7 @@ module;
 
 module onyx32.gui.windows.desktop;
 import onyx32.gui.infra;
+import onyx32.gui.windows.windowclassregistrationscope;
 
 namespace Onyx32::GUI::Windows::Desktop
 {
@@ -30,12 +31,9 @@ namespace Onyx32::GUI::Windows::Desktop
 		if (created)
 			return WndClass;
 
-		if (!RegisterClassExW(&WndClass))
-			throw std::system_error(
-				std::error_code(GetLastError(), std::system_category()),
-				std::format("{}: RegisterClassEx() failed with {}", __FUNCSIG__, GetLastError()));
-
+		static WindowClassRegistrationScope DefaultWindowClassScope(WndClass);
 		created = true;
+
 		return WndClass;
 	}
 }
