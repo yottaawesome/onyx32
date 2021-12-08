@@ -6,6 +6,7 @@ module;
 module onyx32.gui;
 
 import onyx32.gui.infra;
+import onyx32.gui.windows.desktop;
 
 namespace Onyx32::GUI
 {
@@ -23,7 +24,7 @@ namespace Onyx32::GUI
 	{
 		try
 		{
-			Onyx32::GUI::Infra::GetDefaultWindowClass();
+			Onyx32::GUI::Windows::Desktop::GetDefaultWindowClass();
 		}
 		catch (const std::exception& ex)
 		{

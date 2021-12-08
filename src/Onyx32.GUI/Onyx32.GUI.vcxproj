@@ -174,6 +174,10 @@
     <ClCompile Include="src\GUI\GUI.cpp" />
     <ClCompile Include="src\Infra\IMessageable.cpp" />
     <ClCompile Include="src\Infra\onyx32.gui.infra.ixx" />
+    <ClCompile Include="src\Windows\Desktop\Desktop.cpp" />
+    <ClCompile Include="src\Windows\Desktop\onyx32.gui.windows.desktop.defaultwindowclass.ixx" />
+    <ClCompile Include="src\Windows\Desktop\onyx32.gui.windows.desktop.ixx" />
+    <ClCompile Include="src\Windows\onyx32.gui.windows.windowclass.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

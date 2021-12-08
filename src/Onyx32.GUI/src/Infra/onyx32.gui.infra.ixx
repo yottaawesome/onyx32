@@ -20,5 +20,4 @@ export namespace Onyx32::GUI::Infra
 		UINT_PTR uIdSubclass, 
 		DWORD_PTR dwRefData
 	);
-	const WNDCLASSEX& GetDefaultWindowClass();
 }

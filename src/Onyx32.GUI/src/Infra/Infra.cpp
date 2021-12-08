@@ -59,33 +59,5 @@ namespace Onyx32::GUI::Infra
 		return DefSubclassProc(hWnd, message, wParam, lParam);
 	}
 	
-	const WNDCLASSEX& GetDefaultWindowClass()
-	{
-		static bool created = false;
-		static WNDCLASSEX WndClass
-		{
-			.cbSize = sizeof(WNDCLASSEX),
-			.style = CS_HREDRAW | CS_VREDRAW,
-			.lpfnWndProc = WndProc,
-			.cbClsExtra = 0,
-			.cbWndExtra = 0,
-			.hInstance = GetModuleHandleW(nullptr),
-			.hIcon = nullptr,
-			.hCursor = LoadCursorW(nullptr, IDC_ARROW),
-			.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1),
-			.lpszMenuName = nullptr,
-			.lpszClassName = L"Onyx32DefaultWindow",		
-			.hIconSm = nullptr
-		};
-		if (created)
-			return WndClass;
-
-		if (!RegisterClassExW(&WndClass))
-			throw std::system_error(
-				std::error_code(GetLastError(), std::system_category()), 
-				std::format("{}: RegisterClassEx() failed with {}", __FUNCSIG__, GetLastError()));
-		
-		created = true;
-		return WndClass;
-	}
+	
 }
