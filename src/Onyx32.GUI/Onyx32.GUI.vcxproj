@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="export\onyx32.gui.windows.desktop.ixx" />
     <ClCompile Include="export\onyx32.gui.ifactory.ixx" />
     <ClCompile Include="export\onyx32.gui.ixx" />
     <ClCompile Include="src\Infra\Infra.cpp" />
@@ -175,8 +176,8 @@
     <ClCompile Include="src\Infra\IMessageable.cpp" />
     <ClCompile Include="src\Infra\onyx32.gui.infra.ixx" />
     <ClCompile Include="src\Windows\Desktop\Desktop.cpp" />
-    <ClCompile Include="src\Windows\Desktop\onyx32.gui.windows.desktop.defaultwindowclass.ixx" />
-    <ClCompile Include="src\Windows\Desktop\onyx32.gui.windows.desktop.ixx" />
+    <ClCompile Include="src\Windows\Desktop\Impl\DesktopImpl.cpp" />
+    <ClCompile Include="src\Windows\Desktop\Impl\onyx32.gui.windows.desktop.impl.ixx" />
     <ClCompile Include="src\Windows\onyx32.gui.windows.windowclassregistrationscope.ixx" />
     <ClCompile Include="src\Windows\WindowClassRegistrationScope.cpp" />
   </ItemGroup>

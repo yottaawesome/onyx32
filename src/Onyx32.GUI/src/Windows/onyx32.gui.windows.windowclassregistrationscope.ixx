@@ -9,7 +9,7 @@ export namespace Onyx32::GUI::Windows::Desktop
 	class WindowClassRegistrationScope
 	{
 		public:
-			virtual ~WindowClassRegistrationScope();
+			virtual ~WindowClassRegistrationScope() noexcept;
 			WindowClassRegistrationScope(const WNDCLASSEX& wndClass);
 
 		public:

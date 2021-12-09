@@ -50,16 +50,19 @@
     <ClCompile Include="src\Windows\onyx32.gui.windows.windowclassregistrationscope.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Windows\Desktop\onyx32.gui.windows.desktop.defaultwindowclass.ixx">
+    <ClCompile Include="src\Windows\Desktop\Impl\onyx32.gui.windows.desktop.impl.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Windows\Desktop\onyx32.gui.windows.desktop.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Windows\Desktop\Desktop.cpp">
+    <ClCompile Include="src\Windows\Desktop\Impl\DesktopImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Windows\WindowClassRegistrationScope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="export\onyx32.gui.windows.desktop.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Windows\Desktop\Desktop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

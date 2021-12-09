@@ -1,6 +1,8 @@
 module;
 
 #include <format>
+#include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <Windows.h>
 
@@ -8,9 +10,16 @@ module onyx32.gui.windows.windowclassregistrationscope;
 
 namespace Onyx32::GUI::Windows::Desktop
 {
-	WindowClassRegistrationScope::~WindowClassRegistrationScope()
+	WindowClassRegistrationScope::~WindowClassRegistrationScope() noexcept
 	{
-		UnregisterClassW(m_class.lpszClassName, GetModuleHandleW(nullptr));
+		try
+		{
+			if (!IsolationAwareUnregisterClassW(m_class.lpszClassName, GetModuleHandleW(nullptr)))
+				std::wcout << std::format(L"IsolationAwareUnregisterClassW() failed: {}\n", GetLastError());
+		}
+		catch (...) 
+		{
+		}
 	}
 	
 	WindowClassRegistrationScope::WindowClassRegistrationScope(const WNDCLASSEX& wndClass)
