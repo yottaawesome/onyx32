@@ -2,6 +2,7 @@
 #include "framework.h"
 
 // See https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain
+// https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-best-practices
 BOOL APIENTRY DllMain( 
     HMODULE hModule,
     DWORD  reasonForCall,

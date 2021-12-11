@@ -29,7 +29,7 @@ namespace Onyx32::GUI::Windows::Desktop
 		// No window classes registered by a DLL are unregistered when the DLL is unloaded. 
 		// A DLL must explicitly unregister its classes when it is unloaded.
 		if (!RegisterClassExW(&m_class))
-			throw std::system_error(
+			throw std::system_error( // https://stackoverflow.com/questions/15854930/how-do-you-use-stdsystem-error-with-getlasterror
 				std::error_code(GetLastError(), std::system_category()),
 				std::format("{}: RegisterClassEx() failed with {}", __FUNCSIG__, GetLastError()));
 	}
