@@ -29,13 +29,13 @@
     <ClCompile Include="src\GUI\GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Windows\Infra\onyx32.gui.infra.imessageable.ixx">
+    <ClCompile Include="src\Windows\Infra\onyx32.gui.windows.infra.imessageable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\AbstractDestructors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Windows\Infra\onyx32.gui.infra.ixx">
+    <ClCompile Include="src\Windows\Infra\onyx32.gui.windows.infra.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Windows\Infra\IMessageable.cpp">
@@ -53,7 +53,7 @@
     <ClCompile Include="src\Windows\Desktop\Impl\onyx32.gui.windows.desktop.impl.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Windows\Desktop\Impl\DesktopImpl.cpp">
+    <ClCompile Include="src\Windows\Desktop\Impl\DesktopWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Windows\WindowClassRegistrationScope.cpp">
@@ -63,6 +63,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Windows\Desktop\Desktop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\CoreFactory.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\CoreFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global\onyx32.gui.global.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global\Global.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

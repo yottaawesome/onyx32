@@ -4,6 +4,7 @@
 #include <Windows.h>
 
 import onyx32.gui;
+import onyx32.gui.windows.desktop;
 
 int main(int argc, char* args[])
 {
@@ -15,7 +16,7 @@ int main(int argc, char* args[])
     if (!GetCoreFactory)
         throw std::runtime_error(std::format("{}: could not reslve GetCoreFactory()", __FUNCSIG__));
 
-    std::cout << std::format("Hello World! {}\n", test->Blah());
-    return 0;
+    auto x = test->CreateDesktopWindow();
+    return x->MainLoop();
 }
 

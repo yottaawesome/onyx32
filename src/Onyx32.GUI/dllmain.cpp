@@ -1,6 +1,8 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "framework.h"
 
+import onyx32.gui.global;
+
 // See https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain
 // https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-best-practices
 BOOL APIENTRY DllMain( 
@@ -9,6 +11,8 @@ BOOL APIENTRY DllMain(
     void* lpReserved
 )
 {
+    Onyx32::GUI::Global::SetHInstance(hModule);
+
     switch (reasonForCall)
     {
         case DLL_PROCESS_ATTACH:

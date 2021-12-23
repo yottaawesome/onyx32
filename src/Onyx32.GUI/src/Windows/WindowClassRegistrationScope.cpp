@@ -14,6 +14,7 @@ namespace Onyx32::GUI::Windows::Desktop
 	{
 		try
 		{
+			std::wcout << "Unregister";
 			if (!IsolationAwareUnregisterClassW(m_class.lpszClassName, GetModuleHandleW(nullptr)))
 				std::wcout << std::format(L"IsolationAwareUnregisterClassW() failed: {}\n", GetLastError());
 		}

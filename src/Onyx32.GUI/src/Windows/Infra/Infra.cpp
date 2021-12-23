@@ -38,15 +38,15 @@ namespace Onyx32::GUI::Windows::Infra
 			if (!pCreate->lpCreateParams)
 				return DefWindowProcW(hWnd, message, wParam, lParam);
 			IMessageable* pThis = reinterpret_cast<IMessageable*>(pCreate->lpCreateParams);
+			//pThis->SetHwnd(hWnd);
 			SetWindowLongPtrW(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis));
-			pThis->SetHwnd(hWnd);
 		}
 		else
 		{
 			pThis = reinterpret_cast<IMessageable*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 		}
 
-		return pThis ? pThis->Process(message, wParam, lParam) : DefWindowProc(hWnd, message, wParam, lParam);
+		return pThis ? pThis->Process(hWnd, message, wParam, lParam) : DefWindowProc(hWnd, message, wParam, lParam);
 	}
 
 	LRESULT CALLBACK DefCtrlProc(HWND hWnd, unsigned message, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
@@ -54,10 +54,8 @@ namespace Onyx32::GUI::Windows::Infra
 		IMessageable* ctrl = (IMessageable*)dwRefData;
 
 		if (ctrl)
-			return ctrl->Process(message, wParam, lParam);
+			return ctrl->Process(hWnd, message, wParam, lParam);
 
 		return DefSubclassProc(hWnd, message, wParam, lParam);
 	}
-	
-	
 }
