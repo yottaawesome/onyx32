@@ -2,9 +2,9 @@ module;
 
 #include <Windows.h>
 
-export module onyx32.gui.infra;
+export module onyx32.gui.windows.infra;
 
-export namespace Onyx32::GUI::Infra
+export namespace Onyx32::GUI::Windows::Infra
 {
 	LRESULT CALLBACK WndProc(
 		HWND hWnd, 

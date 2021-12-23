@@ -5,7 +5,7 @@ module;
 #include <Windows.h>
 
 module onyx32.gui.windows.desktop.impl;
-import onyx32.gui.infra;
+import onyx32.gui.windows.infra;
 import onyx32.gui.windows.windowclassregistrationscope;
 
 namespace Onyx32::GUI::Windows::Desktop::Impl

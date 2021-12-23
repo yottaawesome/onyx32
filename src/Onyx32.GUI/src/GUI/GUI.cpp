@@ -5,7 +5,7 @@ module;
 
 module onyx32.gui;
 
-import onyx32.gui.infra;
+import onyx32.gui.windows.infra;
 import onyx32.gui.windows.desktop.impl;
 
 namespace Onyx32::GUI

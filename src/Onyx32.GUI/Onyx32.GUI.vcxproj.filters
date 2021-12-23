@@ -29,19 +29,19 @@
     <ClCompile Include="src\GUI\GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Infra\onyx32.gui.infra.imessageable.ixx">
+    <ClCompile Include="src\Windows\Infra\onyx32.gui.infra.imessageable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\AbstractDestructors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Infra\onyx32.gui.infra.ixx">
+    <ClCompile Include="src\Windows\Infra\onyx32.gui.infra.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Infra\IMessageable.cpp">
+    <ClCompile Include="src\Windows\Infra\IMessageable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Infra\Infra.cpp">
+    <ClCompile Include="src\Windows\Infra\Infra.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="export\onyx32.gui.ifactory.ixx">

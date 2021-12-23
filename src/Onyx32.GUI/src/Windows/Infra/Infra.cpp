@@ -5,10 +5,10 @@ module;
 #include <Windows.h>
 #include <commctrl.h>
 
-module onyx32.gui.infra;
-import onyx32.gui.infra.imessageable;
+module onyx32.gui.windows.infra;
+import onyx32.gui.windows.infra.imessageable;
 
-namespace Onyx32::GUI::Infra
+namespace Onyx32::GUI::Windows::Infra
 {
 	LRESULT CALLBACK WndProc(HWND hWnd, unsigned message, WPARAM wParam, LPARAM lParam)
 	{

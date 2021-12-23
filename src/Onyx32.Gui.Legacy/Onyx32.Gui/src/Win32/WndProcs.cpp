@@ -11,7 +11,7 @@ namespace Onyx32::Gui::Win32
 		{
 			CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
 			IMessageable* pThis = static_cast<IMessageable*>(pCreate->lpCreateParams);
-			SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
+			SetWindowLongPtrW(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
 			pThis->SetHwnd(hWnd);
 		}
 		// We need these cases to bounce back messages sent to the parent from
